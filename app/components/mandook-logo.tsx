@@ -8,10 +8,19 @@ const GOLD_DEEP = "#9c7616";
 /**
  * Animated "MANDOOK" wordmark where the double-O is a pair of golden eyes that
  * track the cursor, blink, and glow, while the lettering shimmers and the whole
- * mark gently floats. Recreated from the original design as a self-contained
- * client component. Honors prefers-reduced-motion.
+ * mark gently floats. An optional tagline fades in below, flanked by gold rules.
+ * Recreated from the original design as a self-contained client component.
+ * Honors prefers-reduced-motion.
  */
-export default function MandookLogo({ fontSize = 26 }: { fontSize?: number }) {
+export default function MandookLogo({
+  fontSize = 28,
+  tagline = "Transforming Businesses with AI and Innovation",
+  showTagline = true,
+}: {
+  fontSize?: number;
+  tagline?: string;
+  showTagline?: boolean;
+}) {
   const wrap = useRef<HTMLDivElement>(null);
   const goldL = useRef<HTMLSpanElement>(null);
   const goldR = useRef<HTMLSpanElement>(null);
@@ -23,10 +32,23 @@ export default function MandookLogo({ fontSize = 26 }: { fontSize?: number }) {
   const glowR = useRef<HTMLSpanElement>(null);
   const lidL = useRef<HTMLSpanElement>(null);
   const lidR = useRef<HTMLSpanElement>(null);
+  const ruleL = useRef<HTMLSpanElement>(null);
+  const ruleR = useRef<HTMLSpanElement>(null);
+  const tag = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
+
+    // Start the tagline + rules hidden, then animate them in (they render
+    // visible by default so reduced-motion users still see them).
+    [ruleL.current, ruleR.current].forEach((r) => {
+      if (r) r.style.transform = "scaleX(0)";
+    });
+    if (tag.current) {
+      tag.current.style.opacity = "0";
+      tag.current.style.transform = "translateY(8px)";
+    }
 
     const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
     const onMove = (e: MouseEvent) => {
@@ -76,6 +98,16 @@ export default function MandookLogo({ fontSize = 26 }: { fontSize?: number }) {
         glowR.current.style.transform = `scale(${(1 + 0.1 * gR).toFixed(3)})`;
       }
 
+      // One-time intro for the rules and tagline.
+      const pr = Math.min(1, Math.max(0, (t - 0.4) / 1.0));
+      if (ruleL.current) ruleL.current.style.transform = `scaleX(${pr.toFixed(3)})`;
+      if (ruleR.current) ruleR.current.style.transform = `scaleX(${pr.toFixed(3)})`;
+      const pt = Math.min(1, Math.max(0, (t - 0.6) / 1.1));
+      if (tag.current) {
+        tag.current.style.opacity = (0.92 * pt).toFixed(3);
+        tag.current.style.transform = `translateY(${((1 - pt) * 8).toFixed(2)}px)`;
+      }
+
       move(eyeL.current, pupilL.current);
       move(eyeR.current, pupilR.current);
       raf = requestAnimationFrame(frame);
@@ -113,6 +145,8 @@ export default function MandookLogo({ fontSize = 26 }: { fontSize?: number }) {
   const eye = Math.round(fontSize * 0.674);
   const pupil = Math.round(eye * 0.42);
   const highlight = Math.max(2, Math.round(pupil * 0.45));
+  const tagSize = Math.max(9, Math.round(fontSize * 0.34));
+  const ruleW = Math.round(fontSize * 0.9);
 
   const letter: CSSProperties = {
     fontFamily: "var(--font-cinzel), serif",
@@ -219,23 +253,74 @@ export default function MandookLogo({ fontSize = 26 }: { fontSize?: number }) {
 
   return (
     <div
-      ref={wrap}
       aria-hidden="true"
       style={{
         display: "inline-flex",
+        flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
-        willChange: "transform",
+        gap: Math.round(fontSize * 0.2),
+        lineHeight: 1,
       }}
     >
-      <span ref={goldL} style={letter}>
-        MAND
-      </span>
-      <Eye glowRef={glowL} eyeRef={eyeL} pupilRef={pupilL} lidRef={lidL} />
-      <Eye glowRef={glowR} eyeRef={eyeR} pupilRef={pupilR} lidRef={lidR} />
-      <span ref={goldR} style={{ ...letter, paddingLeft: "0.07em" }}>
-        K
-      </span>
+      <div
+        ref={wrap}
+        style={{
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          willChange: "transform",
+        }}
+      >
+        <span ref={goldL} style={letter}>
+          MAND
+        </span>
+        <Eye glowRef={glowL} eyeRef={eyeL} pupilRef={pupilL} lidRef={lidL} />
+        <Eye glowRef={glowR} eyeRef={eyeR} pupilRef={pupilR} lidRef={lidR} />
+        <span ref={goldR} style={{ ...letter, paddingLeft: "0.07em" }}>
+          K
+        </span>
+      </div>
+
+      {showTagline && tagline.trim() && (
+        <div className="hidden items-center sm:flex" style={{ gap: 10 }}>
+          <span
+            ref={ruleL}
+            style={{
+              display: "block",
+              height: 1,
+              width: ruleW,
+              transformOrigin: "right center",
+              background: `linear-gradient(90deg, rgba(232,194,90,0), ${GOLD})`,
+            }}
+          />
+          <span
+            ref={tag}
+            style={{
+              fontFamily: "var(--font-cormorant), serif",
+              fontStyle: "italic",
+              fontSize: tagSize,
+              letterSpacing: "0.18em",
+              paddingLeft: "0.18em",
+              color: GOLD,
+              whiteSpace: "nowrap",
+              opacity: 0.92,
+            }}
+          >
+            {tagline}
+          </span>
+          <span
+            ref={ruleR}
+            style={{
+              display: "block",
+              height: 1,
+              width: ruleW,
+              transformOrigin: "left center",
+              background: `linear-gradient(90deg, ${GOLD}, rgba(232,194,90,0))`,
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -33,3 +33,25 @@ body {
 section[id] {
   scroll-margin-top: 5rem;
 }
+
+/* Gentle pulse for the hero illustration's glow. */
+@keyframes heroPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+.hero-pulse {
+  transform-origin: center;
+  animation: heroPulse 4.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-pulse {
+    animation: none;
+  }
+}

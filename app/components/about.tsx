@@ -42,7 +42,7 @@ export default function About() {
       <div className="grid gap-12 md:grid-cols-2 md:gap-16">
         {/* Narrative + skills */}
         <div>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">About me</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-gold sm:text-4xl">About me</h2>
           <p className="mt-5 text-lg leading-8 text-zinc-600 dark:text-zinc-300">
             Over the past <strong>15 years</strong> I&apos;ve worked across the
             full spectrum of information technology — from hands-on systems
@@ -74,8 +74,8 @@ export default function About() {
           <ol className="mt-6 space-y-8 border-l border-black/10 pl-6 dark:border-white/15">
             {TIMELINE.map((item) => (
               <li key={item.period} className="relative">
-                <span className="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full border-2 border-white bg-blue-600 dark:border-black" />
-                <div className="text-sm font-medium text-blue-600">{item.period}</div>
+                <span className="absolute -left-[1.625rem] top-1.5 h-3 w-3 rounded-full border-2 border-white bg-gold dark:border-black" />
+                <div className="text-sm font-medium text-gold">{item.period}</div>
                 <div className="mt-0.5 font-semibold">{item.role}</div>
                 <p className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
                   {item.detail}

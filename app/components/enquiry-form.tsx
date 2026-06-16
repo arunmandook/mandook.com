@@ -9,7 +9,7 @@ import {
 } from "@/app/actions/enquiry-types";
 
 const inputBase =
-  "w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm outline-none transition-colors placeholder:text-zinc-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 dark:bg-zinc-900";
+  "w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm outline-none transition-colors placeholder:text-zinc-400 focus:border-gold focus:ring-2 focus:ring-gold/30 dark:bg-zinc-900";
 
 function fieldClass(hasError?: string) {
   return `${inputBase} ${
@@ -23,7 +23,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-12 w-full items-center justify-center rounded-full bg-blue-600 px-7 text-base font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+      className="inline-flex h-12 w-full items-center justify-center rounded-full bg-gold px-7 text-base font-semibold text-black transition-colors hover:bg-gold-deep disabled:cursor-not-allowed disabled:opacity-60"
     >
       {pending ? "Sending…" : "Send enquiry"}
     </button>

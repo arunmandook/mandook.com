@@ -6,7 +6,7 @@ export default function Footer() {
         <p>© {year} Arun Mandook. All rights reserved.</p>
         <p>
           15+ years in IT &amp; IT Services ·{" "}
-          <a href="mailto:arun.mandook@gmail.com" className="hover:text-blue-600">
+          <a href="mailto:arun.mandook@gmail.com" className="hover:text-gold">
             arun.mandook@gmail.com
           </a>
         </p>

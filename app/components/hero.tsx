@@ -7,15 +7,15 @@ export default function Hero() {
       {/* Decorative gradient backdrop */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(37,99,235,0.12),transparent)]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(232,194,90,0.14),transparent)]"
       />
       <div className="mx-auto flex max-w-6xl flex-col items-center px-4 py-20 text-center sm:px-6 sm:py-28">
-        <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-blue-600/20 bg-blue-600/10 px-4 py-1.5 text-sm font-medium text-blue-700 dark:text-blue-300">
-          <span className="h-2 w-2 rounded-full bg-blue-600" />
+        <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-sm font-medium text-gold">
+          <span className="h-2 w-2 rounded-full bg-gold" />
           15+ years in Information Technology &amp; IT Services
         </span>
 
-        <h1 className="max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+        <h1 className="max-w-3xl bg-gradient-to-br from-[#fff4d6] via-gold to-gold-deep bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl md:text-6xl">
           Building reliable technology that moves businesses forward.
         </h1>
 
@@ -29,7 +29,7 @@ export default function Hero() {
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <a
             href="#contact"
-            className="inline-flex h-12 items-center justify-center rounded-full bg-blue-600 px-7 text-base font-medium text-white transition-colors hover:bg-blue-700"
+            className="inline-flex h-12 items-center justify-center rounded-full bg-gold px-7 text-base font-semibold text-black transition-colors hover:bg-gold-deep"
           >
             Start an enquiry
           </a>

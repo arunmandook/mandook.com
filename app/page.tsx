@@ -20,7 +20,7 @@ export default function Home() {
         <section id="contact" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="grid gap-12 md:grid-cols-2 md:gap-16">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tight text-gold sm:text-4xl">
                 Let&apos;s work together
               </h2>
               <p className="mt-4 text-lg leading-8 text-zinc-600 dark:text-zinc-300">
@@ -34,7 +34,7 @@ export default function Home() {
                   <div>
                     <dt className="font-medium">Email</dt>
                     <dd className="text-zinc-600 dark:text-zinc-400">
-                      <a href="mailto:arun.mandook@gmail.com" className="hover:text-blue-600">
+                      <a href="mailto:arun.mandook@gmail.com" className="hover:text-gold">
                         arun.mandook@gmail.com
                       </a>
                     </dd>

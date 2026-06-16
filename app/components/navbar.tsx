@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import MandookLogo from "@/app/components/mandook-logo";
 
 const LINKS = [
   { href: "#about", label: "About" },
@@ -15,15 +16,15 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-black/5 bg-white/80 backdrop-blur-md dark:border-white/10 dark:bg-black/70">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
-        <a href="#top" className="text-lg font-bold tracking-tight">
-          Arun&nbsp;Mandook<span className="text-blue-600">.</span>
+        <a href="#top" aria-label="Mandook — home" className="flex items-center">
+          <MandookLogo fontSize={26} />
         </a>
 
         {/* Desktop links */}
         <ul className="hidden items-center gap-8 text-sm font-medium md:flex">
           {LINKS.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="text-zinc-600 transition-colors hover:text-blue-600 dark:text-zinc-300">
+              <a href={l.href} className="text-zinc-600 transition-colors hover:text-gold dark:text-zinc-300">
                 {l.label}
               </a>
             </li>
@@ -31,7 +32,7 @@ export default function Navbar() {
           <li>
             <a
               href="#contact"
-              className="rounded-full bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
+              className="rounded-full bg-gold px-4 py-2 font-semibold text-black transition-colors hover:bg-gold-deep"
             >
               Get in touch
             </a>

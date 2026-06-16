@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
+/* Class-based dark mode so the gold-on-black brand renders consistently
+   regardless of the visitor's system preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -10,13 +14,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Brand gold — matches the MANDOOK logo. */
+  --color-gold: #e8c25a;
+  --color-gold-deep: #9c7616;
 }
 
 html {

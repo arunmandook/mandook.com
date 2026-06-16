@@ -59,16 +59,14 @@ export async function submitEnquiry(
       console.error("Enquiry insert failed:", error.message);
       return {
         status: "error",
-        // TEMP DIAGNOSTIC — revert after debugging prod.
-        message: `DIAG insert error: ${error.message} | code=${error.code ?? "?"}`,
+        message: "Something went wrong saving your enquiry. Please try again.",
       };
     }
   } catch (err) {
     console.error("Enquiry submission error:", err);
     return {
       status: "error",
-      // TEMP DIAGNOSTIC — revert after debugging prod.
-      message: `DIAG exception: ${err instanceof Error ? err.message : String(err)}`,
+      message: "Service is temporarily unavailable. Please try again later.",
     };
   }
 

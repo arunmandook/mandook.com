@@ -157,64 +157,21 @@
     }
     .nav__logo:hover .logo-word { letter-spacing: 0.5px; }
 
-    .logo-eyes {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      margin: 0 1.5px;
-      /* nudge down to optical centre of cap-height */
-      transform: translateY(0.04em);
-      transition: transform 0.4s var(--ease-out-quart);
+    /* ── Binary OO logo mark ── */
+    @keyframes binGlow {
+      0%, 100% { filter: drop-shadow(0 0 3px rgba(201,168,76,.38)); }
+      50%       { filter: drop-shadow(0 0 5px rgba(0,198,255,.48)); }
     }
-    .nav__logo:hover .logo-eyes { transform: translateY(0.04em) scale(1.1); }
-
-    /* The SVG eye itself */
-    .logo-eye {
-      width:  0.74em;
-      height: 0.74em;
-      display: block;
-      flex-shrink: 0;
-      overflow: visible;
-      transform-box:    fill-box;
-      transform-origin: center;
-      /* Blink: whole eye squishes as if lid closes */
-      animation: eye-blink 5.5s ease-in-out infinite;
-      /* Ambient glow */
-      filter: drop-shadow(0 0 4px rgba(0,198,255,0.35));
+    .logo-bin {
+      display: inline-block;
+      vertical-align: 0.01em;
+      animation: binGlow 3.8s ease-in-out infinite;
       transition: filter 0.35s;
     }
-    .logo-eye:nth-child(2) { animation-delay: 0.18s; }
-
-    .nav__logo:hover .logo-eye {
-      filter: drop-shadow(0 0 7px rgba(0,198,255,0.7))
-              drop-shadow(0 0 14px rgba(123,79,255,0.35));
-    }
-
-    /* Blink — smooth, human timing */
-    @keyframes eye-blink {
-      /* Long open → quick close → open → long open */
-      0%,  42%          { transform: scaleY(1); }
-      48%               { transform: scaleY(0.06); }
-      54%               { transform: scaleY(1); }
-      100%              { transform: scaleY(1); }
-    }
-
-    /* Iris shimmer that runs independently of blink */
-    .eye-iris {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: iris-shimmer 4s ease-in-out infinite alternate;
-    }
-    @keyframes iris-shimmer {
-      from { opacity: 1; }
-      to   { opacity: 0.82; }
-    }
-
-    /* Pupil dilation on logo hover */
-    .nav__logo:hover .eye-pupil {
-      /* JS also moves cx/cy; CSS scales radius */
-      r: 3.2;
-      transition: r 0.3s;
+    .nav__logo:hover .logo-bin {
+      filter: drop-shadow(0 0 7px rgba(0,198,255,.7))
+              drop-shadow(0 0 3px rgba(201,168,76,.4));
+      animation: none;
     }
 
     /* Nav links */
@@ -1596,33 +1553,34 @@
 
 <!-- Comet cursor canvas injected by JS -->
 
-<!-- ╔══ Shared SVG gradient defs for logo eyes ══╗
-     Defined once here; referenced by url(#id) in
-     every .logo-eye across the document.          -->
+<!-- ╔══ Shared SVG gradient defs for Binary logo ══╗
+     Defined once; referenced by url(#id) in nav + footer. -->
 <svg id="logo-svg-defs" aria-hidden="true"
      style="position:absolute;width:0;height:0;overflow:hidden">
   <defs>
-    <!-- Iris: deep-space radial — bright centre fades to indigo edge -->
-    <radialGradient id="irisGrad" cx="38%" cy="33%" r="65%" fx="38%" fy="33%">
-      <stop offset="0%"   stop-color="#22E8FF"/>
-      <stop offset="45%"  stop-color="#0090FF"/>
-      <stop offset="100%" stop-color="#3B1FA8"/>
+    <radialGradient id="binGold" cx="36%" cy="30%" r="68%">
+      <stop offset="0%"   stop-color="#FFFAE0"/>
+      <stop offset="30%"  stop-color="#D09820"/>
+      <stop offset="100%" stop-color="#1E0C00"/>
     </radialGradient>
-    <!-- Sclera: very subtle inner fill -->
-    <radialGradient id="scleraGrad" cx="50%" cy="40%" r="55%">
-      <stop offset="0%"   stop-color="rgba(255,255,255,0.09)"/>
-      <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+    <radialGradient id="binBlue" cx="34%" cy="28%" r="70%">
+      <stop offset="0%"   stop-color="#F0FBFF"/>
+      <stop offset="30%"  stop-color="#08A8E0"/>
+      <stop offset="100%" stop-color="#000410"/>
     </radialGradient>
-    <!-- Ring stroke: cyan → purple diagonal -->
-    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%"   stop-color="#00C6FF"/>
-      <stop offset="100%" stop-color="#7B4FFF"/>
+    <radialGradient id="binGoldGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="42%" stop-color="#C9A84C" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#C9A84C" stop-opacity=".28"/>
+    </radialGradient>
+    <radialGradient id="binBlueGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="42%" stop-color="#00C6FF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#00C6FF" stop-opacity=".24"/>
+    </radialGradient>
+    <linearGradient id="binBridge" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#C9A84C" stop-opacity=".7"/>
+      <stop offset="50%"  stop-color="#ffffff" stop-opacity=".06"/>
+      <stop offset="100%" stop-color="#00C6FF" stop-opacity=".7"/>
     </linearGradient>
-    <!-- Subtle inner-ring glow -->
-    <filter id="eyeGlow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="0.6" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
 </svg>
 
@@ -1633,34 +1591,13 @@
   <div class="container">
     <div class="nav__inner">
       <a href="#" class="nav__logo" aria-label="Mandook home">
-        <span class="logo-word">Mand<span class="logo-eyes" aria-hidden="true">
-
-          <!-- Eye 1 -->
-          <svg class="logo-eye" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Sclera -->
-            <circle cx="12" cy="12" r="11.2" fill="url(#scleraGrad)" stroke="url(#ringGrad)" stroke-width="1.4"/>
-            <circle cx="12" cy="12" r="7.5" fill="none" stroke="rgba(0,198,255,0.22)" stroke-width="0.7"/>
-            <!-- Iris -->
-            <circle class="eye-iris" cx="12" cy="12" r="6.2" fill="url(#irisGrad)" filter="url(#eyeGlow)"/>
-            <!-- Pupil (cx/cy animated by JS) -->
-            <circle class="eye-pupil" cx="12" cy="12" r="2.8" fill="#03050F"/>
-            <!-- Catchlight highlight -->
-            <circle class="eye-highlight" cx="14.2" cy="9.8" r="1.4" fill="rgba(255,255,255,0.88)"/>
-            <!-- Tiny secondary highlight -->
-            <circle class="eye-highlight2" cx="10.2" cy="14.5" r="0.7" fill="rgba(255,255,255,0.32)"/>
-          </svg>
-
-          <!-- Eye 2 -->
-          <svg class="logo-eye" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="11.2" fill="url(#scleraGrad)" stroke="url(#ringGrad)" stroke-width="1.4"/>
-            <circle cx="12" cy="12" r="7.5" fill="none" stroke="rgba(0,198,255,0.22)" stroke-width="0.7"/>
-            <circle class="eye-iris" cx="12" cy="12" r="6.2" fill="url(#irisGrad)" filter="url(#eyeGlow)"/>
-            <circle class="eye-pupil" cx="12" cy="12" r="2.8" fill="#03050F"/>
-            <circle class="eye-highlight" cx="14.2" cy="9.8" r="1.4" fill="rgba(255,255,255,0.88)"/>
-            <circle class="eye-highlight2" cx="10.2" cy="14.5" r="0.7" fill="rgba(255,255,255,0.32)"/>
-          </svg>
-
-        </span>k</span>
+        <span class="logo-word">Mand<svg class="logo-bin" style="width:1.68em;height:0.74em" viewBox="0 0 38 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="9"  cy="9" r="13" fill="url(#binGoldGlow)"/>
+          <circle cx="29" cy="9" r="12" fill="url(#binBlueGlow)"/>
+          <rect x="17" y="5.5" width="4" height="7" fill="url(#binBridge)" rx="2" opacity=".78"/>
+          <circle cx="9"  cy="9" r="8" fill="url(#binGold)"/>
+          <circle cx="29" cy="9" r="8" fill="url(#binBlue)"/>
+        </svg>k</span>
       </a>
 
       <ul class="nav__links" role="list">
@@ -2276,29 +2213,13 @@
 
       <div class="footer__brand reveal-left">
         <div class="nav__logo" style="margin-bottom:0">
-          <span class="logo-word">Mand<span class="logo-eyes" aria-hidden="true">
-
-            <!-- Eye 1 (footer) -->
-            <svg class="logo-eye" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="11.2" fill="url(#scleraGrad)" stroke="url(#ringGrad)" stroke-width="1.4"/>
-            <circle cx="12" cy="12" r="7.5" fill="none" stroke="rgba(0,198,255,0.22)" stroke-width="0.7"/>
-              <circle class="eye-iris" cx="12" cy="12" r="6.2" fill="url(#irisGrad)" filter="url(#eyeGlow)"/>
-              <circle class="eye-pupil" cx="12" cy="12" r="2.8" fill="#03050F"/>
-              <circle class="eye-highlight" cx="14.2" cy="9.8" r="1.4" fill="rgba(255,255,255,0.88)"/>
-              <circle class="eye-highlight2" cx="10.2" cy="14.5" r="0.7" fill="rgba(255,255,255,0.32)"/>
-            </svg>
-
-            <!-- Eye 2 (footer) -->
-            <svg class="logo-eye" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="11.2" fill="url(#scleraGrad)" stroke="url(#ringGrad)" stroke-width="1.4"/>
-            <circle cx="12" cy="12" r="7.5" fill="none" stroke="rgba(0,198,255,0.22)" stroke-width="0.7"/>
-              <circle class="eye-iris" cx="12" cy="12" r="6.2" fill="url(#irisGrad)" filter="url(#eyeGlow)"/>
-              <circle class="eye-pupil" cx="12" cy="12" r="2.8" fill="#03050F"/>
-              <circle class="eye-highlight" cx="14.2" cy="9.8" r="1.4" fill="rgba(255,255,255,0.88)"/>
-              <circle class="eye-highlight2" cx="10.2" cy="14.5" r="0.7" fill="rgba(255,255,255,0.32)"/>
-            </svg>
-
-          </span>k</span>
+          <span class="logo-word">Mand<svg class="logo-bin" style="width:1.68em;height:0.74em" viewBox="0 0 38 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="9"  cy="9" r="13" fill="url(#binGoldGlow)"/>
+            <circle cx="29" cy="9" r="12" fill="url(#binBlueGlow)"/>
+            <rect x="17" y="5.5" width="4" height="7" fill="url(#binBridge)" rx="2" opacity=".78"/>
+            <circle cx="9"  cy="9" r="8" fill="url(#binGold)"/>
+            <circle cx="29" cy="9" r="8" fill="url(#binBlue)"/>
+          </svg>k</span>
         </div>
         <p>Engineering world-class technology for enterprises that refuse to compromise. Based globally, committed locally.</p>
       </div>
@@ -3096,79 +3017,12 @@
   })();
 
   /* ──────────────────────────────────────────────────────────
-     Logo Eye Cursor Tracking
-     — Pupils in both nav + footer eyes follow the mouse
+     Binary Logo — bridge particle animation
+     Tiny dot pulses through the bridge on all logo instances
   ────────────────────────────────────────────────────────── */
-  (function initLogoEyes() {
+  (function initBinaryLogo() {
     if (prefersReducedMotion) return;
-
-    // Collect all pupils across all logo instances (nav + footer)
-    const pupils    = Array.from(document.querySelectorAll('.eye-pupil'));
-    const eyes      = Array.from(document.querySelectorAll('.logo-eye'));
-
-    if (!pupils.length) return;
-
-    // Current lerped mouse position
-    let mx = window.innerWidth  / 2;
-    let my = window.innerHeight / 2;
-    // Smoothed mouse
-    let smx = mx, smy = my;
-
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX;
-      my = e.clientY;
-    }, { passive: true });
-
-    // Max offset pupils can travel (in SVG units, viewBox is 0 0 24 24)
-    const MAX_OFFSET = 2.2;
-
-    function tick() {
-      // Lerp toward real mouse — feels natural, not snappy
-      smx += (mx - smx) * 0.10;
-      smy += (my - smy) * 0.10;
-
-      eyes.forEach((eye, i) => {
-        const pupil = pupils[i];
-        if (!pupil) return;
-
-        // Get eye centre in viewport coords
-        const rect = eye.getBoundingClientRect();
-        if (rect.width === 0) return; // hidden / off-screen
-
-        const eyeCX = rect.left + rect.width  * 0.5;
-        const eyeCY = rect.top  + rect.height * 0.5;
-
-        // Direction from eye centre to (smoothed) mouse
-        const dx = smx - eyeCX;
-        const dy = smy - eyeCY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        // Normalise and scale — caps at MAX_OFFSET SVG units
-        // The eye rect is ~rect.width px wide for a 24-unit SVG
-        const scale = rect.width / 24;
-        // How far the pupil moves (in SVG units)
-        const travel = Math.min(dist / scale, MAX_OFFSET);
-        const angle  = Math.atan2(dy, dx);
-
-        const ox = travel * Math.cos(angle);
-        const oy = travel * Math.sin(angle);
-
-        // SVG viewBox centre is 12,12
-        pupil.setAttribute('cx', (12 + ox).toFixed(3));
-        pupil.setAttribute('cy', (12 + oy).toFixed(3));
-
-        // Shift highlight in same direction (less than pupil)
-        const hl = eye.querySelector('.eye-highlight');
-        if (hl) {
-          hl.setAttribute('cx', (14.2 + ox * 0.45).toFixed(3));
-          hl.setAttribute('cy', (9.8  + oy * 0.45).toFixed(3));
-        }
-      });
-
-      requestAnimationFrame(tick);
-    }
-
-    tick();
+    // No DOM particles at nav size — the CSS glow animation handles it
   })();
 
 })();

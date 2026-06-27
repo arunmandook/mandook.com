@@ -93,8 +93,8 @@
   (function(){if(prm)return;const pupils=Array.from(document.querySelectorAll('.eye-pupil')),eyes=Array.from(document.querySelectorAll('.logo-eye'));if(!pupils.length)return;let mx=innerWidth/2,my=innerHeight/2,smx=mx,smy=my;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});function tick(){smx+=(mx-smx)*0.10;smy+=(my-smy)*0.10;eyes.forEach((eye,i)=>{const pupil=pupils[i];if(!pupil)return;const r=eye.getBoundingClientRect();if(r.width===0)return;const ecx=r.left+r.width/2,ecy=r.top+r.height/2,dx=smx-ecx,dy=smy-ecy,dist=Math.sqrt(dx*dx+dy*dy),scale=r.width/24,travel=Math.min(dist/scale,2.2),angle=Math.atan2(dy,dx),ox=travel*Math.cos(angle),oy=travel*Math.sin(angle);pupil.setAttribute('cx',(12+ox).toFixed(3));pupil.setAttribute('cy',(12+oy).toFixed(3));const hl=eye.querySelector('.eye-highlight');if(hl){hl.setAttribute('cx',(14.2+ox*0.45).toFixed(3));hl.setAttribute('cy',(9.8+oy*0.45).toFixed(3));}});requestAnimationFrame(tick);}tick();})();
   // Country / City data + Supabase enquiry form
   (function(){
-    const SUPABASE_URL = 'https://pinjmmgbtwniwwgbsrhu.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpbmptbWdidHduaXd3Z2Jzcmh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4Nzk4NDMsImV4cCI6MjA5NzQ1NTg0M30.pLXnOIw_PVVWtRnQazFgOi9ztWKY9YBZXOqVL0SmMhQ';
+    const SUPABASE_URL = 'https://qhhitgfophncvmmehyaf.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFoaGl0Z2ZvcGhuY3ZtbWVoeWFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MzUzNDEsImV4cCI6MjA5NzExMTM0MX0.mhDfcF5dM_4LejguHT4wE4zNUSULL3rW_rwhyWtGqT0';
     // ── Google Sheets (optional mirror) — paste Apps Script URL when ready
     const SHEET_URL = '';
 
@@ -200,17 +200,16 @@
 
       try {
         const payload = {
-          first_name:        fields.first_name.value.trim(),
-          last_name:         fields.last_name.value.trim(),
-          country:           fields.country.value,
-          city:              fields.city.value,
-          contact_number:    fields.contact_number.value.trim(),
-          email:             fields.email.value.trim(),
-          organization_name: fields.organization_name.value.trim(),
+          first_name: fields.first_name.value.trim(),
+          last_name:  fields.last_name.value.trim(),
+          contact:    fields.contact_number.value.trim(),
+          email_id:   fields.email.value.trim(),
+          country:    fields.country.value,
+          city:       fields.city.value,
         };
 
         // Primary: Supabase
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/enquiries`, {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/customers`, {
           method: 'POST',
           headers: {
             'Content-Type':  'application/json',

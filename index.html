@@ -1004,6 +1004,43 @@
     }
     .service-card:hover .service-card__link-arrow { transform: translateX(3px); }
 
+    /* Service card features list */
+    .service-card__features {
+      list-style: none;
+      margin: 0 0 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .service-card__features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--clr-text-2);
+      opacity: 0.75;
+      transition: opacity 0.3s, color 0.3s;
+    }
+    .service-card:hover .service-card__features li { opacity: 1; }
+    .service-card__features li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--clr-blue), var(--clr-purple));
+    }
+
+    /* Divider between desc and features */
+    .service-card__divider {
+      height: 1px;
+      background: var(--clr-border);
+      margin: 20px 0;
+      transition: background 0.4s;
+    }
+    .service-card:hover .service-card__divider {
+      background: rgba(0,198,255,0.15);
+    }
+
     /* ============================================================
        WHY MANDOOK SECTION
     ============================================================ */
@@ -2341,38 +2378,66 @@
     <div class="services__grid">
 
       <div class="service-card reveal" data-delay="1" data-tilt>
-        <div class="service-card__icon">🤝</div>
-        <h3 class="service-card__title">Consulting & Implementation</h3>
-        <p class="service-card__desc">We implement and scale Salesforce for real estate and process-driven industries — enabling automation, smarter reporting, and sustainable growth.</p>
+        <div class="service-card__icon">🌐</div>
+        <h3 class="service-card__title">Website Development</h3>
+        <p class="service-card__desc">Professional websites designed to convert visitors into customers.</p>
+        <div class="service-card__divider"></div>
+        <ul class="service-card__features">
+          <li>Responsive design</li>
+          <li>SEO-friendly structure</li>
+          <li>Fast performance</li>
+          <li>Lead forms</li>
+        </ul>
         <a href="contact.html" class="service-card__link">
-          Learn more <span class="service-card__link-arrow">→</span>
+          Get started <span class="service-card__link-arrow">→</span>
         </a>
       </div>
 
       <div class="service-card reveal" data-delay="2" data-tilt>
-        <div class="service-card__icon">🔧</div>
-        <h3 class="service-card__title">AMC & Ongoing Support</h3>
-        <p class="service-card__desc">Keep your Salesforce org healthy and evolving. Our managed support plans cover enhancements, bug fixes, and proactive optimisations.</p>
+        <div class="service-card__icon">🖥️</div>
+        <h3 class="service-card__title">CMS Solutions</h3>
+        <p class="service-card__desc">Manage your content without technical complexity.</p>
+        <div class="service-card__divider"></div>
+        <ul class="service-card__features">
+          <li>Admin dashboard</li>
+          <li>Content updates</li>
+          <li>Blog management</li>
+          <li>Inventory management</li>
+        </ul>
         <a href="contact.html" class="service-card__link">
-          Learn more <span class="service-card__link-arrow">→</span>
+          Get started <span class="service-card__link-arrow">→</span>
         </a>
       </div>
 
       <div class="service-card reveal" data-delay="3" data-tilt>
-        <div class="service-card__icon">☁️</div>
-        <h3 class="service-card__title">Salesforce CRM</h3>
-        <p class="service-card__desc">As certified partners, we help you choose, implement, and manage the right Salesforce products — Sales Cloud, Marketing Cloud, and Data Cloud — at the right scale.</p>
+        <div class="service-card__icon">🔧</div>
+        <h3 class="service-card__title">AMC Support</h3>
+        <p class="service-card__desc">Reliable ongoing support so your business stays online and updated.</p>
+        <div class="service-card__divider"></div>
+        <ul class="service-card__features">
+          <li>Website maintenance</li>
+          <li>Updates & enhancements</li>
+          <li>Bug fixes</li>
+          <li>Security checks & backups</li>
+        </ul>
         <a href="contact.html" class="service-card__link">
-          Learn more <span class="service-card__link-arrow">→</span>
+          Get started <span class="service-card__link-arrow">→</span>
         </a>
       </div>
 
       <div class="service-card reveal" data-delay="4" data-tilt>
-        <div class="service-card__icon">👥</div>
-        <h3 class="service-card__title">DevOps & Platform</h3>
-        <p class="service-card__desc">Augment your team with certified Salesforce professionals. We supply the right resources — developers, admins, and architects — for any project scope.</p>
+        <div class="service-card__icon">📈</div>
+        <h3 class="service-card__title">Lead Growth Solutions</h3>
+        <p class="service-card__desc">Build systems that bring customers directly to your business.</p>
+        <div class="service-card__divider"></div>
+        <ul class="service-card__features">
+          <li>Contact forms</li>
+          <li>CRM integration</li>
+          <li>WhatsApp integration</li>
+          <li>Analytics</li>
+        </ul>
         <a href="contact.html" class="service-card__link">
-          Learn more <span class="service-card__link-arrow">→</span>
+          Get started <span class="service-card__link-arrow">→</span>
         </a>
       </div>
 

@@ -27,7 +27,7 @@
       --clr-gold-light:   #E4C76B;
 
       --clr-text-1:       #F0F4FF;
-      --clr-text-2:       #8B96B0;
+      --clr-text-2:       #FFFFFF;
       --clr-text-3:       #555F78;
 
       --font-head:        'Space Grotesk', sans-serif;
@@ -42,7 +42,7 @@
       --radius-lg:  24px;
       --radius-xl:  40px;
 
-      --nav-h:      80px;
+      --nav-h:      110px;
       --section-gap: 140px;
     }
 
@@ -87,14 +87,6 @@
     }
 
     /* ============================================================
-       CUSTOM CURSOR  — comet edition
-       Canvas injected by JS; only CSS needed is cursor:none
-    ============================================================ */
-    @media (hover: hover) and (pointer: fine) {
-      html, html * { cursor: none !important; }
-    }
-
-    /* ============================================================
        SCROLLBAR
     ============================================================ */
     ::-webkit-scrollbar { width: 4px; }
@@ -121,7 +113,7 @@
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
       box-shadow: 0 1px 0 var(--clr-border), 0 8px 32px rgba(0,0,0,0.3);
-      height: 68px;
+      height: 110px;
     }
     .nav__inner {
       display: flex;
@@ -134,12 +126,20 @@
     .nav__logo {
       display: inline-flex;
       align-items: center;
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 22px;
-      letter-spacing: -0.5px;
-      color: var(--clr-text-1);
       line-height: 1;
+    }
+    .nav__logo-img {
+      height: 100px;
+      max-height: 100px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 0 14px rgba(0,198,255,0.45)) brightness(1.1);
+      transition: filter 0.35s, transform 0.35s;
+    }
+    .nav__logo:hover .nav__logo-img {
+      filter: drop-shadow(0 0 28px rgba(0,198,255,0.8)) brightness(1.25);
+      transform: scale(1.05);
     }
 
     /* ══════════════════════════════════════
@@ -251,8 +251,8 @@
     .btn--primary:active { transform: translateY(0) scale(0.98); }
 
     .btn--large {
-      padding: 18px 44px;
-      font-size: 16px;
+      padding: 13px 32px;
+      font-size: 14px;
     }
 
     /* Hamburger */
@@ -325,6 +325,70 @@
       align-items: center;
       overflow: hidden;
       padding-top: var(--nav-h);
+      background: #060A17;
+    }
+    /* Hero split layout */
+    .hero .container { width: 100%; }
+    .hero__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 48px;
+      min-height: calc(100vh - var(--nav-h));
+    }
+    /* Network visual */
+    .hero__visual {
+      position: relative;
+      height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #network-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    /* Floating stat cards */
+    .hero__stat {
+      position: absolute;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,198,255,0.18);
+      backdrop-filter: blur(12px);
+      border-radius: 14px;
+      padding: 14px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      animation: stat-float 6s ease-in-out infinite;
+    }
+    .hero__stat--1 { top: 12%; left: 5%; animation-delay: 0s; }
+    .hero__stat--2 { top: 38%; right: 2%; animation-delay: 2s; }
+    .hero__stat--3 { bottom: 14%; left: 18%; animation-delay: 4s; }
+    @keyframes stat-float {
+      0%,100% { transform: translateY(0px); }
+      50%      { transform: translateY(-8px); }
+    }
+    .hero__stat-num {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--clr-text-1);
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg,#00c6ff,#7B4FFF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero__stat-label {
+      font-size: 11px;
+      color: var(--clr-text-2);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    @media (max-width: 900px) {
+      .hero__inner { grid-template-columns: 1fr; }
+      .hero__visual { display: none; }
     }
 
     /* Canvas particles */
@@ -419,7 +483,7 @@
     /* Hero headline */
     .hero__headline {
       font-family: var(--font-head);
-      font-size: clamp(46px, 7vw, 88px);
+      font-size: clamp(32px, 4.5vw, 58px);
       font-weight: 800;
       line-height: 1.04;
       letter-spacing: -2px;
@@ -454,11 +518,11 @@
     }
 
     .hero__sub {
-      font-size: clamp(16px, 2vw, 20px);
+      font-size: clamp(14px, 1.5vw, 17px);
       color: var(--clr-text-2);
-      max-width: 560px;
-      line-height: 1.7;
-      margin-bottom: 48px;
+      max-width: 500px;
+      line-height: 1.65;
+      margin-bottom: 36px;
       opacity: 0;
       transform: translateY(20px);
       animation: fade-up 0.7s var(--ease-out-expo) 0.85s forwards;
@@ -467,7 +531,7 @@
     .hero__actions {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
       flex-wrap: wrap;
       opacity: 0;
       transform: translateY(20px);
@@ -543,31 +607,33 @@
       will-change: transform;
     }
 
-    /* Ken Burns: scale up slowly while slide is active */
-    .carousel__slide.active   .carousel__img { animation: ken-burns 8s ease-in-out forwards; }
-    .carousel__slide.exiting  .carousel__img { animation: none; }
+    /* Ken Burns: slow infinite drift */
+    .carousel__slide.active .carousel__img {
+      animation: ken-burns 22s ease-in-out infinite alternate;
+    }
+    .carousel__slide.exiting .carousel__img { animation: none; }
 
     @keyframes ken-burns {
-      0%   { transform: scale(1)    translateX(0)    translateY(0); }
-      100% { transform: scale(1.12) translateX(-1%)  translateY(-1%); }
-    }
-    /* Alternate pan direction for even slides */
-    .carousel__slide:nth-child(even).active .carousel__img {
-      animation: ken-burns-alt 8s ease-in-out forwards;
-    }
-    @keyframes ken-burns-alt {
-      0%   { transform: scale(1)    translateX(0)   translateY(0); }
-      100% { transform: scale(1.1)  translateX(1%)  translateY(-1.5%); }
+      0%   { transform: scale(1)    translateX(0)     translateY(0); }
+      33%  { transform: scale(1.08) translateX(-1.5%) translateY(-1%); }
+      66%  { transform: scale(1.13) translateX(1%)    translateY(-2%); }
+      100% { transform: scale(1.06) translateX(-0.5%) translateY(1%); }
     }
 
-    /* Dark gradient overlay so text is always readable */
+    /* Animated colour-shift overlay for depth */
     .carousel__overlay {
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(105deg, rgba(6,10,23,0.88) 0%, rgba(6,10,23,0.55) 55%, rgba(6,10,23,0.35) 100%),
-        linear-gradient(to top, rgba(6,10,23,0.7) 0%, transparent 50%);
+        linear-gradient(105deg, rgba(6,10,23,0.90) 0%, rgba(6,10,23,0.52) 55%, rgba(6,10,23,0.30) 100%),
+        linear-gradient(to top, rgba(6,10,23,0.75) 0%, transparent 55%);
       z-index: 1;
+      animation: overlay-breathe 12s ease-in-out infinite alternate;
+    }
+    @keyframes overlay-breathe {
+      0%   { opacity: 1; }
+      50%  { opacity: 0.85; }
+      100% { opacity: 1; }
     }
 
     /* ── Arrow navigation ── */
@@ -695,58 +761,59 @@
     /* ============================================================
        MARQUEE / TICKER
     ============================================================ */
-    .marquee-section {
-      padding: 48px 0;
-      border-top: 1px solid var(--clr-border);
-      border-bottom: 1px solid var(--clr-border);
-      overflow: hidden;
-      position: relative;
+    .techstack-section {
+      background: var(--clr-bg);
+      padding: 52px 0 60px;
+      border-top: 1px solid rgba(0,198,255,0.12);
+      border-bottom: 1px solid rgba(0,198,255,0.12);
     }
-    .marquee-section::before,
-    .marquee-section::after {
+    .techstack-label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(0,198,255,0.7);
+      margin-bottom: 36px;
+    }
+    .techstack-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .tech-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 16px;
+      padding: 28px 12px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      transition: border-color 0.3s, transform 0.3s var(--ease-out-quart), box-shadow 0.3s, background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .tech-card::after {
       content: '';
       position: absolute;
-      top: 0; bottom: 0;
-      width: 180px;
-      z-index: 2;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(0,198,255,0.08) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.35s;
       pointer-events: none;
     }
-    .marquee-section::before {
-      left: 0;
-      background: linear-gradient(to right, var(--clr-bg), transparent);
-    }
-    .marquee-section::after {
-      right: 0;
-      background: linear-gradient(to left, var(--clr-bg), transparent);
-    }
-    .marquee-track {
-      display: flex;
-      gap: 60px;
-      width: max-content;
-      animation: marquee-scroll 30s linear infinite;
-    }
-    .marquee-track:hover { animation-play-state: paused; }
-    @keyframes marquee-scroll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-    .marquee-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .tech-card:hover { border-color: rgba(0,198,255,0.35); transform: translateY(-5px); box-shadow: 0 20px 48px rgba(0,0,0,0.4); background: rgba(255,255,255,0.03); }
+    .tech-card:hover::after { opacity: 1; }
+    .tech-card__icon { font-size: 38px; line-height: 1; }
+    .tech-card__name {
       font-family: var(--font-head);
-      font-size: 15px;
+      font-size: 12.5px;
       font-weight: 600;
-      color: var(--clr-text-3);
-      white-space: nowrap;
-      letter-spacing: 0.3px;
-      transition: color 0.3s;
-    }
-    .marquee-item:hover { color: var(--clr-text-2); }
-    .marquee-item svg { opacity: 0.4; flex-shrink: 0; }
-    .marquee-sep {
-      color: var(--clr-blue-dark);
-      opacity: 0.4;
+      color: var(--clr-text-1);
+      letter-spacing: 0.2px;
+      text-align: center;
+      line-height: 1.3;
     }
 
     /* ============================================================
@@ -845,13 +912,13 @@
 
     .services__grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
     }
 
     .service-card {
       position: relative;
-      padding: 40px 36px;
+      padding: 32px 24px;
       background: var(--clr-surface);
       border: 1px solid var(--clr-border);
       border-radius: var(--radius-lg);
@@ -938,6 +1005,50 @@
     .service-card:hover .service-card__link-arrow { transform: translateX(3px); }
 
     /* ============================================================
+       WHY MANDOOK SECTION
+    ============================================================ */
+    .why-mandook { background: var(--clr-bg); }
+    .why__header { text-align: center; margin-bottom: 60px; }
+    .why__header .section__label { justify-content: center; }
+    .why__header .section__heading { margin: 0 auto 16px; }
+    .why__header .section__sub { max-width: 540px; margin: 0 auto; }
+    .why__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .why-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      transition: border-color 0.35s, transform 0.35s var(--ease-out-quart), box-shadow 0.35s;
+    }
+    .why-card:hover {
+      border-color: rgba(0,198,255,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .why-card__icon {
+      font-size: 28px;
+      margin-bottom: 18px;
+      display: block;
+    }
+    .why-card__title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--clr-text-1);
+      margin-bottom: 10px;
+    }
+    .why-card__desc {
+      font-size: 14px;
+      color: var(--clr-text-2);
+      line-height: 1.65;
+    }
+    @media (max-width: 900px) { .why__grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .why__grid { grid-template-columns: 1fr; } }
+
+    /* ============================================================
        STATS SECTION
     ============================================================ */
     .stats {
@@ -985,67 +1096,250 @@
     /* ============================================================
        PROCESS SECTION
     ============================================================ */
+    /* ============================================================
+       PROCESS INFOGRAPHIC
+    ============================================================ */
     .process { background: var(--clr-bg); }
-    .process__layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    .process__left { position: sticky; top: 120px; }
-    .process__left .section__sub { margin-bottom: 40px; }
+    .process__intro { text-align: center; margin-bottom: 72px; }
+    .process__intro .section__label { justify-content: center; }
+    .process__intro .section__heading { margin: 0 auto 20px; }
+    .process__intro .section__sub { max-width: 520px; margin: 0 auto; }
 
-    .process__steps { display: flex; flex-direction: column; }
-
-    .process-step {
+    /* Flow row */
+    .process-flow {
       display: flex;
-      gap: 24px;
-      padding: 32px 0;
-      border-bottom: 1px solid var(--clr-border);
-      cursor: default;
+      align-items: flex-start;
+      justify-content: center;
+      position: relative;
+      gap: 0;
     }
-    .process-step:last-child { border-bottom: none; }
 
-    .process-step__num {
+    /* Connector lines between nodes */
+    .process-connector {
+      flex: 1;
+      height: 2px;
+      background: var(--clr-border);
+      margin-top: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .process-connector::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--clr-blue), var(--clr-purple));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1s var(--ease-out-quart);
+    }
+    .process-flow.visible .process-connector::after { transform: scaleX(1); }
+    .process-connector:nth-of-type(2)::after { transition-delay: 0.3s; }
+    .process-connector:nth-of-type(4)::after { transition-delay: 0.6s; }
+    .process-connector:nth-of-type(6)::after { transition-delay: 0.9s; }
+    .process-connector:nth-of-type(8)::after { transition-delay: 1.2s; }
+
+    /* Each node */
+    .process-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
       flex-shrink: 0;
-      width: 40px; height: 40px;
+      width: 148px;
+      cursor: default;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s var(--ease-out-quart), transform 0.5s var(--ease-out-quart);
+    }
+    .process-flow.visible .process-node { opacity: 1; transform: translateY(0); }
+    .process-flow.visible .process-node:nth-child(1)  { transition-delay: 0.1s; }
+    .process-flow.visible .process-node:nth-child(3)  { transition-delay: 0.4s; }
+    .process-flow.visible .process-node:nth-child(5)  { transition-delay: 0.7s; }
+    .process-flow.visible .process-node:nth-child(7)  { transition-delay: 1.0s; }
+    .process-flow.visible .process-node:nth-child(9)  { transition-delay: 1.3s; }
+
+    /* Circle badge */
+    .process-node__circle {
+      width: 72px; height: 72px;
       border-radius: 50%;
-      border: 1px solid var(--clr-border);
+      border: 1.5px solid var(--clr-border);
+      background: var(--clr-surface);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 2px;
+      position: relative;
+      transition: border-color 0.35s, box-shadow 0.35s, background 0.35s, transform 0.35s var(--ease-out-quart);
+      z-index: 1;
+    }
+    .process-node__circle::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px dashed rgba(0,198,255,0);
+      transition: border-color 0.35s, transform 0.6s;
+    }
+    .process-node:hover .process-node__circle {
+      border-color: var(--clr-blue);
+      box-shadow: 0 0 28px rgba(0,198,255,0.35), 0 0 0 6px rgba(0,198,255,0.07);
+      background: rgba(0,114,255,0.08);
+      transform: translateY(-4px);
+    }
+    .process-node:hover .process-node__circle::before {
+      border-color: rgba(0,198,255,0.4);
+      transform: rotate(45deg) scale(1.1);
+    }
+    .process-node__icon { font-size: 24px; line-height: 1; }
+    .process-node__num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--clr-text-3);
+    }
+
+    /* Label card */
+    .process-node__label {
+      text-align: center;
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-top: 2px solid transparent;
+      border-image: linear-gradient(90deg, var(--clr-blue), var(--clr-purple)) 1 0 0 0;
+      border-radius: 12px;
+      padding: 16px 14px 14px;
+      transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s var(--ease-out-quart);
+    }
+    .process-node:hover .process-node__label {
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,198,255,0.15);
+      transform: translateY(-3px);
+    }
+    .process-node__title {
       font-family: var(--font-head);
       font-size: 13px;
       font-weight: 700;
-      color: var(--clr-text-3);
-      transition: background 0.4s, border-color 0.4s, color 0.4s, transform 0.4s var(--ease-out-quart);
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--clr-blue) 0%, var(--clr-purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .process-step:hover .process-step__num {
-      background: var(--clr-blue);
-      border-color: var(--clr-blue);
-      color: #fff;
-      transform: scale(1.1);
+    .process-node__desc {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.6;
     }
 
-    .process-step__body {}
-    .process-step__title {
-      font-family: var(--font-head);
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--clr-text-1);
-      margin-bottom: 8px;
-      transition: color 0.3s;
+    /* Animated pulse ring on hover */
+    @keyframes pulse-ring {
+      0%   { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.6); opacity: 0; }
     }
-    .process-step:hover .process-step__title { color: var(--clr-blue); }
-    .process-step__desc {
-      font-size: 15px;
-      color: var(--clr-text-2);
-      line-height: 1.65;
+    .process-node:hover .process-node__circle::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0,198,255,0.5);
+      animation: pulse-ring 1s ease-out infinite;
     }
 
     /* ============================================================
        CASE STUDIES / WORK
     ============================================================ */
+    /* ConnectTheWorld full-width showcase */
+    .work-card--ctw {
+      grid-column: 1 / -1;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      cursor: default;
+    }
+    .work-card__visual--ctw {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      overflow: hidden;
+      background: #0a1628;
+    }
+    .work-card__visual--ctw img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 8s ease;
+    }
+    .work-card--ctw:hover .work-card__visual--ctw img { transform: scale(1.03); }
+
+    /* Cinematic overlay — only visible on hover */
+    .work-card__overlay--ctw {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,10,23,0.96) 0%, rgba(6,10,23,0.4) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 40px 48px;
+      opacity: 0;
+      transition: opacity 0.45s var(--ease-out-quart);
+    }
+    .work-card--ctw:hover .work-card__overlay--ctw { opacity: 1; }
+
+    .ctw-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,198,255,0.15);
+      border: 1px solid rgba(0,198,255,0.35);
+      border-radius: 100px;
+      padding: 4px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--clr-blue);
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+    .ctw-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--clr-blue);
+      animation: pulse-ring 1.5s ease-out infinite;
+    }
+    .ctw-title {
+      font-family: var(--font-head);
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+    .ctw-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.6;
+      max-width: 580px;
+      margin-bottom: 24px;
+    }
+    .ctw-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--clr-blue);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 100px;
+      text-decoration: none;
+      width: fit-content;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .ctw-cta:hover { background: var(--clr-blue-dark); transform: translateX(4px); }
+
     .work { background: var(--clr-surface); }
     .work__header {
       display: flex;
@@ -1513,6 +1807,70 @@
     }
 
     /* ============================================================
+       LIGHT SECTIONS
+    ============================================================ */
+    .section--light { background: #060A17; }
+    .section--light .section__label { color: var(--clr-blue); }
+    .section--light .section__label::before { background: var(--clr-blue); }
+    .section--light .section__heading { color: #0D1120; }
+    .section--light .section__sub { color: #374060; }
+
+    /* Service cards on white */
+    .section--light .service-card {
+      background: #F5F7FF;
+      border-color: rgba(0,0,0,0.07);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    .section--light .service-card:hover {
+      border-color: var(--clr-border-glow);
+      box-shadow: 0 20px 50px rgba(0,114,255,0.12), 0 0 0 1px rgba(0,198,255,0.15);
+    }
+    .section--light .service-card__title { color: #0D1120; }
+    .section--light .service-card__desc  { color: #4B5572; }
+    .section--light .service-card__icon {
+      background: rgba(0,114,255,0.07);
+      border-color: rgba(0,114,255,0.14);
+    }
+
+    /* Work cards on white */
+    .section--light.work { background: #F5F7FF; }
+    .section--light .work-card {
+      background: #060A17;
+      border-color: rgba(0,0,0,0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .section--light .work-card:hover {
+      box-shadow: 0 24px 60px rgba(0,0,0,0.12);
+      border-color: rgba(0,198,255,0.3);
+    }
+    .section--light .work-card__title { color: #0D1120; }
+    .section--light .work-card__meta  { color: #6B7490; }
+    .section--light .work__header .section__heading { color: #0D1120; }
+    .section--light .work-card__visual { background: #EEF1FB; }
+    .section--light .btn--ghost {
+      color: #374060;
+      border-color: rgba(0,0,0,0.18);
+    }
+    .section--light .btn--ghost:hover { color: #0D1120; border-color: rgba(0,0,0,0.3); }
+
+    /* CTA section on white */
+    .section--light.cta-section { background: #060A17; }
+    .section--light .cta-section__heading { color: #0D1120; }
+    .section--light .cta-section__sub     { color: #374060; }
+    .section--light .cta-section__bg {
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,114,255,0.07) 0%, transparent 70%);
+    }
+
+    /* Stats strip on light */
+    .stats--light {
+      background: #EEF1FB;
+      border-top: 1px solid rgba(0,0,0,0.07);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .stats--light .stat-item + .stat-item::before { background: rgba(0,0,0,0.08); }
+    .stats--light .stat-label { color: #6B7490; }
+
+    /* ============================================================
        RESPONSIVE
     ============================================================ */
     @media (max-width: 1024px) {
@@ -1547,11 +1905,13 @@
       .hero__headline { letter-spacing: -1px; }
       .stats__grid { grid-template-columns: 1fr 1fr; }
     }
-  </style>
+      /* Page transitions */
+    body > *:not(.nav):not(.nav__mobile){opacity:0;transition:opacity 0.35s ease;}
+    body.loaded > *:not(.nav):not(.nav__mobile){opacity:1;}
+    </style>
 </head>
 <body>
 
-<!-- Comet cursor canvas injected by JS -->
 
 <!-- ╔══ Shared SVG gradient defs for Binary logo ══╗
      Defined once; referenced by url(#id) in nav + footer. -->
@@ -1590,14 +1950,8 @@
 <nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
   <div class="container">
     <div class="nav__inner">
-      <a href="#" class="nav__logo" aria-label="Mandook home">
-        <span class="logo-word">Mand<svg class="logo-bin" style="width:1.68em;height:0.74em" viewBox="0 0 38 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="9"  cy="9" r="13" fill="url(#binGoldGlow)"/>
-          <circle cx="29" cy="9" r="12" fill="url(#binBlueGlow)"/>
-          <rect x="17" y="5.5" width="4" height="7" fill="url(#binBridge)" rx="2" opacity=".78"/>
-          <circle cx="9"  cy="9" r="8" fill="url(#binGold)"/>
-          <circle cx="29" cy="9" r="8" fill="url(#binBlue)"/>
-        </svg>k</span>
+      <a href="index.html" class="nav__logo" aria-label="Mandook home">
+        <img src="assets/mandook-logo.png" alt="MANDOOK" class="nav__logo-img">
       </a>
 
       <ul class="nav__links" role="list">
@@ -1635,161 +1989,45 @@
 ============================================================ -->
 <section class="hero" id="hero" aria-label="Hero banner carousel">
 
-  <!-- ░░ LAYER 0 — Image carousel ░░ -->
-  <div class="hero-carousel"
-       id="heroCarousel"
-       aria-roledescription="carousel"
-       aria-label="Featured services">
-
-    <div class="carousel__slides" id="carouselSlides">
-
-      <!-- Slide 1 — Cloud / Infrastructure -->
-      <div class="carousel__slide active"
-           role="group"
-           aria-roledescription="slide"
-           aria-label="Slide 1 of 4"
-           data-eyebrow="Cloud Architecture"
-           data-headline="Engineering Tomorrow's Infrastructure, Today"
-           data-sub="Mandook partners with forward-thinking enterprises to architect cloud-native platforms, modernise legacy systems, and build software that scales. No compromise, no shortcuts."
-           data-cta1-label="Start a Project"
-           data-cta1-href="contact.html"
-           data-cta2-label="View Case Studies"
-           data-cta2-href="work.html">
-        <div class="carousel__img" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80')" role="img" aria-label="Global technology network"></div>
-        <div class="carousel__overlay" aria-hidden="true"></div>
-      </div>
-
-      <!-- Slide 2 — Data Centre / Security -->
-      <div class="carousel__slide"
-           role="group"
-           aria-roledescription="slide"
-           aria-label="Slide 2 of 4"
-           data-eyebrow="Cybersecurity & DevOps"
-           data-headline="Harden Your Stack. Ship Without Fear."
-           data-sub="From penetration testing and SOC2 compliance to zero-downtime CI/CD pipelines — we make your systems bulletproof before attackers or deadlines can."
-           data-cta1-label="Explore Security Services"
-           data-cta1-href="services.html"
-           data-cta2-label="See Our Process"
-           data-cta2-href="process.html">
-        <div class="carousel__img" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1920&q=80')" role="img" aria-label="Modern data centre servers"></div>
-        <div class="carousel__overlay" aria-hidden="true"></div>
-      </div>
-
-      <!-- Slide 3 — AI / Data -->
-      <div class="carousel__slide"
-           role="group"
-           aria-roledescription="slide"
-           aria-label="Slide 3 of 4"
-           data-eyebrow="AI & Data Engineering"
-           data-headline="Unlock Intelligence Inside Your Data"
-           data-sub="Real-time pipelines, ML-ready data lakes, and production-grade AI integrations — built by engineers who understand both the models and the infrastructure beneath them."
-           data-cta1-label="Explore AI Services"
-           data-cta1-href="services.html"
-           data-cta2-label="View Case Studies"
-           data-cta2-href="work.html">
-        <div class="carousel__img" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1920&q=80')" role="img" aria-label="Circuit board close-up representing AI technology"></div>
-        <div class="carousel__overlay" aria-hidden="true"></div>
-      </div>
-
-      <!-- Slide 4 — Team / Partnership -->
-      <div class="carousel__slide"
-           role="group"
-           aria-roledescription="slide"
-           aria-label="Slide 4 of 4"
-           data-eyebrow="Elite IT Consulting"
-           data-headline="Your Technology Partner from Day One"
-           data-sub="We don't just deliver a project and disappear. Mandook embeds with your team, understands your goals, and builds the technical foundation your next decade will stand on."
-           data-cta1-label="Get a Free Proposal"
-           data-cta1-href="contact.html"
-           data-cta2-label="About Mandook"
-           data-cta2-href="about.html">
-        <div class="carousel__img" style="background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1920&q=80')" role="img" aria-label="Modern collaborative workspace with technology professionals"></div>
-        <div class="carousel__overlay" aria-hidden="true"></div>
-      </div>
-
-    </div><!-- /carouselSlides -->
-
-    <!-- Arrow navigation -->
-    <button class="carousel__arrow carousel__arrow--prev" id="carouselPrev" aria-label="Previous slide">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M13 4l-6 6 6 6"/>
-      </svg>
-    </button>
-    <button class="carousel__arrow carousel__arrow--next" id="carouselNext" aria-label="Next slide">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M7 4l6 6-6 6"/>
-      </svg>
-    </button>
-
-    <!-- Slide counter -->
-    <div class="carousel__counter" aria-hidden="true">
-      <span id="carouselCurrent">01</span> / 04
-    </div>
-
-    <!-- Dot indicators -->
-    <div class="carousel__dots" role="group" aria-label="Slide indicators">
-      <button class="carousel__dot active" data-slide="0" aria-label="Go to slide 1" aria-pressed="true"></button>
-      <button class="carousel__dot" data-slide="1" aria-label="Go to slide 2" aria-pressed="false"></button>
-      <button class="carousel__dot" data-slide="2" aria-label="Go to slide 3" aria-pressed="false"></button>
-      <button class="carousel__dot" data-slide="3" aria-label="Go to slide 4" aria-pressed="false"></button>
-    </div>
-
-    <!-- Auto-advance progress bar -->
-    <div class="carousel__progress" aria-hidden="true">
-      <div class="carousel__progress-fill" id="carouselProgressFill"></div>
-    </div>
-
-  </div><!-- /heroCarousel -->
-
-  <!-- ░░ LAYER 1 — Atmosphere: grid + particles + orbs ░░ -->
+  <!-- ░░ Background atmosphere ░░ -->
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero__grid" aria-hidden="true"></div>
   <div class="hero__orb hero__orb--1" aria-hidden="true"></div>
   <div class="hero__orb hero__orb--2" aria-hidden="true"></div>
   <div class="hero__orb hero__orb--3" aria-hidden="true"></div>
 
-  <!-- ░░ LAYER 2 — Text content (updated per slide by JS) ░░ -->
   <div class="container">
-    <div class="hero__content" id="heroContent">
+    <div class="hero__inner">
 
-      <div class="hero__eyebrow" id="heroEyebrow" aria-live="polite">
-        <div class="hero__eyebrow-dot" aria-hidden="true"></div>
-        Cloud Architecture
-      </div>
-
-      <h1 class="hero__headline" id="heroHeadline">
-        Engineering Tomorrow's Infrastructure, Today
-      </h1>
-
-      <p class="hero__sub" id="heroSub">
-        Mandook partners with forward-thinking enterprises to architect cloud-native platforms, modernise legacy systems, and build software that scales. No compromise, no shortcuts.
-      </p>
-
-      <div class="hero__actions" id="heroActions">
-        <div class="magnetic-wrap">
-          <a href="contact.html" class="btn btn--primary btn--large" id="heroCtaPrimary">
-            Start a Project
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+      <!-- LEFT — Text -->
+      <div class="hero__content" id="heroContent">
+        <h1 class="hero__headline" id="heroHeadline">
+          Your implementation partner for Digital Transformation
+        </h1>
+        <p class="hero__sub" id="heroSub">
+          Helping businesses innovate, automate, and scale with modern technology solutions tailored to their goals.
+        </p>
+        <div class="hero__actions" id="heroActions">
+          <div class="magnetic-wrap">
+            <a href="contact.html" class="btn btn--primary btn--large" id="heroCtaPrimary">
+              Start Your Project
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+          <a href="contact.html" class="btn btn--ghost btn--large" id="heroCtaSecondary">
+            Book a Free Consultation
           </a>
         </div>
-        <a href="work.html" class="btn btn--ghost btn--large" id="heroCtaSecondary">
-          View Case Studies
-        </a>
+      </div>
+
+      <!-- RIGHT — Animated network visual -->
+      <div class="hero__visual" aria-hidden="true">
+        <canvas id="network-canvas"></canvas>
       </div>
 
     </div>
-  </div>
-
-  <!-- ░░ Floating social proof badges ░░ -->
-  <div class="hero__badge" aria-label="Trusted by 120+ companies">
-    <div class="hero__badge-icon" aria-hidden="true">🏆</div>
-    Trusted by 120+ companies
-  </div>
-  <div class="hero__badge-2" aria-label="99.9% uptime delivered">
-    <div class="badge-num">99.9%</div>
-    <div class="badge-txt">Uptime<br>delivered</div>
   </div>
 
   <!-- ░░ Scroll indicator ░░ -->
@@ -1801,129 +2039,48 @@
 </section>
 
 <!-- ============================================================
-     MARQUEE
-============================================================ -->
-<div class="marquee-section" aria-label="Technology partners and expertise">
-  <div class="marquee-track" id="marqueeTrack">
-    <!-- Duplicated for seamless loop -->
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#00C6FF"><circle cx="8" cy="8" r="8"/></svg> AWS</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#7B4FFF"><rect width="16" height="16" rx="4"/></svg> Azure</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#0072FF"><polygon points="8,1 15,15 1,15"/></svg> GCP</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#00C6FF"><circle cx="8" cy="8" r="8"/></svg> Kubernetes</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#7B4FFF"><rect width="16" height="16" rx="4"/></svg> Terraform</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#0072FF"><polygon points="8,1 15,15 1,15"/></svg> React</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#00C6FF"><circle cx="8" cy="8" r="8"/></svg> Node.js</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#7B4FFF"><rect width="16" height="16" rx="4"/></svg> Python</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#0072FF"><polygon points="8,1 15,15 1,15"/></svg> PostgreSQL</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#00C6FF"><circle cx="8" cy="8" r="8"/></svg> Microservices</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#7B4FFF"><rect width="16" height="16" rx="4"/></svg> CI/CD</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#0072FF"><polygon points="8,1 15,15 1,15"/></svg> GraphQL</div>
-    <div class="marquee-sep">✦</div>
-    <!-- DUPLICATE -->
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#00C6FF"><circle cx="8" cy="8" r="8"/></svg> AWS</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#7B4FFF"><rect width="16" height="16" rx="4"/></svg> Azure</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#0072FF"><polygon points="8,1 15,15 1,15"/></svg> GCP</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#00C6FF"><circle cx="8" cy="8" r="8"/></svg> Kubernetes</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#7B4FFF"><rect width="16" height="16" rx="4"/></svg> Terraform</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#0072FF"><polygon points="8,1 15,15 1,15"/></svg> React</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#00C6FF"><circle cx="8" cy="8" r="8"/></svg> Node.js</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#7B4FFF"><rect width="16" height="16" rx="4"/></svg> Python</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#0072FF"><polygon points="8,1 15,15 1,15"/></svg> PostgreSQL</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#00C6FF"><circle cx="8" cy="8" r="8"/></svg> Microservices</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#7B4FFF"><rect width="16" height="16" rx="4"/></svg> CI/CD</div>
-    <div class="marquee-sep">✦</div>
-    <div class="marquee-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="#0072FF"><polygon points="8,1 15,15 1,15"/></svg> GraphQL</div>
-    <div class="marquee-sep">✦</div>
-  </div>
-</div>
-
-<!-- ============================================================
      SERVICES
 ============================================================ -->
-<section class="section services" id="services" aria-labelledby="services-heading">
+<section class="section services section--light" id="services" aria-labelledby="services-heading">
   <div class="container">
     <div class="services__header">
       <div class="section__label reveal">What we do</div>
-      <h2 class="section__heading reveal" id="services-heading" data-delay="1">
-        Expert solutions for<br>every layer of your stack
-      </h2>
-      <p class="section__sub reveal" data-delay="2">
-        From strategy through to deployment — we bring deep expertise across infrastructure, applications, data, and security.
-      </p>
+      <p class="section__sub reveal" data-delay="1" style="background:linear-gradient(135deg,#00c6ff,#7B4FFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">End-to-end technology solutions designed to simplify operations, unlock innovation, and accelerate digital transformation.</p>
     </div>
 
     <div class="services__grid">
 
       <div class="service-card reveal" data-delay="1" data-tilt>
+        <div class="service-card__icon">🤝</div>
+        <h3 class="service-card__title">Consulting & Implementation</h3>
+        <p class="service-card__desc">We implement and scale Salesforce for real estate and process-driven industries — enabling automation, smarter reporting, and sustainable growth.</p>
+        <a href="contact.html" class="service-card__link">
+          Learn more <span class="service-card__link-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="service-card reveal" data-delay="2" data-tilt>
+        <div class="service-card__icon">🔧</div>
+        <h3 class="service-card__title">AMC & Ongoing Support</h3>
+        <p class="service-card__desc">Keep your Salesforce org healthy and evolving. Our managed support plans cover enhancements, bug fixes, and proactive optimisations.</p>
+        <a href="contact.html" class="service-card__link">
+          Learn more <span class="service-card__link-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="service-card reveal" data-delay="3" data-tilt>
         <div class="service-card__icon">☁️</div>
-        <h3 class="service-card__title">Cloud Architecture</h3>
-        <p class="service-card__desc">Design and deploy resilient, cost-optimised cloud environments on AWS, Azure, or GCP. Multi-region, auto-scaling, zero-downtime.</p>
-        <a href="contact.html" class="service-card__link">
-          Learn more <span class="service-card__link-arrow">→</span>
-        </a>
-      </div>
-
-      <div class="service-card reveal" data-delay="2" data-tilt>
-        <div class="service-card__icon">⚡</div>
-        <h3 class="service-card__title">Software Engineering</h3>
-        <p class="service-card__desc">Full-stack product development — from greenfield builds to legacy modernisation. APIs, web apps, and mobile, built to last.</p>
-        <a href="contact.html" class="service-card__link">
-          Learn more <span class="service-card__link-arrow">→</span>
-        </a>
-      </div>
-
-      <div class="service-card reveal" data-delay="3" data-tilt>
-        <div class="service-card__icon">🔒</div>
-        <h3 class="service-card__title">Cybersecurity</h3>
-        <p class="service-card__desc">Penetration testing, threat modelling, and compliance audits (SOC2, ISO 27001). We harden your systems before attackers find the gaps.</p>
-        <a href="contact.html" class="service-card__link">
-          Learn more <span class="service-card__link-arrow">→</span>
-        </a>
-      </div>
-
-      <div class="service-card reveal" data-delay="2" data-tilt>
-        <div class="service-card__icon">📊</div>
-        <h3 class="service-card__title">Data Engineering</h3>
-        <p class="service-card__desc">Build pipelines that deliver clean, reliable data at scale. Data lakes, real-time streaming, BI dashboards, and ML-ready infrastructure.</p>
-        <a href="contact.html" class="service-card__link">
-          Learn more <span class="service-card__link-arrow">→</span>
-        </a>
-      </div>
-
-      <div class="service-card reveal" data-delay="3" data-tilt>
-        <div class="service-card__icon">🤖</div>
-        <h3 class="service-card__title">AI Integration</h3>
-        <p class="service-card__desc">Embed LLMs, computer vision, and predictive models into your products. We bridge the gap between AI research and production systems.</p>
+        <h3 class="service-card__title">Salesforce CRM</h3>
+        <p class="service-card__desc">As certified partners, we help you choose, implement, and manage the right Salesforce products — Sales Cloud, Marketing Cloud, and Data Cloud — at the right scale.</p>
         <a href="contact.html" class="service-card__link">
           Learn more <span class="service-card__link-arrow">→</span>
         </a>
       </div>
 
       <div class="service-card reveal" data-delay="4" data-tilt>
-        <div class="service-card__icon">🚀</div>
+        <div class="service-card__icon">👥</div>
         <h3 class="service-card__title">DevOps & Platform</h3>
-        <p class="service-card__desc">Streamline delivery with CI/CD pipelines, Infrastructure as Code, observability stacks, and Kubernetes platform engineering.</p>
+        <p class="service-card__desc">Augment your team with certified Salesforce professionals. We supply the right resources — developers, admins, and architects — for any project scope.</p>
         <a href="contact.html" class="service-card__link">
           Learn more <span class="service-card__link-arrow">→</span>
         </a>
@@ -1936,156 +2093,58 @@
 <!-- ============================================================
      STATS
 ============================================================ -->
-<div class="stats" aria-label="Company statistics">
-  <div class="container">
-    <div class="stats__grid">
-      <div class="stat-item reveal" data-delay="1">
-        <div class="stat-num" data-countup="120" data-suffix="+">0</div>
-        <div class="stat-label">Projects delivered</div>
-      </div>
-      <div class="stat-item reveal" data-delay="2">
-        <div class="stat-num" data-countup="8" data-suffix=" yrs">0</div>
-        <div class="stat-label">Years of excellence</div>
-      </div>
-      <div class="stat-item reveal" data-delay="3">
-        <div class="stat-num" data-countup="99" data-suffix=".9%">0</div>
-        <div class="stat-label">Average uptime SLA</div>
-      </div>
-      <div class="stat-item reveal" data-delay="4">
-        <div class="stat-num" data-countup="40" data-suffix="+">0</div>
-        <div class="stat-label">Engineers on staff</div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ============================================================
-     PROCESS
+     WHY MANDOOK
 ============================================================ -->
-<section class="section process" id="process" aria-labelledby="process-heading">
+<section class="section why-mandook" id="why" aria-labelledby="why-heading">
   <div class="container">
-    <div class="process__layout">
-      <div class="process__left reveal-left">
-        <div class="section__label">How we work</div>
-        <h2 class="section__heading" id="process-heading">
-          A rigorous process.<br>Predictable outcomes.
-        </h2>
-        <p class="section__sub">
-          We follow a structured engagement model refined over hundreds of projects. You always know where we are and what's next.
-        </p>
-        <div class="tech-stack">
-          <div class="tech-pill"><span>☁️</span> Cloud-native</div>
-          <div class="tech-pill"><span>🔄</span> Agile sprints</div>
-          <div class="tech-pill"><span>📋</span> Weekly reviews</div>
-          <div class="tech-pill"><span>🧪</span> Test-driven</div>
-          <div class="tech-pill"><span>🔒</span> Security-first</div>
-        </div>
-      </div>
-
-      <div class="process__steps" role="list">
-
-        <div class="process-step reveal" data-delay="1" role="listitem">
-          <div class="process-step__num">01</div>
-          <div class="process-step__body">
-            <h3 class="process-step__title">Discovery & Audit</h3>
-            <p class="process-step__desc">Deep-dive into your current stack, business goals, and constraints. We surface risks, gaps, and opportunities before a single line is written.</p>
-          </div>
-        </div>
-
-        <div class="process-step reveal" data-delay="2" role="listitem">
-          <div class="process-step__num">02</div>
-          <div class="process-step__body">
-            <h3 class="process-step__title">Architecture & Roadmap</h3>
-            <p class="process-step__desc">We design the technical blueprint and phased delivery plan. Fully documented, fully reviewed by your team before we build anything.</p>
-          </div>
-        </div>
-
-        <div class="process-step reveal" data-delay="3" role="listitem">
-          <div class="process-step__num">03</div>
-          <div class="process-step__body">
-            <h3 class="process-step__title">Agile Build</h3>
-            <p class="process-step__desc">Two-week sprints. Continuous integration. Working software in your hands every fortnight, not six months from now.</p>
-          </div>
-        </div>
-
-        <div class="process-step reveal" data-delay="4" role="listitem">
-          <div class="process-step__num">04</div>
-          <div class="process-step__body">
-            <h3 class="process-step__title">Launch & Harden</h3>
-            <p class="process-step__desc">Zero-downtime deployment, load testing, security review, and 30-day hypercare support included in every engagement.</p>
-          </div>
-        </div>
-
-        <div class="process-step reveal" data-delay="5" role="listitem">
-          <div class="process-step__num">05</div>
-          <div class="process-step__body">
-            <h3 class="process-step__title">Ongoing Partnership</h3>
-            <p class="process-step__desc">Retainer support, SLA-backed monitoring, and quarterly roadmap reviews. We grow with you.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     CASE STUDIES
-============================================================ -->
-<section class="section work" id="work" aria-labelledby="work-heading">
-  <div class="container">
-    <div class="work__header">
-      <div>
-        <div class="section__label reveal">Selected work</div>
-        <h2 class="section__heading reveal" id="work-heading" data-delay="1">
-          Results that speak<br>for themselves
-        </h2>
-      </div>
-      <a href="contact.html" class="btn btn--ghost reveal" data-delay="2">View all work →</a>
+    <div class="why__header reveal">
+      <div class="section__label">Why Mandook.com</div>
+      <h2 class="section__heading reveal" id="why-heading" data-delay="1">
+        The partner that delivers,<br>not just consults
+      </h2>
+      <p class="section__sub reveal" data-delay="2">
+        We don't hand you a report and disappear. We embed with your team, build the solution, and stay to make sure it works.
+      </p>
     </div>
 
-    <div class="work__grid">
+    <div class="why__grid">
 
-      <div class="work-card work-card--a work-card--tall reveal" data-delay="1">
-        <div class="work-card__visual">
-          <div class="work-card__pattern"></div>
-          <div class="work-card__overlay">
-            <span class="work-card__cta">View case study →</span>
-          </div>
-        </div>
-        <div class="work-card__info">
-          <div class="work-card__tag">Cloud Migration</div>
-          <div class="work-card__title">Fin-tech Platform Migration to AWS</div>
-          <div class="work-card__meta">Reduced infra costs by 42% · 99.99% uptime · 18 weeks</div>
-        </div>
+      <div class="why-card reveal" data-delay="1">
+        <div class="why-card__icon">🏆</div>
+        <h3 class="why-card__title">Certified Salesforce Partner</h3>
+        <p class="why-card__desc">CREST-level Salesforce credentials backed by real delivery experience — not just badges.</p>
       </div>
 
-      <div class="work-card work-card--b reveal" data-delay="2">
-        <div class="work-card__visual">
-          <div class="work-card__pattern"></div>
-          <div class="work-card__overlay">
-            <span class="work-card__cta">View case study →</span>
-          </div>
-        </div>
-        <div class="work-card__info">
-          <div class="work-card__tag">AI / ML</div>
-          <div class="work-card__title">Predictive Analytics Engine for Retail</div>
-          <div class="work-card__meta">28% revenue uplift · Real-time inference · 12 weeks</div>
-        </div>
+      <div class="why-card reveal" data-delay="2">
+        <div class="why-card__icon">⚡</div>
+        <h3 class="why-card__title">8-Week Go-Live</h3>
+        <p class="why-card__desc">Our structured delivery model gets you live faster than the industry average — without cutting corners.</p>
       </div>
 
-      <div class="work-card work-card--c reveal" data-delay="3">
-        <div class="work-card__visual">
-          <div class="work-card__pattern"></div>
-          <div class="work-card__overlay">
-            <span class="work-card__cta">View case study →</span>
-          </div>
-        </div>
-        <div class="work-card__info">
-          <div class="work-card__tag">Platform Engineering</div>
-          <div class="work-card__title">Internal Developer Platform — 800 Engineers</div>
-          <div class="work-card__meta">Deploy frequency ×8 · DORA elite tier · 24 weeks</div>
-        </div>
+      <div class="why-card reveal" data-delay="3">
+        <div class="why-card__icon">🔁</div>
+        <h3 class="why-card__title">End-to-End Ownership</h3>
+        <p class="why-card__desc">From strategy and consulting through to implementation, AMC, and ongoing support — one partner, full accountability.</p>
+      </div>
+
+      <div class="why-card reveal" data-delay="4">
+        <div class="why-card__icon">🎯</div>
+        <h3 class="why-card__title">Domain-Focused Expertise</h3>
+        <p class="why-card__desc">Deep experience in real estate and process-driven industries means we understand your operations before we touch your CRM.</p>
+      </div>
+
+      <div class="why-card reveal" data-delay="5">
+        <div class="why-card__icon">🤝</div>
+        <h3 class="why-card__title">Long-Term Partnership</h3>
+        <p class="why-card__desc">We measure success by your growth, not the close of a contract. Our AMC plans keep your platform evolving alongside your business.</p>
+      </div>
+
+      <div class="why-card reveal" data-delay="6">
+        <div class="why-card__icon">📊</div>
+        <h3 class="why-card__title">Data-Driven Decisions</h3>
+        <p class="why-card__desc">We build Salesforce solutions that surface the right data at the right time — giving your leadership team clarity, not guesswork.</p>
       </div>
 
     </div>
@@ -2110,13 +2169,13 @@
         <div class="testi-card">
           <div class="testi-card__inner">
             <p class="testi-card__quote">
-              "Mandook didn't just deliver a cloud migration — they transformed how our entire engineering team thinks about infrastructure. The ROI in year one was undeniable."
+              "The team understood our real estate workflows from day one. The Salesforce implementation was seamless and the results were immediate — our sales cycle dropped by 40%."
             </p>
             <div class="testi-card__author">
-              <div class="testi-card__avatar">SR</div>
+              <div class="testi-card__avatar">AR</div>
               <div>
-                <div class="testi-card__name">Sarah Reynolds</div>
-                <div class="testi-card__role">CTO · Apex Financial Services</div>
+                <div class="testi-card__name">Ahmed Al Rashidi</div>
+                <div class="testi-card__role">CEO · Pinnacle Properties</div>
               </div>
               <div class="testi-card__stars" aria-label="5 stars">★★★★★</div>
             </div>
@@ -2126,13 +2185,13 @@
         <div class="testi-card">
           <div class="testi-card__inner">
             <p class="testi-card__quote">
-              "We went from quarterly releases to shipping every two weeks. Mandook's DevOps overhaul gave our product team a velocity we'd never seen before. Exceptional engineers."
+              "We've worked with other Salesforce partners before, but none matched the depth of expertise and commitment this team brought. Our CRM is finally a true growth engine."
             </p>
             <div class="testi-card__author">
-              <div class="testi-card__avatar">MK</div>
+              <div class="testi-card__avatar">SM</div>
               <div>
-                <div class="testi-card__name">Marcus Kim</div>
-                <div class="testi-card__role">VP Engineering · Vanta Retail</div>
+                <div class="testi-card__name">Sara Mehta</div>
+                <div class="testi-card__role">Head of Operations · Landmark Developers</div>
               </div>
               <div class="testi-card__stars" aria-label="5 stars">★★★★★</div>
             </div>
@@ -2142,13 +2201,13 @@
         <div class="testi-card">
           <div class="testi-card__inner">
             <p class="testi-card__quote">
-              "I was sceptical about working with an external partner on something as critical as our data platform. Mandook erased every doubt within the first sprint. Highly recommend."
+              "From go-live in under 8 weeks to the ongoing AMC support — the professionalism has been outstanding. I wouldn't trust anyone else with our Salesforce org."
             </p>
             <div class="testi-card__author">
-              <div class="testi-card__avatar">PN</div>
+              <div class="testi-card__avatar">KP</div>
               <div>
-                <div class="testi-card__name">Priya Nair</div>
-                <div class="testi-card__role">Head of Data · Luma Health</div>
+                <div class="testi-card__name">Karan Patel</div>
+                <div class="testi-card__role">VP Sales · Horizon Realty Group</div>
               </div>
               <div class="testi-card__stars" aria-label="5 stars">★★★★★</div>
             </div>
@@ -2179,13 +2238,13 @@
 <!-- ============================================================
      CTA
 ============================================================ -->
-<section class="cta-section" id="contact" aria-labelledby="cta-heading">
+<section class="cta-section section--light" id="contact" aria-labelledby="cta-heading">
   <div class="cta-section__bg" aria-hidden="true"></div>
   <div class="container">
     <div class="cta-section__inner">
       <div class="section__label reveal" style="justify-content:center">Let's build together</div>
       <h2 class="cta-section__heading reveal" id="cta-heading" data-delay="1">
-        Ready to engineer<br>something <span style="background:linear-gradient(135deg,var(--clr-blue),var(--clr-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">remarkable?</span>
+        Ready to transform your<br>business with <span style="background:linear-gradient(135deg,var(--clr-blue),var(--clr-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Salesforce?</span>
       </h2>
       <p class="cta-section__sub reveal" data-delay="2">
         Tell us about your challenge. We'll respond within 24 hours with a tailored approach — no sales pitch, no commitment required.
@@ -2213,25 +2272,18 @@
 
       <div class="footer__brand reveal-left">
         <div class="nav__logo" style="margin-bottom:0">
-          <span class="logo-word">Mand<svg class="logo-bin" style="width:1.68em;height:0.74em" viewBox="0 0 38 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="9"  cy="9" r="13" fill="url(#binGoldGlow)"/>
-            <circle cx="29" cy="9" r="12" fill="url(#binBlueGlow)"/>
-            <rect x="17" y="5.5" width="4" height="7" fill="url(#binBridge)" rx="2" opacity=".78"/>
-            <circle cx="9"  cy="9" r="8" fill="url(#binGold)"/>
-            <circle cx="29" cy="9" r="8" fill="url(#binBlue)"/>
-          </svg>k</span>
+          <img src="assets/mandook-logo.png" alt="MANDOOK" class="nav__logo-img">
         </div>
-        <p>Engineering world-class technology for enterprises that refuse to compromise. Based globally, committed locally.</p>
+        <p>Salesforce CREST Partner specialising in consulting, implementation, and ongoing support — helping businesses automate operations and grow with confidence.</p>
       </div>
 
       <div class="reveal" data-delay="1">
         <div class="footer__col-title">Services</div>
         <ul class="footer__col-links" role="list">
-          <li><a href="services.html" class="footer__col-link">Cloud Architecture</a></li>
-          <li><a href="services.html" class="footer__col-link">Software Engineering</a></li>
-          <li><a href="services.html" class="footer__col-link">Cybersecurity</a></li>
-          <li><a href="services.html" class="footer__col-link">Data Engineering</a></li>
-          <li><a href="services.html" class="footer__col-link">AI Integration</a></li>
+          <li><a href="services.html" class="footer__col-link">Consulting & Implementation</a></li>
+          <li><a href="services.html" class="footer__col-link">AMC & Ongoing Support</a></li>
+          <li><a href="services.html" class="footer__col-link">Salesforce CRM</a></li>
+          <li><a href="services.html" class="footer__col-link">DevOps & Platform</a></li>
         </ul>
       </div>
 
@@ -2280,150 +2332,6 @@
   ────────────────────────────────────────────────────────── */
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ──────────────────────────────────────────────────────────
-     Custom cursor
-  ────────────────────────────────────────────────────────── */
-  (function initCursor() {
-    if (prefersReducedMotion) return;
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-
-    /* ── Canvas ── */
-    const cvs = document.createElement('canvas');
-    cvs.setAttribute('aria-hidden', 'true');
-    Object.assign(cvs.style, {
-      position: 'fixed', top: '0', left: '0',
-      width: '100%', height: '100%',
-      pointerEvents: 'none', zIndex: '9999',
-    });
-    document.body.appendChild(cvs);
-    const ctx = cvs.getContext('2d');
-    const resize = () => { cvs.width = innerWidth; cvs.height = innerHeight; };
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-
-    /* ── Physics chain — 16 nodes ── */
-    const N = 16;
-    const nodes = Array.from({ length: N }, () => ({ x: -500, y: -500, vx: 0, vy: 0 }));
-    let mx = -500, my = -500;
-    let alive = false, glowFrames = 0;
-    const ripples = [];
-
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      alive = true; glowFrames = 36;
-    }, { passive: true });
-    document.addEventListener('mouseleave', () => { alive = false; });
-    document.addEventListener('mouseenter', () => { alive = true; glowFrames = 36; });
-
-    /* Single subtle ripple on click — no sparks */
-    document.addEventListener('mousedown', () => {
-      ripples.push({ x: mx, y: my, r: 4, a: 0.55 });
-    });
-
-    /* Trail colour: indigo → blue → cyan (t = 0 tail → 1 head) */
-    function col(t, a) {
-      let r = 0, g = 0, b = 255;
-      if (t < 0.5) { const u = t / 0.5; r = Math.round(80 * (1 - u)); g = Math.round(60 + 54 * u); }
-      else          { const u = (t - 0.5) / 0.5; g = Math.round(114 + 84 * u); }
-      return `rgba(${r},${g},${b},${Math.min(a, 1).toFixed(3)})`;
-    }
-
-    function draw() {
-      const W = cvs.width, H = cvs.height;
-
-      /* Physics — head snaps to mouse instantly, tail spring follows */
-      nodes[0].x = mx; nodes[0].y = my;
-      for (let i = 1; i < N; i++) {
-        const k = Math.max(0.10, 0.22 - i * 0.007);
-        const d = Math.min(0.88, 0.72 + i * 0.009);
-        nodes[i].vx += (nodes[i-1].x - nodes[i].x) * k;
-        nodes[i].vy += (nodes[i-1].y - nodes[i].y) * k;
-        nodes[i].vx *= d; nodes[i].vy *= d;
-        nodes[i].x  += nodes[i].vx; nodes[i].y += nodes[i].vy;
-      }
-
-      /* Fade via destination-out (transparent regions unaffected) */
-      if (glowFrames > 0) {
-        ctx.save();
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.fillStyle = 'rgba(0,0,0,0.30)';
-        ctx.fillRect(0, 0, W, H);
-        ctx.restore();
-        glowFrames--;
-      } else {
-        ctx.clearRect(0, 0, W, H);
-      }
-
-      /* Ripples */
-      for (let i = ripples.length - 1; i >= 0; i--) {
-        const rip = ripples[i];
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(rip.x, rip.y, rip.r, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(0,198,255,${rip.a.toFixed(3)})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        ctx.restore();
-        rip.r += 2.5; rip.a *= 0.87;
-        if (rip.a < 0.01) ripples.splice(i, 1);
-      }
-
-      if (!alive) { requestAnimationFrame(draw); return; }
-
-      /* Soft outer glow — restrained width & alpha */
-      ctx.save();
-      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      for (let i = 0; i < N - 1; i++) {
-        const t = 1 - i / (N - 1);
-        if (t < 0.15) continue;
-        ctx.beginPath();
-        ctx.strokeStyle = col(t, Math.pow(t, 3) * 0.10);
-        ctx.lineWidth   = Math.pow(t, 0.5) * 11;
-        ctx.moveTo(nodes[i].x, nodes[i].y);
-        ctx.lineTo(nodes[i+1].x, nodes[i+1].y);
-        ctx.stroke();
-      }
-      ctx.restore();
-
-      /* Crisp core streak */
-      ctx.save();
-      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      for (let i = 0; i < N - 1; i++) {
-        const t = 1 - i / (N - 1);
-        if (t < 0.04) continue;
-        ctx.beginPath();
-        ctx.strokeStyle = col(t, Math.pow(t, 1.8) * 0.80);
-        ctx.lineWidth   = Math.pow(t, 0.8) * 2.8;
-        ctx.moveTo(nodes[i].x, nodes[i].y);
-        ctx.lineTo(nodes[i+1].x, nodes[i+1].y);
-        ctx.stroke();
-      }
-      ctx.restore();
-
-      /* Head — small, clean, no pulsing */
-      const hx = nodes[0].x, hy = nodes[0].y;
-
-      const halo = ctx.createRadialGradient(hx, hy, 0, hx, hy, 16);
-      halo.addColorStop(0,   'rgba(0,210,255,0.22)');
-      halo.addColorStop(1,   'rgba(0,120,255,0)');
-      ctx.save();
-      ctx.beginPath(); ctx.arc(hx, hy, 16, 0, Math.PI * 2);
-      ctx.fillStyle = halo; ctx.fill();
-      ctx.restore();
-
-      ctx.save();
-      ctx.beginPath(); ctx.arc(hx, hy, 2.5, 0, Math.PI * 2);
-      ctx.fillStyle   = '#ffffff';
-      ctx.shadowColor = 'rgba(0,210,255,0.9)';
-      ctx.shadowBlur  = 8;
-      ctx.fill();
-      ctx.restore();
-
-      requestAnimationFrame(draw);
-    }
-
-    draw();
-  })();
 
   /* ──────────────────────────────────────────────────────────
      Nav — scroll behaviour
@@ -2581,6 +2489,21 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
     els.forEach(el => io.observe(el));
+  })();
+
+  /* ──────────────────────────────────────────────────────────
+     Process flow animation
+  ────────────────────────────────────────────────────────── */
+  (function initProcessFlow() {
+    const flow = document.getElementById('processFlow');
+    if (!flow) return;
+    if (prefersReducedMotion) { flow.classList.add('visible'); return; }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { flow.classList.add('visible'); io.unobserve(flow); }
+      });
+    }, { threshold: 0.2 });
+    io.observe(flow);
   })();
 
   /* ──────────────────────────────────────────────────────────
@@ -2778,243 +2701,6 @@
     sections.forEach(s => io.observe(s));
   })();
 
-  /* ──────────────────────────────────────────────────────────
-     Hero Image Carousel
-  ────────────────────────────────────────────────────────── */
-  (function initHeroCarousel() {
-    const slides       = Array.from(document.querySelectorAll('.carousel__slide'));
-    const dots         = Array.from(document.querySelectorAll('.carousel__dot'));
-    const prevBtn      = document.getElementById('carouselPrev');
-    const nextBtn      = document.getElementById('carouselNext');
-    const progressFill = document.getElementById('carouselProgressFill');
-    const counterEl    = document.getElementById('carouselCurrent');
-    const heroContent  = document.getElementById('heroContent');
-    const eyebrowEl    = document.getElementById('heroEyebrow');
-    const headlineEl   = document.getElementById('heroHeadline');
-    const subEl        = document.getElementById('heroSub');
-    const cta1El       = document.getElementById('heroCtaPrimary');
-    const cta2El       = document.getElementById('heroCtaSecondary');
-    const hero         = document.getElementById('hero');
-
-    if (!slides.length) return;
-
-    const DURATION   = 7000;    // ms between auto-advances
-    const TRANS_DUR  = 1000;    // css transition duration (ms)
-
-    let current    = 0;
-    let timer      = null;
-    let progTimer  = null;
-    let paused     = false;
-    let isAnimating = false;
-
-    /* ── Helpers ── */
-    const pad = n => String(n + 1).padStart(2, '0');
-
-    const updateCounter = () => {
-      if (counterEl) counterEl.textContent = pad(current);
-    };
-
-    const updateDots = () => {
-      dots.forEach((d, i) => {
-        const active = i === current;
-        d.classList.toggle('active', active);
-        d.setAttribute('aria-pressed', active);
-      });
-    };
-
-    /* ── Progress bar ── */
-    const startProgress = () => {
-      if (!progressFill) return;
-      clearTimeout(progTimer);
-      progressFill.style.transition = 'none';
-      progressFill.style.width = '0%';
-
-      // Force reflow to reset
-      progressFill.getBoundingClientRect();
-
-      progressFill.style.transition = `width ${DURATION}ms linear`;
-      progressFill.style.width = '100%';
-    };
-
-    const stopProgress = () => {
-      if (!progressFill) return;
-      const computed = getComputedStyle(progressFill).width;
-      const parentW  = progressFill.parentElement.offsetWidth;
-      const pct      = parseFloat(computed) / parentW * 100;
-      progressFill.style.transition = 'none';
-      progressFill.style.width = pct + '%';
-    };
-
-    /* ── Slide text update ── */
-    const updateContent = (slide) => {
-      const d = slide.dataset;
-      if (!d) return;
-
-      // Eyebrow chip text (keep the dot, update label)
-      if (eyebrowEl) {
-        const dot = eyebrowEl.querySelector('.hero__eyebrow-dot');
-        eyebrowEl.innerHTML = '';
-        if (dot) eyebrowEl.appendChild(dot);
-        eyebrowEl.append(d.eyebrow || 'Elite IT Consulting');
-      }
-
-      // Headline — trigger word-reveal if not reduced-motion
-      if (headlineEl) {
-        headlineEl.textContent = d.headline || '';
-        if (!prefersReducedMotion) {
-          const words = (d.headline || '').split(/\s+/);
-          headlineEl.innerHTML = words.map(w =>
-            `<span class="word"><span class="word-inner" style="animation-duration:0.55s">${w}</span></span>`
-          ).join(' ');
-          // Reset animation
-          headlineEl.querySelectorAll('.word-inner').forEach((el, i) => {
-            el.style.animationDelay = (0.05 * i) + 's';
-          });
-        }
-      }
-
-      if (subEl)  subEl.textContent  = d.sub  || '';
-
-      if (cta1El) {
-        cta1El.textContent = d.cta1Label || 'Start a Project';
-        cta1El.href        = d.cta1Href  || '#contact';
-        // Re-add the SVG arrow icon
-        const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
-        svg.setAttribute('width','16'); svg.setAttribute('height','16');
-        svg.setAttribute('viewBox','0 0 16 16'); svg.setAttribute('fill','none');
-        svg.setAttribute('aria-hidden','true');
-        const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-        path.setAttribute('d','M3 8h10M9 4l4 4-4 4');
-        path.setAttribute('stroke','currentColor');
-        path.setAttribute('stroke-width','1.5');
-        path.setAttribute('stroke-linecap','round');
-        path.setAttribute('stroke-linejoin','round');
-        svg.appendChild(path);
-        cta1El.appendChild(svg);
-      }
-
-      if (cta2El) {
-        cta2El.textContent = d.cta2Label || 'View Case Studies';
-        cta2El.href        = d.cta2Href  || '#work';
-      }
-    };
-
-    /* ── Go to slide ── */
-    const goTo = (idx, dir) => {
-      if (isAnimating || idx === current) return;
-      isAnimating = true;
-
-      const prev = current;
-      current    = (idx + slides.length) % slides.length;
-
-      // Image crossfade
-      slides[prev].classList.remove('active');
-      slides[prev].classList.add('exiting');
-      slides[current].classList.add('active');
-
-      // Remove exiting class after transition completes
-      setTimeout(() => {
-        slides[prev].classList.remove('exiting');
-        isAnimating = false;
-      }, TRANS_DUR);
-
-      // Animate text out → update → text in
-      if (heroContent && !prefersReducedMotion) {
-        heroContent.classList.add('hero__content--transitioning');
-        setTimeout(() => {
-          heroContent.classList.remove('hero__content--transitioning');
-          heroContent.classList.add('hero__content--entering');
-          updateContent(slides[current]);
-          setTimeout(() => {
-            heroContent.classList.remove('hero__content--entering');
-          }, 700);
-        }, 300);
-      } else {
-        updateContent(slides[current]);
-      }
-
-      updateDots();
-      updateCounter();
-    };
-
-    /* ── Auto-advance ── */
-    const startAuto = () => {
-      clearInterval(timer);
-      timer = setInterval(() => {
-        if (!paused) goTo(current + 1);
-      }, DURATION);
-      startProgress();
-    };
-
-    const stopAuto = () => {
-      clearInterval(timer);
-      stopProgress();
-    };
-
-    /* ── Controls ── */
-    if (prevBtn) prevBtn.addEventListener('click', () => {
-      stopAuto(); goTo(current - 1); startAuto();
-    });
-    if (nextBtn) nextBtn.addEventListener('click', () => {
-      stopAuto(); goTo(current + 1); startAuto();
-    });
-
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        const idx = parseInt(dot.dataset.slide, 10);
-        if (idx !== current) { stopAuto(); goTo(idx); startAuto(); }
-      });
-    });
-
-    /* ── Keyboard navigation ── */
-    document.addEventListener('keydown', e => {
-      // Only when hero is visible in viewport
-      const rect = hero ? hero.getBoundingClientRect() : null;
-      if (!rect || rect.bottom < 0 || rect.top > window.innerHeight) return;
-      if (e.key === 'ArrowLeft')  { stopAuto(); goTo(current - 1); startAuto(); }
-      if (e.key === 'ArrowRight') { stopAuto(); goTo(current + 1); startAuto(); }
-    });
-
-    /* ── Touch / swipe ── */
-    let touchStartX = 0;
-    let touchStartY = 0;
-    if (hero) {
-      hero.addEventListener('touchstart', e => {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-      }, { passive: true });
-      hero.addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        const dy = e.changedTouches[0].clientY - touchStartY;
-        // Only swipe if mostly horizontal
-        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-          stopAuto();
-          dx < 0 ? goTo(current + 1) : goTo(current - 1);
-          startAuto();
-        }
-      }, { passive: true });
-    }
-
-    /* ── Pause on hover ── */
-    if (hero) {
-      hero.addEventListener('mouseenter', () => { paused = true;  stopProgress(); });
-      hero.addEventListener('mouseleave', () => { paused = false; startProgress(); });
-    }
-
-    /* ── Preload all images ── */
-    slides.forEach(slide => {
-      const imgEl = slide.querySelector('.carousel__img');
-      if (!imgEl) return;
-      const url = (imgEl.style.backgroundImage || '').replace(/url\(['"]?|['"]?\)/g, '');
-      if (url) { const img = new Image(); img.src = url; }
-    });
-
-    /* ── Init ── */
-    updateContent(slides[0]);
-    updateCounter();
-    startAuto();
-
-  })();
 
   /* ──────────────────────────────────────────────────────────
      Binary Logo — bridge particle animation
@@ -3025,6 +2711,133 @@
     // No DOM particles at nav size — the CSS glow animation handles it
   })();
 
+})();
+</script>
+  <script>
+    document.addEventListener("DOMContentLoaded",function(){
+      document.body.classList.add("loaded");
+      document.querySelectorAll("a[href]").forEach(function(a){
+        var href=a.getAttribute("href");
+        if(!href||href.startsWith("#")||href.startsWith("mailto:")||href.startsWith("tel:")||a.target==="_blank")return;
+        a.addEventListener("click",function(e){
+          e.preventDefault();
+          document.body.classList.remove("loaded");
+          setTimeout(function(){window.location.assign(href);},320);
+        });
+      });
+    });
+  </script>
+<script>
+(function initNetwork() {
+  const cvs = document.getElementById('network-canvas');
+  if (!cvs) return;
+  const ctx = cvs.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = cvs.width  = cvs.offsetWidth;
+    H = cvs.height = cvs.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  /* Node definitions — labelled to suggest business systems */
+  const LABELS = ['CRM','Sales','Marketing','Data','DevOps','Support','Analytics','Automation','Platform','Cloud'];
+  const nodes = LABELS.map((label, i) => {
+    const angle = (i / LABELS.length) * Math.PI * 2;
+    const r = 0.28 + (i % 3) * 0.09;
+    return {
+      label,
+      bx: 0.5 + Math.cos(angle) * r,
+      by: 0.5 + Math.sin(angle) * r,
+      x: 0, y: 0,
+      vx: (Math.random() - 0.5) * 0.0003,
+      vy: (Math.random() - 0.5) * 0.0003,
+      pulse: Math.random() * Math.PI * 2,
+      size: i === 0 ? 7 : 4 + Math.random() * 2,
+      core: i === 0,
+    };
+  });
+
+  /* Central hub node */
+  nodes.unshift({ label: '', bx: 0.5, by: 0.5, x: 0, y: 0, vx: 0, vy: 0, pulse: 0, size: 10, core: true, hub: true });
+
+  const CONN_DIST = 1.5;
+  let t = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t += 0.008;
+
+    /* Update positions */
+    nodes.forEach(n => {
+      n.x = n.bx * W + Math.sin(t * 0.4 + n.pulse) * (n.hub ? 0 : 14);
+      n.y = n.by * H + Math.cos(t * 0.3 + n.pulse) * (n.hub ? 0 : 10);
+      n.pulse += 0.004;
+    });
+
+    /* Draw connections */
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const dx = (a.bx - b.bx), dy = (a.by - b.by);
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist > CONN_DIST) continue;
+        const alpha = (1 - dist / CONN_DIST) * 0.45;
+        const pulse = 0.5 + 0.5 * Math.sin(t * 1.5 + i * 0.7 + j * 0.4);
+        const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+        grad.addColorStop(0, `rgba(0,198,255,${alpha * pulse})`);
+        grad.addColorStop(1, `rgba(123,79,255,${alpha * pulse})`);
+        ctx.beginPath();
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 0.8;
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+
+        /* Travelling data dot */
+        if (Math.sin(t * 2 + i + j) > 0.7) {
+          const prog = (Math.sin(t * 1.8 + i * 1.3) * 0.5 + 0.5);
+          const tx = a.x + (b.x - a.x) * prog;
+          const ty = a.y + (b.y - a.y) * prog;
+          ctx.beginPath();
+          ctx.arc(tx, ty, 2, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0,210,255,${0.7 * pulse})`;
+          ctx.fill();
+        }
+      }
+    }
+
+    /* Draw nodes */
+    nodes.forEach((n, i) => {
+      const glow = 0.6 + 0.4 * Math.sin(t * 1.2 + i);
+
+      /* Outer ring glow */
+      const rg = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.size * 3.5);
+      rg.addColorStop(0, n.hub ? `rgba(0,198,255,${0.18 * glow})` : `rgba(123,79,255,${0.12 * glow})`);
+      rg.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.size * 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = rg;
+      ctx.fill();
+
+      /* Node circle */
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
+      ctx.fillStyle = n.hub ? '#00c6ff' : `rgba(100,80,220,${0.7 + 0.3 * glow})`;
+      ctx.fill();
+
+      /* Label */
+      ctx.font = `${n.hub ? 600 : 500} ${n.hub ? 11 : 9}px Inter,sans-serif`;
+      ctx.fillStyle = n.hub ? 'rgba(255,255,255,0.95)' : 'rgba(180,190,220,0.8)';
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, n.x, n.y + n.size + 13);
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
 })();
 </script>
 </body>

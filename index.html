@@ -1809,6 +1809,89 @@
     /* ============================================================
        LIGHT SECTIONS
     ============================================================ */
+    /* ============================================================
+       PROBLEM SECTION
+    ============================================================ */
+    .problem { background: var(--clr-bg); }
+    .problem__header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .problem__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+    .problem-card {
+      position: relative;
+      padding: 40px 32px;
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      transition: border-color 0.4s, transform 0.4s var(--ease-out-quart), box-shadow 0.4s;
+      overflow: hidden;
+    }
+    .problem-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--clr-blue-dark), var(--clr-purple));
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .problem-card:hover::before { opacity: 1; }
+    .problem-card:hover {
+      border-color: var(--clr-border-glow);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    }
+    .problem-card__icon {
+      font-size: 36px;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .problem-card__title {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--clr-text-1);
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+    .problem-card__desc {
+      font-size: 14px;
+      color: var(--clr-text-2);
+      line-height: 1.65;
+    }
+    .problem__transition {
+      text-align: center;
+      padding: 40px 32px;
+      background: linear-gradient(135deg, rgba(0,114,255,0.08) 0%, rgba(123,79,255,0.08) 100%);
+      border: 1px solid var(--clr-border-glow);
+      border-radius: var(--radius-xl);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .problem__transition p {
+      font-family: var(--font-head);
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--clr-blue) 0%, var(--clr-purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    @media (max-width: 1024px) {
+      .problem__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .problem__grid { grid-template-columns: 1fr; }
+    }
+
     .section--light { background: #060A17; }
     .section--light .section__label { color: var(--clr-blue); }
     .section--light .section__label::before { background: var(--clr-blue); }
@@ -2036,6 +2119,47 @@
     <div class="hero__scroll-line"></div>
   </div>
 
+</section>
+
+<!-- ============================================================
+     PROBLEM SECTION
+============================================================ -->
+<section class="section problem" id="problem" aria-labelledby="problem-heading">
+  <div class="container">
+    <div class="problem__header reveal">
+      <div class="section__label">The Problem</div>
+      <h2 class="section__heading" id="problem-heading">
+        Why many businesses lose customers online
+      </h2>
+    </div>
+
+    <div class="problem__grid">
+      <div class="problem-card reveal" data-delay="1">
+        <span class="problem-card__icon">🚫</span>
+        <h3 class="problem-card__title">No Website</h3>
+        <p class="problem-card__desc">Customers cannot find you.</p>
+      </div>
+      <div class="problem-card reveal" data-delay="2">
+        <span class="problem-card__icon">⏳</span>
+        <h3 class="problem-card__title">Outdated Website</h3>
+        <p class="problem-card__desc">People leave within seconds.</p>
+      </div>
+      <div class="problem-card reveal" data-delay="3">
+        <span class="problem-card__icon">📉</span>
+        <h3 class="problem-card__title">No Lead System</h3>
+        <p class="problem-card__desc">Visitors never become customers.</p>
+      </div>
+      <div class="problem-card reveal" data-delay="4">
+        <span class="problem-card__icon">🔧</span>
+        <h3 class="problem-card__title">No Maintenance</h3>
+        <p class="problem-card__desc">Small issues become costly problems.</p>
+      </div>
+    </div>
+
+    <div class="problem__transition reveal">
+      <p>We solve all of these under one roof.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ============================================================

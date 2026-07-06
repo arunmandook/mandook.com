@@ -7,7 +7,7 @@
   <meta name="description" content="Mandook.com delivers world-class IT consulting, cloud architecture, and software engineering for enterprises that refuse to compromise." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@800&display=swap" rel="stylesheet" />
 
   <style>
     /* ============================================================
@@ -2410,6 +2410,51 @@
       /* Page transitions */
     body > *:not(.nav):not(.nav__mobile){opacity:0;transition:opacity 0.35s ease;}
     body.loaded > *:not(.nav):not(.nav__mobile){opacity:1;}
+
+    /* ── Language Toggle ── */
+    .lang-toggle {
+      display: flex; align-items: center;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--clr-border);
+      border-radius: 100px; padding: 3px; gap: 2px; flex-shrink: 0;
+    }
+    .lang-toggle__btn {
+      padding: 5px 12px; border-radius: 100px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+      color: var(--clr-text-3); transition: background 0.25s, color 0.25s;
+      cursor: pointer; border: none; background: none; user-select: none;
+    }
+    .lang-toggle__btn.active { background: var(--clr-blue); color: #fff; }
+
+    /* ── RTL / Arabic ── */
+    html[dir="rtl"] body,
+    html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3,
+    html[dir="rtl"] p, html[dir="rtl"] a, html[dir="rtl"] li,
+    html[dir="rtl"] span, html[dir="rtl"] div, html[dir="rtl"] button {
+      font-family: 'Cairo', sans-serif; letter-spacing: 0;
+    }
+    html[dir="rtl"] .nav__inner { flex-direction: row-reverse; }
+    html[dir="rtl"] .nav__links { flex-direction: row-reverse; }
+    html[dir="rtl"] .nav__cta   { flex-direction: row-reverse; }
+    html[dir="rtl"] .section__label { flex-direction: row-reverse; }
+    html[dir="rtl"] .section__label::before { margin-right: 0; margin-left: 10px; }
+    html[dir="rtl"] .hero__actions { flex-direction: row-reverse; }
+    html[dir="rtl"] .hero__content { text-align: right; }
+    html[dir="rtl"] .problem-card { text-align: right; }
+    html[dir="rtl"] .problem-card__icon-wrap { justify-content: flex-end; }
+    html[dir="rtl"] .svc-tab__arrow { transform: scaleX(-1); }
+    html[dir="rtl"] .svc-tab::before { left: auto; right: 0; border-radius: 2px 0 0 2px; }
+    html[dir="rtl"] .svc-panel__features li { flex-direction: row-reverse; }
+    html[dir="rtl"] .svc-panel__cta { flex-direction: row-reverse; }
+    html[dir="rtl"] .why-card { text-align: right; }
+    html[dir="rtl"] .testi-card__author { flex-direction: row-reverse; }
+    html[dir="rtl"] .testi-card__inner { text-align: right; }
+    html[dir="rtl"] .footer__col-link:hover { transform: translateX(-4px); }
+    html[dir="rtl"] .footer__bottom { flex-direction: row-reverse; }
+    html[dir="rtl"] .footer__brand p { text-align: right; }
+    @media (max-width: 600px) {
+      html[dir="rtl"] .nav__mobile-lang { flex-direction: row-reverse; }
+    }
     </style>
 </head>
 <body>
@@ -2457,16 +2502,20 @@
       </a>
 
       <ul class="nav__links" role="list">
-        <li><a href="index.html" class="nav__link active">Home</a></li>
-        <li><a href="services.html" class="nav__link">Services</a></li>
-        <li><a href="process.html"  class="nav__link">Process</a></li>
-        <li><a href="work.html"     class="nav__link">Work</a></li>
-        <li><a href="about.html"    class="nav__link">About</a></li>
+        <li><a href="index.html" class="nav__link active" data-i18n="nav-home">Home</a></li>
+        <li><a href="services.html" class="nav__link" data-i18n="nav-services">Services</a></li>
+        <li><a href="process.html"  class="nav__link" data-i18n="nav-process">Process</a></li>
+        <li><a href="work.html"     class="nav__link" data-i18n="nav-work">Work</a></li>
+        <li><a href="about.html"    class="nav__link" data-i18n="nav-about">About</a></li>
       </ul>
 
       <div class="nav__cta">
-        <a href="work.html"    class="btn btn--ghost">See Our Work</a>
-        <a href="contact.html" class="btn btn--primary">Get a Proposal</a>
+        <div class="lang-toggle" aria-label="Switch language">
+          <button class="lang-toggle__btn active" data-lang="en">EN</button>
+          <button class="lang-toggle__btn" data-lang="ar">AR</button>
+        </div>
+        <a href="work.html"    class="btn btn--ghost" data-i18n="nav-see-work">See Our Work</a>
+        <a href="contact.html" class="btn btn--primary" data-i18n="nav-proposal">Get a Proposal</a>
       </div>
 
       <button class="nav__hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
@@ -2478,12 +2527,16 @@
 
 <!-- Mobile menu -->
 <div class="nav__mobile" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
-  <a href="index.html" class="nav__mobile-link">Home</a>
-  <a href="services.html" class="nav__mobile-link">Services</a>
-  <a href="process.html"  class="nav__mobile-link">Process</a>
-  <a href="work.html"     class="nav__mobile-link">Work</a>
-  <a href="about.html"    class="nav__mobile-link">About</a>
-  <a href="contact.html"  class="nav__mobile-link" style="color:var(--clr-blue)">Get a Proposal →</a>
+  <a href="index.html" class="nav__mobile-link" data-i18n="nav-home">Home</a>
+  <a href="services.html" class="nav__mobile-link" data-i18n="nav-services">Services</a>
+  <a href="process.html"  class="nav__mobile-link" data-i18n="nav-process">Process</a>
+  <a href="work.html"     class="nav__mobile-link" data-i18n="nav-work">Work</a>
+  <a href="about.html"    class="nav__mobile-link" data-i18n="nav-about">About</a>
+  <a href="contact.html"  class="nav__mobile-link" data-i18n="nav-proposal" style="color:var(--clr-blue)">Get a Proposal →</a>
+  <div class="lang-toggle" style="margin:16px 24px;" aria-label="Switch language">
+    <button class="lang-toggle__btn active" data-lang="en">EN</button>
+    <button class="lang-toggle__btn" data-lang="ar">AR</button>
+  </div>
 </div>
 
 <!-- ============================================================
@@ -2503,22 +2556,22 @@
 
       <!-- LEFT — Text -->
       <div class="hero__content" id="heroContent">
-        <h1 class="hero__headline" id="heroHeadline">
+        <h1 class="hero__headline" id="heroHeadline" data-i18n="hero-headline">
           Your Implementation Partner for Digital Transformation
         </h1>
-        <p class="hero__sub" id="heroSub">
+        <p class="hero__sub" id="heroSub" data-i18n="hero-sub">
           Helping businesses innovate, automate, and scale with modern technology solutions tailored to their goals.
         </p>
         <div class="hero__actions" id="heroActions">
           <div class="magnetic-wrap">
             <a href="contact.html" class="btn btn--primary btn--large" id="heroCtaPrimary">
-              Start Your Project
+              <span data-i18n="hero-cta-primary">Start Your Project</span>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </a>
           </div>
-          <a href="contact.html" class="btn btn--ghost btn--large" id="heroCtaSecondary">
+          <a href="contact.html" class="btn btn--ghost btn--large" id="heroCtaSecondary" data-i18n="hero-cta-secondary">
             Book a Free Consultation
           </a>
         </div>
@@ -2534,7 +2587,7 @@
 
   <!-- ░░ Scroll indicator ░░ -->
   <div class="hero__scroll" aria-hidden="true">
-    <span class="hero__scroll-label">Scroll</span>
+    <span class="hero__scroll-label" data-i18n="hero-scroll">Scroll</span>
     <div class="hero__scroll-line"></div>
   </div>
 
@@ -2546,8 +2599,8 @@
 <section class="section problem" id="problem" aria-labelledby="problem-heading">
   <div class="container">
     <div class="problem__header reveal">
-      <div class="section__label">The Problem</div>
-      <h2 class="section__heading" id="problem-heading">
+      <div class="section__label" data-i18n="prob-label">The Problem</div>
+      <h2 class="section__heading" id="problem-heading" data-i18n="prob-heading">
         The Digital Gaps Holding Your Business Back
       </h2>
     </div>
@@ -2559,8 +2612,8 @@
           <span>🚫</span>
           <span class="problem-card__num">01</span>
         </div>
-        <h3 class="problem-card__title">No Website</h3>
-        <p class="problem-card__desc">Customers cannot find you — your competitors get the business instead.</p>
+        <h3 class="problem-card__title" data-i18n="prob-1-title">No Website</h3>
+        <p class="problem-card__desc" data-i18n="prob-1-desc">Customers cannot find you — your competitors get the business instead.</p>
       </div>
 
       <div class="problem-card reveal" data-delay="2">
@@ -2568,8 +2621,8 @@
           <span>⏳</span>
           <span class="problem-card__num">02</span>
         </div>
-        <h3 class="problem-card__title">Outdated Website</h3>
-        <p class="problem-card__desc">Visitors judge credibility in seconds. A dated site loses them before they read a word.</p>
+        <h3 class="problem-card__title" data-i18n="prob-2-title">Outdated Website</h3>
+        <p class="problem-card__desc" data-i18n="prob-2-desc">Visitors judge credibility in seconds. A dated site loses them before they read a word.</p>
       </div>
 
       <div class="problem-card reveal" data-delay="3">
@@ -2577,8 +2630,8 @@
           <span>📉</span>
           <span class="problem-card__num">03</span>
         </div>
-        <h3 class="problem-card__title">No Lead System</h3>
-        <p class="problem-card__desc">Traffic without a capture system is wasted. Visitors leave and never return.</p>
+        <h3 class="problem-card__title" data-i18n="prob-3-title">No Lead System</h3>
+        <p class="problem-card__desc" data-i18n="prob-3-desc">Traffic without a capture system is wasted. Visitors leave and never return.</p>
       </div>
 
       <div class="problem-card reveal" data-delay="4">
@@ -2586,15 +2639,15 @@
           <span>🔧</span>
           <span class="problem-card__num">04</span>
         </div>
-        <h3 class="problem-card__title">No Maintenance</h3>
-        <p class="problem-card__desc">Small issues compound silently — until they become expensive, urgent problems.</p>
+        <h3 class="problem-card__title" data-i18n="prob-4-title">No Maintenance</h3>
+        <p class="problem-card__desc" data-i18n="prob-4-desc">Small issues compound silently — until they become expensive, urgent problems.</p>
       </div>
 
     </div>
 
     <div class="problem__transition reveal">
-      <p class="problem__transition-text">We solve <em>all of these</em> under one roof.</p>
-      <p class="problem__transition-sub">One partner. End-to-end digital presence. Zero gaps.</p>
+      <p class="problem__transition-text" data-i18n-html="prob-transition">We solve <em>all of these</em> under one roof.</p>
+      <p class="problem__transition-sub" data-i18n="prob-transition-sub">One partner. End-to-end digital presence. Zero gaps.</p>
     </div>
   </div>
 </section>
@@ -2605,9 +2658,9 @@
 <section class="section services" id="services" aria-labelledby="services-heading">
   <div class="container">
     <div class="services__header reveal">
-      <div class="section__label">What We Do</div>
-      <h2 class="section__heading" id="services-heading">One Partner. Every Digital Need.</h2>
-      <p class="section__sub">End-to-end solutions crafted to grow your business online — from first impression to lasting results.</p>
+      <div class="section__label" data-i18n="svc-label">What We Do</div>
+      <h2 class="section__heading" id="services-heading" data-i18n="svc-heading">One Partner. Every Digital Need.</h2>
+      <p class="section__sub" data-i18n="svc-sub">End-to-end solutions crafted to grow your business online — from first impression to lasting results.</p>
     </div>
 
     <div class="services__layout reveal" data-delay="1">
@@ -2618,28 +2671,28 @@
         <div class="svc-tab active" role="tab" aria-selected="true" aria-controls="panel-1" data-tab="1">
           <span class="svc-tab__num">01</span>
           <span class="svc-tab__icon">🌐</span>
-          <span class="svc-tab__label">Website Development</span>
+          <span class="svc-tab__label" data-i18n="tab-1-label">Website Development</span>
           <span class="svc-tab__arrow">→</span>
         </div>
 
         <div class="svc-tab" role="tab" aria-selected="false" aria-controls="panel-2" data-tab="2">
           <span class="svc-tab__num">02</span>
           <span class="svc-tab__icon">🖥️</span>
-          <span class="svc-tab__label">CMS Solutions</span>
+          <span class="svc-tab__label" data-i18n="tab-2-label">CMS Solutions</span>
           <span class="svc-tab__arrow">→</span>
         </div>
 
         <div class="svc-tab" role="tab" aria-selected="false" aria-controls="panel-3" data-tab="3">
           <span class="svc-tab__num">03</span>
           <span class="svc-tab__icon">🔧</span>
-          <span class="svc-tab__label">AMC Support</span>
+          <span class="svc-tab__label" data-i18n="tab-3-label">AMC Support</span>
           <span class="svc-tab__arrow">→</span>
         </div>
 
         <div class="svc-tab" role="tab" aria-selected="false" aria-controls="panel-4" data-tab="4">
           <span class="svc-tab__num">04</span>
           <span class="svc-tab__icon">📈</span>
-          <span class="svc-tab__label">Lead Growth</span>
+          <span class="svc-tab__label" data-i18n="tab-4-label">Lead Growth</span>
           <span class="svc-tab__arrow">→</span>
         </div>
 
@@ -2653,28 +2706,28 @@
           <div class="svc-panel__inner">
             <div class="svc-panel__header">
               <div class="svc-panel__icon-wrap">🌐</div>
-              <h3 class="svc-panel__title">Website Development</h3>
-              <p class="svc-panel__desc">Professional, high-converting websites built from scratch — designed to make your brand stand out and turn visitors into customers from day one.</p>
+              <h3 class="svc-panel__title" data-i18n="p1-title">Website Development</h3>
+              <p class="svc-panel__desc" data-i18n="p1-desc">Professional, high-converting websites built from scratch — designed to make your brand stand out and turn visitors into customers from day one.</p>
             </div>
             <div class="svc-panel__body">
               <div>
-                <p class="svc-panel__features-title">What's Included</p>
+                <p class="svc-panel__features-title" data-i18n="feat-title">What's Included</p>
                 <ul class="svc-panel__features">
-                  <li><span class="feat-check">✦</span> Responsive design for all devices</li>
-                  <li><span class="feat-check">✦</span> SEO-optimised structure & speed</li>
-                  <li><span class="feat-check">✦</span> Conversion-focused landing pages</li>
-                  <li><span class="feat-check">✦</span> Lead capture & contact forms</li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p1-f1">Responsive design for all devices</span></li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p1-f2">SEO-optimised structure & speed</span></li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p1-f3">Conversion-focused landing pages</span></li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p1-f4">Lead capture & contact forms</span></li>
                 </ul>
-                <a href="contact.html" class="svc-panel__cta">Start your project →</a>
+                <a href="contact.html" class="svc-panel__cta" data-i18n="p1-cta">Start your project →</a>
               </div>
               <div class="svc-panel__visual">
-                <p class="svc-visual__label">Average go-live</p>
-                <p class="svc-visual__stat">8 wks</p>
-                <p class="svc-visual__sub">From brief to launch, fully managed end-to-end.</p>
+                <p class="svc-visual__label" data-i18n="p1-s1-label">Average go-live</p>
+                <p class="svc-visual__stat" data-i18n="p1-s1-val">8 wks</p>
+                <p class="svc-visual__sub" data-i18n="p1-s1-sub">From brief to launch, fully managed end-to-end.</p>
                 <div class="svc-visual__divider"></div>
-                <p class="svc-visual__label">Client satisfaction</p>
-                <p class="svc-visual__stat">98%</p>
-                <p class="svc-visual__sub">Rated excellent across all delivered projects.</p>
+                <p class="svc-visual__label" data-i18n="p1-s2-label">Client satisfaction</p>
+                <p class="svc-visual__stat" data-i18n="p1-s2-val">98%</p>
+                <p class="svc-visual__sub" data-i18n="p1-s2-sub">Rated excellent across all delivered projects.</p>
               </div>
             </div>
           </div>
@@ -2685,28 +2738,28 @@
           <div class="svc-panel__inner">
             <div class="svc-panel__header">
               <div class="svc-panel__icon-wrap">🖥️</div>
-              <h3 class="svc-panel__title">CMS Solutions</h3>
-              <p class="svc-panel__desc">Take full control of your website content without writing a line of code. We build intuitive admin panels tailored to your workflow.</p>
+              <h3 class="svc-panel__title" data-i18n="p2-title">CMS Solutions</h3>
+              <p class="svc-panel__desc" data-i18n="p2-desc">Take full control of your website content without writing a line of code. We build intuitive admin panels tailored to your workflow.</p>
             </div>
             <div class="svc-panel__body">
               <div>
-                <p class="svc-panel__features-title">What's Included</p>
+                <p class="svc-panel__features-title" data-i18n="feat-title">What's Included</p>
                 <ul class="svc-panel__features">
-                  <li><span class="feat-check">✦</span> Custom admin dashboard</li>
-                  <li><span class="feat-check">✦</span> Blog & news management</li>
-                  <li><span class="feat-check">✦</span> Product / inventory management</li>
-                  <li><span class="feat-check">✦</span> Role-based access control</li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p2-f1">Custom admin dashboard</span></li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p2-f2">Blog & news management</span></li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p2-f3">Product / inventory management</span></li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p2-f4">Role-based access control</span></li>
                 </ul>
-                <a href="contact.html" class="svc-panel__cta">Explore CMS options →</a>
+                <a href="contact.html" class="svc-panel__cta" data-i18n="p2-cta">Explore CMS options →</a>
               </div>
               <div class="svc-panel__visual">
-                <p class="svc-visual__label">Content updates</p>
-                <p class="svc-visual__stat">No-code</p>
-                <p class="svc-visual__sub">Any team member can publish — zero technical skill needed.</p>
+                <p class="svc-visual__label" data-i18n="p2-s1-label">Content updates</p>
+                <p class="svc-visual__stat" data-i18n="p2-s1-val">No-code</p>
+                <p class="svc-visual__sub" data-i18n="p2-s1-sub">Any team member can publish — zero technical skill needed.</p>
                 <div class="svc-visual__divider"></div>
-                <p class="svc-visual__label">Setup time</p>
-                <p class="svc-visual__stat">2–3 wks</p>
-                <p class="svc-visual__sub">From design to a fully operational CMS dashboard.</p>
+                <p class="svc-visual__label" data-i18n="p2-s2-label">Setup time</p>
+                <p class="svc-visual__stat" data-i18n="p2-s2-val">2–3 wks</p>
+                <p class="svc-visual__sub" data-i18n="p2-s2-sub">From design to a fully operational CMS dashboard.</p>
               </div>
             </div>
           </div>
@@ -2717,28 +2770,28 @@
           <div class="svc-panel__inner">
             <div class="svc-panel__header">
               <div class="svc-panel__icon-wrap">🔧</div>
-              <h3 class="svc-panel__title">AMC Support</h3>
-              <p class="svc-panel__desc">Your website is a living asset. We keep it fast, secure, and up-to-date so you can focus on running your business without worrying about downtime.</p>
+              <h3 class="svc-panel__title" data-i18n="p3-title">AMC Support</h3>
+              <p class="svc-panel__desc" data-i18n="p3-desc">Your website is a living asset. We keep it fast, secure, and up-to-date so you can focus on running your business without worrying about downtime.</p>
             </div>
             <div class="svc-panel__body">
               <div>
-                <p class="svc-panel__features-title">What's Included</p>
+                <p class="svc-panel__features-title" data-i18n="feat-title">What's Included</p>
                 <ul class="svc-panel__features">
-                  <li><span class="feat-check">✦</span> Ongoing website maintenance</li>
-                  <li><span class="feat-check">✦</span> Feature updates & enhancements</li>
-                  <li><span class="feat-check">✦</span> Bug fixes & performance tuning</li>
-                  <li><span class="feat-check">✦</span> Security audits & daily backups</li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p3-f1">Ongoing website maintenance</span></li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p3-f2">Feature updates & enhancements</span></li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p3-f3">Bug fixes & performance tuning</span></li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p3-f4">Security audits & daily backups</span></li>
                 </ul>
-                <a href="contact.html" class="svc-panel__cta">Get a support plan →</a>
+                <a href="contact.html" class="svc-panel__cta" data-i18n="p3-cta">Get a support plan →</a>
               </div>
               <div class="svc-panel__visual">
-                <p class="svc-visual__label">Response time</p>
-                <p class="svc-visual__stat">&lt; 24 hrs</p>
-                <p class="svc-visual__sub">Priority support tickets resolved within one business day.</p>
+                <p class="svc-visual__label" data-i18n="p3-s1-label">Response time</p>
+                <p class="svc-visual__stat" data-i18n="p3-s1-val">&lt; 24 hrs</p>
+                <p class="svc-visual__sub" data-i18n="p3-s1-sub">Priority support tickets resolved within one business day.</p>
                 <div class="svc-visual__divider"></div>
-                <p class="svc-visual__label">Uptime guarantee</p>
-                <p class="svc-visual__stat">99.9%</p>
-                <p class="svc-visual__sub">Proactive monitoring keeps your site running 24/7.</p>
+                <p class="svc-visual__label" data-i18n="p3-s2-label">Uptime guarantee</p>
+                <p class="svc-visual__stat" data-i18n="p3-s2-val">99.9%</p>
+                <p class="svc-visual__sub" data-i18n="p3-s2-sub">Proactive monitoring keeps your site running 24/7.</p>
               </div>
             </div>
           </div>
@@ -2749,28 +2802,28 @@
           <div class="svc-panel__inner">
             <div class="svc-panel__header">
               <div class="svc-panel__icon-wrap">📈</div>
-              <h3 class="svc-panel__title">Lead Growth Solutions</h3>
-              <p class="svc-panel__desc">Stop waiting for customers to find you. We build automated systems that capture, qualify, and route leads directly to your team — 24/7.</p>
+              <h3 class="svc-panel__title" data-i18n="p4-title">Lead Growth Solutions</h3>
+              <p class="svc-panel__desc" data-i18n="p4-desc">Stop waiting for customers to find you. We build automated systems that capture, qualify, and route leads directly to your team — 24/7.</p>
             </div>
             <div class="svc-panel__body">
               <div>
-                <p class="svc-panel__features-title">What's Included</p>
+                <p class="svc-panel__features-title" data-i18n="feat-title">What's Included</p>
                 <ul class="svc-panel__features">
-                  <li><span class="feat-check">✦</span> Smart contact & inquiry forms</li>
-                  <li><span class="feat-check">✦</span> CRM integration & automation</li>
-                  <li><span class="feat-check">✦</span> WhatsApp & email lead routing</li>
-                  <li><span class="feat-check">✦</span> Analytics & conversion tracking</li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p4-f1">Smart contact & inquiry forms</span></li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p4-f2">CRM integration & automation</span></li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p4-f3">WhatsApp & email lead routing</span></li>
+                  <li><span class="feat-check">✦</span> <span data-i18n="p4-f4">Analytics & conversion tracking</span></li>
                 </ul>
-                <a href="contact.html" class="svc-panel__cta">Grow my leads →</a>
+                <a href="contact.html" class="svc-panel__cta" data-i18n="p4-cta">Grow my leads →</a>
               </div>
               <div class="svc-panel__visual">
-                <p class="svc-visual__label">Avg. lead increase</p>
-                <p class="svc-visual__stat">3× more</p>
-                <p class="svc-visual__sub">Clients see 3x more qualified inquiries within 60 days.</p>
+                <p class="svc-visual__label" data-i18n="p4-s1-label">Avg. lead increase</p>
+                <p class="svc-visual__stat" data-i18n="p4-s1-val">3× more</p>
+                <p class="svc-visual__sub" data-i18n="p4-s1-sub">Clients see 3x more qualified inquiries within 60 days.</p>
                 <div class="svc-visual__divider"></div>
-                <p class="svc-visual__label">Automation</p>
-                <p class="svc-visual__stat">24 / 7</p>
-                <p class="svc-visual__sub">Leads captured and routed even when your team is offline.</p>
+                <p class="svc-visual__label" data-i18n="p4-s2-label">Automation</p>
+                <p class="svc-visual__stat" data-i18n="p4-s2-val">24 / 7</p>
+                <p class="svc-visual__sub" data-i18n="p4-s2-sub">Leads captured and routed even when your team is offline.</p>
               </div>
             </div>
           </div>
@@ -2791,11 +2844,11 @@
 <section class="section why-mandook" id="why" aria-labelledby="why-heading">
   <div class="container">
     <div class="why__header reveal">
-      <div class="section__label">Why Mandook.com</div>
-      <h2 class="section__heading reveal" id="why-heading" data-delay="1">
+      <div class="section__label" data-i18n="why-label">Why Mandook.com</div>
+      <h2 class="section__heading reveal" id="why-heading" data-delay="1" data-i18n="why-heading">
         The partner that delivers,<br>not just consults
       </h2>
-      <p class="section__sub reveal" data-delay="2">
+      <p class="section__sub reveal" data-delay="2" data-i18n="why-sub">
         We don't hand you a report and disappear. We embed with your team, build the solution, and stay to make sure it works.
       </p>
     </div>
@@ -2804,38 +2857,38 @@
 
       <div class="why-card reveal" data-delay="1">
         <div class="why-card__icon">🏆</div>
-        <h3 class="why-card__title">Certified Salesforce Partner</h3>
-        <p class="why-card__desc">CREST-level Salesforce credentials backed by real delivery experience — not just badges.</p>
+        <h3 class="why-card__title" data-i18n="why-1-title">Certified Salesforce Partner</h3>
+        <p class="why-card__desc" data-i18n="why-1-desc">CREST-level Salesforce credentials backed by real delivery experience — not just badges.</p>
       </div>
 
       <div class="why-card reveal" data-delay="2">
         <div class="why-card__icon">⚡</div>
-        <h3 class="why-card__title">8-Week Go-Live</h3>
-        <p class="why-card__desc">Our structured delivery model gets you live faster than the industry average — without cutting corners.</p>
+        <h3 class="why-card__title" data-i18n="why-2-title">8-Week Go-Live</h3>
+        <p class="why-card__desc" data-i18n="why-2-desc">Our structured delivery model gets you live faster than the industry average — without cutting corners.</p>
       </div>
 
       <div class="why-card reveal" data-delay="3">
         <div class="why-card__icon">🔁</div>
-        <h3 class="why-card__title">End-to-End Ownership</h3>
-        <p class="why-card__desc">From strategy and consulting through to implementation, AMC, and ongoing support — one partner, full accountability.</p>
+        <h3 class="why-card__title" data-i18n="why-3-title">End-to-End Ownership</h3>
+        <p class="why-card__desc" data-i18n="why-3-desc">From strategy and consulting through to implementation, AMC, and ongoing support — one partner, full accountability.</p>
       </div>
 
       <div class="why-card reveal" data-delay="4">
         <div class="why-card__icon">🎯</div>
-        <h3 class="why-card__title">Domain-Focused Expertise</h3>
-        <p class="why-card__desc">Deep experience in real estate and process-driven industries means we understand your operations before we touch your CRM.</p>
+        <h3 class="why-card__title" data-i18n="why-4-title">Domain-Focused Expertise</h3>
+        <p class="why-card__desc" data-i18n="why-4-desc">Deep experience in real estate and process-driven industries means we understand your operations before we touch your CRM.</p>
       </div>
 
       <div class="why-card reveal" data-delay="5">
         <div class="why-card__icon">🤝</div>
-        <h3 class="why-card__title">Long-Term Partnership</h3>
-        <p class="why-card__desc">We measure success by your growth, not the close of a contract. Our AMC plans keep your platform evolving alongside your business.</p>
+        <h3 class="why-card__title" data-i18n="why-5-title">Long-Term Partnership</h3>
+        <p class="why-card__desc" data-i18n="why-5-desc">We measure success by your growth, not the close of a contract. Our AMC plans keep your platform evolving alongside your business.</p>
       </div>
 
       <div class="why-card reveal" data-delay="6">
         <div class="why-card__icon">📊</div>
-        <h3 class="why-card__title">Data-Driven Decisions</h3>
-        <p class="why-card__desc">We build Salesforce solutions that surface the right data at the right time — giving your leadership team clarity, not guesswork.</p>
+        <h3 class="why-card__title" data-i18n="why-6-title">Data-Driven Decisions</h3>
+        <p class="why-card__desc" data-i18n="why-6-desc">We build Salesforce solutions that surface the right data at the right time — giving your leadership team clarity, not guesswork.</p>
       </div>
 
     </div>
@@ -2848,8 +2901,8 @@
 <section class="section testimonials" id="about" aria-labelledby="testi-heading">
   <div class="container">
     <div class="testimonials__header reveal">
-      <div class="section__label">Client voices</div>
-      <h2 class="section__heading" id="testi-heading" style="max-width:520px;margin:0 auto">
+      <div class="section__label" data-i18n="testi-label">Client voices</div>
+      <h2 class="section__heading" id="testi-heading" style="max-width:520px;margin:0 auto" data-i18n="testi-heading">
         What our partners say
       </h2>
     </div>
@@ -2859,14 +2912,14 @@
 
         <div class="testi-card">
           <div class="testi-card__inner">
-            <p class="testi-card__quote">
+            <p class="testi-card__quote" data-i18n="testi-1-quote">
               "The team understood our real estate workflows from day one. The Salesforce implementation was seamless and the results were immediate — our sales cycle dropped by 40%."
             </p>
             <div class="testi-card__author">
               <div class="testi-card__avatar">AR</div>
               <div>
-                <div class="testi-card__name">Ahmed Al Rashidi</div>
-                <div class="testi-card__role">CEO · Pinnacle Properties</div>
+                <div class="testi-card__name" data-i18n="testi-1-name">Ahmed Al Rashidi</div>
+                <div class="testi-card__role" data-i18n="testi-1-role">CEO · Pinnacle Properties</div>
               </div>
               <div class="testi-card__stars" aria-label="5 stars">★★★★★</div>
             </div>
@@ -2875,14 +2928,14 @@
 
         <div class="testi-card">
           <div class="testi-card__inner">
-            <p class="testi-card__quote">
+            <p class="testi-card__quote" data-i18n="testi-2-quote">
               "We've worked with other Salesforce partners before, but none matched the depth of expertise and commitment this team brought. Our CRM is finally a true growth engine."
             </p>
             <div class="testi-card__author">
               <div class="testi-card__avatar">SM</div>
               <div>
-                <div class="testi-card__name">Sara Mehta</div>
-                <div class="testi-card__role">Head of Operations · Landmark Developers</div>
+                <div class="testi-card__name" data-i18n="testi-2-name">Sara Mehta</div>
+                <div class="testi-card__role" data-i18n="testi-2-role">Head of Operations · Landmark Developers</div>
               </div>
               <div class="testi-card__stars" aria-label="5 stars">★★★★★</div>
             </div>
@@ -2891,14 +2944,14 @@
 
         <div class="testi-card">
           <div class="testi-card__inner">
-            <p class="testi-card__quote">
+            <p class="testi-card__quote" data-i18n="testi-3-quote">
               "From go-live in under 8 weeks to the ongoing AMC support — the professionalism has been outstanding. I wouldn't trust anyone else with our Salesforce org."
             </p>
             <div class="testi-card__author">
               <div class="testi-card__avatar">KP</div>
               <div>
-                <div class="testi-card__name">Karan Patel</div>
-                <div class="testi-card__role">VP Sales · Horizon Realty Group</div>
+                <div class="testi-card__name" data-i18n="testi-3-name">Karan Patel</div>
+                <div class="testi-card__role" data-i18n="testi-3-role">VP Sales · Horizon Realty Group</div>
               </div>
               <div class="testi-card__stars" aria-label="5 stars">★★★★★</div>
             </div>
@@ -2933,17 +2986,17 @@
   <div class="cta-section__bg" aria-hidden="true"></div>
   <div class="container">
     <div class="cta-section__inner">
-      <div class="section__label reveal" style="justify-content:center">Let's build together</div>
-      <h2 class="cta-section__heading reveal" id="cta-heading" data-delay="1">
+      <div class="section__label reveal" style="justify-content:center" data-i18n="cta-label">Let's build together</div>
+      <h2 class="cta-section__heading reveal" id="cta-heading" data-delay="1" data-i18n-html="cta-heading">
         Ready to transform your<br>business with <span style="background:linear-gradient(135deg,var(--clr-blue),var(--clr-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Salesforce?</span>
       </h2>
-      <p class="cta-section__sub reveal" data-delay="2">
+      <p class="cta-section__sub reveal" data-delay="2" data-i18n="cta-sub">
         Tell us about your challenge. We'll respond within 24 hours with a tailored approach — no sales pitch, no commitment required.
       </p>
       <div class="reveal" data-delay="3">
         <div class="magnetic-wrap" id="ctaMagneticWrap">
           <a href="mailto:arun.mandook@gmail.com" class="btn--magnetic" id="ctaBtn">
-            Get a Free Proposal
+            <span data-i18n="cta-btn">Get a Free Proposal</span>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               <path d="M4 10h12M12 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -2965,11 +3018,11 @@
         <div class="nav__logo" style="margin-bottom:0">
           <img src="assets/mandook-logo.png" alt="MANDOOK" class="nav__logo-img">
         </div>
-        <p>Salesforce CREST Partner specialising in consulting, implementation, and ongoing support — helping businesses automate operations and grow with confidence.</p>
+        <p data-i18n="footer-brand">Salesforce CREST Partner specialising in consulting, implementation, and ongoing support — helping businesses automate operations and grow with confidence.</p>
       </div>
 
       <div class="reveal" data-delay="1">
-        <div class="footer__col-title">Services</div>
+        <div class="footer__col-title" data-i18n="footer-col1-title">Services</div>
         <ul class="footer__col-links" role="list">
           <li><a href="services.html" class="footer__col-link">Consulting & Implementation</a></li>
           <li><a href="services.html" class="footer__col-link">AMC & Ongoing Support</a></li>
@@ -2979,7 +3032,7 @@
       </div>
 
       <div class="reveal" data-delay="2">
-        <div class="footer__col-title">Company</div>
+        <div class="footer__col-title" data-i18n="footer-col2-title">Company</div>
         <ul class="footer__col-links" role="list">
           <li><a href="about.html"   class="footer__col-link">About</a></li>
           <li><a href="work.html"    class="footer__col-link">Case Studies</a></li>
@@ -2990,7 +3043,7 @@
       </div>
 
       <div class="reveal" data-delay="3">
-        <div class="footer__col-title">Contact</div>
+        <div class="footer__col-title" data-i18n="footer-col3-title">Contact</div>
         <ul class="footer__col-links" role="list">
           <li><a href="mailto:arun.mandook@gmail.com" class="footer__col-link">arun.mandook@gmail.com</a></li>
           <li><a href="tel:+919619884321" class="footer__col-link">+91 9619884321</a></li>
@@ -3001,7 +3054,7 @@
     </div>
 
     <div class="footer__bottom">
-      <p class="footer__copy">© 2025 Mandook.com · All rights reserved.</p>
+      <p class="footer__copy" data-i18n="footer-copy">© 2025 Mandook.com · All rights reserved.</p>
       <div class="footer__socials" aria-label="Social links">
         <a href="#" class="footer__social" aria-label="LinkedIn">in</a>
         <a href="#" class="footer__social" aria-label="Twitter">𝕏</a>
@@ -3558,6 +3611,205 @@
   }
 
   draw();
+})();
+</script>
+
+<script>
+/* ── Bilingual i18n: English + Arabic ── */
+(function() {
+  var T = {
+    en: {
+      'nav-home':'Home','nav-services':'Services','nav-process':'Process',
+      'nav-work':'Work','nav-about':'About',
+      'nav-see-work':'See Our Work','nav-proposal':'Get a Proposal →',
+      'hero-headline':'Your Implementation Partner for Digital Transformation',
+      'hero-sub':'Helping businesses innovate, automate, and scale with modern technology solutions tailored to their goals.',
+      'hero-cta-primary':'Start Your Project','hero-cta-secondary':'Book a Free Consultation',
+      'hero-scroll':'Scroll',
+      'prob-label':'The Problem',
+      'prob-heading':'The Digital Gaps Holding Your Business Back',
+      'prob-1-title':'No Website','prob-1-desc':'Customers cannot find you — your competitors get the business instead.',
+      'prob-2-title':'Outdated Website','prob-2-desc':'Visitors judge credibility in seconds. A dated site loses them before they read a word.',
+      'prob-3-title':'No Lead System','prob-3-desc':'Traffic without a capture system is wasted. Visitors leave and never return.',
+      'prob-4-title':'No Maintenance','prob-4-desc':'Small issues compound silently — until they become expensive, urgent problems.',
+      'prob-transition':'We solve <em>all of these</em> under one roof.',
+      'prob-transition-sub':'One partner. End-to-end digital presence. Zero gaps.',
+      'svc-label':'What We Do','svc-heading':'One Partner. Every Digital Need.',
+      'svc-sub':'End-to-end solutions crafted to grow your business online — from first impression to lasting results.',
+      'tab-1-label':'Website Development','tab-2-label':'CMS Solutions',
+      'tab-3-label':'AMC Support','tab-4-label':'Lead Growth',
+      'feat-title':"What's Included",
+      'p1-title':'Website Development',
+      'p1-desc':'Professional, high-converting websites built from scratch — designed to make your brand stand out and turn visitors into customers from day one.',
+      'p1-f1':'Responsive design for all devices','p1-f2':'SEO-optimised structure & speed',
+      'p1-f3':'Conversion-focused landing pages','p1-f4':'Lead capture & contact forms',
+      'p1-cta':'Start your project →',
+      'p1-s1-label':'Average go-live','p1-s1-val':'8 wks','p1-s1-sub':'From brief to launch, fully managed end-to-end.',
+      'p1-s2-label':'Client satisfaction','p1-s2-val':'98%','p1-s2-sub':'Rated excellent across all delivered projects.',
+      'p2-title':'CMS Solutions',
+      'p2-desc':'Take full control of your website content without writing a line of code. We build intuitive admin panels tailored to your workflow.',
+      'p2-f1':'Custom admin dashboard','p2-f2':'Blog & news management',
+      'p2-f3':'Product / inventory management','p2-f4':'Role-based access control',
+      'p2-cta':'Explore CMS options →',
+      'p2-s1-label':'Content updates','p2-s1-val':'No-code','p2-s1-sub':'Any team member can publish — zero technical skill needed.',
+      'p2-s2-label':'Setup time','p2-s2-val':'2–3 wks','p2-s2-sub':'From design to a fully operational CMS dashboard.',
+      'p3-title':'AMC Support',
+      'p3-desc':'Your website is a living asset. We keep it fast, secure, and up-to-date so you can focus on running your business without worrying about downtime.',
+      'p3-f1':'Ongoing website maintenance','p3-f2':'Feature updates & enhancements',
+      'p3-f3':'Bug fixes & performance tuning','p3-f4':'Security audits & daily backups',
+      'p3-cta':'Get a support plan →',
+      'p3-s1-label':'Response time','p3-s1-val':'< 24 hrs','p3-s1-sub':'Priority support tickets resolved within one business day.',
+      'p3-s2-label':'Uptime guarantee','p3-s2-val':'99.9%','p3-s2-sub':'Proactive monitoring keeps your site running 24/7.',
+      'p4-title':'Lead Growth Solutions',
+      'p4-desc':'Stop waiting for customers to find you. We build automated systems that capture, qualify, and route leads directly to your team — 24/7.',
+      'p4-f1':'Smart contact & inquiry forms','p4-f2':'CRM integration & automation',
+      'p4-f3':'WhatsApp & email lead routing','p4-f4':'Analytics & conversion tracking',
+      'p4-cta':'Grow my leads →',
+      'p4-s1-label':'Avg. lead increase','p4-s1-val':'3× more','p4-s1-sub':'Clients see 3x more qualified inquiries within 60 days.',
+      'p4-s2-label':'Automation','p4-s2-val':'24 / 7','p4-s2-sub':'Leads captured and routed even when your team is offline.',
+      'why-label':'Why Mandook.com',
+      'why-heading':'The partner that delivers,\nnot just consults',
+      'why-sub':"We don't hand you a report and disappear. We embed with your team, build the solution, and stay to make sure it works.",
+      'why-1-title':'Certified Salesforce Partner','why-1-desc':'CREST-level Salesforce credentials backed by real delivery experience — not just badges.',
+      'why-2-title':'8-Week Go-Live','why-2-desc':'Our structured delivery model gets you live faster than the industry average — without cutting corners.',
+      'why-3-title':'End-to-End Ownership','why-3-desc':'From strategy and consulting through to implementation, AMC, and ongoing support — one partner, full accountability.',
+      'why-4-title':'Domain-Focused Expertise','why-4-desc':'Deep experience in real estate and process-driven industries means we understand your operations before we touch your CRM.',
+      'why-5-title':'Long-Term Partnership','why-5-desc':'We measure success by your growth, not the close of a contract. Our AMC plans keep your platform evolving alongside your business.',
+      'why-6-title':'Data-Driven Decisions','why-6-desc':'We build Salesforce solutions that surface the right data at the right time — giving your leadership team clarity, not guesswork.',
+      'testi-label':'Client Voices','testi-heading':'What Our Partners Say',
+      'testi-1-quote':'"The team understood our real estate workflows from day one. The Salesforce implementation was seamless and the results were immediate — our sales cycle dropped by 40%."',
+      'testi-1-name':'Ahmed Al Rashidi','testi-1-role':'CEO · Pinnacle Properties',
+      'testi-2-quote':'"We\'ve worked with other Salesforce partners before, but none matched the depth of expertise and commitment this team brought. Our CRM is finally a true growth engine."',
+      'testi-2-name':'Sara Mehta','testi-2-role':'Head of Operations · Landmark Developers',
+      'testi-3-quote':'"From go-live in under 8 weeks to the ongoing AMC support — the professionalism has been outstanding. I wouldn\'t trust anyone else with our Salesforce org."',
+      'testi-3-name':'Karan Patel','testi-3-role':'VP Sales · Horizon Realty Group',
+      'cta-label':"Let's build together",
+      'cta-heading':'Ready to transform your<br>business with <span style="background:linear-gradient(135deg,var(--clr-blue),var(--clr-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Salesforce?</span>',
+      'cta-sub':"Tell us about your challenge. We'll respond within 24 hours with a tailored approach — no sales pitch, no commitment required.",
+      'cta-btn':'Get a Free Proposal',
+      'footer-brand':'Salesforce CREST Partner specialising in consulting, implementation, and ongoing support — helping businesses automate operations and grow with confidence.',
+      'footer-col1-title':'Services','footer-col2-title':'Company','footer-col3-title':'Contact',
+      'footer-copy':'© 2025 Mandook.com · All rights reserved.'
+    },
+    ar: {
+      'nav-home':'الرئيسية','nav-services':'الخدمات','nav-process':'المنهجية',
+      'nav-work':'أعمالنا','nav-about':'من نحن',
+      'nav-see-work':'استعرض أعمالنا','nav-proposal':'احصل على عرض ←',
+      'hero-headline':'شريكك في التحول الرقمي',
+      'hero-sub':'نساعد الشركات على الابتكار والأتمتة والنمو بحلول تقنية حديثة مصممة لتحقيق أهدافها.',
+      'hero-cta-primary':'ابدأ مشروعك','hero-cta-secondary':'احجز استشارة مجانية',
+      'hero-scroll':'تمرير',
+      'prob-label':'المشكلة',
+      'prob-heading':'الثغرات الرقمية التي تعيق نمو عملك',
+      'prob-1-title':'لا يوجد موقع','prob-1-desc':'لا يستطيع العملاء إيجادك — فيذهب العمل إلى منافسيك.',
+      'prob-2-title':'موقع متقادم','prob-2-desc':'يحكم الزوار على مصداقيتك في ثوانٍ — الموقع القديم يفقدهم قبل أن يقرأوا كلمة.',
+      'prob-3-title':'لا نظام لاستقطاب العملاء','prob-3-desc':'الزيارات دون نظام التقاط تذهب هباءً — الزوار يغادرون ولا يعودون.',
+      'prob-4-title':'لا صيانة','prob-4-desc':'المشكلات الصغيرة تتراكم في صمت حتى تصبح أزمات مكلفة وعاجلة.',
+      'prob-transition':'نحل <em>كل هذا</em> تحت سقف واحد.',
+      'prob-transition-sub':'شريك واحد. حضور رقمي متكامل. بلا ثغرات.',
+      'svc-label':'ما نقدمه','svc-heading':'شريك واحد. لكل احتياج رقمي.',
+      'svc-sub':'حلول متكاملة مصممة لتنمية أعمالك — من الانطباع الأول إلى النتائج المستدامة.',
+      'tab-1-label':'تطوير المواقع','tab-2-label':'إدارة المحتوى',
+      'tab-3-label':'دعم ما بعد البيع','tab-4-label':'نمو العملاء',
+      'feat-title':'ما يشمله العرض',
+      'p1-title':'تطوير المواقع الإلكترونية',
+      'p1-desc':'مواقع احترافية عالية التحويل مبنية من الصفر، مصممة لإبراز علامتك وتحويل الزوار إلى عملاء منذ اليوم الأول.',
+      'p1-f1':'تصميم متجاوب لجميع الأجهزة','p1-f2':'بنية محسّنة لمحركات البحث والسرعة',
+      'p1-f3':'صفحات هبوط تركّز على التحويل','p1-f4':'نماذج استقطاب العملاء والتواصل',
+      'p1-cta':'ابدأ مشروعك ←',
+      'p1-s1-label':'متوسط وقت الإطلاق','p1-s1-val':'٨ أسابيع','p1-s1-sub':'من الموجز إلى الإطلاق، إدارة متكاملة من البداية للنهاية.',
+      'p1-s2-label':'رضا العملاء','p1-s2-val':'٩٨٪','p1-s2-sub':'تقييم ممتاز في جميع المشاريع المُسلَّمة.',
+      'p2-title':'حلول إدارة المحتوى',
+      'p2-desc':'تحكم كامل في محتوى موقعك دون كتابة سطر برمجي واحد. نبني لوحات إدارة سهلة الاستخدام مصممة لسير عملك.',
+      'p2-f1':'لوحة تحكم مخصصة','p2-f2':'إدارة المدونة والأخبار',
+      'p2-f3':'إدارة المنتجات والمخزون','p2-f4':'صلاحيات الوصول حسب الدور',
+      'p2-cta':'استكشف خيارات CMS ←',
+      'p2-s1-label':'تحديث المحتوى','p2-s1-val':'بلا كود','p2-s1-sub':'أي فرد من فريقك يستطيع النشر — دون مهارات تقنية.',
+      'p2-s2-label':'مدة الإعداد','p2-s2-val':'٢–٣ أسابيع','p2-s2-sub':'من التصميم إلى لوحة CMS كاملة التشغيل.',
+      'p3-title':'دعم ما بعد البيع (AMC)',
+      'p3-desc':'موقعك أصل حي ومتطور. نحافظ على سرعته وأمانه وتحديثه حتى تتفرغ لإدارة أعمالك.',
+      'p3-f1':'صيانة دورية للموقع','p3-f2':'تحديثات وتحسينات مستمرة',
+      'p3-f3':'إصلاح الأخطاء وتحسين الأداء','p3-f4':'فحوصات أمنية ونسخ احتياطية يومية',
+      'p3-cta':'احصل على خطة دعم ←',
+      'p3-s1-label':'وقت الاستجابة','p3-s1-val':'أقل من ٢٤ ساعة','p3-s1-sub':'تذاكر الدعم ذات الأولوية تُحل خلال يوم عمل واحد.',
+      'p3-s2-label':'ضمان التشغيل','p3-s2-val':'٩٩.٩٪','p3-s2-sub':'مراقبة استباقية تبقي موقعك يعمل على مدار الساعة.',
+      'p4-title':'حلول نمو العملاء المحتملين',
+      'p4-desc':'لا تنتظر أن يجدك العملاء. نبني أنظمة آلية تستقطب العملاء وتؤهلهم وتوجههم مباشرة لفريقك.',
+      'p4-f1':'نماذج تواصل واستفسار ذكية','p4-f2':'تكامل مع CRM وأتمتة المهام',
+      'p4-f3':'توجيه العملاء عبر واتساب والبريد','p4-f4':'تحليلات وتتبع التحويلات',
+      'p4-cta':'نمّ عملاءك المحتملين ←',
+      'p4-s1-label':'متوسط زيادة العملاء','p4-s1-val':'٣× أكثر','p4-s1-sub':'يرى العملاء ٣ أضعاف الاستفسارات المؤهلة خلال ٦٠ يوماً.',
+      'p4-s2-label':'الأتمتة','p4-s2-val':'٢٤ / ٧','p4-s2-sub':'يُستقطب العملاء ويُوجَّهون حتى حين يكون فريقك غير متاح.',
+      'why-label':'لماذا مندوق',
+      'why-heading':'الشريك الذي يُنجز، لا يكتفي بالاستشارة',
+      'why-sub':'لا نسلّمك تقريراً ونختفي. نندمج مع فريقك، نبني الحل، ونبقى لنتأكد أنه يعمل.',
+      'why-1-title':'شريك سيلزفورس المعتمد','why-1-desc':'اعتماد CREST من سيلزفورس مدعوم بتجربة تسليم حقيقية — لا مجرد شهادات.',
+      'why-2-title':'إطلاق في ٨ أسابيع','why-2-desc':'نموذج التسليم المنظم لدينا يجعلك تنطلق أسرع من متوسط الصناعة — دون تنازلات.',
+      'why-3-title':'ملكية شاملة من البداية للنهاية','why-3-desc':'من الاستراتيجية والاستشارات إلى التطبيق والدعم المستمر — شريك واحد، مسؤولية كاملة.',
+      'why-4-title':'خبرة متخصصة في المجال','why-4-desc':'خبرة عميقة في العقارات والصناعات المبنية على العمليات تجعلنا نفهم عملك قبل أن نلمس CRM الخاص بك.',
+      'why-5-title':'شراكة طويلة الأمد','why-5-desc':'نقيس نجاحنا بنموك، لا بإغلاق العقد. خطط AMC لدينا تبقي منصتك تتطور بجانب أعمالك.',
+      'why-6-title':'قرارات مبنية على البيانات','why-6-desc':'نبني حلول سيلزفورس تُظهر البيانات الصحيحة في الوقت المناسب — لمنح قيادتك الوضوح لا التخمين.',
+      'testi-label':'آراء عملائنا','testi-heading':'ما يقوله شركاؤنا',
+      'testi-1-quote':'"فهم الفريق سير عمل العقارات لدينا من اليوم الأول. كان تطبيق سيلزفورس سلساً والنتائج فورية — انخفضت دورة المبيعات بنسبة ٤٠٪."',
+      'testi-1-name':'أحمد الراشدي','testi-1-role':'الرئيس التنفيذي · بيناكل للعقارات',
+      'testi-2-quote':'"تعاملنا مع شركاء سيلزفورس آخرين، لكن لم يرقَ أي منهم إلى عمق الخبرة والالتزام الذي قدمه هذا الفريق. نظام CRM أصبح محرك نمو حقيقياً."',
+      'testi-2-name':'سارة ميهتا','testi-2-role':'رئيسة العمليات · لاندمارك للمطورين',
+      'testi-3-quote':'"من الإطلاق في أقل من ٨ أسابيع إلى دعم AMC المستمر — الاحترافية كانت استثنائية. لن أثق بأحد آخر في إدارة منصة سيلزفورس لدينا."',
+      'testi-3-name':'كاران باتيل','testi-3-role':'نائب رئيس المبيعات · هورايزون ريالتي',
+      'cta-label':'لنبني معاً',
+      'cta-heading':'هل أنت مستعد لتحويل أعمالك<br>بـ <span style="background:linear-gradient(135deg,var(--clr-blue),var(--clr-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">سيلزفورس؟</span>',
+      'cta-sub':'أخبرنا عن تحديك. سنرد خلال ٢٤ ساعة بمقاربة مخصصة — بدون عروض مبيعات أو التزامات.',
+      'cta-btn':'احصل على عرض مجاني',
+      'footer-brand':'شريك سيلزفورس CREST متخصص في الاستشارات والتطبيق والدعم المستمر — نساعد الشركات على أتمتة عملياتها والنمو بثقة.',
+      'footer-col1-title':'الخدمات','footer-col2-title':'الشركة','footer-col3-title':'تواصل',
+      'footer-copy':'© ٢٠٢٥ Mandook.com · جميع الحقوق محفوظة.'
+    }
+  };
+
+  var lang = localStorage.getItem('mandook-lang') || 'en';
+
+  function applyLang(l) {
+    lang = l;
+    localStorage.setItem('mandook-lang', l);
+    document.documentElement.lang = l;
+    document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var k = el.getAttribute('data-i18n');
+      if (T[l][k] !== undefined) el.textContent = T[l][k];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+      var k = el.getAttribute('data-i18n-html');
+      if (T[l][k] !== undefined) el.innerHTML = T[l][k];
+    });
+
+    // Re-render hero headline words
+    var hl = document.getElementById('heroHeadline');
+    if (hl && T[l]['hero-headline']) {
+      hl.innerHTML = T[l]['hero-headline'].split(/\s+/).map(function(w) {
+        return '<span class="word"><span class="word-inner" style="transform:translateY(0);opacity:1">' + w + '</span></span>';
+      }).join(' ');
+    }
+
+    document.querySelectorAll('.lang-toggle__btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === l);
+    });
+  }
+
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.lang-toggle__btn');
+    if (btn) {
+      var l = btn.getAttribute('data-lang');
+      if (l && l !== lang) applyLang(l);
+    }
+  });
+
+  if (lang === 'ar') applyLang('ar');
+  else {
+    document.querySelectorAll('.lang-toggle__btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === 'en');
+    });
+  }
 })();
 </script>
 </body>

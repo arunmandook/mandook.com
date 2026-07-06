@@ -343,42 +343,76 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: visible;
     }
     .hero__map-img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       object-position: center;
       display: block;
       pointer-events: none;
-      mix-blend-mode: lighten;
+      mix-blend-mode: screen;
+      filter: brightness(1.1) contrast(1.1) saturate(1.15);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%),
+                          linear-gradient(to bottom, transparent 0%, black 10%, black 88%, transparent 100%);
+      -webkit-mask-composite: source-in;
+      mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%),
+                  linear-gradient(to bottom, transparent 0%, black 10%, black 88%, transparent 100%);
+      mask-composite: intersect;
     }
-    /* Animated glowing dots overlay */
+    /* Dot + label wrapper */
     .hero__dots {
       position: absolute;
       inset: 0;
       pointer-events: none;
     }
-    .hero__dot {
+    .hero__pin {
       position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transform: translate(-50%, -50%);
+    }
+    .hero__pin--flip {
+      flex-direction: row-reverse;
+    }
+    /* Glowing dot */
+    .hero__pin__dot {
+      flex-shrink: 0;
       border-radius: 50%;
-      animation: dotPulse 2.8s ease-in-out infinite;
+      animation: pinPulse 2.8s ease-in-out infinite;
     }
-    @keyframes dotPulse {
-      0%, 100% { transform: scale(1);   opacity: 0.85; box-shadow: 0 0 6px 2px currentColor; }
-      50%       { transform: scale(1.5); opacity: 1;    box-shadow: 0 0 18px 6px currentColor; }
-    }
-    .hero__dot--hub {
-      width: 14px; height: 14px;
-      background: #fff;
-      color: rgba(0,210,255,0.9);
-      box-shadow: 0 0 20px 8px rgba(0,210,255,0.8);
+    .hero__pin--hub .hero__pin__dot {
+      width: 13px; height: 13px;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(0,210,255,0.35), 0 0 18px 6px rgba(0,210,255,0.7);
       animation-duration: 2.0s;
     }
-    .hero__dot--node {
-      width: 8px; height: 8px;
-      background: #c8e8ff;
-      color: rgba(100,190,255,0.7);
+    .hero__pin--node .hero__pin__dot {
+      width: 7px; height: 7px;
+      background: #d0eeff;
+      box-shadow: 0 0 0 2px rgba(100,190,255,0.25), 0 0 10px 3px rgba(100,190,255,0.55);
+    }
+    @keyframes pinPulse {
+      0%,100% { transform: scale(1);    opacity: 0.88; }
+      50%      { transform: scale(1.45); opacity: 1;    }
+    }
+    /* Label */
+    .hero__pin__label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(210,235,255,0.90);
+      text-shadow: 0 0 8px rgba(0,180,255,0.7), 0 0 20px rgba(0,150,255,0.4);
+      white-space: nowrap;
+      animation: labelFade 2.8s ease-in-out infinite;
+    }
+    @keyframes labelFade {
+      0%,100% { opacity: 0.80; }
+      50%      { opacity: 1.00; }
     }
     #network-canvas { display: none; }
     /* Floating stat cards */
@@ -2613,22 +2647,38 @@
       <div class="hero__visual" aria-hidden="true">
         <img src="assets/HeroInfo.png" alt="" class="hero__map-img">
         <div class="hero__dots">
-          <!-- RAK hub -->
-          <span class="hero__dot hero__dot--hub"  style="top:30%; left:73%; animation-delay:0s"></span>
+          <!-- RAK hub — no label -->
+          <div class="hero__pin hero__pin--hub" style="top:30%; left:73%; animation-delay:0s">
+            <span class="hero__pin__dot"></span>
+          </div>
           <!-- Lead -->
-          <span class="hero__dot hero__dot--node" style="top:36%; left:69%; animation-delay:0.3s"></span>
+          <div class="hero__pin hero__pin--node" style="top:33%; left:69%; animation-delay:0.3s">
+            <span class="hero__pin__dot"></span>
+          </div>
           <!-- Analytics -->
-          <span class="hero__dot hero__dot--node" style="top:41%; left:66%; animation-delay:0.6s"></span>
+          <div class="hero__pin hero__pin--node" style="top:39%; left:66%; animation-delay:0.6s">
+            <span class="hero__pin__dot"></span>
+          </div>
           <!-- CRM -->
-          <span class="hero__dot hero__dot--node" style="top:45%; left:63%; animation-delay:0.9s"></span>
+          <div class="hero__pin hero__pin--node" style="top:44%; left:63%; animation-delay:0.9s">
+            <span class="hero__pin__dot"></span>
+          </div>
           <!-- Design -->
-          <span class="hero__dot hero__dot--node" style="top:44%; left:80%; animation-delay:1.2s"></span>
+          <div class="hero__pin hero__pin--node" style="top:43%; left:81%; animation-delay:1.2s">
+            <span class="hero__pin__dot"></span>
+          </div>
           <!-- CMS -->
-          <span class="hero__dot hero__dot--node" style="top:55%; left:74%; animation-delay:1.5s"></span>
+          <div class="hero__pin hero__pin--node" style="top:55%; left:75%; animation-delay:1.5s">
+            <span class="hero__pin__dot"></span>
+          </div>
           <!-- Data -->
-          <span class="hero__dot hero__dot--node" style="top:52%; left:49%; animation-delay:1.8s"></span>
+          <div class="hero__pin hero__pin--node" style="top:52%; left:49%; animation-delay:1.8s">
+            <span class="hero__pin__dot"></span>
+          </div>
           <!-- Support -->
-          <span class="hero__dot hero__dot--node" style="top:68%; left:38%; animation-delay:2.1s"></span>
+          <div class="hero__pin hero__pin--node" style="top:68%; left:38%; animation-delay:2.1s">
+            <span class="hero__pin__dot"></span>
+          </div>
         </div>
         <canvas id="network-canvas"></canvas>
       </div>

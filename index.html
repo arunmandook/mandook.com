@@ -339,80 +339,87 @@
     /* Network visual */
     .hero__visual {
       position: relative;
-      height: 480px;
+      height: 500px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: visible;
     }
+    /* Image: fully blended, edges fade into bg, opacity reduced so
+       baked-in callout lines recede and our CSS overlays dominate */
     .hero__map-img {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      inset: -10px;
+      width: calc(100% + 20px);
+      height: calc(100% + 20px);
       object-fit: cover;
       object-position: center;
       display: block;
       pointer-events: none;
       mix-blend-mode: screen;
-      filter: brightness(1.1) contrast(1.1) saturate(1.15);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%),
-                          linear-gradient(to bottom, transparent 0%, black 10%, black 88%, transparent 100%);
+      opacity: 0.72;
+      filter: brightness(1.05) contrast(1.08) saturate(1.1);
+      -webkit-mask-image:
+        linear-gradient(to right,  transparent 0%,  black 14%, black 86%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%,  black 8%,  black 90%, transparent 100%);
       -webkit-mask-composite: source-in;
-      mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%),
-                  linear-gradient(to bottom, transparent 0%, black 10%, black 88%, transparent 100%);
+      mask-image:
+        linear-gradient(to right,  transparent 0%,  black 14%, black 86%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%,  black 8%,  black 90%, transparent 100%);
       mask-composite: intersect;
     }
-    /* Dot + label wrapper */
+    /* Overlay layer for dots + labels */
     .hero__dots {
       position: absolute;
       inset: 0;
       pointer-events: none;
     }
+    /* Each pin: dot immediately beside label, no line */
     .hero__pin {
       position: absolute;
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 5px;
       transform: translate(-50%, -50%);
     }
-    .hero__pin--flip {
-      flex-direction: row-reverse;
-    }
-    /* Glowing dot */
+    .hero__pin--flip { flex-direction: row-reverse; }
+
+    /* Animated dot */
     .hero__pin__dot {
       flex-shrink: 0;
       border-radius: 50%;
-      animation: pinPulse 2.8s ease-in-out infinite;
+      animation: pinPulse 2.6s ease-in-out infinite;
     }
     .hero__pin--hub .hero__pin__dot {
-      width: 13px; height: 13px;
-      background: #ffffff;
-      box-shadow: 0 0 0 3px rgba(0,210,255,0.35), 0 0 18px 6px rgba(0,210,255,0.7);
-      animation-duration: 2.0s;
+      width: 14px; height: 14px;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(0,210,255,0.4),
+                  0 0 16px 5px rgba(0,200,255,0.65),
+                  0 0 32px 10px rgba(0,180,255,0.25);
+      animation-duration: 1.8s;
     }
     .hero__pin--node .hero__pin__dot {
-      width: 7px; height: 7px;
-      background: #d0eeff;
-      box-shadow: 0 0 0 2px rgba(100,190,255,0.25), 0 0 10px 3px rgba(100,190,255,0.55);
+      width: 8px; height: 8px;
+      background: #cce8ff;
+      box-shadow: 0 0 0 2px rgba(100,185,255,0.30),
+                  0 0 10px 4px rgba(80,170,255,0.50);
     }
     @keyframes pinPulse {
-      0%,100% { transform: scale(1);    opacity: 0.88; }
-      50%      { transform: scale(1.45); opacity: 1;    }
+      0%,100% { transform: scale(1);    opacity: 0.85; }
+      50%      { transform: scale(1.5);  opacity: 1;    }
     }
-    /* Label */
+
+    /* Label — sits flush against the dot, no line */
     .hero__pin__label {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.04em;
-      color: rgba(210,235,255,0.90);
-      text-shadow: 0 0 8px rgba(0,180,255,0.7), 0 0 20px rgba(0,150,255,0.4);
+      letter-spacing: 0.05em;
+      color: rgba(215,238,255,0.92);
+      text-shadow:
+        0 0 6px rgba(0,180,255,0.8),
+        0 0 16px rgba(0,150,255,0.4);
       white-space: nowrap;
-      animation: labelFade 2.8s ease-in-out infinite;
-    }
-    @keyframes labelFade {
-      0%,100% { opacity: 0.80; }
-      50%      { opacity: 1.00; }
+      animation: pinPulse 2.6s ease-in-out infinite;
     }
     #network-canvas { display: none; }
     /* Floating stat cards */
@@ -2647,37 +2654,45 @@
       <div class="hero__visual" aria-hidden="true">
         <img src="assets/HeroInfo.png" alt="" class="hero__map-img">
         <div class="hero__dots">
-          <!-- RAK hub — no label -->
+          <!-- RAK hub -->
           <div class="hero__pin hero__pin--hub" style="top:30%; left:73%; animation-delay:0s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">RAK</span>
           </div>
-          <!-- Lead -->
-          <div class="hero__pin hero__pin--node" style="top:33%; left:69%; animation-delay:0.3s">
+          <!-- Lead — label left of dot -->
+          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:33%; left:69%; animation-delay:0.3s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">Lead</span>
           </div>
-          <!-- Analytics -->
-          <div class="hero__pin hero__pin--node" style="top:39%; left:66%; animation-delay:0.6s">
+          <!-- Analytics — label left -->
+          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:39%; left:66%; animation-delay:0.6s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">Analytics</span>
           </div>
-          <!-- CRM -->
-          <div class="hero__pin hero__pin--node" style="top:44%; left:63%; animation-delay:0.9s">
+          <!-- CRM — label left -->
+          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:44%; left:63%; animation-delay:0.9s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">CRM</span>
           </div>
-          <!-- Design -->
+          <!-- Design — label right of dot -->
           <div class="hero__pin hero__pin--node" style="top:43%; left:81%; animation-delay:1.2s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">Design</span>
           </div>
-          <!-- CMS -->
+          <!-- CMS — label right -->
           <div class="hero__pin hero__pin--node" style="top:55%; left:75%; animation-delay:1.5s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">CMS</span>
           </div>
-          <!-- Data -->
-          <div class="hero__pin hero__pin--node" style="top:52%; left:49%; animation-delay:1.8s">
+          <!-- Data — label left -->
+          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:52%; left:49%; animation-delay:1.8s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">Data</span>
           </div>
-          <!-- Support -->
-          <div class="hero__pin hero__pin--node" style="top:68%; left:38%; animation-delay:2.1s">
+          <!-- Support — label left -->
+          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:68%; left:38%; animation-delay:2.1s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">Support</span>
           </div>
         </div>
         <canvas id="network-canvas"></canvas>

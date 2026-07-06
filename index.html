@@ -339,31 +339,27 @@
     /* Network visual */
     .hero__visual {
       position: relative;
-      height: 500px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: visible;
+      /* width is set by the flex layout; height follows the image's natural ratio */
     }
-    /* Image: fully blended, edges fade into bg, opacity reduced so
-       baked-in callout lines recede and our CSS overlays dominate */
     .hero__map-img {
-      position: absolute;
-      inset: -10px;
-      width: calc(100% + 20px);
-      height: calc(100% + 20px);
       display: block;
+      width: 100%;
+      height: auto; /* preserve natural 1.5:1 ratio — no stretching */
       pointer-events: none;
       mix-blend-mode: screen;
-      opacity: 0.80;
+      opacity: 0.85;
       filter: brightness(1.05) contrast(1.08) saturate(1.1);
       -webkit-mask-image:
-        linear-gradient(to right,  transparent 0%,  black 14%, black 86%, transparent 100%),
-        linear-gradient(to bottom, transparent 0%,  black 8%,  black 90%, transparent 100%);
+        linear-gradient(to right,  transparent 0%,  black 12%, black 88%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%,  black 6%,  black 92%, transparent 100%);
       -webkit-mask-composite: source-in;
       mask-image:
-        linear-gradient(to right,  transparent 0%,  black 14%, black 86%, transparent 100%),
-        linear-gradient(to bottom, transparent 0%,  black 8%,  black 90%, transparent 100%);
+        linear-gradient(to right,  transparent 0%,  black 12%, black 88%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%,  black 6%,  black 92%, transparent 100%);
       mask-composite: intersect;
     }
     /* Overlay layer for dots + labels */

@@ -29,18 +29,59 @@
     .footer{background:var(--clr-surface);border-top:1px solid var(--clr-border);padding:80px 0 40px;}.footer__grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:60px;margin-bottom:64px;}.footer__brand p{font-size:15px;color:var(--clr-text-2);line-height:1.7;margin-top:16px;max-width:280px;}.footer__col-title{font-family:var(--font-head);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--clr-text-3);margin-bottom:24px;}.footer__col-links{display:flex;flex-direction:column;gap:14px;}.footer__col-link{font-size:15px;color:var(--clr-text-2);transition:color 0.25s,transform 0.25s;display:inline-block;}.footer__col-link:hover{color:var(--clr-text-1);transform:translateX(4px);}.footer__bottom{display:flex;align-items:center;justify-content:space-between;padding-top:32px;border-top:1px solid var(--clr-border);flex-wrap:wrap;gap:16px;}.footer__copy{font-size:13px;color:var(--clr-text-3);}.footer__socials{display:flex;gap:16px;}.footer__social{width:36px;height:36px;border-radius:50%;border:1px solid var(--clr-border);display:flex;align-items:center;justify-content:center;color:var(--clr-text-3);font-size:14px;transition:border-color 0.3s,color 0.3s,transform 0.3s var(--ease-out-quart);}.footer__social:hover{border-color:var(--clr-blue);color:var(--clr-blue);transform:translateY(-3px);}
     /* RESPONSIVE */
     @media(max-width:1024px){.process-page__layout{grid-template-columns:1fr;}.process-page__left{position:static;}.why-grid{grid-template-columns:repeat(2,1fr);}.footer__grid{grid-template-columns:1fr 1fr;gap:40px;}}@media(max-width:768px){:root{--section-gap:80px;}.nav__links,.nav__cta{display:none;}.nav__hamburger{display:flex;}.nav__mobile{display:flex;}.why-grid{grid-template-columns:1fr;}.footer__grid{grid-template-columns:1fr;}}
+    .nav__logo-img { height: 48px; width: auto; display: block; transition: opacity 0.3s; }
+    .nav__logo:hover .nav__logo-img { opacity: 0.85; }
+    .lang-toggle { display: flex; background: rgba(255,255,255,0.06); border-radius: 20px; padding: 3px; }
+    .lang-toggle__btn { padding: 4px 12px; border-radius: 16px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5); transition: background 0.2s, color 0.2s; cursor: pointer; border: none; background: none; font-family: inherit; }
+    .lang-toggle__btn.active { background: var(--clr-blue); color: #fff; }
   </style>
 </head>
 <body>
-<svg id="logo-svg-defs" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs><radialGradient id="irisGrad" cx="38%" cy="33%" r="65%" fx="38%" fy="33%"><stop offset="0%" stop-color="#22E8FF"/><stop offset="45%" stop-color="#0090FF"/><stop offset="100%" stop-color="#3B1FA8"/></radialGradient><radialGradient id="scleraGrad" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="rgba(255,255,255,0.09)"/><stop offset="100%" stop-color="rgba(255,255,255,0.02)"/></radialGradient><linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00C6FF"/><stop offset="100%" stop-color="#7B4FFF"/></linearGradient><filter id="eyeGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="0.6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs></svg>
+<!-- NAV -->
+<nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Mandook home">
+        <img src="assets/mandook-logo.png" alt="MANDOOK" class="nav__logo-img">
+      </a>
 
-<nav class="nav" id="mainNav"><div class="container"><div class="nav__inner">
-  <a href="index.html" class="nav__logo"><span class="logo-word">Mand<span class="logo-eyes" aria-hidden="true"><svg class="logo-eye" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11.2" fill="url(#scleraGrad)" stroke="url(#ringGrad)" stroke-width="1.4"/><circle cx="12" cy="12" r="7.5" fill="none" stroke="rgba(0,198,255,0.22)" stroke-width="0.7"/><circle class="eye-iris" cx="12" cy="12" r="6.2" fill="url(#irisGrad)" filter="url(#eyeGlow)"/><circle class="eye-pupil" cx="12" cy="12" r="2.8" fill="#03050F"/><circle class="eye-highlight" cx="14.2" cy="9.8" r="1.4" fill="rgba(255,255,255,0.88)"/></svg><svg class="logo-eye" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11.2" fill="url(#scleraGrad)" stroke="url(#ringGrad)" stroke-width="1.4"/><circle cx="12" cy="12" r="7.5" fill="none" stroke="rgba(0,198,255,0.22)" stroke-width="0.7"/><circle class="eye-iris" cx="12" cy="12" r="6.2" fill="url(#irisGrad)" filter="url(#eyeGlow)"/><circle class="eye-pupil" cx="12" cy="12" r="2.8" fill="#03050F"/><circle class="eye-highlight" cx="14.2" cy="9.8" r="1.4" fill="rgba(255,255,255,0.88)"/></svg></span>k</span></a>
-  <ul class="nav__links" role="list"><li><a href="index.html" class="nav__link">Home</a></li><li><a href="services.html" class="nav__link">Services</a></li><li><a href="process.html" class="nav__link active">Process</a></li><li><a href="work.html" class="nav__link">Work</a></li><li><a href="about.html" class="nav__link">About</a></li></ul>
-  <div class="nav__cta"><a href="work.html" class="btn btn--ghost">See Our Work</a><a href="contact.html" class="btn btn--primary">Get a Proposal</a></div>
-  <button class="nav__hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
-</div></div></nav>
-<div class="nav__mobile" id="mobileMenu" role="dialog"><a href="index.html" class="nav__mobile-link">Home</a><a href="services.html" class="nav__mobile-link">Services</a><a href="process.html" class="nav__mobile-link">Process</a><a href="work.html" class="nav__mobile-link">Work</a><a href="about.html" class="nav__mobile-link">About</a><a href="contact.html" class="nav__mobile-link" style="color:var(--clr-blue)">Get a Proposal →</a></div>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link" data-i18n="nav-home">Home</a></li>
+        <li><a href="services.html" class="nav__link" data-i18n="nav-services">Services</a></li>
+        <li><a href="process.html"  class="nav__link active" data-i18n="nav-process">Process</a></li>
+        <li><a href="work.html"     class="nav__link" data-i18n="nav-work">Work</a></li>
+        <li><a href="about.html"    class="nav__link" data-i18n="nav-about">About</a></li>
+      </ul>
+
+      <div class="nav__cta">
+        <div class="lang-toggle" aria-label="Switch language">
+          <button class="lang-toggle__btn active" data-lang="en">EN</button>
+          <button class="lang-toggle__btn" data-lang="ar">AR</button>
+        </div>
+        <a href="work.html"    class="btn btn--ghost" data-i18n="nav-see-work">See Our Work</a>
+        <a href="contact.html" class="btn btn--primary" data-i18n="nav-proposal">Get a Proposal</a>
+      </div>
+
+      <button class="nav__hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="nav__mobile" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+  <a href="index.html" class="nav__mobile-link" data-i18n="nav-home">Home</a>
+  <a href="services.html" class="nav__mobile-link" data-i18n="nav-services">Services</a>
+  <a href="process.html"  class="nav__mobile-link" data-i18n="nav-process">Process</a>
+  <a href="work.html"     class="nav__mobile-link" data-i18n="nav-work">Work</a>
+  <a href="about.html"    class="nav__mobile-link" data-i18n="nav-about">About</a>
+  <a href="contact.html"  class="nav__mobile-link" data-i18n="nav-proposal" style="color:var(--clr-blue)">Get a Proposal →</a>
+  <div class="lang-toggle" style="margin:16px 24px;" aria-label="Switch language">
+    <button class="lang-toggle__btn active" data-lang="en">EN</button>
+    <button class="lang-toggle__btn" data-lang="ar">AR</button>
+  </div>
+</div>
 
 <section class="page-hero">
   <div class="page-hero__orb page-hero__orb--1" aria-hidden="true"></div>

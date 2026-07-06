@@ -3505,211 +3505,214 @@
   const cvs = document.getElementById('network-canvas');
   if (!cvs) return;
   const ctx = cvs.getContext('2d');
-  let W, H;
+  let W, H, dpr = window.devicePixelRatio || 1;
 
   function resize() {
-    W = cvs.width  = cvs.offsetWidth;
-    H = cvs.height = cvs.offsetHeight;
+    const rect = cvs.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    cvs.width  = W * dpr;
+    cvs.height = H * dpr;
+    cvs.style.width  = W + 'px';
+    cvs.style.height = H + 'px';
+    ctx.scale(dpr, dpr);
   }
   resize();
-  window.addEventListener('resize', resize, { passive: true });
+  window.addEventListener('resize', () => { resize(); }, { passive: true });
 
-  /* ── UAE geographic bounds (lon/lat → normalised 0-1 canvas space) ── */
-  const LON0 = 51.40, LON_SPAN = 5.20;   // 51.4°E → 56.6°E
-  const LAT_TOP = 26.10, LAT_SPAN = 3.70; // 26.1°N → 22.4°N
-
+  const LON0 = 51.40, LON_SPAN = 5.20;
+  const LAT_TOP = 26.10, LAT_SPAN = 3.70;
   function geo(lon, lat) {
     return { bx: (lon - LON0) / LON_SPAN, by: (LAT_TOP - lat) / LAT_SPAN };
   }
 
-  /* ── UAE boundary points (clockwise from western tip) ──
-     gapBefore=true → Musandam (Oman exclave) gap; skip connecting line        */
+  /* UAE boundary — segments array, gap=true skips line across Musandam */
   const BOUNDARY_PTS = [
-    { lon: 51.56, lat: 24.09 },           // W tip (Jebel Dhanna coast)
-    { lon: 51.60, lat: 23.65 },
-    { lon: 51.67, lat: 23.18 },
-    { lon: 51.73, lat: 22.83 },
-    { lon: 51.80, lat: 22.63 },           // SW corner → Saudi border begins
-    { lon: 52.30, lat: 22.62 },
-    { lon: 53.00, lat: 22.62 },
-    { lon: 53.70, lat: 22.62 },
-    { lon: 54.40, lat: 22.63 },
-    { lon: 54.95, lat: 22.75 },
-    { lon: 55.33, lat: 22.92 },
-    { lon: 55.58, lat: 23.18 },
-    { lon: 55.80, lat: 23.52 },
-    { lon: 55.92, lat: 23.88 },
-    { lon: 56.07, lat: 24.12 },
-    { lon: 56.23, lat: 24.43 },
-    { lon: 56.37, lat: 24.58 },           // Kalba (Gulf of Oman)
-    { lon: 56.38, lat: 24.90 },
-    { lon: 56.30, lat: 25.22 },           // Khor Fakkan
-    { lon: 56.25, lat: 25.57 },           // Dibba – last UAE pt before Musandam
-    { lon: 55.97, lat: 25.82, gap: true },// RAK – rejoins after Musandam exclave
-    { lon: 55.82, lat: 25.88 },
-    { lon: 55.65, lat: 25.78 },
-    { lon: 55.52, lat: 25.58 },           // Umm Al Quwain
-    { lon: 55.43, lat: 25.47 },           // Ajman
-    { lon: 55.33, lat: 25.37 },           // Sharjah
-    { lon: 55.18, lat: 25.22 },           // Dubai coast
-    { lon: 55.05, lat: 25.06 },
-    { lon: 54.55, lat: 24.46 },           // Abu Dhabi north coast
-    { lon: 54.37, lat: 24.43 },
-    { lon: 53.95, lat: 24.18 },
-    { lon: 53.45, lat: 24.13 },
-    { lon: 52.85, lat: 24.09 },           // Ruwais
-    { lon: 52.20, lat: 24.07 },
-    { lon: 51.80, lat: 24.08 },
+    {lon:51.56,lat:24.09},{lon:51.60,lat:23.65},{lon:51.67,lat:23.18},
+    {lon:51.73,lat:22.83},{lon:51.80,lat:22.63},{lon:52.30,lat:22.62},
+    {lon:53.00,lat:22.62},{lon:53.70,lat:22.62},{lon:54.40,lat:22.63},
+    {lon:54.95,lat:22.75},{lon:55.33,lat:22.92},{lon:55.58,lat:23.18},
+    {lon:55.80,lat:23.52},{lon:55.92,lat:23.88},{lon:56.07,lat:24.12},
+    {lon:56.23,lat:24.43},{lon:56.37,lat:24.58},{lon:56.38,lat:24.90},
+    {lon:56.30,lat:25.22},{lon:56.25,lat:25.57},
+    {lon:55.97,lat:25.82,gap:true},
+    {lon:55.82,lat:25.88},{lon:55.65,lat:25.78},{lon:55.52,lat:25.58},
+    {lon:55.43,lat:25.47},{lon:55.33,lat:25.37},{lon:55.18,lat:25.22},
+    {lon:55.05,lat:25.06},{lon:54.55,lat:24.46},{lon:54.37,lat:24.43},
+    {lon:53.95,lat:24.18},{lon:53.45,lat:24.13},{lon:52.85,lat:24.09},
+    {lon:52.20,lat:24.07},{lon:51.80,lat:24.08},
   ];
 
-  /* ── Nodes: RAK = electric-blue hub, rest = silver/white constellation dots ── */
-  const CITIES = [
-    { label: '',          lon: 55.92, lat: 25.79, hub: true,  size: 5.5 }, // RAK hub
-    { label: 'CRM',       lon: 55.27, lat: 25.20, hub: false, size: 3.5 },
-    { label: 'Analytics', lon: 55.38, lat: 25.36, hub: false, size: 3.5 },
-    { label: 'Design',    lon: 56.34, lat: 25.12, hub: false, size: 3.5 },
-    { label: 'Data',      lon: 54.37, lat: 24.47, hub: false, size: 3.5 },
-    { label: 'CMS',       lon: 55.76, lat: 24.22, hub: false, size: 3.5 },
-    { label: 'Lead',      lon: 55.52, lat: 25.55, hub: false, size: 3.5 },
-    { label: 'Support',   lon: 53.77, lat: 23.12, hub: false, size: 3.5 },
+  /* Service nodes — RAK is the bright hub */
+  const SERVICES = [
+    { label:'',          lon:55.92, lat:25.79, hub:true  },
+    { label:'Lead',      lon:55.52, lat:25.55 },
+    { label:'Analytics', lon:55.38, lat:25.36 },
+    { label:'CRM',       lon:55.27, lat:25.20 },
+    { label:'Design',    lon:56.34, lat:25.12 },
+    { label:'CMS',       lon:55.76, lat:24.22 },
+    { label:'Data',      lon:54.37, lat:24.47 },
+    { label:'Support',   lon:53.77, lat:23.12 },
   ];
 
-  const BCOUNT = BOUNDARY_PTS.length;
-  const nodes = [];
-
-  BOUNDARY_PTS.forEach((pt, i) => {
-    const { bx, by } = geo(pt.lon, pt.lat);
-    nodes.push({ bx, by, x: 0, y: 0, size: 1.8,
-      pulse: Math.random() * Math.PI * 2,
-      boundary: true, gap: !!pt.gap, hub: false, label: '' });
-  });
-
-  CITIES.forEach(c => {
-    const { bx, by } = geo(c.lon, c.lat);
-    nodes.push({ bx, by, x: 0, y: 0, size: c.size, label: c.label,
-      pulse: Math.random() * Math.PI * 2,
-      boundary: false, hub: c.hub });
-  });
+  /* Pre-compute normalised coords */
+  const bpts = BOUNDARY_PTS.map(p => ({ ...geo(p.lon, p.lat), gap: !!p.gap }));
+  const snodes = SERVICES.map(s => ({ ...geo(s.lon, s.lat), label: s.label, hub: !!s.hub, phase: Math.random() * 6.28 }));
 
   let t = 0;
-  function sw(ph, sp) { return 0.5 + 0.5 * Math.sin(t * sp + ph); }
+
+  function fit() {
+    const asp = LON_SPAN / LAT_SPAN;
+    /* leave room on right for labels, more generous vertical padding */
+    const padL = 0.02, padR = 0.16, padT = 0.08, padB = 0.08;
+    const aw = W * (1 - padL - padR), ah = H * (1 - padT - padB);
+    let sx, sy, ox, oy;
+    if (aw / ah > asp) { sy = ah; sx = sy * asp; ox = W * padL + (aw - sx) / 2; oy = H * padT; }
+    else               { sx = aw; sy = sx / asp; ox = W * padL; oy = H * padT + (ah - sy) / 2; }
+    return { sx, sy, ox, oy };
+  }
+
+  function px(bx, by, f) {
+    return { x: f.ox + bx * f.sx, y: f.oy + by * f.sy };
+  }
+
+  /* Draw a glowing line: thick soft halo + thin bright core */
+  function glowLine(x1, y1, x2, y2, colorRGB, alpha, width) {
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(${colorRGB},${alpha * 0.25})`;
+    ctx.lineWidth = width * 4;
+    ctx.lineCap = 'round';
+    ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(${colorRGB},${alpha})`;
+    ctx.lineWidth = width;
+    ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  }
+
+  /* Draw a glowing dot: radial halo + bright core + specular */
+  function glowDot(x, y, r, colorRGB, intensity) {
+    /* outer halo */
+    const rg = ctx.createRadialGradient(x, y, 0, x, y, r * 5);
+    rg.addColorStop(0,   `rgba(${colorRGB},${0.22 * intensity})`);
+    rg.addColorStop(0.4, `rgba(${colorRGB},${0.08 * intensity})`);
+    rg.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.beginPath(); ctx.arc(x, y, r * 5, 0, 6.28);
+    ctx.fillStyle = rg; ctx.fill();
+
+    /* bright core */
+    const cg = ctx.createRadialGradient(x - r*0.3, y - r*0.3, 0, x, y, r);
+    cg.addColorStop(0, 'rgba(255,255,255,0.95)');
+    cg.addColorStop(0.4, `rgba(${colorRGB},0.95)`);
+    cg.addColorStop(1,   `rgba(${colorRGB},0.70)`);
+    ctx.beginPath(); ctx.arc(x, y, r, 0, 6.28);
+    ctx.fillStyle = cg; ctx.fill();
+  }
+
+  /* Starburst rays radiating from hub */
+  function starburst(x, y, intensity) {
+    const RAYS = 16;
+    for (let i = 0; i < RAYS; i++) {
+      const angle = (i / RAYS) * Math.PI * 2 + t * 0.08;
+      const len = (50 + 80 * ((i % 3 === 0) ? 1 : 0.45)) * intensity;
+      const ex = x + Math.cos(angle) * len;
+      const ey = y + Math.sin(angle) * len;
+      const alpha = (0.04 + 0.06 * ((i % 3 === 0) ? 1 : 0.4)) * intensity;
+      ctx.beginPath();
+      ctx.strokeStyle = `rgba(60,185,255,${alpha})`;
+      ctx.lineWidth = (i % 3 === 0) ? 0.8 : 0.4;
+      ctx.moveTo(x, y); ctx.lineTo(ex, ey); ctx.stroke();
+    }
+  }
+
+  /* Label callout: short horizontal tick + text */
+  function drawLabel(x, y, label, side, alpha) {
+    const TICK = 20, GAP = 5;
+    const dx = side === 'right' ? 1 : -1;
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(130,170,220,${alpha * 0.6})`;
+    ctx.lineWidth = 0.6;
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + dx * TICK, y);
+    ctx.stroke();
+
+    /* dot at end of tick */
+    ctx.beginPath();
+    ctx.arc(x + dx * TICK, y, 1.5, 0, 6.28);
+    ctx.fillStyle = `rgba(130,170,220,${alpha * 0.8})`;
+    ctx.fill();
+
+    ctx.font = '500 10px Inter,sans-serif';
+    ctx.fillStyle = `rgba(195,215,245,${alpha})`;
+    ctx.textAlign = side === 'right' ? 'left' : 'right';
+    ctx.fillText(label, x + dx * (TICK + GAP), y + 3.5);
+  }
 
   function draw() {
     ctx.clearRect(0, 0, W, H);
-    t += 0.006;
+    t += 0.012;
+    const f = fit();
 
-    const UAE_ASPECT = LON_SPAN / LAT_SPAN;
-    const PAD = 0.06;
-    let scaleX, scaleY, offX, offY;
-    const availW = W * (1 - 2 * PAD), availH = H * (1 - 2 * PAD);
-    if (W / H > UAE_ASPECT) {
-      scaleY = availH; scaleX = scaleY * UAE_ASPECT;
-      offX = (W - scaleX) / 2; offY = H * PAD;
-    } else {
-      scaleX = availW; scaleY = scaleX / UAE_ASPECT;
-      offX = W * PAD; offY = (H - scaleY) / 2;
-    }
-
-    nodes.forEach(n => {
-      const amp = n.hub ? 0 : n.boundary ? 1.5 : 3;
-      n.x = offX + n.bx * scaleX + Math.sin(t * 0.4 + n.pulse) * amp;
-      n.y = offY + n.by * scaleY + Math.cos(t * 0.35 + n.pulse) * amp;
-      n.pulse += 0.002;
-    });
-
-    /* ── 1. Boundary outline — thin silver, subtle shimmer ── */
-    for (let i = 0; i < BCOUNT; i++) {
-      const a = nodes[i], b = nodes[(i + 1) % BCOUNT];
+    /* ── 1. UAE boundary — glowing blue outline ── */
+    const BRGB = '80,160,255';
+    for (let i = 0; i < bpts.length; i++) {
+      const a = bpts[i], b = bpts[(i + 1) % bpts.length];
       if (b.gap) continue;
-      const alpha = 0.12 + 0.10 * Math.sin(t * 0.8 + i * 0.35);
-      ctx.beginPath();
-      ctx.strokeStyle = `rgba(170,195,235,${alpha})`;
-      ctx.lineWidth = 0.8;
-      ctx.lineCap = 'round';
-      ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-      ctx.stroke();
+      const shimmer = 0.55 + 0.25 * Math.sin(t * 0.6 + i * 0.28);
+      const pa = px(a.bx, a.by, f), pb = px(b.bx, b.by, f);
+      glowLine(pa.x, pa.y, pb.x, pb.y, BRGB, shimmer, 1.0);
     }
 
-    /* ── 2. City ↔ city lines — very faint, thin ── */
-    for (let i = BCOUNT; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const a = nodes[i], b = nodes[j];
-        const d = Math.hypot(a.bx - b.bx, a.by - b.by);
-        if (d > 0.30) continue;
-        const alpha = 0.06 + 0.07 * sw(i * 0.5 + j * 0.3, 1.0);
+    /* ── 2. Internal triangulation lines (subtle mesh inside map) ── */
+    const sxy = snodes.map(s => ({ ...px(s.bx, s.by, f), label: s.label, hub: s.hub, phase: s.phase }));
+    for (let i = 0; i < sxy.length; i++) {
+      for (let j = i + 1; j < sxy.length; j++) {
+        const a = sxy[i], b = sxy[j];
+        const d = Math.hypot(snodes[i].bx - snodes[j].bx, snodes[i].by - snodes[j].by);
+        if (d > 0.32) continue;
+        const alpha = 0.07 + 0.05 * Math.sin(t * 0.8 + i + j);
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(160,185,220,${alpha})`;
+        ctx.strokeStyle = `rgba(60,140,240,${alpha})`;
         ctx.lineWidth = 0.5;
-        ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-        ctx.stroke();
-
-        /* Occasional slow-moving particle */
-        if (Math.sin(t * 1.8 + i * 2.1 + j) > 0.78) {
-          const prog = (Math.sin(t * 1.2 + i + j * 0.7) * 0.5 + 0.5);
-          ctx.beginPath();
-          ctx.arc(a.x + (b.x - a.x) * prog, a.y + (b.y - a.y) * prog, 1.2, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(190,215,255,0.55)`;
-          ctx.fill();
-        }
+        ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
       }
     }
 
-    /* ── 3. Boundary dots — tiny silver stars ── */
-    nodes.slice(0, BCOUNT).forEach((n, i) => {
-      const g = sw(i * 0.45, 0.9);
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(185,205,238,${0.40 + 0.35 * g})`;
-      ctx.fill();
-    });
-
-    /* ── 4. Service nodes — clean white dots with soft halo + label ── */
-    nodes.slice(BCOUNT).forEach((n, i) => {
-      const g = sw(i * 0.8, 1.0);
+    /* ── 3. Service nodes + labels ── */
+    sxy.forEach((n, i) => {
+      const pulse = 0.75 + 0.25 * Math.sin(t * 1.4 + n.phase);
+      const labelAlpha = 0.70 + 0.20 * Math.sin(t * 0.9 + n.phase);
 
       if (n.hub) {
-        /* RAK: electric-blue, two calm rings */
-        const r1 = n.size * 2.6 + sw(0, 0.6) * n.size;
-        ctx.beginPath(); ctx.arc(n.x, n.y, r1, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(0,185,255,${0.20 + 0.10 * g})`; ctx.lineWidth = 0.8; ctx.stroke();
+        /* Starburst behind hub */
+        starburst(n.x, n.y, pulse);
 
-        const r2 = n.size * 4.2 + sw(1.8, 0.4) * n.size;
-        ctx.beginPath(); ctx.arc(n.x, n.y, r2, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(0,185,255,${0.07 + 0.05 * g})`; ctx.lineWidth = 0.6; ctx.stroke();
+        /* Large glow halo */
+        const hg = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 55 * pulse);
+        hg.addColorStop(0,   `rgba(0,200,255,${0.30 * pulse})`);
+        hg.addColorStop(0.3, `rgba(0,160,240,${0.12 * pulse})`);
+        hg.addColorStop(1,   'rgba(0,0,0,0)');
+        ctx.beginPath(); ctx.arc(n.x, n.y, 55 * pulse, 0, 6.28);
+        ctx.fillStyle = hg; ctx.fill();
 
-        /* Soft glow */
-        const rg = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.size * 4);
-        rg.addColorStop(0, `rgba(0,190,255,${0.30 * g})`);
-        rg.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.beginPath(); ctx.arc(n.x, n.y, n.size * 4, 0, Math.PI * 2);
-        ctx.fillStyle = rg; ctx.fill();
+        /* Pulsing rings */
+        [14, 22].forEach((r, ri) => {
+          const rr = r + (ri === 0 ? pulse * 4 : pulse * 8);
+          ctx.beginPath(); ctx.arc(n.x, n.y, rr, 0, 6.28);
+          ctx.strokeStyle = `rgba(0,200,255,${(0.30 - ri * 0.10) * pulse})`;
+          ctx.lineWidth = 0.8 - ri * 0.2; ctx.stroke();
+        });
 
-        /* Core */
-        ctx.beginPath(); ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0,200,255,${0.90 + 0.10 * g})`; ctx.fill();
-        ctx.beginPath(); ctx.arc(n.x - n.size * 0.28, n.y - n.size * 0.28, n.size * 0.38, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,0.55)'; ctx.fill();
+        /* Core dot */
+        glowDot(n.x, n.y, 6, '0,210,255', pulse);
 
       } else {
-        /* Silver-white dot with faint halo */
-        const rg = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.size * 4.5);
-        rg.addColorStop(0, `rgba(195,215,245,${0.12 * g})`);
-        rg.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.beginPath(); ctx.arc(n.x, n.y, n.size * 4.5, 0, Math.PI * 2);
-        ctx.fillStyle = rg; ctx.fill();
-
-        ctx.beginPath(); ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(215,228,250,${0.80 + 0.20 * g})`; ctx.fill();
-
-        /* Specular highlight */
-        ctx.beginPath(); ctx.arc(n.x - n.size * 0.3, n.y - n.size * 0.3, n.size * 0.35, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,0.50)'; ctx.fill();
+        /* Service node: glowing white dot */
+        glowDot(n.x, n.y, 3.5, '140,195,255', pulse);
 
         if (n.label) {
-          ctx.font = '500 8.5px Inter,sans-serif';
-          ctx.fillStyle = `rgba(155,178,215,${0.65 + 0.20 * g})`;
-          ctx.textAlign = 'center';
-          ctx.fillText(n.label, n.x, n.y + n.size + 11);
+          /* Decide label side based on x position within canvas */
+          const side = n.x > W * 0.55 ? 'right' : 'left';
+          drawLabel(n.x, n.y, n.label, side, labelAlpha);
         }
       }
     });

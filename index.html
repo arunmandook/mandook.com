@@ -2650,39 +2650,47 @@
 
       <!-- RIGHT — UAE map image with glowing dot overlays -->
       <div class="hero__visual" aria-hidden="true">
-        <canvas class="hero__map-img" id="hero-map-canvas"></canvas>
+        <img src="assets/HeroImage.png" alt="" class="hero__map-img">
         <div class="hero__dots">
-          <!-- RAK hub -->
-          <div class="hero__pin hero__pin--hub" style="top:30%; left:73%; animation-delay:0s">
+          <!-- RAK / hub — top-right bright star -->
+          <div class="hero__pin hero__pin--hub" style="top:22%; left:82%; animation-delay:0s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">RAK</span>
           </div>
-          <!-- Lead -->
-          <div class="hero__pin hero__pin--node" style="top:33%; left:69%; animation-delay:0.3s">
+          <!-- Lead — upper-centre star -->
+          <div class="hero__pin hero__pin--node" style="top:33%; left:72%; animation-delay:0.4s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">Lead</span>
           </div>
-          <!-- Analytics -->
-          <div class="hero__pin hero__pin--node" style="top:39%; left:66%; animation-delay:0.6s">
+          <!-- Design — right-mid star -->
+          <div class="hero__pin hero__pin--node" style="top:44%; left:88%; animation-delay:0.8s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">Design</span>
           </div>
-          <!-- CRM -->
-          <div class="hero__pin hero__pin--node" style="top:44%; left:63%; animation-delay:0.9s">
+          <!-- Analytics — centre star -->
+          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:50%; left:63%; animation-delay:1.0s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">Analytics</span>
           </div>
-          <!-- Design -->
-          <div class="hero__pin hero__pin--node" style="top:43%; left:81%; animation-delay:1.2s">
+          <!-- CMS — lower-right star -->
+          <div class="hero__pin hero__pin--node" style="top:60%; left:78%; animation-delay:1.4s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">CMS</span>
           </div>
-          <!-- CMS -->
-          <div class="hero__pin hero__pin--node" style="top:55%; left:75%; animation-delay:1.5s">
+          <!-- CRM — lower-centre star -->
+          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:68%; left:55%; animation-delay:1.6s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">CRM</span>
           </div>
-          <!-- Data -->
-          <div class="hero__pin hero__pin--node" style="top:52%; left:49%; animation-delay:1.8s">
+          <!-- Data — left star -->
+          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:58%; left:40%; animation-delay:2.0s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">Data</span>
           </div>
-          <!-- Support -->
-          <div class="hero__pin hero__pin--node" style="top:68%; left:38%; animation-delay:2.1s">
+          <!-- Support — bottom-left star -->
+          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:75%; left:30%; animation-delay:2.3s">
             <span class="hero__pin__dot"></span>
+            <span class="hero__pin__label">Support</span>
           </div>
         </div>
         <canvas id="network-canvas"></canvas>

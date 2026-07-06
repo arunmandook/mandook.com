@@ -344,11 +344,43 @@
       align-items: center;
       justify-content: center;
     }
-    #network-canvas {
+    .hero__map-img {
       width: 100%;
       height: 100%;
+      object-fit: contain;
+      object-position: center;
       display: block;
+      pointer-events: none;
+      mix-blend-mode: lighten;
     }
+    /* Animated glowing dots overlay */
+    .hero__dots {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .hero__dot {
+      position: absolute;
+      border-radius: 50%;
+      animation: dotPulse 2.8s ease-in-out infinite;
+    }
+    @keyframes dotPulse {
+      0%, 100% { transform: scale(1);   opacity: 0.85; box-shadow: 0 0 6px 2px currentColor; }
+      50%       { transform: scale(1.5); opacity: 1;    box-shadow: 0 0 18px 6px currentColor; }
+    }
+    .hero__dot--hub {
+      width: 14px; height: 14px;
+      background: #fff;
+      color: rgba(0,210,255,0.9);
+      box-shadow: 0 0 20px 8px rgba(0,210,255,0.8);
+      animation-duration: 2.0s;
+    }
+    .hero__dot--node {
+      width: 8px; height: 8px;
+      background: #c8e8ff;
+      color: rgba(100,190,255,0.7);
+    }
+    #network-canvas { display: none; }
     /* Floating stat cards */
     .hero__stat {
       position: absolute;
@@ -2577,8 +2609,27 @@
         </div>
       </div>
 
-      <!-- RIGHT — Animated network visual -->
+      <!-- RIGHT — UAE map image with glowing dot overlays -->
       <div class="hero__visual" aria-hidden="true">
+        <img src="assets/HeroInfo.png" alt="" class="hero__map-img">
+        <div class="hero__dots">
+          <!-- RAK hub -->
+          <span class="hero__dot hero__dot--hub"  style="top:30%; left:73%; animation-delay:0s"></span>
+          <!-- Lead -->
+          <span class="hero__dot hero__dot--node" style="top:36%; left:69%; animation-delay:0.3s"></span>
+          <!-- Analytics -->
+          <span class="hero__dot hero__dot--node" style="top:41%; left:66%; animation-delay:0.6s"></span>
+          <!-- CRM -->
+          <span class="hero__dot hero__dot--node" style="top:45%; left:63%; animation-delay:0.9s"></span>
+          <!-- Design -->
+          <span class="hero__dot hero__dot--node" style="top:44%; left:80%; animation-delay:1.2s"></span>
+          <!-- CMS -->
+          <span class="hero__dot hero__dot--node" style="top:55%; left:74%; animation-delay:1.5s"></span>
+          <!-- Data -->
+          <span class="hero__dot hero__dot--node" style="top:52%; left:49%; animation-delay:1.8s"></span>
+          <!-- Support -->
+          <span class="hero__dot hero__dot--node" style="top:68%; left:38%; animation-delay:2.1s"></span>
+        </div>
         <canvas id="network-canvas"></canvas>
       </div>
 

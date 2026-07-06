@@ -352,12 +352,10 @@
       inset: -10px;
       width: calc(100% + 20px);
       height: calc(100% + 20px);
-      object-fit: cover;
-      object-position: center;
       display: block;
       pointer-events: none;
       mix-blend-mode: screen;
-      opacity: 0.72;
+      opacity: 0.80;
       filter: brightness(1.05) contrast(1.08) saturate(1.1);
       -webkit-mask-image:
         linear-gradient(to right,  transparent 0%,  black 14%, black 86%, transparent 100%),
@@ -2652,47 +2650,39 @@
 
       <!-- RIGHT — UAE map image with glowing dot overlays -->
       <div class="hero__visual" aria-hidden="true">
-        <img src="assets/HeroInfo.png" alt="" class="hero__map-img">
+        <canvas class="hero__map-img" id="hero-map-canvas"></canvas>
         <div class="hero__dots">
           <!-- RAK hub -->
           <div class="hero__pin hero__pin--hub" style="top:30%; left:73%; animation-delay:0s">
             <span class="hero__pin__dot"></span>
-            <span class="hero__pin__label">RAK</span>
           </div>
-          <!-- Lead — label left of dot -->
-          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:33%; left:69%; animation-delay:0.3s">
+          <!-- Lead -->
+          <div class="hero__pin hero__pin--node" style="top:33%; left:69%; animation-delay:0.3s">
             <span class="hero__pin__dot"></span>
-            <span class="hero__pin__label">Lead</span>
           </div>
-          <!-- Analytics — label left -->
-          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:39%; left:66%; animation-delay:0.6s">
+          <!-- Analytics -->
+          <div class="hero__pin hero__pin--node" style="top:39%; left:66%; animation-delay:0.6s">
             <span class="hero__pin__dot"></span>
-            <span class="hero__pin__label">Analytics</span>
           </div>
-          <!-- CRM — label left -->
-          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:44%; left:63%; animation-delay:0.9s">
+          <!-- CRM -->
+          <div class="hero__pin hero__pin--node" style="top:44%; left:63%; animation-delay:0.9s">
             <span class="hero__pin__dot"></span>
-            <span class="hero__pin__label">CRM</span>
           </div>
-          <!-- Design — label right of dot -->
+          <!-- Design -->
           <div class="hero__pin hero__pin--node" style="top:43%; left:81%; animation-delay:1.2s">
             <span class="hero__pin__dot"></span>
-            <span class="hero__pin__label">Design</span>
           </div>
-          <!-- CMS — label right -->
+          <!-- CMS -->
           <div class="hero__pin hero__pin--node" style="top:55%; left:75%; animation-delay:1.5s">
             <span class="hero__pin__dot"></span>
-            <span class="hero__pin__label">CMS</span>
           </div>
-          <!-- Data — label left -->
-          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:52%; left:49%; animation-delay:1.8s">
+          <!-- Data -->
+          <div class="hero__pin hero__pin--node" style="top:52%; left:49%; animation-delay:1.8s">
             <span class="hero__pin__dot"></span>
-            <span class="hero__pin__label">Data</span>
           </div>
-          <!-- Support — label left -->
-          <div class="hero__pin hero__pin--node hero__pin--flip" style="top:68%; left:38%; animation-delay:2.1s">
+          <!-- Support -->
+          <div class="hero__pin hero__pin--node" style="top:68%; left:38%; animation-delay:2.1s">
             <span class="hero__pin__dot"></span>
-            <span class="hero__pin__label">Support</span>
           </div>
         </div>
         <canvas id="network-canvas"></canvas>
@@ -4020,6 +4010,42 @@
       btn.classList.toggle('active', btn.getAttribute('data-lang') === 'en');
     });
   }
+})();
+</script>
+<script>
+// Draw HeroInfo.png onto canvas and paint over the baked-in text labels
+(function() {
+  var cvs = document.getElementById('hero-map-canvas');
+  if (!cvs) return;
+  var ctx = cvs.getContext('2d');
+  var img = new Image();
+  img.src = 'assets/HeroInfo.png';
+  img.onload = function() {
+    var dpr = window.devicePixelRatio || 1;
+    cvs.width  = img.naturalWidth;
+    cvs.height = img.naturalHeight;
+    ctx.drawImage(img, 0, 0);
+    // Paint over label text + connector lines using the image's own bg colour
+    // Sampled from dark corners of the PNG (~#050d1a)
+    var W = img.naturalWidth, H = img.naturalHeight;
+    ctx.fillStyle = '#050e1c';
+    // Each rect: [left%, top%, width%, height%] of image dimensions
+    var blots = [
+      // "Lead" callout top-right
+      [0.58, 0.15, 0.22, 0.07],
+      // "Analytics" callout
+      [0.52, 0.24, 0.22, 0.07],
+      // "CRM" callout left
+      [0.49, 0.32, 0.16, 0.06],
+      // "Data" callout left-centre
+      [0.38, 0.44, 0.16, 0.06],
+      // "Support" callout bottom
+      [0.44, 0.72, 0.17, 0.06],
+    ];
+    blots.forEach(function(b) {
+      ctx.fillRect(b[0]*W, b[1]*H, b[2]*W, b[3]*H);
+    });
+  };
 })();
 </script>
 </body>

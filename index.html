@@ -1341,46 +1341,147 @@
     /* ============================================================
        WHY MANDOOK SECTION
     ============================================================ */
-    .why-mandook { background: var(--clr-bg); }
-    .why__header { text-align: center; margin-bottom: 60px; }
-    .why__header .section__label { justify-content: center; }
-    .why__header .section__heading { margin: 0 auto 16px; }
-    .why__header .section__sub { max-width: 540px; margin: 0 auto; }
-    .why__grid {
+    /* ============================================================
+       PROCESS STEPS
+    ============================================================ */
+    .process-steps { background: var(--clr-bg); }
+    .process-steps__header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .process-steps__header .section__label { justify-content: center; }
+    .process-steps__header .section__heading { margin: 0 auto 14px; }
+    .process-steps__header .section__sub { max-width: 440px; margin: 0 auto; }
+
+    .process-steps__track {
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .ps-step {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: 64px 32px 1fr;
+      gap: 0 24px;
+      align-items: start;
+      margin-bottom: 0;
     }
-    .why-card {
-      background: var(--clr-surface);
-      border: 1px solid var(--clr-border);
-      border-radius: var(--radius-lg);
-      padding: 36px 28px;
-      transition: border-color 0.35s, transform 0.35s var(--ease-out-quart), box-shadow 0.35s;
+
+    /* Step number */
+    .ps-step__left {
+      padding-top: 2px;
+      text-align: right;
     }
-    .why-card:hover {
-      border-color: rgba(0,198,255,0.3);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    .ps-step__num {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--clr-blue);
+      opacity: 0.55;
+      line-height: 1;
+      padding-top: 6px;
     }
-    .why-card__icon {
-      font-size: 28px;
-      margin-bottom: 18px;
-      display: block;
+
+    /* Node + vertical line */
+    .ps-step__connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .why-card__title {
-      font-size: 17px;
+    .ps-step__node {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--clr-bg);
+      border: 2px solid var(--clr-blue);
+      box-shadow: 0 0 0 4px rgba(0,198,255,0.10), 0 0 12px 4px rgba(0,198,255,0.20);
+      flex-shrink: 0;
+      margin-top: 4px;
+      position: relative;
+      transition: box-shadow 0.4s, border-color 0.4s;
+    }
+    /* Inner pulse dot */
+    .ps-step__node::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: var(--clr-blue);
+      opacity: 0.9;
+      animation: nodePulse 2.4s ease-in-out infinite;
+    }
+    .ps-step__node--last::after { animation-delay: 0.8s; }
+
+    @keyframes nodePulse {
+      0%, 100% { transform: scale(1);   opacity: 0.9; }
+      50%       { transform: scale(1.3); opacity: 0.5; }
+    }
+
+    .ps-step__line {
+      width: 2px;
+      flex: 1;
+      min-height: 56px;
+      background: linear-gradient(to bottom, rgba(0,198,255,0.35) 0%, rgba(0,198,255,0.06) 100%);
+      margin-top: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Animated travelling light down the line */
+    .ps-step__line::after {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: 0;
+      width: 100%;
+      height: 40%;
+      background: linear-gradient(to bottom, transparent, rgba(0,198,255,0.7), transparent);
+      animation: lineTravel 2.4s ease-in-out infinite;
+    }
+    @keyframes lineTravel {
+      0%   { top: -40%; }
+      100% { top: 110%; }
+    }
+
+    /* Step content */
+    .ps-step__right {
+      padding-bottom: 52px;
+    }
+    .ps-step:last-child .ps-step__right { padding-bottom: 0; }
+
+    .ps-step__title {
+      font-family: var(--font-head);
+      font-size: 22px;
       font-weight: 700;
       color: var(--clr-text-1);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      line-height: 1.2;
+      transition: color 0.3s;
     }
-    .why-card__desc {
-      font-size: 14px;
-      color: var(--clr-text-2);
-      line-height: 1.65;
+    .ps-step:hover .ps-step__title { color: var(--clr-blue); }
+    .ps-step:hover .ps-step__node {
+      border-color: var(--clr-blue);
+      box-shadow: 0 0 0 6px rgba(0,198,255,0.15), 0 0 20px 6px rgba(0,198,255,0.35);
     }
-    @media (max-width: 900px) { .why__grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 560px) { .why__grid { grid-template-columns: 1fr; } }
+
+    .ps-step__desc {
+      font-size: 15px;
+      color: rgba(240,244,255,0.55);
+      line-height: 1.7;
+      max-width: 420px;
+    }
+
+    /* Stagger line animation delays per step */
+    .ps-step:nth-child(1) .ps-step__line::after { animation-delay: 0s; }
+    .ps-step:nth-child(2) .ps-step__line::after { animation-delay: 0.48s; }
+    .ps-step:nth-child(3) .ps-step__line::after { animation-delay: 0.96s; }
+    .ps-step:nth-child(4) .ps-step__line::after { animation-delay: 1.44s; }
+
+    @media (max-width: 600px) {
+      .process-steps__track { max-width: 100%; }
+      .ps-step { grid-template-columns: 48px 28px 1fr; gap: 0 16px; }
+      .ps-step__title { font-size: 19px; }
+    }
 
     /* ============================================================
        STATS SECTION
@@ -2931,54 +3032,83 @@
 <!-- ============================================================
      WHY MANDOOK
 ============================================================ -->
-<section class="section why-mandook" id="why" aria-labelledby="why-heading">
+<section class="section process-steps" id="why" aria-labelledby="process-heading">
   <div class="container">
-    <div class="why__header reveal">
-      <div class="section__label" data-i18n="why-label">Why Mandook.com</div>
-      <h2 class="section__heading reveal" id="why-heading" data-delay="1" data-i18n="why-heading">
-        The partner that delivers,<br>not just consults
-      </h2>
-      <p class="section__sub reveal" data-delay="2" data-i18n="why-sub">
-        We don't hand you a report and disappear. We embed with your team, build the solution, and stay to make sure it works.
-      </p>
+    <div class="process-steps__header reveal">
+      <div class="section__label">Process</div>
+      <h2 class="section__heading" id="process-heading">Businesses like clarity.</h2>
+      <p class="section__sub">Here's exactly how we work.</p>
     </div>
 
-    <div class="why__grid">
+    <div class="process-steps__track">
 
-      <div class="why-card reveal" data-delay="1">
-        <div class="why-card__icon">🏆</div>
-        <h3 class="why-card__title" data-i18n="why-1-title">Certified Salesforce Partner</h3>
-        <p class="why-card__desc" data-i18n="why-1-desc">CREST-level Salesforce credentials backed by real delivery experience — not just badges.</p>
+      <div class="ps-step reveal" data-delay="1">
+        <div class="ps-step__left">
+          <div class="ps-step__num">01</div>
+        </div>
+        <div class="ps-step__connector">
+          <div class="ps-step__node"></div>
+          <div class="ps-step__line"></div>
+        </div>
+        <div class="ps-step__right">
+          <h3 class="ps-step__title">Discover</h3>
+          <p class="ps-step__desc">Understand your business goals, challenges, and the outcomes that matter most.</p>
+        </div>
       </div>
 
-      <div class="why-card reveal" data-delay="2">
-        <div class="why-card__icon">⚡</div>
-        <h3 class="why-card__title" data-i18n="why-2-title">8-Week Go-Live</h3>
-        <p class="why-card__desc" data-i18n="why-2-desc">Our structured delivery model gets you live faster than the industry average — without cutting corners.</p>
+      <div class="ps-step reveal" data-delay="2">
+        <div class="ps-step__left">
+          <div class="ps-step__num">02</div>
+        </div>
+        <div class="ps-step__connector">
+          <div class="ps-step__node"></div>
+          <div class="ps-step__line"></div>
+        </div>
+        <div class="ps-step__right">
+          <h3 class="ps-step__title">Design</h3>
+          <p class="ps-step__desc">Create a modern user experience — intuitive, scalable, and built around your team.</p>
+        </div>
       </div>
 
-      <div class="why-card reveal" data-delay="3">
-        <div class="why-card__icon">🔁</div>
-        <h3 class="why-card__title" data-i18n="why-3-title">End-to-End Ownership</h3>
-        <p class="why-card__desc" data-i18n="why-3-desc">From strategy and consulting through to implementation, AMC, and ongoing support — one partner, full accountability.</p>
+      <div class="ps-step reveal" data-delay="3">
+        <div class="ps-step__left">
+          <div class="ps-step__num">03</div>
+        </div>
+        <div class="ps-step__connector">
+          <div class="ps-step__node"></div>
+          <div class="ps-step__line"></div>
+        </div>
+        <div class="ps-step__right">
+          <h3 class="ps-step__title">Build</h3>
+          <p class="ps-step__desc">Develop scalable solutions with clean architecture — on time, no surprises.</p>
+        </div>
       </div>
 
-      <div class="why-card reveal" data-delay="4">
-        <div class="why-card__icon">🎯</div>
-        <h3 class="why-card__title" data-i18n="why-4-title">Domain-Focused Expertise</h3>
-        <p class="why-card__desc" data-i18n="why-4-desc">Deep experience in real estate and process-driven industries means we understand your operations before we touch your CRM.</p>
+      <div class="ps-step reveal" data-delay="4">
+        <div class="ps-step__left">
+          <div class="ps-step__num">04</div>
+        </div>
+        <div class="ps-step__connector">
+          <div class="ps-step__node"></div>
+          <div class="ps-step__line"></div>
+        </div>
+        <div class="ps-step__right">
+          <h3 class="ps-step__title">Launch</h3>
+          <p class="ps-step__desc">Go live with confidence. We handle deployment, training, and every detail before day one.</p>
+        </div>
       </div>
 
-      <div class="why-card reveal" data-delay="5">
-        <div class="why-card__icon">🤝</div>
-        <h3 class="why-card__title" data-i18n="why-5-title">Long-Term Partnership</h3>
-        <p class="why-card__desc" data-i18n="why-5-desc">We measure success by your growth, not the close of a contract. Our AMC plans keep your platform evolving alongside your business.</p>
-      </div>
-
-      <div class="why-card reveal" data-delay="6">
-        <div class="why-card__icon">📊</div>
-        <h3 class="why-card__title" data-i18n="why-6-title">Data-Driven Decisions</h3>
-        <p class="why-card__desc" data-i18n="why-6-desc">We build Salesforce solutions that surface the right data at the right time — giving your leadership team clarity, not guesswork.</p>
+      <div class="ps-step reveal" data-delay="5">
+        <div class="ps-step__left">
+          <div class="ps-step__num">05</div>
+        </div>
+        <div class="ps-step__connector">
+          <div class="ps-step__node ps-step__node--last"></div>
+        </div>
+        <div class="ps-step__right">
+          <h3 class="ps-step__title">Support &amp; Grow</h3>
+          <p class="ps-step__desc">We stay with you — monitoring, optimising, and evolving the platform as your business scales.</p>
+        </div>
       </div>
 
     </div>

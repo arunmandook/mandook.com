@@ -1484,6 +1484,130 @@
     }
 
     /* ============================================================
+       WHY CHOOSE US
+    ============================================================ */
+    .why-choose {
+      background: var(--clr-bg);
+      position: relative;
+      overflow: hidden;
+    }
+    /* subtle radial glow behind the grid */
+    .why-choose::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse at center, rgba(0,198,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .why-choose__header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .why-choose__header .section__label { justify-content: center; }
+    .why-choose__title {
+      font-family: var(--font-head);
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 700;
+      color: var(--clr-text-1);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.25;
+    }
+    .why-choose__title em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--clr-blue), var(--clr-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .why-choose__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .wc-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 16px;
+      padding: 28px 28px 28px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      cursor: default;
+      transition: border-color 0.35s, transform 0.35s var(--ease-out-quart), box-shadow 0.35s, background 0.35s;
+      position: relative;
+      overflow: hidden;
+    }
+    /* shimmer sweep on hover */
+    .wc-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(0,198,255,0.06) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.55s ease;
+    }
+    .wc-card:hover::after { transform: translateX(100%); }
+    .wc-card:hover {
+      border-color: rgba(0,198,255,0.35);
+      background: var(--clr-surface-2);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 0 0 1px rgba(0,198,255,0.12);
+    }
+
+    .wc-card__check {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0,198,255,0.18), rgba(123,79,255,0.12));
+      border: 1px solid rgba(0,198,255,0.30);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: background 0.35s, border-color 0.35s, box-shadow 0.35s;
+    }
+    .wc-card:hover .wc-card__check {
+      background: linear-gradient(135deg, rgba(0,198,255,0.30), rgba(123,79,255,0.22));
+      border-color: rgba(0,198,255,0.6);
+      box-shadow: 0 0 10px rgba(0,198,255,0.35);
+    }
+    .wc-card__check svg {
+      width: 13px; height: 13px;
+      stroke: var(--clr-blue);
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    .wc-card__text h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--clr-text-1);
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+    .wc-card__text p {
+      font-size: 13px;
+      color: rgba(240,244,255,0.45);
+      line-height: 1.55;
+    }
+
+    /* staggered reveal delays */
+    .wc-card:nth-child(1) { transition-delay: 0.05s; }
+    .wc-card:nth-child(2) { transition-delay: 0.10s; }
+    .wc-card:nth-child(3) { transition-delay: 0.15s; }
+    .wc-card:nth-child(4) { transition-delay: 0.20s; }
+    .wc-card:nth-child(5) { transition-delay: 0.25s; }
+    .wc-card:nth-child(6) { transition-delay: 0.30s; }
+
+    @media (max-width: 900px) { .why-choose__grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .why-choose__grid { grid-template-columns: 1fr; } }
+
+    /* ============================================================
        STATS SECTION
     ============================================================ */
     .stats {
@@ -3108,6 +3232,84 @@
         <div class="ps-step__right">
           <h3 class="ps-step__title">Support &amp; Grow</h3>
           <p class="ps-step__desc">We stay with you — monitoring, optimising, and evolving the platform as your business scales.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHY CHOOSE US
+============================================================ -->
+<section class="section why-choose" aria-labelledby="wc-heading">
+  <div class="container">
+    <div class="why-choose__header reveal">
+      <div class="section__label">Why Choose Us</div>
+      <h2 class="why-choose__title" id="wc-heading">
+        More than developers —<br><em>your digital growth partner</em>
+      </h2>
+    </div>
+
+    <div class="why-choose__grid">
+
+      <div class="wc-card reveal" data-delay="1">
+        <div class="wc-card__check">
+          <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
+        </div>
+        <div class="wc-card__text">
+          <h3>Local UAE Understanding</h3>
+          <p>Deep knowledge of how UAE businesses operate, communicate, and grow.</p>
+        </div>
+      </div>
+
+      <div class="wc-card reveal" data-delay="2">
+        <div class="wc-card__check">
+          <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
+        </div>
+        <div class="wc-card__text">
+          <h3>Customized Solutions</h3>
+          <p>No templates. Every solution is architected around your specific goals.</p>
+        </div>
+      </div>
+
+      <div class="wc-card reveal" data-delay="3">
+        <div class="wc-card__check">
+          <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
+        </div>
+        <div class="wc-card__text">
+          <h3>Long-Term AMC Support</h3>
+          <p>We stay after go-live — maintaining, evolving, and optimising your platform.</p>
+        </div>
+      </div>
+
+      <div class="wc-card reveal" data-delay="4">
+        <div class="wc-card__check">
+          <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
+        </div>
+        <div class="wc-card__text">
+          <h3>Transparent Pricing</h3>
+          <p>Clear scope, fixed deliverables, no surprise invoices. Ever.</p>
+        </div>
+      </div>
+
+      <div class="wc-card reveal" data-delay="5">
+        <div class="wc-card__check">
+          <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
+        </div>
+        <div class="wc-card__text">
+          <h3>Fast Communication</h3>
+          <p>Direct access to your team. No account managers, no queues.</p>
+        </div>
+      </div>
+
+      <div class="wc-card reveal" data-delay="6">
+        <div class="wc-card__check">
+          <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
+        </div>
+        <div class="wc-card__text">
+          <h3>Growth-Focused Approach</h3>
+          <p>We measure our success by the results your business achieves.</p>
         </div>
       </div>
 

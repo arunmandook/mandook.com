@@ -348,18 +348,20 @@
     .hero__map-img {
       display: block;
       width: 100%;
-      height: auto; /* preserve natural 1.5:1 ratio — no stretching */
+      height: auto;
       pointer-events: none;
       mix-blend-mode: screen;
-      opacity: 0.85;
-      filter: brightness(1.05) contrast(1.08) saturate(1.1);
+      opacity: 0.90;
+      filter: brightness(1.1) contrast(1.1) saturate(1.15);
+      /* Left fade is heavy (0%→35%) because the image's left half is empty dark space.
+         Right/top/bottom fade gently so the map glow merges into the hero bg. */
       -webkit-mask-image:
-        linear-gradient(to right,  transparent 0%,  black 12%, black 88%, transparent 100%),
-        linear-gradient(to bottom, transparent 0%,  black 6%,  black 92%, transparent 100%);
+        linear-gradient(to right,  transparent 0%, transparent 5%, black 35%, black 92%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%);
       -webkit-mask-composite: source-in;
       mask-image:
-        linear-gradient(to right,  transparent 0%,  black 12%, black 88%, transparent 100%),
-        linear-gradient(to bottom, transparent 0%,  black 6%,  black 92%, transparent 100%);
+        linear-gradient(to right,  transparent 0%, transparent 5%, black 35%, black 92%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%);
       mask-composite: intersect;
     }
     /* Overlay layer for dots + labels */

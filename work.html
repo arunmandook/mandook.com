@@ -27,6 +27,7 @@
     .lang-toggle__btn { padding: 5px 12px; border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: var(--clr-text-3); transition: background 0.25s, color 0.25s; cursor: pointer; border: none; background: none; user-select: none; }
     .lang-toggle__btn.active { background: var(--clr-blue); color: #fff; }
   </style>
+<style id="no-trans">.nav{transition:none!important}</style>
 </head>
 <body>
 <!-- NAV -->
@@ -160,5 +161,6 @@
   (function(){if(prm)return;const pupils=Array.from(document.querySelectorAll('.eye-pupil')),eyes=Array.from(document.querySelectorAll('.logo-eye'));if(!pupils.length)return;let mx=innerWidth/2,my=innerHeight/2,smx=mx,smy=my;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});function tick(){smx+=(mx-smx)*0.10;smy+=(my-smy)*0.10;eyes.forEach((eye,i)=>{const pupil=pupils[i];if(!pupil)return;const r=eye.getBoundingClientRect();if(r.width===0)return;const ecx=r.left+r.width/2,ecy=r.top+r.height/2,dx=smx-ecx,dy=smy-ecy,dist=Math.sqrt(dx*dx+dy*dy),scale=r.width/24,travel=Math.min(dist/scale,2.2),angle=Math.atan2(dy,dx),ox=travel*Math.cos(angle),oy=travel*Math.sin(angle);pupil.setAttribute('cx',(12+ox).toFixed(3));pupil.setAttribute('cy',(12+oy).toFixed(3));const hl=eye.querySelector('.eye-highlight');if(hl){hl.setAttribute('cx',(14.2+ox*0.45).toFixed(3));hl.setAttribute('cy',(9.8+oy*0.45).toFixed(3));}});requestAnimationFrame(tick);}tick();})();
 })();
 </script>
+<script>requestAnimationFrame(function(){requestAnimationFrame(function(){var s=document.getElementById("no-trans");if(s)s.remove();});});</script>
 </body>
 </html>

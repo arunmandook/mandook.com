@@ -43,6 +43,20 @@
 
     @media(max-width:1024px){.mv-grid{grid-template-columns:1fr;}}
     @media(max-width:768px){.mv-card{padding:36px 28px;}}
+
+    /* CORE VALUES */
+    .values-section{background:var(--clr-bg);padding:var(--section-gap) 0;}
+    .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:64px;}
+    .value-card{padding:40px 36px;background:var(--clr-surface);border:1px solid var(--clr-border);border-radius:var(--radius-lg);transition:border-color 0.4s,transform 0.4s var(--ease-out-quart);position:relative;overflow:hidden;}
+    .value-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--clr-blue-dark),var(--clr-blue),var(--clr-purple));opacity:0;transition:opacity 0.4s;}
+    .value-card:hover{border-color:var(--clr-border-glow);transform:translateY(-5px);}
+    .value-card:hover::before{opacity:1;}
+    .value-card__num{font-family:var(--font-head);font-size:13px;font-weight:700;letter-spacing:1.5px;color:var(--clr-blue);margin-bottom:20px;}
+    .value-card__icon{font-size:28px;margin-bottom:16px;}
+    .value-card__title{font-family:var(--font-head);font-size:19px;font-weight:700;color:var(--clr-text-1);margin-bottom:12px;letter-spacing:-0.3px;}
+    .value-card__desc{font-size:15px;color:var(--clr-text-2);line-height:1.7;}
+    @media(max-width:1024px){.values-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:600px){.values-grid{grid-template-columns:1fr;}}
     .cta-section{padding:var(--section-gap) 0;position:relative;overflow:hidden;}.cta-section__bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 50% 50%,rgba(0,114,255,0.15) 0%,transparent 70%);pointer-events:none;}.cta-section__inner{position:relative;text-align:center;max-width:720px;margin:0 auto;}.cta-section__heading{font-family:var(--font-head);font-size:clamp(36px,5vw,64px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:24px;}.cta-section__sub{font-size:18px;color:var(--clr-text-2);margin-bottom:48px;line-height:1.65;}.btn--magnetic{display:inline-flex;align-items:center;gap:10px;padding:20px 52px;border-radius:100px;background:linear-gradient(135deg,var(--clr-blue-dark),var(--clr-blue));color:#fff;font-family:var(--font-head);font-size:18px;font-weight:700;letter-spacing:-0.3px;position:relative;overflow:hidden;transition:box-shadow 0.4s;box-shadow:0 0 60px rgba(0,198,255,0.3);}.btn--magnetic::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);animation:btn-shimmer 3s ease-in-out infinite;}@keyframes btn-shimmer{0%{left:-100%;}50%,100%{left:150%;}}.btn--magnetic:hover{box-shadow:0 0 80px rgba(0,198,255,0.5),0 20px 40px rgba(0,0,0,0.3);}
     /* ============================================================
        FOOTER
@@ -299,6 +313,59 @@
         <div class="mv-card__label">Our Vision</div>
         <h3 class="mv-card__title">The Trusted Digital Growth Partner Across the UAE</h3>
         <p class="mv-card__body">To become the trusted digital growth partner for businesses across the UAE by delivering world-class digital experiences that combine innovation, reliability, and measurable business results.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CORE VALUES -->
+<section class="values-section">
+  <div class="container">
+    <div class="section__label reveal">What We Stand For</div>
+    <h2 class="section__heading reveal" data-delay="1">Our Core Values</h2>
+    <div class="values-grid">
+
+      <div class="value-card reveal">
+        <div class="value-card__num">01</div>
+        <div class="value-card__icon">🤝</div>
+        <div class="value-card__title">Client Success</div>
+        <p class="value-card__desc">Every decision we make begins with one question: "Will this help our clients grow?" Your success is the measure of ours.</p>
+      </div>
+
+      <div class="value-card reveal" data-delay="1">
+        <div class="value-card__num">02</div>
+        <div class="value-card__icon">⭐</div>
+        <div class="value-card__title">Excellence</div>
+        <p class="value-card__desc">We believe every website, application, and digital solution should reflect the highest standards of quality, performance, security, and usability.</p>
+      </div>
+
+      <div class="value-card reveal" data-delay="2">
+        <div class="value-card__num">03</div>
+        <div class="value-card__icon">💬</div>
+        <div class="value-card__title">Transparency</div>
+        <p class="value-card__desc">We build relationships through honest communication, clear expectations, and complete accountability throughout every project.</p>
+      </div>
+
+      <div class="value-card reveal" data-delay="1">
+        <div class="value-card__num">04</div>
+        <div class="value-card__icon">💡</div>
+        <div class="value-card__title">Innovation</div>
+        <p class="value-card__desc">Technology evolves constantly, and so do we. We embrace modern tools and creative thinking to solve real business challenges.</p>
+      </div>
+
+      <div class="value-card reveal" data-delay="2">
+        <div class="value-card__num">05</div>
+        <div class="value-card__icon">🛡️</div>
+        <div class="value-card__title">Reliability</div>
+        <p class="value-card__desc">Launching your website is just the beginning. We remain a dependable partner through ongoing maintenance, updates, and technical support.</p>
+      </div>
+
+      <div class="value-card reveal" data-delay="3">
+        <div class="value-card__num">06</div>
+        <div class="value-card__icon">📈</div>
+        <div class="value-card__title">Continuous Growth</div>
+        <p class="value-card__desc">We are committed to continuous learning and improvement so we can deliver better solutions and greater value to every client.</p>
       </div>
 
     </div>

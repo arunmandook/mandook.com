@@ -2198,6 +2198,212 @@
     }
 
     /* ============================================================
+       BLOG PREVIEW SECTION
+    ============================================================ */
+    .blog-preview {
+      background: var(--clr-bg);
+      padding: var(--section-gap) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .blog-preview::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse at center, rgba(123,79,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .blog-preview__header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 52px;
+      gap: 24px;
+    }
+    .blog-preview__header-left {}
+    .blog-preview__view-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--clr-blue);
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: gap 0.25s;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(0,198,255,0.3);
+    }
+    .blog-preview__view-all:hover { gap: 14px; }
+
+    .blog-preview__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* Card */
+    .bp-card {
+      position: relative;
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(48px);
+      transition:
+        opacity 0.7s var(--ease-out-expo),
+        transform 0.7s var(--ease-out-expo),
+        border-color 0.35s,
+        box-shadow 0.35s;
+    }
+    .bp-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .bp-card:nth-child(1) { transition-delay: 0.05s; }
+    .bp-card:nth-child(2) { transition-delay: 0.15s; }
+    .bp-card:nth-child(3) { transition-delay: 0.25s; }
+    .bp-card:hover {
+      border-color: var(--clr-border-glow);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,198,255,0.08);
+      transform: translateY(-6px);
+    }
+    .bp-card.visible:hover { transform: translateY(-6px); }
+
+    /* Shimmer sweep on hover */
+    .bp-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(0,198,255,0.05) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+      pointer-events: none;
+    }
+    .bp-card:hover::after { transform: translateX(100%); }
+
+    /* Thumb */
+    .bp-card__thumb {
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .bp-card__thumb-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.6s var(--ease-out-quart);
+    }
+    .bp-card:hover .bp-card__thumb-bg { transform: scale(1.06); }
+    .bp-card__thumb-bg--1 {
+      background: linear-gradient(135deg, rgba(0,114,255,0.18) 0%, rgba(0,198,255,0.08) 50%, rgba(123,79,255,0.12) 100%);
+    }
+    .bp-card__thumb-bg--2 {
+      background: linear-gradient(135deg, rgba(123,79,255,0.18) 0%, rgba(0,198,255,0.10) 50%, rgba(0,114,255,0.12) 100%);
+    }
+    .bp-card__thumb-bg--3 {
+      background: linear-gradient(135deg, rgba(0,198,255,0.14) 0%, rgba(123,79,255,0.16) 50%, rgba(0,114,255,0.10) 100%);
+    }
+    .bp-card__thumb-icon {
+      font-size: 44px;
+      position: relative;
+      z-index: 1;
+      opacity: 0.5;
+      transition: opacity 0.35s, transform 0.4s var(--ease-out-quart);
+    }
+    .bp-card:hover .bp-card__thumb-icon { opacity: 0.75; transform: scale(1.12); }
+    /* Grid lines inside thumb */
+    .bp-card__thumb::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,198,255,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,198,255,0.07) 1px, transparent 1px);
+      background-size: 28px 28px;
+      z-index: 0;
+    }
+    .bp-card__thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, var(--clr-surface) 100%);
+      z-index: 1;
+    }
+
+    /* Body */
+    .bp-card__body {
+      padding: 24px 28px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .bp-card__meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .bp-card__tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--clr-blue);
+      background: rgba(0,198,255,0.08);
+      border: 1px solid rgba(0,198,255,0.18);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+    .bp-card__date {
+      font-size: 12px;
+      color: var(--clr-text-3);
+    }
+    .bp-card__title {
+      font-family: var(--font-head);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--clr-text-1);
+      line-height: 1.35;
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+      transition: color 0.25s;
+    }
+    .bp-card:hover .bp-card__title { color: var(--clr-blue); }
+    .bp-card__excerpt {
+      font-size: 14px;
+      color: var(--clr-text-2);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    .bp-card__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--clr-blue);
+      letter-spacing: 0.3px;
+      transition: gap 0.25s;
+      margin-top: auto;
+    }
+    .bp-card__link-arrow { transition: transform 0.25s; }
+    .bp-card:hover .bp-card__link { gap: 10px; }
+    .bp-card:hover .bp-card__link-arrow { transform: translateX(4px); }
+
+    @media (max-width: 1024px) { .blog-preview__grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px)  { .blog-preview__grid { grid-template-columns: 1fr; } .blog-preview__header { flex-direction: column; align-items: flex-start; } }
+
+    /* ============================================================
        GROW CTA SECTION
     ============================================================ */
     .grow-cta {
@@ -3570,6 +3776,79 @@
 </script>
 
 <!-- ============================================================
+     BLOG PREVIEW SECTION
+============================================================ -->
+<section class="section blog-preview" aria-labelledby="blog-preview-heading">
+  <div class="container">
+
+    <div class="blog-preview__header reveal">
+      <div class="blog-preview__header-left">
+        <div class="section-eyebrow">From the blog</div>
+        <h2 class="section-heading" id="blog-preview-heading">
+          Insights &amp; <span class="text-gradient">Ideas</span>
+        </h2>
+      </div>
+      <a href="blog.html" class="blog-preview__view-all">View all articles <span>→</span></a>
+    </div>
+
+    <div class="blog-preview__grid">
+
+      <!-- Card 1 -->
+      <article class="bp-card">
+        <div class="bp-card__thumb">
+          <div class="bp-card__thumb-bg bp-card__thumb-bg--1"></div>
+          <span class="bp-card__thumb-icon">🌐</span>
+        </div>
+        <div class="bp-card__body">
+          <div class="bp-card__meta">
+            <span class="bp-card__tag">Digital Growth</span>
+            <span class="bp-card__date">July 2025</span>
+          </div>
+          <h3 class="bp-card__title">Why Every RAK Business Needs a Professional Website in 2026</h3>
+          <p class="bp-card__excerpt">In a market where first impressions happen online, a professional website is no longer optional. Discover why Ras Al Khaimah businesses are investing in digital presence now.</p>
+          <a href="blog-rak-website-2026.html" class="bp-card__link">Read Article <span class="bp-card__link-arrow">→</span></a>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="bp-card">
+        <div class="bp-card__thumb">
+          <div class="bp-card__thumb-bg bp-card__thumb-bg--2"></div>
+          <span class="bp-card__thumb-icon">📈</span>
+        </div>
+        <div class="bp-card__body">
+          <div class="bp-card__meta">
+            <span class="bp-card__tag">Lead Generation</span>
+            <span class="bp-card__date">July 2025</span>
+          </div>
+          <h3 class="bp-card__title">5 Proven Ways Small Businesses Can Generate More Leads Online</h3>
+          <p class="bp-card__excerpt">Lead generation doesn't require a big budget. These five battle-tested strategies help small businesses attract and convert more customers through their website.</p>
+          <a href="blog-lead-generation.html" class="bp-card__link">Read Article <span class="bp-card__link-arrow">→</span></a>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="bp-card">
+        <div class="bp-card__thumb">
+          <div class="bp-card__thumb-bg bp-card__thumb-bg--3"></div>
+          <span class="bp-card__thumb-icon">🚀</span>
+        </div>
+        <div class="bp-card__body">
+          <div class="bp-card__meta">
+            <span class="bp-card__tag">Business Growth</span>
+            <span class="bp-card__date">July 2025</span>
+          </div>
+          <h3 class="bp-card__title">How a Modern Website Can Help Your Small Business Grow Faster</h3>
+          <p class="bp-card__excerpt">Your website works around the clock even when you don't. Learn how a modern, well-designed website becomes your most powerful growth tool for small business success.</p>
+          <a href="blog-website-growth.html" class="bp-card__link">Read Article <span class="bp-card__link-arrow">→</span></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      FOOTER
 ============================================================ -->
 <footer class="footer" role="contentinfo">
@@ -3775,7 +4054,7 @@
      Scroll reveal — IntersectionObserver
   ────────────────────────────────────────────────────────── */
   (function initReveal() {
-    const classes = ['reveal', 'reveal-left', 'reveal-right', 'reveal-scale'];
+    const classes = ['reveal', 'reveal-left', 'reveal-right', 'reveal-scale', 'bp-card'];
     const selector = classes.map(c => '.' + c).join(',');
     const els = document.querySelectorAll(selector);
     if (!els.length) return;

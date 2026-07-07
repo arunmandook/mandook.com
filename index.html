@@ -2312,6 +2312,16 @@
     .bp-card__thumb-bg--3 {
       background: linear-gradient(135deg, rgba(0,198,255,0.14) 0%, rgba(123,79,255,0.16) 50%, rgba(0,114,255,0.10) 100%);
     }
+    .bp-card__thumb-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 2;
+      transition: transform 0.6s var(--ease-out-quart);
+    }
+    .bp-card:hover .bp-card__thumb-img { transform: scale(1.06); }
     .bp-card__thumb-icon {
       font-size: 44px;
       position: relative;
@@ -3796,8 +3806,7 @@
       <!-- Card 1 -->
       <article class="bp-card">
         <div class="bp-card__thumb">
-          <div class="bp-card__thumb-bg bp-card__thumb-bg--1"></div>
-          <span class="bp-card__thumb-icon">🌐</span>
+          <img src="assets/blogs/RAKbusiness.png" alt="Why Every RAK Business Needs a Professional Website in 2026" class="bp-card__thumb-img">
         </div>
         <div class="bp-card__body">
           <div class="bp-card__meta">

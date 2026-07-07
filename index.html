@@ -884,14 +884,7 @@
     /* ============================================================
        SECTION SHARED UTILITIES
     ============================================================ */
-    .section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: var(--section-gap) 0;
-    }
-    .section > .container { width: 100%; }
+    .section { padding: var(--section-gap) 0; }
 
     .section__label {
       display: inline-flex;
@@ -2209,10 +2202,6 @@
     ============================================================ */
     .grow-cta {
       position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       padding: 80px 0;
       overflow: hidden;
       background: var(--clr-bg);

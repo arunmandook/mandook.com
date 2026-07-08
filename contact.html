@@ -12,6 +12,7 @@
     @view-transition{navigation:auto;}.nav{position:fixed;top:0;left:0;right:0;z-index:1000;view-transition-name:site-nav;height:var(--nav-h);display:flex;align-items:center;transition:background 0.4s var(--ease-out-quart),backdrop-filter 0.4s,box-shadow 0.4s,height 0.4s var(--ease-out-quart);}.nav.scrolled{background:rgba(6,10,23,0.88);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);box-shadow:0 1px 0 var(--clr-border),0 8px 32px rgba(0,0,0,0.3);height:68px;}.nav__inner{display:flex;align-items:center;justify-content:space-between;width:100%;}.nav__logo{display:inline-flex;align-items:center;font-family:var(--font-head);font-weight:700;font-size:22px;letter-spacing:-0.5px;color:var(--clr-text-1);line-height:1;}.logo-word{display:inline-flex;align-items:center;gap:0;line-height:1;font-family:'Syne',sans-serif;font-weight:800;letter-spacing:1px;transition:letter-spacing 0.45s var(--ease-out-quart);}.nav__logo:hover .logo-word{letter-spacing:0.5px;}.logo-eyes{display:inline-flex;align-items:center;gap:3px;margin:0 1.5px;transform:translateY(0.04em);transition:transform 0.4s var(--ease-out-quart);}.nav__logo:hover .logo-eyes{transform:translateY(0.04em) scale(1.1);}.logo-eye{width:0.74em;height:0.74em;display:block;flex-shrink:0;overflow:visible;transform-box:fill-box;transform-origin:center;animation:eye-blink 5.5s ease-in-out infinite;filter:drop-shadow(0 0 4px rgba(0,198,255,0.35));transition:filter 0.35s;}.logo-eye:nth-child(2){animation-delay:0.18s;}.nav__logo:hover .logo-eye{filter:drop-shadow(0 0 7px rgba(0,198,255,0.7)) drop-shadow(0 0 14px rgba(123,79,255,0.35));}@keyframes eye-blink{0%,42%{transform:scaleY(1);}48%{transform:scaleY(0.06);}54%{transform:scaleY(1);}100%{transform:scaleY(1);}}.eye-iris{transform-box:fill-box;transform-origin:center;animation:iris-shimmer 4s ease-in-out infinite alternate;}@keyframes iris-shimmer{from{opacity:1;}to{opacity:0.82;}}.nav__links{display:flex;align-items:center;gap:40px;}.nav__link{font-size:14px;font-weight:500;color:var(--clr-text-2);position:relative;transition:color 0.25s;padding:4px 0;}.nav__link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--clr-blue);transition:width 0.3s var(--ease-out-quart);}.nav__link:hover{color:var(--clr-text-1);}.nav__link:hover::after,.nav__link.active::after{width:100%;}.nav__link.active{color:var(--clr-text-1);}.nav__cta{display:flex;align-items:center;gap:16px;}.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:100px;font-size:14px;font-weight:600;letter-spacing:0.2px;position:relative;overflow:hidden;transition:transform 0.2s var(--ease-out-quart),box-shadow 0.3s;}.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);transition:left 0.5s;}.btn:hover::before{left:100%;}.btn:hover{transform:translateY(-2px);}.btn--ghost{color:var(--clr-text-2);border:1px solid var(--clr-border);background:transparent;}.btn--ghost:hover{color:var(--clr-text-1);border-color:rgba(255,255,255,0.2);box-shadow:0 4px 20px rgba(0,0,0,0.3);}.btn--primary{background:linear-gradient(135deg,var(--clr-blue-dark),var(--clr-blue));color:#fff;}.btn--primary:hover{box-shadow:0 8px 30px rgba(0,198,255,0.35);}.nav__hamburger{display:none;flex-direction:column;gap:5px;padding:4px;cursor:pointer;}.nav__hamburger span{display:block;width:22px;height:2px;background:var(--clr-text-1);border-radius:2px;transition:transform 0.35s var(--ease-out-quart),opacity 0.35s,width 0.35s;}.nav__hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}.nav__hamburger.open span:nth-child(2){opacity:0;width:0;}.nav__hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}.nav__mobile{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(6,10,23,0.97);backdrop-filter:blur(24px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:40px;opacity:0;pointer-events:none;transition:opacity 0.35s var(--ease-out-quart);}.nav__mobile.open{opacity:1;pointer-events:all;}.nav__mobile-link{font-family:var(--font-head);font-size:36px;font-weight:700;color:var(--clr-text-2);transform:translateY(20px);opacity:0;transition:transform 0.4s var(--ease-out-expo),opacity 0.4s,color 0.2s;}.nav__mobile.open .nav__mobile-link{transform:translateY(0);opacity:1;}.nav__mobile.open .nav__mobile-link:nth-child(1){transition-delay:0.05s;}.nav__mobile.open .nav__mobile-link:nth-child(2){transition-delay:0.10s;}.nav__mobile.open .nav__mobile-link:nth-child(3){transition-delay:0.15s;}.nav__mobile.open .nav__mobile-link:nth-child(4){transition-delay:0.20s;}.nav__mobile.open .nav__mobile-link:nth-child(5){transition-delay:0.25s;}.nav__mobile-link:hover{color:var(--clr-text-1);}
     .nav__logo-img{height:100px;max-height:100px;width:auto;display:block;object-fit:contain;filter:drop-shadow(0 0 14px rgba(0,198,255,0.45)) brightness(1.1);transition:filter 0.35s,transform 0.35s;}
     .nav__logo:hover .nav__logo-img{filter:drop-shadow(0 0 28px rgba(0,198,255,0.8)) brightness(1.25);transform:scale(1.05);}
+    .lang-toggle{display:flex;align-items:center;background:rgba(255,255,255,0.05);border:1px solid var(--clr-border);border-radius:100px;padding:3px;gap:2px;flex-shrink:0;}.lang-toggle__btn{padding:5px 12px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:0.5px;color:var(--clr-text-3);transition:background 0.25s,color 0.25s;cursor:pointer;border:none;background:none;user-select:none;}.lang-toggle__btn.active{background:var(--clr-blue);color:#fff;}
     .section{padding:var(--section-gap) 0;}.section__label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--clr-blue);margin-bottom:20px;}.section__label::before{content:'';width:20px;height:1px;background:var(--clr-blue);}.section__heading{font-family:var(--font-head);font-size:clamp(32px,4.5vw,56px);font-weight:800;letter-spacing:-1px;line-height:1.1;color:var(--clr-text-1);margin-bottom:20px;}.section__sub{font-size:18px;color:var(--clr-text-2);max-width:560px;line-height:1.7;}.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s var(--ease-out-expo),transform 0.7s var(--ease-out-expo);}.reveal.visible{opacity:1;transform:translateY(0);}.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.7s var(--ease-out-expo),transform 0.7s var(--ease-out-expo);}.reveal-left.visible{opacity:1;transform:translateX(0);}.reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.7s var(--ease-out-expo),transform 0.7s var(--ease-out-expo);}.reveal-right.visible{opacity:1;transform:translateX(0);}[data-delay="1"]{transition-delay:0.1s;}[data-delay="2"]{transition-delay:0.2s;}[data-delay="3"]{transition-delay:0.3s;}@keyframes fade-up{to{opacity:1;transform:translateY(0);}}.magnetic-wrap{position:relative;display:inline-block;}
     .page-hero{position:relative;padding:calc(var(--nav-h) + 48px) 0 56px;overflow:hidden;}.page-hero__orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}.page-hero__orb--1{width:600px;height:600px;top:-20%;left:-10%;background:radial-gradient(circle,rgba(0,114,255,0.16) 0%,transparent 70%);}.page-hero__orb--2{width:450px;height:450px;top:10%;right:-5%;background:radial-gradient(circle,rgba(123,79,255,0.13) 0%,transparent 70%);}.page-hero__grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 30%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 30%,transparent 100%);pointer-events:none;}.page-hero__content{position:relative;z-index:2;}.page-hero__breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--clr-text-3);margin-bottom:28px;opacity:0;animation:fade-up 0.6s var(--ease-out-expo) 0.1s forwards;}.page-hero__breadcrumb a{color:var(--clr-text-3);transition:color 0.2s;}.page-hero__breadcrumb a:hover{color:var(--clr-text-2);}.page-hero__label{display:inline-flex;align-items:center;gap:8px;padding:6px 16px 6px 8px;border:1px solid var(--clr-border-glow);background:rgba(0,198,255,0.06);border-radius:100px;font-size:12px;font-weight:600;color:var(--clr-blue);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fade-up 0.6s var(--ease-out-expo) 0.2s forwards;}.page-hero__label-dot{width:6px;height:6px;border-radius:50%;background:var(--clr-blue);animation:pulse-dot 2s ease-in-out infinite;}@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(0,198,255,0.5);}50%{box-shadow:0 0 0 6px rgba(0,198,255,0);}}.page-hero__title{font-family:var(--font-head);font-size:clamp(44px,6.5vw,82px);font-weight:800;letter-spacing:-2.5px;line-height:1.04;margin-bottom:24px;color:var(--clr-text-1);opacity:0;animation:fade-up 0.75s var(--ease-out-expo) 0.3s forwards;}.page-hero__title .grad{background:linear-gradient(135deg,var(--clr-blue) 0%,var(--clr-purple) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}.page-hero__sub{font-size:clamp(16px,2vw,20px);color:var(--clr-text-2);max-width:600px;line-height:1.7;opacity:0;animation:fade-up 0.7s var(--ease-out-expo) 0.5s forwards;}
     /* CONTACT LAYOUT */
@@ -189,15 +190,19 @@
         <img src="assets/mandook-logo.png" alt="MANDOOK" class="nav__logo-img">
       </a>
       <ul class="nav__links" role="list">
-        <li><a href="index.html" class="nav__link">Home</a></li>
-        <li><a href="services.html" class="nav__link">Services</a></li>
-        <li><a href="process.html" class="nav__link">Process</a></li>
-        <li><a href="about.html" class="nav__link">About</a></li>
-        <li><a href="contact.html" class="nav__link active">Contact</a></li>
-        <li><a href="blog.html" class="nav__link">Blog</a></li>
+        <li><a href="index.html" class="nav__link" data-i18n="nav-home">Home</a></li>
+        <li><a href="services.html" class="nav__link" data-i18n="nav-services">Services</a></li>
+        <li><a href="process.html" class="nav__link" data-i18n="nav-process">Process</a></li>
+        <li><a href="about.html" class="nav__link" data-i18n="nav-about">About</a></li>
+        <li><a href="contact.html" class="nav__link active" data-i18n="nav-contact">Contact</a></li>
+        <li><a href="blog.html" class="nav__link" data-i18n="nav-blog">Blog</a></li>
       </ul>
       <div class="nav__cta">
-        <a href="contact.html" class="btn btn--primary">Get a Proposal</a>
+        <div class="lang-toggle" aria-label="Switch language">
+          <button class="lang-toggle__btn active" data-lang="en">EN</button>
+          <button class="lang-toggle__btn" data-lang="ar">AR</button>
+        </div>
+        <a href="contact.html" class="btn btn--primary" data-i18n="nav-proposal">Get a Proposal</a>
       </div>
       <button class="nav__hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -206,56 +211,61 @@
   </div>
 </nav>
 <nav class="nav__mobile" id="mobileMenu" aria-label="Mobile navigation">
-  <a href="index.html" class="nav__mobile-link">Home</a>
-  <a href="services.html" class="nav__mobile-link">Services</a>
-  <a href="process.html" class="nav__mobile-link">Process</a>
-  <a href="about.html" class="nav__mobile-link">About</a>
-  <a href="contact.html" class="nav__mobile-link">Contact</a>
-  <a href="blog.html" class="nav__mobile-link">Blog</a>
+  <a href="index.html" class="nav__mobile-link" data-i18n="nav-home">Home</a>
+  <a href="services.html" class="nav__mobile-link" data-i18n="nav-services">Services</a>
+  <a href="process.html" class="nav__mobile-link" data-i18n="nav-process">Process</a>
+  <a href="about.html" class="nav__mobile-link" data-i18n="nav-about">About</a>
+  <a href="contact.html" class="nav__mobile-link" data-i18n="nav-contact">Contact</a>
+  <a href="blog.html" class="nav__mobile-link" data-i18n="nav-blog">Blog</a>
+  <a href="contact.html" class="nav__mobile-link" data-i18n="nav-proposal" style="color:var(--clr-blue)">Get a Proposal →</a>
+  <div class="lang-toggle" style="margin:16px 24px;" aria-label="Switch language">
+    <button class="lang-toggle__btn active" data-lang="en">EN</button>
+    <button class="lang-toggle__btn" data-lang="ar">AR</button>
+  </div>
 </nav>
 
-<section class="page-hero"><div class="page-hero__orb page-hero__orb--1" aria-hidden="true"></div><div class="page-hero__orb page-hero__orb--2" aria-hidden="true"></div><div class="page-hero__grid" aria-hidden="true"></div><div class="container"><div class="page-hero__content"><div class="page-hero__breadcrumb"><a href="index.html">Home</a><span>›</span><span>Get a Proposal</span></div><div class="page-hero__label"><span class="page-hero__label-dot"></span>No obligation</div><h1 class="page-hero__title">Tell us what<br><span class="grad">you're building.</span></h1><p class="page-hero__sub">We'll respond within one business day with a clear, honest scope — no vague estimates, no sales calls before you're ready, no NDAs on day one.</p></div></div></section>
+<section class="page-hero"><div class="page-hero__orb page-hero__orb--1" aria-hidden="true"></div><div class="page-hero__orb page-hero__orb--2" aria-hidden="true"></div><div class="page-hero__grid" aria-hidden="true"></div><div class="container"><div class="page-hero__content"><div class="page-hero__breadcrumb"><a href="index.html">Home</a><span>›</span><span>Get a Proposal</span></div><div class="page-hero__label"><span class="page-hero__label-dot"></span><span data-i18n="hero-label">No obligation</span></div><h1 class="page-hero__title" data-i18n-html="hero-title">Tell us what<br><span class="grad">you're building.</span></h1><p class="page-hero__sub" data-i18n="hero-sub">We'll respond within one business day with a clear, honest scope — no vague estimates, no sales calls before you're ready, no NDAs on day one.</p></div></div></section>
 
 <section class="contact-section"><div class="container"><div class="contact-layout">
   <div class="reveal-left">
-    <h2 class="contact-sidebar__heading">Let's start a conversation</h2>
-    <p class="contact-sidebar__sub">Whether you have a clear spec or just an idea — we can help you define both. Our engineers handle the discovery process, so the first conversation is always technical.</p>
+    <h2 class="contact-sidebar__heading" data-i18n="sidebar-heading">Let's start a conversation</h2>
+    <p class="contact-sidebar__sub" data-i18n="sidebar-sub">Whether you have a clear spec or just an idea — we can help you define both. Our engineers handle the discovery process, so the first conversation is always technical.</p>
     <div class="contact-info">
-      <div class="contact-info-item"><div class="contact-info-icon">✉</div><div class="contact-info-text"><strong>Email us</strong><a href="mailto:arun.mandook@gmail.com">arun.mandook@gmail.com</a></div></div>
-      <div class="contact-info-item"><div class="contact-info-icon">📞</div><div class="contact-info-text"><strong>Call us</strong><a href="tel:+919619884321">+91 9619884321</a></div></div>
-      <div class="contact-info-item"><div class="contact-info-icon">🕐</div><div class="contact-info-text"><strong>Response time</strong><span>Within 1 business day</span></div></div>
-      <div class="contact-info-item"><div class="contact-info-icon">🌍</div><div class="contact-info-text"><strong>Timezone coverage</strong><span>US · EU · APAC</span></div></div>
+      <div class="contact-info-item"><div class="contact-info-icon">✉</div><div class="contact-info-text"><strong data-i18n="info-email-label">Email us</strong><a href="mailto:arun.mandook@gmail.com">arun.mandook@gmail.com</a></div></div>
+      <div class="contact-info-item"><div class="contact-info-icon">📞</div><div class="contact-info-text"><strong data-i18n="info-phone-label">Call us</strong><a href="tel:+919619884321">+91 9619884321</a></div></div>
+      <div class="contact-info-item"><div class="contact-info-icon">🕐</div><div class="contact-info-text"><strong data-i18n="info-response-label">Response time</strong><span data-i18n="info-response-val">Within 1 business day</span></div></div>
+      <div class="contact-info-item"><div class="contact-info-icon">🌍</div><div class="contact-info-text"><strong data-i18n="info-tz-label">Timezone coverage</strong><span data-i18n="info-tz-val">US · EU · APAC</span></div></div>
     </div>
     <div class="trust-pills">
-      <span class="trust-pill">No commitment required</span>
-      <span class="trust-pill">NDA available on request</span>
-      <span class="trust-pill">Fixed-price options</span>
-      <span class="trust-pill">Senior engineers only</span>
-      <span class="trust-pill">Transparent pricing</span>
+      <span class="trust-pill" data-i18n="pill-1">No commitment required</span>
+      <span class="trust-pill" data-i18n="pill-2">NDA available on request</span>
+      <span class="trust-pill" data-i18n="pill-3">Fixed-price options</span>
+      <span class="trust-pill" data-i18n="pill-4">Senior engineers only</span>
+      <span class="trust-pill" data-i18n="pill-5">Transparent pricing</span>
     </div>
   </div>
   <div class="reveal-right">
     <div class="contact-form-wrap">
       <div id="contactForm">
         <div class="form-row">
-          <div class="form-group"><label class="form-label" for="fname">First Name *</label><input class="form-input" id="fname" type="text" placeholder="Alex" autocomplete="given-name" required/></div>
-          <div class="form-group"><label class="form-label" for="lname">Last Name *</label><input class="form-input" id="lname" type="text" placeholder="Johnson" autocomplete="family-name" required/></div>
+          <div class="form-group"><label class="form-label" for="fname" data-i18n="form-fname">First Name *</label><input class="form-input" id="fname" type="text" placeholder="Alex" autocomplete="given-name" required/></div>
+          <div class="form-group"><label class="form-label" for="lname" data-i18n="form-lname">Last Name *</label><input class="form-input" id="lname" type="text" placeholder="Johnson" autocomplete="family-name" required/></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label" for="country">Country *</label><select class="form-select" id="country" required><option value="" disabled selected>Select country</option></select></div>
-          <div class="form-group"><label class="form-label" for="city">City *</label><select class="form-select" id="city" required disabled><option value="" disabled selected>Select city</option></select></div>
+          <div class="form-group"><label class="form-label" for="country" data-i18n="form-country">Country *</label><select class="form-select" id="country" required><option value="" disabled selected>Select country</option></select></div>
+          <div class="form-group"><label class="form-label" for="city" data-i18n="form-city">City *</label><select class="form-select" id="city" required disabled><option value="" disabled selected>Select city</option></select></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label" for="phone">Contact Number *</label><input class="form-input" id="phone" type="tel" placeholder="+1 555 000 0000" autocomplete="tel" required/></div>
-          <div class="form-group"><label class="form-label" for="email">Email ID *</label><input class="form-input" id="email" type="email" placeholder="alex@company.com" autocomplete="email" required/></div>
+          <div class="form-group"><label class="form-label" for="phone" data-i18n="form-phone">Contact Number *</label><input class="form-input" id="phone" type="tel" placeholder="+1 555 000 0000" autocomplete="tel" required/></div>
+          <div class="form-group"><label class="form-label" for="email" data-i18n="form-email">Email ID *</label><input class="form-input" id="email" type="email" placeholder="alex@company.com" autocomplete="email" required/></div>
         </div>
-        <div class="form-group form-group--full"><label class="form-label" for="org">Organization Name *</label><input class="form-input" id="org" type="text" placeholder="Acme Inc." autocomplete="organization" required/></div>
-        <div class="form-group form-group--full"><label class="form-label" for="services">Service Required *</label><select class="form-select" id="services" required><option value="" disabled selected>Loading services…</option></select></div>
+        <div class="form-group form-group--full"><label class="form-label" for="org" data-i18n="form-org">Organization Name *</label><input class="form-input" id="org" type="text" placeholder="Acme Inc." autocomplete="organization" required/></div>
+        <div class="form-group form-group--full"><label class="form-label" for="services" data-i18n="form-service">Service Required *</label><select class="form-select" id="services" required><option value="" disabled selected>Loading services…</option></select></div>
         <div id="formError" style="display:none;color:rgba(255,100,100,0.9);font-size:13px;margin-bottom:12px;padding:10px 14px;background:rgba(255,100,100,0.07);border:1px solid rgba(255,100,100,0.2);border-radius:8px;"></div>
-        <button type="button" class="form-submit" id="submitBtn">Submit Enquiry →</button>
-        <p class="form-note">We read every enquiry personally. No automated replies.</p>
+        <button type="button" class="form-submit" id="submitBtn" data-i18n="form-submit">Submit Enquiry →</button>
+        <p class="form-note" data-i18n="form-note">We read every enquiry personally. No automated replies.</p>
       </div>
-      <div class="form-success" id="formSuccess" style="display:none;"><div class="form-success__icon">✅</div><h3 class="form-success__title">Enquiry submitted!</h3><p class="form-success__sub">Thank you for reaching out. Expect a reply from a real engineer within one business day.</p></div>
+      <div class="form-success" id="formSuccess" style="display:none;"><div class="form-success__icon">✅</div><h3 class="form-success__title" data-i18n="success-title">Enquiry submitted!</h3><p class="form-success__sub" data-i18n="success-sub">Thank you for reaching out. Expect a reply from a real engineer within one business day.</p></div>
     </div>
   </div>
 </div></div></section>
@@ -317,6 +327,85 @@
   (function(){const btn=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu');if(!btn||!menu)return;let open=false;const toggle=()=>{open=!open;btn.classList.toggle('open',open);menu.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':'';};btn.addEventListener('click',toggle);menu.querySelectorAll('.nav__mobile-link').forEach(l=>l.addEventListener('click',()=>{if(open)toggle();}));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open)toggle();});})();
   (function(){const els=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');if(!els.length)return;if(prm){els.forEach(el=>el.classList.add('visible'));return;}const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});els.forEach(el=>io.observe(el));})();
   (function(){if(prm)return;document.querySelectorAll('.magnetic-wrap').forEach(wrap=>{const btn=wrap.querySelector('a,button');if(!btn)return;wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*0.35}px,${(e.clientY-r.top-r.height/2)*0.35}px)`;});wrap.addEventListener('mouseleave',()=>{btn.style.transform='';});});})();
+
+  // ── Bilingual EN / AR ──
+  (function(){
+    var T = {
+      en: {
+        'nav-home':'Home','nav-services':'Services','nav-process':'Process',
+        'nav-about':'About','nav-contact':'Contact','nav-blog':'Blog',
+        'nav-proposal':'Get a Proposal',
+        'hero-label':'No obligation',
+        'hero-title':'Tell us what<br><span class="grad">you\'re building.</span>',
+        'hero-sub':"We'll respond within one business day with a clear, honest scope — no vague estimates, no sales calls before you're ready, no NDAs on day one.",
+        'sidebar-heading':"Let's start a conversation",
+        'sidebar-sub':"Whether you have a clear spec or just an idea — we can help you define both. Our engineers handle the discovery process, so the first conversation is always technical.",
+        'info-email-label':'Email us','info-phone-label':'Call us',
+        'info-response-label':'Response time','info-response-val':'Within 1 business day',
+        'info-tz-label':'Timezone coverage','info-tz-val':'US · EU · APAC',
+        'pill-1':'No commitment required','pill-2':'NDA available on request',
+        'pill-3':'Fixed-price options','pill-4':'Senior engineers only','pill-5':'Transparent pricing',
+        'form-fname':'First Name *','form-lname':'Last Name *',
+        'form-country':'Country *','form-city':'City *',
+        'form-phone':'Contact Number *','form-email':'Email ID *',
+        'form-org':'Organization Name *','form-service':'Service Required *',
+        'form-submit':'Submit Enquiry →','form-note':'We read every enquiry personally. No automated replies.',
+        'success-title':'Enquiry submitted!',
+        'success-sub':'Thank you for reaching out. Expect a reply from a real engineer within one business day.',
+      },
+      ar: {
+        'nav-home':'الرئيسية','nav-services':'الخدمات','nav-process':'المنهجية',
+        'nav-about':'من نحن','nav-contact':'تواصل معنا','nav-blog':'المدونة',
+        'nav-proposal':'احصل على عرض ←',
+        'hero-label':'بلا التزام',
+        'hero-title':'أخبرنا<br><span class="grad">ماذا تبني.</span>',
+        'hero-sub':'سنرد خلال يوم عمل واحد بنطاق واضح وصادق — بلا تقديرات مبهمة، ولا مكالمات مبيعات قبل أن تكون مستعداً.',
+        'sidebar-heading':'لنبدأ محادثة',
+        'sidebar-sub':'سواء كان لديك مواصفات واضحة أو مجرد فكرة — يمكننا مساعدتك في تحديد كليهما. يتولى مهندسونا عملية الاكتشاف، لذا تكون المحادثة الأولى دائماً تقنية.',
+        'info-email-label':'راسلنا','info-phone-label':'اتصل بنا',
+        'info-response-label':'وقت الاستجابة','info-response-val':'خلال يوم عمل واحد',
+        'info-tz-label':'التغطية الزمنية','info-tz-val':'أمريكا · أوروبا · آسيا والمحيط الهادئ',
+        'pill-1':'بلا التزام مسبق','pill-2':'اتفاقية سرية عند الطلب',
+        'pill-3':'خيارات بسعر ثابت','pill-4':'مهندسون متمرسون فقط','pill-5':'تسعير شفاف',
+        'form-fname':'الاسم الأول *','form-lname':'اسم العائلة *',
+        'form-country':'الدولة *','form-city':'المدينة *',
+        'form-phone':'رقم التواصل *','form-email':'البريد الإلكتروني *',
+        'form-org':'اسم المنظمة *','form-service':'الخدمة المطلوبة *',
+        'form-submit':'إرسال الاستفسار ←','form-note':'نقرأ كل استفسار بأنفسنا. لا ردود آلية.',
+        'success-title':'تم إرسال الاستفسار!',
+        'success-sub':'شكراً لتواصلك. توقع رداً من مهندس حقيقي خلال يوم عمل واحد.',
+      }
+    };
+
+    var lang = localStorage.getItem('mandook-lang') || 'en';
+
+    function applyLang(l) {
+      lang = l;
+      localStorage.setItem('mandook-lang', l);
+      document.documentElement.lang = l;
+      document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var k = el.getAttribute('data-i18n');
+        if (T[l][k] !== undefined) el.textContent = T[l][k];
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+        var k = el.getAttribute('data-i18n-html');
+        if (T[l][k] !== undefined) el.innerHTML = T[l][k];
+      });
+      document.querySelectorAll('.lang-toggle__btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === l);
+      });
+    }
+
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('.lang-toggle__btn');
+      if (btn) { var l = btn.getAttribute('data-lang'); if (l && l !== lang) applyLang(l); }
+    });
+
+    if (lang === 'ar') applyLang('ar');
+    else { document.querySelectorAll('.lang-toggle__btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang')==='en'); }); }
+  })();
+
   (function(){if(prm)return;const pupils=Array.from(document.querySelectorAll('.eye-pupil')),eyes=Array.from(document.querySelectorAll('.logo-eye'));if(!pupils.length)return;let mx=innerWidth/2,my=innerHeight/2,smx=mx,smy=my;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});function tick(){smx+=(mx-smx)*0.10;smy+=(my-smy)*0.10;eyes.forEach((eye,i)=>{const pupil=pupils[i];if(!pupil)return;const r=eye.getBoundingClientRect();if(r.width===0)return;const ecx=r.left+r.width/2,ecy=r.top+r.height/2,dx=smx-ecx,dy=smy-ecy,dist=Math.sqrt(dx*dx+dy*dy),scale=r.width/24,travel=Math.min(dist/scale,2.2),angle=Math.atan2(dy,dx),ox=travel*Math.cos(angle),oy=travel*Math.sin(angle);pupil.setAttribute('cx',(12+ox).toFixed(3));pupil.setAttribute('cy',(12+oy).toFixed(3));const hl=eye.querySelector('.eye-highlight');if(hl){hl.setAttribute('cx',(14.2+ox*0.45).toFixed(3));hl.setAttribute('cy',(9.8+oy*0.45).toFixed(3));}});requestAnimationFrame(tick);}tick();})();
   // Country / City data + Supabase enquiry form
   (function(){

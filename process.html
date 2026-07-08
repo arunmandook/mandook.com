@@ -18,8 +18,36 @@
     /* PAGE HERO */
     .page-hero{position:relative;padding:calc(var(--nav-h) + 90px) 0 100px;overflow:hidden;}.page-hero__orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}.page-hero__orb--1{width:600px;height:600px;top:-20%;left:-10%;background:radial-gradient(circle,rgba(0,114,255,0.16) 0%,transparent 70%);}.page-hero__orb--2{width:450px;height:450px;top:10%;right:-5%;background:radial-gradient(circle,rgba(123,79,255,0.13) 0%,transparent 70%);}.page-hero__grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 30%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 30%,transparent 100%);pointer-events:none;}.page-hero__content{position:relative;z-index:2;}.page-hero__breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--clr-text-3);margin-bottom:28px;opacity:0;animation:fade-up 0.6s var(--ease-out-expo) 0.1s forwards;}.page-hero__breadcrumb a{color:var(--clr-text-3);transition:color 0.2s;}.page-hero__breadcrumb a:hover{color:var(--clr-text-2);}.page-hero__label{display:inline-flex;align-items:center;gap:8px;padding:6px 16px 6px 8px;border:1px solid var(--clr-border-glow);background:rgba(0,198,255,0.06);border-radius:100px;font-size:12px;font-weight:600;color:var(--clr-blue);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fade-up 0.6s var(--ease-out-expo) 0.2s forwards;}.page-hero__label-dot{width:6px;height:6px;border-radius:50%;background:var(--clr-blue);animation:pulse-dot 2s ease-in-out infinite;}@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(0,198,255,0.5);}50%{box-shadow:0 0 0 6px rgba(0,198,255,0);}}.page-hero__title{font-family:var(--font-head);font-size:clamp(44px,6.5vw,82px);font-weight:800;letter-spacing:-2.5px;line-height:1.04;margin-bottom:24px;color:var(--clr-text-1);opacity:0;animation:fade-up 0.75s var(--ease-out-expo) 0.3s forwards;}.page-hero__title .grad{background:linear-gradient(135deg,var(--clr-blue) 0%,var(--clr-purple) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}.page-hero__sub{font-size:clamp(16px,2vw,20px);color:var(--clr-text-2);max-width:600px;line-height:1.7;opacity:0;animation:fade-up 0.7s var(--ease-out-expo) 0.5s forwards;}
     /* PROCESS STEPS */
-    .process-page{background:var(--clr-bg);padding:var(--section-gap) 0;}.process-page__layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}.process-page__left{position:sticky;top:120px;}.process-page__left .section__sub{margin-bottom:32px;}
-    .process__steps{display:flex;flex-direction:column;}.process-step{display:flex;gap:28px;padding:36px 0;border-bottom:1px solid var(--clr-border);}.process-step:last-child{border-bottom:none;}.process-step__num{flex-shrink:0;width:44px;height:44px;border-radius:50%;border:1px solid var(--clr-border);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:13px;font-weight:700;color:var(--clr-text-3);transition:background 0.4s,border-color 0.4s,color 0.4s,transform 0.4s var(--ease-out-quart);}.process-step:hover .process-step__num{background:var(--clr-blue);border-color:var(--clr-blue);color:#fff;transform:scale(1.1);}.process-step__body{}.process-step__title{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--clr-text-1);margin-bottom:10px;transition:color 0.3s;}.process-step:hover .process-step__title{color:var(--clr-blue);}.process-step__desc{font-size:15px;color:var(--clr-text-2);line-height:1.65;margin-bottom:16px;}.process-step__tags{display:flex;flex-wrap:wrap;gap:8px;}.process-step__tag{padding:4px 12px;background:rgba(0,198,255,0.06);border:1px solid rgba(0,198,255,0.15);border-radius:100px;font-size:12px;font-weight:600;color:var(--clr-blue);}
+    .process-steps-page{background:var(--clr-bg);padding:var(--section-gap) 0;}
+    .process-steps__header{text-align:center;margin-bottom:56px;}
+    .process-steps__header .section__label{justify-content:center;}
+    .process-steps__header .section__heading{margin:0 auto 14px;}
+    .process-steps__header .section__sub{max-width:480px;margin:0 auto;}
+    .process-steps__track{max-width:680px;margin:0 auto;position:relative;}
+    .ps-step{display:grid;grid-template-columns:64px 32px 1fr;gap:0 24px;align-items:start;margin-bottom:0;}
+    .ps-step__left{padding-top:2px;text-align:right;}
+    .ps-step__num{font-family:var(--font-head);font-size:13px;font-weight:700;letter-spacing:0.1em;color:var(--clr-blue);opacity:0.55;line-height:1;padding-top:6px;}
+    .ps-step__connector{display:flex;flex-direction:column;align-items:center;}
+    .ps-step__node{width:14px;height:14px;border-radius:50%;background:var(--clr-bg);border:2px solid var(--clr-blue);box-shadow:0 0 0 4px rgba(0,198,255,0.10),0 0 12px 4px rgba(0,198,255,0.20);flex-shrink:0;margin-top:4px;position:relative;transition:box-shadow 0.4s,border-color 0.4s;}
+    .ps-step__node::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--clr-blue);opacity:0.9;animation:nodePulse 2.4s ease-in-out infinite;}
+    .ps-step__node--last::after{animation-delay:0.8s;}
+    @keyframes nodePulse{0%,100%{transform:scale(1);opacity:0.9;}50%{transform:scale(1.3);opacity:0.5;}}
+    .ps-step__line{width:2px;flex:1;min-height:48px;background:linear-gradient(to bottom,rgba(0,198,255,0.35) 0%,rgba(0,198,255,0.06) 100%);margin-top:4px;position:relative;overflow:hidden;}
+    .ps-step__line::after{content:'';position:absolute;top:-40%;left:0;width:100%;height:40%;background:linear-gradient(to bottom,transparent,rgba(0,198,255,0.7),transparent);animation:lineTravel 2.4s ease-in-out infinite;}
+    @keyframes lineTravel{0%{top:-40%;}100%{top:110%;}}
+    .ps-step__right{padding-bottom:40px;}
+    .ps-step:last-child .ps-step__right{padding-bottom:0;}
+    .ps-step__title{font-family:var(--font-head);font-size:22px;font-weight:700;color:var(--clr-text-1);margin-bottom:8px;line-height:1.2;transition:color 0.3s;}
+    .ps-step:hover .ps-step__title{color:var(--clr-blue);}
+    .ps-step:hover .ps-step__node{border-color:var(--clr-blue);box-shadow:0 0 0 6px rgba(0,198,255,0.15),0 0 20px 6px rgba(0,198,255,0.35);}
+    .ps-step__desc{font-size:15px;color:rgba(240,244,255,0.55);line-height:1.7;max-width:480px;margin-bottom:14px;}
+    .ps-step__tags{display:flex;flex-wrap:wrap;gap:8px;}
+    .ps-step__tag{padding:4px 12px;background:rgba(0,198,255,0.06);border:1px solid rgba(0,198,255,0.15);border-radius:100px;font-size:12px;font-weight:600;color:var(--clr-blue);}
+    .ps-step:nth-child(1) .ps-step__line::after{animation-delay:0s;}
+    .ps-step:nth-child(2) .ps-step__line::after{animation-delay:0.48s;}
+    .ps-step:nth-child(3) .ps-step__line::after{animation-delay:0.96s;}
+    .ps-step:nth-child(4) .ps-step__line::after{animation-delay:1.44s;}
+    @media(max-width:600px){.process-steps__track{max-width:100%;}.ps-step{grid-template-columns:48px 28px 1fr;gap:0 16px;}.ps-step__title{font-size:19px;}}
     /* WHY SECTION */
     .why-section{background:var(--clr-surface);padding:var(--section-gap) 0;}.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:64px;}.why-card{padding:40px 36px;background:var(--clr-surface-2);border:1px solid var(--clr-border);border-radius:var(--radius-lg);transition:border-color 0.4s,transform 0.4s var(--ease-out-quart);}.why-card:hover{border-color:var(--clr-border-glow);transform:translateY(-6px);}.why-card__icon{font-size:32px;margin-bottom:20px;}.why-card__title{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--clr-text-1);margin-bottom:12px;}.why-card__desc{font-size:15px;color:var(--clr-text-2);line-height:1.65;}
     /* FAQ */
@@ -248,26 +276,66 @@
   </div></div>
 </section>
 
-<section class="process-page" id="process">
+<section class="process-steps-page" id="process">
   <div class="container">
-    <div class="process-page__layout">
-      <div class="process-page__left reveal-left">
-        <div class="section__label">Our Methodology</div>
-        <h2 class="section__heading">Eight Steps.<br>Zero Surprises.</h2>
-        <p class="section__sub">We've refined this process across 120+ engagements. It's structured enough to deliver predictably — and flexible enough to adapt to your reality.</p>
-        <br>
-        <a href="contact.html" class="btn btn--primary" style="margin-top:8px">Start the Conversation →</a>
+    <div class="process-steps__header reveal">
+      <div class="section__label">Our Process</div>
+      <h2 class="section__heading">Businesses like clarity.</h2>
+      <p class="section__sub">Here's exactly how we work — from the first call to long-term growth.</p>
+    </div>
+
+    <div class="process-steps__track">
+
+      <div class="ps-step reveal" data-delay="1">
+        <div class="ps-step__left"><div class="ps-step__num">01</div></div>
+        <div class="ps-step__connector"><div class="ps-step__node"></div><div class="ps-step__line"></div></div>
+        <div class="ps-step__right">
+          <h3 class="ps-step__title">Discover</h3>
+          <p class="ps-step__desc">A focused session to understand your business goals, challenges, and the outcomes that matter most. We listen far more than we talk — then map a clear path forward.</p>
+          <div class="ps-step__tags"><span class="ps-step__tag">Free call</span><span class="ps-step__tag">No commitment</span></div>
+        </div>
       </div>
-      <div class="process__steps">
-        <div class="process-step reveal"><div class="process-step__num">01</div><div class="process-step__body"><div class="process-step__title">Discovery Call</div><p class="process-step__desc">A focused 60-minute session to understand your business context, technical landscape, and the specific outcome you need. We listen far more than we talk.</p><div class="process-step__tags"><span class="process-step__tag">60 min</span><span class="process-step__tag">No commitment</span></div></div></div>
-        <div class="process-step reveal" data-delay="1"><div class="process-step__num">02</div><div class="process-step__body"><div class="process-step__title">Technical Audit</div><p class="process-step__desc">Our senior engineers review your existing codebase, infrastructure, and architecture. We identify risks, bottlenecks, and quick wins before a single line is written.</p><div class="process-step__tags"><span class="process-step__tag">1–2 weeks</span><span class="process-step__tag">Written report</span></div></div></div>
-        <div class="process-step reveal" data-delay="2"><div class="process-step__num">03</div><div class="process-step__body"><div class="process-step__title">Proposal & Scoping</div><p class="process-step__desc">A clear, fixed-scope proposal with milestones, timelines, and costs. No vague retainers, no scope creep surprises — just honest, transparent planning.</p><div class="process-step__tags"><span class="process-step__tag">Fixed-scope</span><span class="process-step__tag">Milestone-based</span></div></div></div>
-        <div class="process-step reveal" data-delay="3"><div class="process-step__num">04</div><div class="process-step__body"><div class="process-step__title">Team Assembly</div><p class="process-step__desc">We match the right senior engineers to your project — not whoever is available. Every engagement lead has 8+ years of domain-specific experience.</p><div class="process-step__tags"><span class="process-step__tag">Senior engineers only</span></div></div></div>
-        <div class="process-step reveal"><div class="process-step__num">05</div><div class="process-step__body"><div class="process-step__title">Sprints & Delivery</div><p class="process-step__desc">Two-week sprints with weekly stakeholder demos. You see working software early and often — never a 3-month black box that reveals itself at launch.</p><div class="process-step__tags"><span class="process-step__tag">2-week sprints</span><span class="process-step__tag">Weekly demos</span></div></div></div>
-        <div class="process-step reveal" data-delay="1"><div class="process-step__num">06</div><div class="process-step__body"><div class="process-step__title">Quality & Security</div><p class="process-step__desc">Every deliverable goes through code review, automated testing, and security scanning before it reaches your environment. Our QA is non-negotiable.</p><div class="process-step__tags"><span class="process-step__tag">Automated tests</span><span class="process-step__tag">Security scan</span></div></div></div>
-        <div class="process-step reveal" data-delay="2"><div class="process-step__num">07</div><div class="process-step__body"><div class="process-step__title">Launch & Handover</div><p class="process-step__desc">Zero-downtime deployments, full documentation, and knowledge transfer sessions that leave your team fully capable of owning what we built together.</p><div class="process-step__tags"><span class="process-step__tag">Zero downtime</span><span class="process-step__tag">Full docs</span></div></div></div>
-        <div class="process-step reveal" data-delay="3"><div class="process-step__num">08</div><div class="process-step__body"><div class="process-step__title">Long-Term Partnership</div><p class="process-step__desc">90-day post-launch support included in every engagement. Most clients stay with us for years — not because they have to, but because they choose to.</p><div class="process-step__tags"><span class="process-step__tag">90-day support</span><span class="process-step__tag">Ongoing available</span></div></div></div>
+
+      <div class="ps-step reveal" data-delay="2">
+        <div class="ps-step__left"><div class="ps-step__num">02</div></div>
+        <div class="ps-step__connector"><div class="ps-step__node"></div><div class="ps-step__line"></div></div>
+        <div class="ps-step__right">
+          <h3 class="ps-step__title">Design</h3>
+          <p class="ps-step__desc">Create a modern user experience — intuitive, scalable, and built around your team. Fixed-scope proposal with milestones, timelines, and costs. No surprises.</p>
+          <div class="ps-step__tags"><span class="ps-step__tag">Fixed-scope</span><span class="ps-step__tag">Milestone-based</span></div>
+        </div>
       </div>
+
+      <div class="ps-step reveal" data-delay="3">
+        <div class="ps-step__left"><div class="ps-step__num">03</div></div>
+        <div class="ps-step__connector"><div class="ps-step__node"></div><div class="ps-step__line"></div></div>
+        <div class="ps-step__right">
+          <h3 class="ps-step__title">Build</h3>
+          <p class="ps-step__desc">Develop scalable solutions with clean architecture — on time, no surprises. Two-week sprints with weekly demos so you see working software early and often.</p>
+          <div class="ps-step__tags"><span class="ps-step__tag">2-week sprints</span><span class="ps-step__tag">Weekly demos</span></div>
+        </div>
+      </div>
+
+      <div class="ps-step reveal" data-delay="4">
+        <div class="ps-step__left"><div class="ps-step__num">04</div></div>
+        <div class="ps-step__connector"><div class="ps-step__node"></div><div class="ps-step__line"></div></div>
+        <div class="ps-step__right">
+          <h3 class="ps-step__title">Launch</h3>
+          <p class="ps-step__desc">Go live with confidence. We handle deployment, training, and every detail before day one — zero-downtime releases and full documentation included.</p>
+          <div class="ps-step__tags"><span class="ps-step__tag">Zero downtime</span><span class="ps-step__tag">Full docs</span></div>
+        </div>
+      </div>
+
+      <div class="ps-step reveal" data-delay="5">
+        <div class="ps-step__left"><div class="ps-step__num">05</div></div>
+        <div class="ps-step__connector"><div class="ps-step__node ps-step__node--last"></div></div>
+        <div class="ps-step__right">
+          <h3 class="ps-step__title">Support &amp; Grow</h3>
+          <p class="ps-step__desc">We stay with you — monitoring, optimising, and evolving the platform as your business scales. 90-day post-launch support included in every engagement.</p>
+          <div class="ps-step__tags"><span class="ps-step__tag">90-day support</span><span class="ps-step__tag">Ongoing available</span></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>

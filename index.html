@@ -4462,15 +4462,11 @@
 
     document.addEventListener("DOMContentLoaded",function(){
       document.body.classList.add("loaded");
-      document.querySelectorAll("a[href]").forEach(function(a){
-        var href=a.getAttribute("href");
-        if(!href||href.startsWith("#")||href.startsWith("mailto:")||href.startsWith("tel:")||a.target==="_blank")return;
-        a.addEventListener("click",function(e){
-          e.preventDefault();
-          document.body.classList.remove("loaded");
-          setTimeout(function(){window.location.assign(href);},320);
-        });
-      });
+    });
+    // Re-show page when restored from bfcache (back/forward navigation)
+    window.addEventListener("pageshow",function(e){
+      document.body.classList.add("loaded");
+      window.scrollTo(0,0);
     });
   </script>
 <script>

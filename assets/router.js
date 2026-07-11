@@ -107,8 +107,9 @@
         // Force reveal elements visible (fallback for IntersectionObserver)
         forceReveal(root);
 
-        // Fade back in
-        root.style.opacity = '1';
+        // Run page enter animation + re-init counters/stagger/tilt
+        if (typeof window.runPageEnter === 'function') window.runPageEnter();
+        else root.style.opacity = '1';
       })
       .catch(function () {
         location.href = href;

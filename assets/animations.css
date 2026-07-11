@@ -1,0 +1,160 @@
+/* ============================================================
+   MANDOOK — Shared Animation Layer
+   Loaded on every page via <link> in <head>
+   ============================================================ */
+
+/* ── Scroll progress bar ── */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #0072FF, #00C6FF, #7B4FFF);
+  z-index: 9999;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* ── Page enter transition ── */
+#page-root {
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+#page-root.page-entering {
+  opacity: 0;
+  transform: translateY(18px);
+}
+#page-root.page-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Enhanced reveal variants ── */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.93);
+  transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
+              transform 0.65s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Staggered children inside a grid */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.55s cubic-bezier(0.16,1,0.3,1),
+              transform 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+.stagger-children.visible > *:nth-child(1) { transition-delay: 0.05s; }
+.stagger-children.visible > *:nth-child(2) { transition-delay: 0.13s; }
+.stagger-children.visible > *:nth-child(3) { transition-delay: 0.21s; }
+.stagger-children.visible > *:nth-child(4) { transition-delay: 0.29s; }
+.stagger-children.visible > *:nth-child(5) { transition-delay: 0.37s; }
+.stagger-children.visible > *:nth-child(6) { transition-delay: 0.45s; }
+.stagger-children.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Card hover glow ── */
+.why-card,
+.expect-card,
+.problem-card,
+.wc-card,
+.process-card,
+.blog-card,
+.svc-panel__item {
+  transition: border-color 0.35s ease,
+              box-shadow 0.35s ease,
+              transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.why-card:hover,
+.expect-card:hover,
+.problem-card:hover,
+.wc-card:hover,
+.process-card:hover {
+  border-color: rgba(0,198,255,0.35) !important;
+  box-shadow: 0 8px 40px rgba(0,114,255,0.18), 0 0 0 1px rgba(0,198,255,0.12);
+  transform: translateY(-5px);
+}
+
+/* ── Gradient text shimmer on headings ── */
+@keyframes grad-shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.section__heading .grad,
+.page-hero__title .grad,
+.cta-section__heading .grad {
+  background-size: 200% auto;
+  animation: grad-shimmer 4s ease infinite;
+}
+
+/* ── Floating orbs ── */
+@keyframes orb-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -20px) scale(1.04); }
+  66%       { transform: translate(-20px, 15px) scale(0.97); }
+}
+@keyframes orb-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-25px, 20px) scale(0.96); }
+  66%       { transform: translate(20px, -15px) scale(1.03); }
+}
+.page-hero__orb--1 { animation: orb-drift-1 12s ease-in-out infinite; }
+.page-hero__orb--2 { animation: orb-drift-2 15s ease-in-out infinite; }
+
+/* ── Button shine sweep on hover ── */
+.btn--primary {
+  overflow: hidden;
+  position: relative;
+}
+.btn--primary::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: -75%;
+  width: 50%; height: 200%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.22), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+.btn--primary:hover::after {
+  left: 130%;
+}
+
+/* ── Section label pulse dot ── */
+.section__label::before {
+  animation: label-pulse 2.5s ease-in-out infinite;
+}
+@keyframes label-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ── Number counter ── */
+[data-count] {
+  display: inline-block;
+}
+
+/* ── Smooth anchor links ── */
+html { scroll-behavior: smooth; }
+
+/* ── Subtle tilt card (JS-powered via data-tilt) ── */
+[data-tilt] {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.1s ease;
+}
+
+/* ── Hero canvas fade-in ── */
+@keyframes canvas-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+#network-canvas, #hero-canvas {
+  animation: canvas-fade 1.2s ease 0.4s both;
+}

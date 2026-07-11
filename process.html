@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@800&display=swap" rel="stylesheet" />
-  <style>
+  <style id="page-styles">
     :root{--clr-bg:#060A17;--clr-surface:#0C1628;--clr-surface-2:#111F3A;--clr-border:rgba(255,255,255,0.07);--clr-border-glow:rgba(0,198,255,0.25);--clr-blue:#00C6FF;--clr-blue-dark:#0072FF;--clr-purple:#7B4FFF;--clr-gold:#C9A84C;--clr-text-1:#F0F4FF;--clr-text-2:#8B96B0;--clr-text-3:#555F78;--font-head:'Space Grotesk',sans-serif;--font-body:'Inter',sans-serif;--ease-out-expo:cubic-bezier(0.16,1,0.3,1);--ease-out-quart:cubic-bezier(0.25,1,0.5,1);--radius-sm:8px;--radius-md:16px;--radius-lg:24px;--radius-xl:40px;--nav-h:110px;--section-gap:120px;--h2-size:clamp(28px,4vw,48px);--h3-size:clamp(17px,2vw,22px);}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;overflow-x:hidden;}body{background:var(--clr-bg);color:var(--clr-text-1);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}img{display:block;max-width:100%;}a{text-decoration:none;color:inherit;}ul{list-style:none;}button{cursor:pointer;border:none;background:none;font-family:inherit;}.container{width:100%;max-width:1240px;margin:0 auto;padding:0 32px;}::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--clr-bg);}::-webkit-scrollbar-thumb{background:var(--clr-blue-dark);border-radius:2px;}
     /* NAV */
@@ -266,6 +266,8 @@
   </div>
 </div>
 
+<div id="page-root">
+
 <section class="page-hero">
   <div class="page-hero__orb page-hero__orb--1" aria-hidden="true"></div>
   <div class="page-hero__orb page-hero__orb--2" aria-hidden="true"></div>
@@ -423,5 +425,7 @@
 })();
 </script>
 <script>requestAnimationFrame(function(){requestAnimationFrame(function(){var s=document.getElementById("no-trans");if(s)s.remove();});});</script>
+</div><!-- #page-root -->
+<script src="assets/router.js"></script>
 </body>
 </html>

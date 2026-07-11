@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@800&display=swap" rel="stylesheet" />
-  <style>
+  <style id="page-styles">
     :root {
       --clr-bg:#060A17;--clr-surface:#0C1628;--clr-surface-2:#111F3A;
       --clr-border:rgba(255,255,255,0.07);--clr-border-glow:rgba(0,198,255,0.25);
@@ -415,6 +415,8 @@
   </div>
 </div>
 
+<div id="page-root">
+
 <!-- PAGE HERO -->
 <section class="page-hero">
   <div class="page-hero__orb page-hero__orb--1" aria-hidden="true"></div>
@@ -723,5 +725,7 @@
   });
 })();
 </script>
+</div><!-- #page-root -->
+<script src="assets/router.js"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@800&display=swap" rel="stylesheet" />
-  <style>
+  <style id="page-styles">
     :root {
       --clr-bg:#060A17;--clr-surface:#0C1628;--clr-surface-2:#111F3A;
       --clr-border:rgba(255,255,255,0.07);--clr-border-glow:rgba(0,198,255,0.25);
@@ -494,6 +494,8 @@
   </div>
 </div>
 
+<div id="page-root">
+
 <!-- FOOTER -->
 <footer class="footer" role="contentinfo">
   <div class="footer__glow-bar" aria-hidden="true"></div>
@@ -551,5 +553,7 @@
   (function(){const btn=document.getElementById('hamburger'),menu=document.getElementById('mobileMenu');if(!btn||!menu)return;let open=false;const toggle=()=>{open=!open;btn.classList.toggle('open',open);menu.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':'';};btn.addEventListener('click',toggle);menu.querySelectorAll('.nav__mobile-link').forEach(l=>l.addEventListener('click',()=>{if(open)toggle();}));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open)toggle();});})();
 </script>
 <script>requestAnimationFrame(function(){requestAnimationFrame(function(){var s=document.getElementById("no-trans");if(s)s.remove();});});</script>
+</div><!-- #page-root -->
+<script src="assets/router.js"></script>
 </body>
 </html>

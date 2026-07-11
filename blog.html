@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@800&display=swap" rel="stylesheet" />
-  <style>
+  <style id="page-styles">
     :root {
       --clr-bg:#060A17;--clr-surface:#0C1628;--clr-surface-2:#111F3A;
       --clr-border:rgba(255,255,255,0.07);--clr-border-glow:rgba(0,198,255,0.25);
@@ -338,6 +338,8 @@
 <!-- PAGE HERO -->
 <section class="page-hero" aria-label="Blog hero">
   <div class="page-hero__orb page-hero__orb--1"></div>
+
+<div id="page-root">
   <div class="page-hero__orb page-hero__orb--2"></div>
   <div class="page-hero__grid"></div>
   <div class="container">
@@ -473,5 +475,7 @@
   (function(){const els=document.querySelectorAll('.reveal,.reveal-left');if(!els.length)return;if(prm){els.forEach(el=>el.classList.add('visible'));return;}const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px 60px 0px'});els.forEach(el=>io.observe(el));setTimeout(function(){document.querySelectorAll(sel).forEach(function(el){el.classList.add('visible');});},2000);})();
 </script>
 <script>requestAnimationFrame(function(){requestAnimationFrame(function(){var s=document.getElementById("no-trans");if(s)s.remove();});});</script>
+</div><!-- #page-root -->
+<script src="assets/router.js"></script>
 </body>
 </html>

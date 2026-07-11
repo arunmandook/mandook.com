@@ -459,7 +459,13 @@
     }
     @media (max-width: 900px) {
       .hero__inner { grid-template-columns: 1fr; }
-      .hero__visual { display: none; }
+      .hero__visual {
+        width: 100%;
+        max-width: 340px;
+        margin: 0 auto;
+        height: 260px;
+      }
+      .hero__stat { display: none; }
     }
 
     /* Canvas particles */

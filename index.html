@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="view-transition" content="same-origin">
   <link rel="preload" href="assets/mandook-logo.png" as="image" fetchpriority="high">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -102,6 +103,7 @@
     ============================================================ */
     
     .nav {
+      view-transition-name: site-nav;
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
@@ -3252,7 +3254,7 @@
     .testi-heading,.cta-heading,.blog-section__heading { font-size: var(--h2-size) !important; }
     .svc-panel__title,.ps-step__title,.prob-card__title,.why-card__title,
     .bp-card__title,.wc-card__text h3 { font-size: var(--h3-size) !important; }
-    </style>
+    ::view-transition-group(site-nav){animation-duration:0s;}::view-transition-old(site-nav),::view-transition-new(site-nav){animation:none;mix-blend-mode:normal;}</style>
 </head>
 <body>
 

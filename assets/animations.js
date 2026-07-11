@@ -348,17 +348,21 @@
   };
 
   function pageEnter() {
-    if (reducedMotion) return;
     var root = document.getElementById('page-root');
     if (!root) return;
     root.classList.remove('m-exit', 'm-visible');
+    if (reducedMotion) {
+      root.classList.add('m-visible');
+      return;
+    }
     root.classList.add('m-enter');
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        root.classList.remove('m-enter');
-        root.classList.add('m-visible');
-      });
-    });
+    // setTimeout fires even in background/hidden tabs — unlike rAF which
+    // is suspended when document.hidden is true, causing the page to stay
+    // invisible if it loads while the tab is not focused.
+    setTimeout(function () {
+      root.classList.remove('m-enter');
+      root.classList.add('m-visible');
+    }, 20);
   }
 
   /* ═══════════════════════════════════════════════

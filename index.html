@@ -3096,6 +3096,98 @@
     .problem-card:nth-child(3) { transition-delay: 0.10s; }
     .problem-card:nth-child(4) { transition-delay: 0.15s; }
 
+    /* ─────────────────────────────────────────────────────────
+       PROBLEM SECTION — Premium child cascade animations
+       Each card's children stagger in after the card itself
+       reveals. Uses animation-fill-mode: backwards so that
+       hover states (which live at author cascade level) work
+       normally after each animation completes.
+    ───────────────────────────────────────────────────────── */
+
+    /* Per-card stagger offset — matches the card's own reveal delay */
+    .problem-card:nth-child(1) { --prob-d: 0.05s; }
+    .problem-card:nth-child(2) { --prob-d: 0.13s; }
+    .problem-card:nth-child(3) { --prob-d: 0.21s; }
+    .problem-card:nth-child(4) { --prob-d: 0.29s; }
+
+    /* Keyframes */
+    @keyframes prob-icon-in {
+      from { opacity: 0; transform: scale(0.5) translateY(12px); }
+      72%  { transform: scale(1.1) translateY(-4px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes prob-num-in {
+      from { opacity: 0; transform: scale(0.15) translate(5px,-5px); }
+      58%  { opacity: 1; transform: scale(1.3) translate(-2px,2px); }
+      to   { opacity: 1; transform: scale(1) translate(0,0); }
+    }
+    @keyframes prob-title-in {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes prob-desc-in {
+      from { opacity: 0; transform: translateY(9px); }
+      to   { opacity: 0.65; transform: translateY(0); }
+    }
+    @keyframes prob-line-draw {
+      from { transform: scaleX(0); opacity: 0; }
+      8%   { opacity: 1; }
+      to   { transform: scaleX(1); opacity: 1; }
+    }
+    @keyframes prob-em-up {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Icon circle: spring scale-bounce entrance */
+    .problem-card.visible .problem-card__icon-wrap {
+      animation: prob-icon-in 0.65s cubic-bezier(0.34,1.15,0.64,1)
+                 calc(var(--prob-d,0.05s) + 0.1s) backwards;
+    }
+    /* Number badge: tight elastic pop */
+    .problem-card.visible .problem-card__num {
+      animation: prob-num-in 0.48s cubic-bezier(0.34,1.55,0.64,1)
+                 calc(var(--prob-d,0.05s) + 0.28s) backwards;
+    }
+    /* Title: slide up */
+    .problem-card.visible .problem-card__title {
+      animation: prob-title-in 0.55s cubic-bezier(0.16,1,0.3,1)
+                 calc(var(--prob-d,0.05s) + 0.2s) backwards;
+    }
+    /* Description: fade up, rest at 0.65 so hover-to-1 still works
+       (fill: backwards means cascade takes over after animation, restoring
+        0.65 rest state and allowing .problem-card:hover override to 1) */
+    .problem-card.visible .problem-card__desc {
+      animation: prob-desc-in 0.55s cubic-bezier(0.16,1,0.3,1)
+                 calc(var(--prob-d,0.05s) + 0.34s) backwards;
+    }
+
+    /* Grid connecting line: draw left → right when .prob-grid-in is added */
+    .problem__grid::before {
+      transform: scaleX(0);
+      transform-origin: left center;
+      opacity: 0;
+    }
+    .problem__grid.prob-grid-in::before {
+      animation: prob-line-draw 1.15s cubic-bezier(0.16,1,0.3,1) 0.2s both;
+    }
+
+    /* Gradient "all of these" em: needs inline-block for transform */
+    .problem__transition-text em { display: inline-block; }
+    .problem__transition.visible .problem__transition-text em {
+      animation: prob-em-up 0.75s cubic-bezier(0.16,1,0.3,1) 0.48s backwards;
+    }
+
+    /* Reduced motion: skip all problem animations */
+    @media (prefers-reduced-motion: reduce) {
+      .problem-card.visible .problem-card__icon-wrap,
+      .problem-card.visible .problem-card__num,
+      .problem-card.visible .problem-card__title,
+      .problem-card.visible .problem-card__desc,
+      .problem__transition.visible .problem__transition-text em { animation: none !important; }
+      .problem__grid::before { transform: none !important; opacity: 1 !important; }
+    }
+
     @media (max-width: 1024px) {
       .problem__grid { grid-template-columns: repeat(2, 1fr); }
       .problem__grid::before { display: none; }
@@ -3474,6 +3566,19 @@
       </div>
 
     </div>
+
+    <script>
+    /* Grid connector line: observe .problem__grid, add prob-grid-in on enter */
+    (function(){
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var g = document.querySelector('#problem .problem__grid');
+      if(!g) return;
+      var io = new IntersectionObserver(function(e){
+        if(e[0].isIntersecting){ g.classList.add('prob-grid-in'); io.disconnect(); }
+      },{threshold:0.15});
+      io.observe(g);
+    })();
+    </script>
 
     <div class="problem__transition reveal">
       <p class="problem__transition-text" data-i18n-html="prob-transition">We solve <em>all of these</em> under one roof.</p>

@@ -31,26 +31,25 @@
   ═══════════════════════════════════════════════ */
   var revealIO = null;
 
-  // Elements auto-tagged by JS (no HTML change needed)
+  // Elements auto-tagged by JS (no HTML change needed).
+  // IMPORTANT: never include elements inside JS-controlled tabs/accordions
+  // (e.g. .wc-card, .svc-panel) — they start hidden and the IO never fires.
   var AUTO_SELECTORS = [
     /* section structure */
     '.section__label',
     '.section__heading',
     '.section__sub',
-    /* cards */
+    /* standalone cards (not inside tab panels) */
     '.why-card',
     '.expect-card',
     '.problem-card',
     '.process-card',
-    '.wc-card',
     '.blog-card',
     '.value-card',
     '.mv-card',
     '.faq-item',
-    '.tech-tag',
     '.stat-item',
     '.bp-card',
-    '.svc-panel',
     /* hero stats */
     '.hero__stat',
     /* article / blog content */
@@ -60,11 +59,10 @@
     '.article-body > ul',
     '.article-body > blockquote',
     /* contact */
-    '.expect-card',
     '.contact-form-wrap',
     /* footer cols */
     '.footer__col',
-    /* page hero elements not already animated */
+    /* page hero elements not already animated via CSS keyframes */
     '.page-hero__breadcrumb',
     '.page-hero__label',
     '.page-hero__title',
@@ -80,15 +78,12 @@
     '.expect-card':           'm-reveal-up',
     '.problem-card':          'm-reveal-up',
     '.process-card':          'm-reveal-up',
-    '.wc-card':               'm-reveal-up',
     '.blog-card':             'm-reveal-up',
     '.value-card':            'm-reveal-up',
     '.mv-card':               'm-reveal-up',
     '.faq-item':              'm-reveal',
-    '.tech-tag':              'm-reveal-scale',
     '.stat-item':             'm-reveal-up',
     '.bp-card':               'm-reveal-up',
-    '.svc-panel':             'm-reveal',
     '.hero__stat':            'm-reveal-scale',
     '.article-body > p':      'm-reveal',
     '.article-body > h2':     'm-reveal',
@@ -138,6 +133,15 @@
     });
   }
 
+  function safetyReveal(root) {
+    // After 1.5s, force-reveal anything still hidden (e.g. inside display:none tabs)
+    setTimeout(function () {
+      (root || document).querySelectorAll('.m-anim:not(.m-visible), .reveal:not(.visible), .reveal-left:not(.visible), .reveal-right:not(.visible)').forEach(function (el) {
+        el.classList.add('m-visible', 'visible');
+      });
+    }, 1500);
+  }
+
   function buildIO(root) {
     if (revealIO) revealIO.disconnect();
 
@@ -153,22 +157,22 @@
       entries.forEach(function (entry) {
         var el = entry.target;
         if (entry.isIntersecting) {
-          el.classList.add('m-visible');
-          // Also add legacy visible class for existing reveal elements
-          el.classList.add('visible');
-        } else {
-          // Remove so it re-animates next time
-          el.classList.remove('m-visible', 'visible');
+          el.classList.add('m-visible', 'visible');
+          // Unobserve after reveal so tab/accordion content stays visible
+          // when its panel is toggled off-screen
+          revealIO.unobserve(el);
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0.1,
+      rootMargin: '0px 0px -30px 0px'
     });
 
     (root || document).querySelectorAll('[data-m-anim], .reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function (el) {
       revealIO.observe(el);
     });
+
+    safetyReveal(root);
   }
 
   /* ═══════════════════════════════════════════════

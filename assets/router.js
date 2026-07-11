@@ -68,8 +68,9 @@
     var root = document.getElementById(ROOT_ID);
     if (!root) return;
 
-    root.style.transition = 'opacity 0.12s ease';
-    root.style.opacity = '0';
+    // Signal animation layer to play exit
+    if (typeof window.mAnimExit === 'function') window.mAnimExit();
+    else { root.style.transition = 'opacity 0.12s ease'; root.style.opacity = '0'; }
 
     fetch(href)
       .then(function (r) { return r.text(); })
@@ -107,8 +108,9 @@
         // Force reveal elements visible (fallback for IntersectionObserver)
         forceReveal(root);
 
-        // Fade back in
-        root.style.opacity = '1';
+        // Page enter animation + re-init counters / image fades
+        if (typeof window.mAnimEnter === 'function') window.mAnimEnter();
+        else root.style.opacity = '1';
       })
       .catch(function () {
         location.href = href;

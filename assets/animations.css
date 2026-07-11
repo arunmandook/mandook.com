@@ -1,0 +1,283 @@
+/* ============================================================
+   MANDOOK — Premium Animation Layer
+   Only adds transitions/transforms. Zero layout changes.
+   ============================================================ */
+
+/* ── Reduced motion: kill everything ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ────────────────────────────────────────
+   SCROLL PROGRESS BAR
+──────────────────────────────────────── */
+#m-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #0072FF 0%, #00C6FF 60%, #7B4FFF 100%);
+  z-index: 9999;
+  pointer-events: none;
+  will-change: width;
+  transition: width 0.08s linear;
+}
+
+/* ────────────────────────────────────────
+   PAGE TRANSITION (router-driven)
+──────────────────────────────────────── */
+#page-root {
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16,1,0.3,1);
+  will-change: opacity, transform;
+}
+#page-root.m-exit {
+  opacity: 0;
+  transform: translateY(10px);
+}
+#page-root.m-enter {
+  opacity: 0;
+  transform: translateY(12px);
+}
+#page-root.m-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ────────────────────────────────────────
+   NAVBAR
+──────────────────────────────────────── */
+/* Logo subtle scale on hover */
+.nav__logo-img {
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1),
+              filter 0.3s ease !important;
+}
+.nav__logo:hover .nav__logo-img {
+  transform: scale(1.04) !important;
+}
+
+/* Nav link underline — smooth width */
+.nav__link::after {
+  transition: width 0.25s cubic-bezier(0.16,1,0.3,1) !important;
+}
+
+/* ────────────────────────────────────────
+   BUTTONS
+──────────────────────────────────────── */
+.btn {
+  transition: transform 0.18s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.25s ease,
+              background 0.25s ease !important;
+}
+.btn:hover {
+  transform: translateY(-2px) !important;
+}
+.btn:active {
+  transform: translateY(0) scale(0.97) !important;
+  transition-duration: 0.08s !important;
+}
+
+/* Primary button — shimmer sweep */
+.btn--primary {
+  overflow: hidden;
+  position: relative;
+}
+.btn--primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(120deg,
+    transparent 0%,
+    rgba(255,255,255,0.15) 50%,
+    transparent 100%);
+  transform: skewX(-15deg);
+  pointer-events: none;
+  transition: left 0.55s ease;
+}
+.btn--primary:hover::after {
+  left: 160%;
+}
+
+/* Magnetic CTA button */
+.btn--magnetic {
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.25s ease !important;
+}
+.btn--magnetic:hover {
+  box-shadow: 0 8px 32px rgba(0,114,255,0.35) !important;
+}
+
+/* ────────────────────────────────────────
+   CARDS — hover lift + glow
+──────────────────────────────────────── */
+.why-card,
+.expect-card,
+.problem-card,
+.process-card,
+.wc-card,
+.svc-tab,
+.tech-tag {
+  transition:
+    transform 0.3s cubic-bezier(0.16,1,0.3,1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease !important;
+  will-change: transform;
+}
+.why-card:hover,
+.expect-card:hover,
+.problem-card:hover,
+.process-card:hover,
+.wc-card:hover {
+  transform: translateY(-5px) !important;
+  border-color: rgba(0,198,255,0.3) !important;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.25),
+              0 0 0 1px rgba(0,198,255,0.12) !important;
+}
+
+/* Blog cards */
+.blog-card {
+  transition:
+    transform 0.3s cubic-bezier(0.16,1,0.3,1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease !important;
+  will-change: transform;
+}
+.blog-card:hover {
+  transform: translateY(-6px) !important;
+  border-color: rgba(0,198,255,0.25) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35) !important;
+}
+
+/* Blog card thumbnail zoom */
+.blog-card__thumb-img {
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1) !important;
+}
+.blog-card:hover .blog-card__thumb-img {
+  transform: scale(1.05) !important;
+}
+
+/* ────────────────────────────────────────
+   FORM INPUTS
+──────────────────────────────────────── */
+.form-input,
+.form-select,
+.form-textarea {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease !important;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--clr-blue) !important;
+  box-shadow: 0 0 0 3px rgba(0,198,255,0.12),
+              0 2px 8px rgba(0,114,255,0.1) !important;
+}
+
+/* Submit button loading pulse */
+.form-submit {
+  transition:
+    transform 0.2s cubic-bezier(0.16,1,0.3,1),
+    box-shadow 0.3s ease !important;
+}
+.form-submit:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 40px rgba(0,198,255,0.35) !important;
+}
+.form-submit:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+/* ────────────────────────────────────────
+   FOOTER LINKS
+──────────────────────────────────────── */
+.footer__link {
+  position: relative;
+  display: inline-block;
+  transition: color 0.2s ease !important;
+}
+.footer__link::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 0; height: 1px;
+  background: var(--clr-blue);
+  transition: width 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+.footer__link:hover::after {
+  width: 100%;
+}
+
+/* ────────────────────────────────────────
+   PAGE HERO ORBS — gentle drift
+──────────────────────────────────────── */
+@keyframes m-orb1 {
+  0%,100% { transform: translate(0,0); }
+  40%     { transform: translate(24px,-18px); }
+  70%     { transform: translate(-16px,12px); }
+}
+@keyframes m-orb2 {
+  0%,100% { transform: translate(0,0); }
+  35%     { transform: translate(-20px,16px); }
+  65%     { transform: translate(18px,-14px); }
+}
+.page-hero__orb--1 {
+  animation: m-orb1 14s ease-in-out infinite;
+}
+.page-hero__orb--2 {
+  animation: m-orb2 18s ease-in-out infinite;
+}
+
+/* ────────────────────────────────────────
+   HERO CANVAS — fade in on load
+──────────────────────────────────────── */
+@keyframes m-canvas-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+#network-canvas {
+  animation: m-canvas-in 1.4s ease 0.5s both;
+}
+
+/* ────────────────────────────────────────
+   IMAGES — fade in when loaded
+──────────────────────────────────────── */
+img.m-loaded {
+  animation: m-canvas-in 0.5s ease both;
+}
+
+/* ────────────────────────────────────────
+   SECTION LABEL — dot pulse
+──────────────────────────────────────── */
+@keyframes m-dot {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50%     { transform: scale(1.6); opacity: 0.5; }
+}
+.page-hero__label-dot,
+.section__label::before {
+  animation: m-dot 2.8s ease-in-out infinite;
+}
+
+/* ────────────────────────────────────────
+   MOBILE MENU LINKS — stagger in
+──────────────────────────────────────── */
+.nav__mobile-link {
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1), color 0.2s ease !important;
+}
+
+/* ────────────────────────────────────────
+   STAT / NUMBER ITEMS
+──────────────────────────────────────── */
+.stat-item,
+.hero__stat {
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1) !important;
+}
+.stat-item:hover,
+.hero__stat:hover {
+  transform: translateY(-3px) !important;
+}

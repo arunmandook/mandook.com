@@ -334,3 +334,44 @@ img.m-loaded {
 .hero__stat:hover {
   transform: translateY(-3px) !important;
 }
+
+/* ────────────────────────────────────────
+   WORD-SPLIT REVEAL
+   Applied to .hero__headline and .page-hero__title
+   Replaces CSS animation: fade-up with per-word transitions
+──────────────────────────────────────── */
+
+/* Cancel the page's own CSS animation and make the container transparent */
+.m-split-active {
+  opacity: 1 !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+/* Each word span — hidden initial state */
+.m-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.55em);
+  transition:
+    opacity  0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  /* Prevent word-wrap from splitting our spans mid-word */
+  white-space: nowrap;
+}
+
+/* Triggered state — words animate into final position */
+.m-word.m-w-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Accessibility — instantly visible under reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .m-word {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

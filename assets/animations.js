@@ -26,118 +26,226 @@
   }
 
   /* ═══════════════════════════════════════════════
-     SCROLL REVEAL — fires every time element
-     enters AND exits viewport
+     WORD-SPLIT REVEAL
+     Splits headings into per-word spans that
+     stagger in — replaces the CSS fade-up animation
+     on .page-hero__title and .hero__headline
+  ═══════════════════════════════════════════════ */
+  var WORD_SPLIT_SEL = '.page-hero__title, .hero__headline';
+
+  function buildWordHTML(el) {
+    // Walk child nodes: text → split into m-word spans,
+    // BR → keep, element (span.grad etc.) → rewrap each word preserving attrs
+    var html = '';
+    el.childNodes.forEach(function (node) {
+      if (node.nodeType === 3) { // text node
+        node.textContent.split(/(\s+)/).forEach(function (part) {
+          if (/^\s+$/.test(part)) {
+            html += ' ';
+          } else if (part) {
+            html += '<span class="m-word">' + part + '</span>';
+          }
+        });
+      } else if (node.nodeName === 'BR') {
+        html += '<br>';
+      } else if (node.nodeType === 1) {
+        // Inline element (span.grad, span[style]) — preserve styling per word
+        var cls   = node.className ? ' ' + node.className : '';
+        var style = node.getAttribute('style') ? ' style="' + node.getAttribute('style') + '"' : '';
+        node.textContent.trim().split(/\s+/).filter(Boolean).forEach(function (word) {
+          html += '<span class="m-word' + cls + '"' + style + '>' + word + '</span> ';
+        });
+      }
+    });
+    return html;
+  }
+
+  function applyWordSplit(el) {
+    if (reducedMotion || el.hasAttribute('data-m-split')) return;
+
+    el.setAttribute('data-m-split', '1');
+    // Cancel the CSS animation that page styles define, make el a transparent
+    // container — words carry the animation instead
+    el.classList.add('m-split-active');
+    // Strip any IO-based classes that might have been added by autoTag first
+    el.classList.remove('reveal', 'm-anim', 'm-reveal', 'm-reveal-up', 'm-reveal-left', 'm-reveal-scale');
+    el.removeAttribute('data-m-anim');
+
+    el.innerHTML = buildWordHTML(el);
+
+    var words = el.querySelectorAll('.m-word');
+    // Match the original CSS animation-delay so the first word appears at the
+    // same time the old animation would have started
+    var baseDelay = el.classList.contains('page-hero__title') ? 0.32 : 0.05;
+    words.forEach(function (span, i) {
+      span.style.transitionDelay = (baseDelay + i * 0.055) + 's';
+    });
+
+    // Two-frame delay so the browser has painted the initial hidden state
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        words.forEach(function (span) { span.classList.add('m-w-in'); });
+      });
+    });
+  }
+
+  function applyWordSplits(root) {
+    var container = root || document;
+    container.querySelectorAll(WORD_SPLIT_SEL + ':not([data-m-split])').forEach(applyWordSplit);
+  }
+
+  /* ═══════════════════════════════════════════════
+     SCROLL REVEAL — auto-tags elements and
+     fires IntersectionObserver once per element
   ═══════════════════════════════════════════════ */
   var revealIO = null;
 
-  // Elements auto-tagged by JS (no HTML change needed).
-  // IMPORTANT: never include elements inside JS-controlled tabs/accordions
-  // (e.g. .wc-card, .svc-panel) — they start hidden and the IO never fires.
+  // Elements tagged by JS — no HTML change required.
+  // Rules:
+  //   • Never include elements in hidden tab panels (.svc-panel etc.)
+  //   • Never include page-hero children — those use CSS animation: fade-up
+  //   • Group by parent → siblings stagger together
   var AUTO_SELECTORS = [
-    /* section structure */
+    /* ── Section chrome ── */
     '.section__label',
     '.section__heading',
     '.section__sub',
-    /* standalone cards (not inside tab panels) */
-    '.why-card',
-    '.expect-card',
+
+    /* ── Homepage ── */
     '.problem-card',
-    '.process-card',
-    '.blog-card',
-    '.value-card',
-    '.mv-card',
-    '.faq-item',
-    '.stat-item',
     '.bp-card',
-    /* hero stats */
     '.hero__stat',
-    /* article / blog content */
+
+    /* ── Services tab buttons (always visible, not in hidden panels) ── */
+    '.svc-tab',
+
+    /* ── Process steps ── */
+    '.ps-step',
+
+    /* ── Why Choose cards ── */
+    '.why-card',
+
+    /* ── Blog cards ── */
+    '.blog-card',
+
+    /* ── About ── */
+    '.mv-card',
+    '.value-card',
+    '.story-body',
+
+    /* ── Contact / Expect ── */
+    '.expect-card',
+    '.contact-form-wrap',
+
+    /* ── Work ── */
+    '.case-card',
+    '.ind-card',
+    '.stat-item',
+
+    /* ── CTA section ── */
+    '.cta-section__heading',
+    '.cta-section__sub',
+    '.magnetic-wrap',        // CTA button wrapper
+
+    /* ── FAQ ── */
+    '.faq-item',
+
+    /* ── Blog article body ── */
     '.article-body > p',
     '.article-body > h2',
     '.article-body > h3',
     '.article-body > ul',
     '.article-body > blockquote',
-    /* contact */
-    '.contact-form-wrap',
-    /* footer cols */
+    '.article-body > .article-cta',
+
+    /* ── Footer columns ── */
     '.footer__col',
-    /* page hero elements not already animated via CSS keyframes */
-    '.page-hero__breadcrumb',
-    '.page-hero__label',
-    '.page-hero__title',
-    '.page-hero__sub',
   ];
 
-  // Direction map: which animation variant to assign per selector
   var DIRECTION = {
-    '.section__label':        'm-reveal',
-    '.section__heading':      'm-reveal',
-    '.section__sub':          'm-reveal',
-    '.why-card':              'm-reveal-up',
-    '.expect-card':           'm-reveal-up',
-    '.problem-card':          'm-reveal-up',
-    '.process-card':          'm-reveal-up',
-    '.blog-card':             'm-reveal-up',
-    '.value-card':            'm-reveal-up',
-    '.mv-card':               'm-reveal-up',
-    '.faq-item':              'm-reveal',
-    '.stat-item':             'm-reveal-up',
-    '.bp-card':               'm-reveal-up',
-    '.hero__stat':            'm-reveal-scale',
-    '.article-body > p':      'm-reveal',
-    '.article-body > h2':     'm-reveal',
-    '.article-body > h3':     'm-reveal',
-    '.article-body > ul':     'm-reveal',
-    '.article-body > blockquote': 'm-reveal-left',
-    '.contact-form-wrap':     'm-reveal-up',
-    '.footer__col':           'm-reveal-up',
-    '.page-hero__breadcrumb': 'm-reveal',
-    '.page-hero__label':      'm-reveal',
-    '.page-hero__title':      'm-reveal',
-    '.page-hero__sub':        'm-reveal',
+    '.section__label':              'm-reveal',
+    '.section__heading':            'm-reveal',
+    '.section__sub':                'm-reveal',
+    '.problem-card':                'm-reveal-up',
+    '.bp-card':                     'm-reveal-up',
+    '.hero__stat':                  'm-reveal-scale',
+    '.svc-tab':                     'm-reveal-up',
+    '.ps-step':                     'm-reveal-up',
+    '.why-card':                    'm-reveal-up',
+    '.blog-card':                   'm-reveal-up',
+    '.mv-card':                     'm-reveal-up',
+    '.value-card':                  'm-reveal-up',
+    '.story-body':                  'm-reveal',
+    '.expect-card':                 'm-reveal-up',
+    '.contact-form-wrap':           'm-reveal-up',
+    '.case-card':                   'm-reveal-up',
+    '.ind-card':                    'm-reveal-up',
+    '.stat-item':                   'm-reveal-scale',
+    '.cta-section__heading':        'm-reveal',
+    '.cta-section__sub':            'm-reveal',
+    '.magnetic-wrap':               'm-reveal-scale',
+    '.faq-item':                    'm-reveal',
+    '.article-body > p':            'm-reveal',
+    '.article-body > h2':           'm-reveal',
+    '.article-body > h3':           'm-reveal',
+    '.article-body > ul':           'm-reveal',
+    '.article-body > blockquote':   'm-reveal-left',
+    '.article-body > .article-cta': 'm-reveal-up',
+    '.footer__col':                 'm-reveal-up',
   };
 
   function tagElement(el, cls) {
-    if (!el.hasAttribute('data-m-anim')) {
-      el.setAttribute('data-m-anim', cls);
-      el.classList.add('m-anim', cls);
-    }
+    // Skip elements already tagged by IO system or by word-split
+    if (el.hasAttribute('data-m-anim') || el.hasAttribute('data-m-split')) return;
+    el.setAttribute('data-m-anim', cls);
+    el.classList.add('m-anim', cls);
   }
 
   function autoTag(root) {
     var container = root || document;
+
     AUTO_SELECTORS.forEach(function (sel) {
       var cls = DIRECTION[sel] || 'm-reveal';
-      container.querySelectorAll(sel).forEach(function (el, i) {
-        tagElement(el, cls);
-        // Stagger siblings inside a grid
-        var parent = el.parentElement;
-        if (parent) {
-          var siblings = Array.from(parent.children).filter(function (c) {
-            return c.classList.contains(el.classList[0]);
-          });
-          if (siblings.length > 1) {
-            var idx = siblings.indexOf(el);
-            el.style.transitionDelay = (idx * 0.07) + 's';
+      var elements = Array.from(container.querySelectorAll(sel));
+
+      // Group by parent — stagger runs within each visual grid
+      var byParent = new Map();
+      elements.forEach(function (el) {
+        var p = el.parentElement || document.body;
+        if (!byParent.has(p)) byParent.set(p, []);
+        byParent.get(p).push(el);
+      });
+
+      byParent.forEach(function (group) {
+        group.forEach(function (el, idx) {
+          tagElement(el, cls);
+          // Apply stagger only when there are siblings, and only when the
+          // author hasn't already set a [data-delay] HTML attribute
+          if (group.length > 1 && !el.hasAttribute('data-delay')) {
+            el.style.transitionDelay = (idx * 0.08) + 's';
           }
-        }
+        });
       });
     });
 
-    // Also tag existing reveal elements so they re-fire
+    // Ensure legacy .reveal elements are observed even if not in AUTO_SELECTORS
     container.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function (el) {
-      if (!el.hasAttribute('data-m-anim')) {
+      if (!el.hasAttribute('data-m-anim') && !el.hasAttribute('data-m-split')) {
         el.setAttribute('data-m-anim', 'legacy');
       }
     });
   }
 
   function safetyReveal(root) {
-    // After 1.5s, force-reveal anything still hidden (e.g. inside display:none tabs)
     setTimeout(function () {
-      (root || document).querySelectorAll('.m-anim:not(.m-visible), .reveal:not(.visible), .reveal-left:not(.visible), .reveal-right:not(.visible)').forEach(function (el) {
+      (root || document).querySelectorAll(
+        '.m-anim:not(.m-visible), .reveal:not(.visible), .reveal-left:not(.visible), .reveal-right:not(.visible)'
+      ).forEach(function (el) {
         el.classList.add('m-visible', 'visible');
+      });
+      // Also unblock any word spans that didn't fire (e.g. offscreen on load)
+      (root || document).querySelectorAll('.m-word:not(.m-w-in)').forEach(function (span) {
+        span.classList.add('m-w-in');
       });
     }, 1500);
   }
@@ -146,26 +254,25 @@
     if (revealIO) revealIO.disconnect();
 
     if (reducedMotion) {
-      // Just show everything immediately
       (root || document).querySelectorAll('.m-anim, .reveal, .reveal-left, .reveal-right').forEach(function (el) {
         el.classList.add('visible', 'm-visible');
+      });
+      (root || document).querySelectorAll('.m-word').forEach(function (span) {
+        span.classList.add('m-w-in');
       });
       return;
     }
 
     revealIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        var el = entry.target;
         if (entry.isIntersecting) {
-          el.classList.add('m-visible', 'visible');
-          // Unobserve after reveal so tab/accordion content stays visible
-          // when its panel is toggled off-screen
-          revealIO.unobserve(el);
+          entry.target.classList.add('m-visible', 'visible');
+          revealIO.unobserve(entry.target); // one-shot: never re-hide
         }
       });
     }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -30px 0px'
+      threshold: 0.08,
+      rootMargin: '0px 0px -24px 0px'
     });
 
     (root || document).querySelectorAll('[data-m-anim], .reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function (el) {
@@ -231,6 +338,8 @@
 
   window.mAnimEnter = function () {
     var pageRoot = document.getElementById('page-root');
+    // Word-split must run before autoTag so tagElement's guard sees data-m-split
+    applyWordSplits(pageRoot);
     autoTag(pageRoot);
     buildIO(pageRoot);
     initImageFade(pageRoot);
@@ -257,6 +366,7 @@
   ═══════════════════════════════════════════════ */
   function init() {
     initProgress();
+    applyWordSplits(document); // must run before autoTag
     autoTag(document);
     buildIO(document);
     initImageFade(document);

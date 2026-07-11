@@ -1,10 +1,9 @@
 (function () {
   'use strict';
 
-  var SELECTOR_NAV = '#mainNav';
-  var SELECTOR_MOBILE = '#mobileMenu';
   var ROOT_ID = 'page-root';
   var STYLES_ID = 'page-styles';
+  var REVEAL_SEL = '.reveal,.reveal-left,.reveal-right,.reveal-scale';
 
   function isSameOriginHtml(href) {
     try {
@@ -24,8 +23,20 @@
     });
   }
 
+  function forceReveal(container) {
+    // Give IntersectionObserver scripts a tick to set up, then force all
+    // reveal elements visible so nothing stays hidden after navigation.
+    setTimeout(function () {
+      (container || document).querySelectorAll(REVEAL_SEL).forEach(function (el) {
+        el.classList.add('visible');
+      });
+    }, 120);
+  }
+
   function runScripts(container) {
     container.querySelectorAll('script').forEach(function (old) {
+      // Skip re-injecting router.js itself to avoid duplicate listeners
+      if (old.src && old.src.indexOf('router.js') !== -1) return;
       var s = document.createElement('script');
       if (old.src) { s.src = old.src; s.async = false; }
       else { s.textContent = old.textContent; }
@@ -33,12 +44,32 @@
     });
   }
 
+  function swapStyles(doc) {
+    // Swap all <style> blocks that exist in the new page's <head>
+    var newStyles = doc.querySelectorAll('head style');
+    var curStyles = document.querySelectorAll('head style');
+    // Replace matched by index; append extras
+    newStyles.forEach(function (ns, i) {
+      if (curStyles[i]) {
+        curStyles[i].textContent = ns.textContent;
+      } else {
+        var s = document.createElement('style');
+        s.textContent = ns.textContent;
+        document.head.appendChild(s);
+      }
+    });
+    // Remove any leftover old styles beyond what the new page has
+    for (var i = newStyles.length; i < curStyles.length; i++) {
+      curStyles[i].remove();
+    }
+  }
+
   function navigate(href, push) {
     var root = document.getElementById(ROOT_ID);
     if (!root) return;
 
+    root.style.transition = 'opacity 0.12s ease';
     root.style.opacity = '0';
-    root.style.transition = 'opacity 0.15s ease';
 
     fetch(href)
       .then(function (r) { return r.text(); })
@@ -46,19 +77,15 @@
         var parser = new DOMParser();
         var doc = parser.parseFromString(html, 'text/html');
 
-        // Swap page title
+        // Swap title
         document.title = doc.title;
 
-        // Swap page-specific styles
-        var newStyle = doc.getElementById(STYLES_ID);
-        var curStyle = document.getElementById(STYLES_ID);
-        if (newStyle && curStyle) {
-          curStyle.textContent = newStyle.textContent;
-        }
+        // Swap all head styles
+        swapStyles(doc);
 
-        // Extract new page root content (strip nav elements from clone)
+        // Swap page root content
         var newRoot = doc.getElementById(ROOT_ID);
-        if (!newRoot) return;
+        if (!newRoot) { location.href = href; return; }
 
         root.innerHTML = newRoot.innerHTML;
 
@@ -68,14 +95,17 @@
         // Update nav active state
         updateActiveLinks(href);
 
-        // Scroll top
+        // Scroll to top
         window.scrollTo(0, 0);
 
-        // Re-run page scripts
+        // Re-run page scripts (excluding router)
         runScripts(root);
 
-        // Re-add body.loaded so reveal classes fire
+        // Ensure body.loaded is set
         document.body.classList.add('loaded');
+
+        // Force reveal elements visible (fallback for IntersectionObserver)
+        forceReveal(root);
 
         // Fade back in
         root.style.opacity = '1';
@@ -85,12 +115,12 @@
       });
   }
 
-  // Intercept all internal link clicks
+  // Intercept internal link clicks
   document.addEventListener('click', function (e) {
     var link = e.target.closest('a[href]');
     if (!link) return;
     var href = link.getAttribute('href');
-    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+    if (!href || href.charAt(0) === '#' || href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0) return;
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     var abs = new URL(href, location.href).href;
     if (!isSameOriginHtml(abs)) return;
@@ -103,7 +133,9 @@
     navigate(location.href, false);
   });
 
-  // Record initial state
+  // Force reveal on initial page load too (in case IntersectionObserver misses elements)
+  forceReveal(document);
+
   history.replaceState({ href: location.href }, '', location.href);
 
 })();

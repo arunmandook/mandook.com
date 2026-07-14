@@ -132,13 +132,53 @@
       'testi-3-name':  'Karan Patel',
       'testi-3-role':  'VP Sales · Horizon Realty',
 
-      /* ── INDEX CTA ── */
-      'cta-label':   "Let's build together",
-      'cta-heading': 'Ready to transform your business<br>with <span style="background:linear-gradient(135deg,var(--clr-blue),var(--clr-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Salesforce?</span>',
-      'cta-sub':     "Tell us your challenge. We'll respond within 24 hours with a tailored approach — no sales pitch, no commitment.",
-      'cta-btn':     'Get a Free Proposal',
-      'bp-label':    'Business Impact',
-      'bp-heading':  'Numbers that prove it.',
+      /* ── INDEX Process section ── */
+      'ps-label':   'Process',
+      'ps-heading': 'Businesses like clarity.',
+      'ps-sub':     "Here's exactly how we work.",
+      'ps-1-title': 'Discover',
+      'ps-1-desc':  'Understand your business goals, challenges, and the outcomes that matter most.',
+      'ps-2-title': 'Design',
+      'ps-2-desc':  'Create a modern user experience — intuitive, scalable, and built around your team.',
+      'ps-3-title': 'Build',
+      'ps-3-desc':  'Develop scalable solutions with clean architecture — on time, no surprises.',
+      'ps-4-title': 'Launch',
+      'ps-4-desc':  'Go live with confidence. We handle deployment, training, and every detail before day one.',
+      'ps-5-title': 'Support & Grow',
+      'ps-5-desc':  'We stay with you — monitoring, optimising, and evolving the platform as your business scales.',
+
+      /* ── INDEX Why Choose Us ── */
+      'wc-label':   'Why Choose Us',
+      'wc-heading': 'More than developers —<br><em>your digital growth partner</em>',
+      'wc-1-title': 'Local UAE Understanding',
+      'wc-1-desc':  'Deep knowledge of how UAE businesses operate, communicate, and grow.',
+      'wc-2-title': 'Customized Solutions',
+      'wc-2-desc':  'No templates. Every solution is architected around your specific goals.',
+      'wc-3-title': 'Long-Term AMC Support',
+      'wc-3-desc':  'We stay after go-live — maintaining, evolving, and optimising your platform.',
+      'wc-4-title': 'Transparent Pricing',
+      'wc-4-desc':  'Clear scope and fixed deliverables.',
+      'wc-5-title': 'Fast Communication',
+      'wc-5-desc':  'Direct access to your team. No account managers, no queues.',
+      'wc-6-title': 'Growth-Focused Approach',
+      'wc-6-desc':  'We measure our success by the results your business achieves.',
+
+      /* ── INDEX Grow CTA ── */
+      'cta-eyebrow': 'Ready to grow',
+      'cta-heading': 'Ready to grow your<br><span class="highlight">business digitally?</span>',
+      'cta-quote':   "Let's create a digital presence that attracts customers and builds trust.",
+      'cta-btn':     'Book Free Consultation',
+
+      /* ── INDEX Blog Preview ── */
+      'bp-eyebrow':  'From the blog',
+      'bp-heading':  'Insights &amp; <span class="text-gradient">Ideas</span>',
+      'bp-view-all': 'View all articles →',
+
+      /* ── Footer company links ── */
+      'footer-co-1': 'About',
+      'footer-co-2': 'Contact',
+      'footer-co-3': 'Blog',
+      'footer-co-4': 'Contact',
 
       /* ── ABOUT ── */
       'about-hero-label':  'About Mandook',
@@ -430,13 +470,53 @@
       'testi-3-name':  'كاران باتيل',
       'testi-3-role':  'نائب رئيس المبيعات · هورايزون ريالتي',
 
-      /* ── INDEX CTA ── */
-      'cta-label':   'لنبني معاً',
-      'cta-heading': 'هل أنت مستعد لتحويل أعمالك<br>بـ <span style="background:linear-gradient(135deg,var(--clr-blue),var(--clr-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Salesforce؟</span>',
-      'cta-sub':     'أخبرنا عن تحديك. سنرد خلال ٢٤ ساعة بمقاربة مخصصة — بدون عروض مبيعات أو التزامات.',
-      'cta-btn':     'احصل على عرض مجاني',
-      'bp-label':    'الأثر التجاري',
-      'bp-heading':  'أرقام تثبت ذلك.',
+      /* ── INDEX Process section ── */
+      'ps-label':   'العملية',
+      'ps-heading': 'الأعمال تحب الوضوح.',
+      'ps-sub':     'هكذا نعمل بالضبط.',
+      'ps-1-title': 'اكتشاف',
+      'ps-1-desc':  'فهم أهداف عملك، تحدياته، والنتائج الأكثر أهمية لك.',
+      'ps-2-title': 'تصميم',
+      'ps-2-desc':  'إنشاء تجربة مستخدم عصرية — سهلة الاستخدام وقابلة للتطوير ومصممة حول فريقك.',
+      'ps-3-title': 'بناء',
+      'ps-3-desc':  'تطوير حلول قابلة للتوسع ببنية نظيفة — في الوقت المحدد، بدون مفاجآت.',
+      'ps-4-title': 'إطلاق',
+      'ps-4-desc':  'انطلق بثقة. نتولى النشر والتدريب وكل التفاصيل قبل اليوم الأول.',
+      'ps-5-title': 'دعم ونمو',
+      'ps-5-desc':  'نبقى معك — نراقب ونحسّن ونطوّر المنصة مع نمو أعمالك.',
+
+      /* ── INDEX Why Choose Us ── */
+      'wc-label':   'لماذا نختارنا',
+      'wc-heading': 'أكثر من مطورين —<br><em>شريكك في النمو الرقمي</em>',
+      'wc-1-title': 'فهم محلي للسوق الإماراتي',
+      'wc-1-desc':  'معرفة عميقة بكيفية عمل الشركات الإماراتية وتواصلها ونموها.',
+      'wc-2-title': 'حلول مخصصة',
+      'wc-2-desc':  'لا قوالب جاهزة. كل حل مصمم خصيصاً لأهدافك.',
+      'wc-3-title': 'دعم AMC طويل الأمد',
+      'wc-3-desc':  'نبقى بعد الإطلاق — نصون منصتك ونطورها ونحسّنها.',
+      'wc-4-title': 'أسعار شفافة',
+      'wc-4-desc':  'نطاق واضح وتسليمات ثابتة.',
+      'wc-5-title': 'تواصل سريع',
+      'wc-5-desc':  'وصول مباشر لفريقك. بدون وسطاء، بدون طوابير انتظار.',
+      'wc-6-title': 'نهج يركز على النمو',
+      'wc-6-desc':  'نقيس نجاحنا بالنتائج التي تحققها أعمالك.',
+
+      /* ── INDEX Grow CTA ── */
+      'cta-eyebrow': 'هل أنت مستعد للنمو',
+      'cta-heading': 'هل أنت مستعد لتنمية<br><span class="highlight">أعمالك رقمياً؟</span>',
+      'cta-quote':   'دعنا نبني حضوراً رقمياً يجذب العملاء ويبني الثقة.',
+      'cta-btn':     'احجز استشارة مجانية',
+
+      /* ── INDEX Blog Preview ── */
+      'bp-eyebrow':  'من المدونة',
+      'bp-heading':  'رؤى وأفكار <span class="text-gradient">مفيدة</span>',
+      'bp-view-all': 'عرض جميع المقالات →',
+
+      /* ── Footer company links ── */
+      'footer-co-1': 'من نحن',
+      'footer-co-2': 'تواصل',
+      'footer-co-3': 'المدونة',
+      'footer-co-4': 'تواصل',
 
       /* ── ABOUT ── */
       'about-hero-label':  'عن مندوق',

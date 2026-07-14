@@ -3324,7 +3324,7 @@
     html[dir="rtl"] .nav__cta   { flex-direction: row-reverse; }
     html[dir="rtl"] .section__label { flex-direction: row-reverse; }
     html[dir="rtl"] .section__label::before { margin-right: 0; margin-left: 10px; }
-    html[dir="rtl"] .hero__actions { flex-direction: row-reverse; }
+    html[dir="rtl"] .hero__actions { justify-content: flex-start; }
     html[dir="rtl"] .hero__content { text-align: right; }
     html[dir="rtl"] .problem-card { text-align: right; }
     html[dir="rtl"] .problem-card__icon-wrap { justify-content: flex-end; }
@@ -3775,9 +3775,9 @@
 <section class="section process-steps" id="why" aria-labelledby="process-heading">
   <div class="container">
     <div class="process-steps__header reveal">
-      <div class="section__label">Process</div>
-      <h2 class="section__heading" id="process-heading">Businesses like clarity.</h2>
-      <p class="section__sub">Here's exactly how we work.</p>
+      <div class="section__label" data-i18n="ps-label">Process</div>
+      <h2 class="section__heading" id="process-heading" data-i18n="ps-heading">Businesses like clarity.</h2>
+      <p class="section__sub" data-i18n="ps-sub">Here's exactly how we work.</p>
     </div>
 
     <div class="process-steps__track">
@@ -3791,8 +3791,8 @@
           <div class="ps-step__line"></div>
         </div>
         <div class="ps-step__right">
-          <h3 class="ps-step__title">Discover</h3>
-          <p class="ps-step__desc">Understand your business goals, challenges, and the outcomes that matter most.</p>
+          <h3 class="ps-step__title" data-i18n="ps-1-title">Discover</h3>
+          <p class="ps-step__desc" data-i18n="ps-1-desc">Understand your business goals, challenges, and the outcomes that matter most.</p>
         </div>
       </div>
 
@@ -3805,8 +3805,8 @@
           <div class="ps-step__line"></div>
         </div>
         <div class="ps-step__right">
-          <h3 class="ps-step__title">Design</h3>
-          <p class="ps-step__desc">Create a modern user experience — intuitive, scalable, and built around your team.</p>
+          <h3 class="ps-step__title" data-i18n="ps-2-title">Design</h3>
+          <p class="ps-step__desc" data-i18n="ps-2-desc">Create a modern user experience — intuitive, scalable, and built around your team.</p>
         </div>
       </div>
 
@@ -3819,8 +3819,8 @@
           <div class="ps-step__line"></div>
         </div>
         <div class="ps-step__right">
-          <h3 class="ps-step__title">Build</h3>
-          <p class="ps-step__desc">Develop scalable solutions with clean architecture — on time, no surprises.</p>
+          <h3 class="ps-step__title" data-i18n="ps-3-title">Build</h3>
+          <p class="ps-step__desc" data-i18n="ps-3-desc">Develop scalable solutions with clean architecture — on time, no surprises.</p>
         </div>
       </div>
 
@@ -3833,8 +3833,8 @@
           <div class="ps-step__line"></div>
         </div>
         <div class="ps-step__right">
-          <h3 class="ps-step__title">Launch</h3>
-          <p class="ps-step__desc">Go live with confidence. We handle deployment, training, and every detail before day one.</p>
+          <h3 class="ps-step__title" data-i18n="ps-4-title">Launch</h3>
+          <p class="ps-step__desc" data-i18n="ps-4-desc">Go live with confidence. We handle deployment, training, and every detail before day one.</p>
         </div>
       </div>
 
@@ -3846,8 +3846,8 @@
           <div class="ps-step__node ps-step__node--last"></div>
         </div>
         <div class="ps-step__right">
-          <h3 class="ps-step__title">Support &amp; Grow</h3>
-          <p class="ps-step__desc">We stay with you — monitoring, optimising, and evolving the platform as your business scales.</p>
+          <h3 class="ps-step__title" data-i18n="ps-5-title">Support &amp; Grow</h3>
+          <p class="ps-step__desc" data-i18n="ps-5-desc">We stay with you — monitoring, optimising, and evolving the platform as your business scales.</p>
         </div>
       </div>
 
@@ -3861,8 +3861,8 @@
 <section class="section why-choose" aria-labelledby="wc-heading">
   <div class="container">
     <div class="why-choose__header reveal">
-      <div class="section__label">Why Choose Us</div>
-      <h2 class="why-choose__title" id="wc-heading">
+      <div class="section__label" data-i18n="wc-label">Why Choose Us</div>
+      <h2 class="why-choose__title" id="wc-heading" data-i18n-html="wc-heading">
         More than developers —<br><em>your digital growth partner</em>
       </h2>
     </div>
@@ -3874,8 +3874,8 @@
           <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
         </div>
         <div class="wc-card__text">
-          <h3>Local UAE Understanding</h3>
-          <p>Deep knowledge of how UAE businesses operate, communicate, and grow.</p>
+          <h3 data-i18n="wc-1-title">Local UAE Understanding</h3>
+          <p data-i18n="wc-1-desc">Deep knowledge of how UAE businesses operate, communicate, and grow.</p>
         </div>
       </div>
 
@@ -3884,8 +3884,8 @@
           <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
         </div>
         <div class="wc-card__text">
-          <h3>Customized Solutions</h3>
-          <p>No templates. Every solution is architected around your specific goals.</p>
+          <h3 data-i18n="wc-2-title">Customized Solutions</h3>
+          <p data-i18n="wc-2-desc">No templates. Every solution is architected around your specific goals.</p>
         </div>
       </div>
 
@@ -3894,8 +3894,8 @@
           <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
         </div>
         <div class="wc-card__text">
-          <h3>Long-Term AMC Support</h3>
-          <p>We stay after go-live — maintaining, evolving, and optimising your platform.</p>
+          <h3 data-i18n="wc-3-title">Long-Term AMC Support</h3>
+          <p data-i18n="wc-3-desc">We stay after go-live — maintaining, evolving, and optimising your platform.</p>
         </div>
       </div>
 
@@ -3904,8 +3904,8 @@
           <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
         </div>
         <div class="wc-card__text">
-          <h3>Transparent Pricing</h3>
-          <p>Clear scope and fixed deliverables.</p>
+          <h3 data-i18n="wc-4-title">Transparent Pricing</h3>
+          <p data-i18n="wc-4-desc">Clear scope and fixed deliverables.</p>
         </div>
       </div>
 
@@ -3914,8 +3914,8 @@
           <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
         </div>
         <div class="wc-card__text">
-          <h3>Fast Communication</h3>
-          <p>Direct access to your team. No account managers, no queues.</p>
+          <h3 data-i18n="wc-5-title">Fast Communication</h3>
+          <p data-i18n="wc-5-desc">Direct access to your team. No account managers, no queues.</p>
         </div>
       </div>
 
@@ -3924,8 +3924,8 @@
           <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
         </div>
         <div class="wc-card__text">
-          <h3>Growth-Focused Approach</h3>
-          <p>We measure our success by the results your business achieves.</p>
+          <h3 data-i18n="wc-6-title">Growth-Focused Approach</h3>
+          <p data-i18n="wc-6-desc">We measure our success by the results your business achieves.</p>
         </div>
       </div>
 
@@ -3948,17 +3948,17 @@
   <div class="container">
     <div class="grow-cta__inner">
 
-      <div class="grow-cta__eyebrow reveal">Ready to grow</div>
+      <div class="grow-cta__eyebrow reveal" data-i18n="cta-eyebrow">Ready to grow</div>
 
-      <h2 class="grow-cta__heading reveal" data-delay="1" id="grow-cta-heading">
+      <h2 class="grow-cta__heading reveal" data-delay="1" id="grow-cta-heading" data-i18n-html="cta-heading">
         Ready to grow your<br><span class="highlight">business digitally?</span>
       </h2>
 
-      <p class="grow-cta__quote reveal" data-delay="2">
+      <p class="grow-cta__quote reveal" data-delay="2" data-i18n="cta-quote">
         Let's create a digital presence that attracts customers and builds trust.
       </p>
 
-      <a href="contact.html" class="grow-cta__btn reveal" data-delay="3">
+      <a href="contact.html" class="grow-cta__btn reveal" data-delay="3" data-i18n="cta-btn">
         Book Free Consultation
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
           <path d="M3 9h12M11 4l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -4010,12 +4010,12 @@
 
     <div class="blog-preview__header reveal">
       <div class="blog-preview__header-left">
-        <div class="section-eyebrow">From the blog</div>
-        <h2 class="section-heading" id="blog-preview-heading">
+        <div class="section-eyebrow" data-i18n="bp-eyebrow">From the blog</div>
+        <h2 class="section-heading" id="blog-preview-heading" data-i18n-html="bp-heading">
           Insights &amp; <span class="text-gradient">Ideas</span>
         </h2>
       </div>
-      <a href="blog.html" class="blog-preview__view-all">View all articles <span>→</span></a>
+      <a href="blog.html" class="blog-preview__view-all" data-i18n="bp-view-all">View all articles <span>→</span></a>
     </div>
 
     <div class="blog-preview__grid">
@@ -4072,7 +4072,7 @@
         <div class="nav__logo" style="margin-bottom:0">
           <img src="assets/mandook-logo.png" alt="MANDOOK" class="nav__logo-img" fetchpriority="high">
         </div>
-        <p class="footer__tagline">We design and build digital experiences that help businesses grow — from stunning websites to powerful CRM solutions.</p>
+        <p class="footer__tagline" data-i18n="footer-tagline">We design and build digital experiences that help businesses grow — from stunning websites to powerful CRM solutions.</p>
         <div class="footer__socials">
           <a href="https://www.linkedin.com/company/mandook" class="footer__social" aria-label="LinkedIn" target="_blank" rel="noopener">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -4088,29 +4088,29 @@
 
       <!-- Services -->
       <div class="footer__col">
-        <div class="footer__col-title">Services</div>
+        <div class="footer__col-title" data-i18n="footer-col1-title">Services</div>
         <ul class="footer__col-links" role="list">
-          <li><a href="services.html" class="footer__col-link">Website Development</a></li>
-          <li><a href="services.html" class="footer__col-link">CMS Solutions</a></li>
-          <li><a href="services.html" class="footer__col-link">AMC Support</a></li>
-          <li><a href="services.html" class="footer__col-link">Lead Growth</a></li>
+          <li><a href="services.html" class="footer__col-link" data-i18n="footer-svc-1">Website Development</a></li>
+          <li><a href="services.html" class="footer__col-link" data-i18n="footer-svc-2">CMS Solutions</a></li>
+          <li><a href="services.html" class="footer__col-link" data-i18n="footer-svc-3">AMC Support</a></li>
+          <li><a href="services.html" class="footer__col-link" data-i18n="footer-svc-4">Lead Growth</a></li>
         </ul>
       </div>
 
       <!-- Company -->
       <div class="footer__col">
-        <div class="footer__col-title">Company</div>
+        <div class="footer__col-title" data-i18n="footer-col2-title">Company</div>
         <ul class="footer__col-links" role="list">
-          <li><a href="about.html"   class="footer__col-link">About</a></li>
-        <li><a href="contact.html" class="nav__link">Contact</a></li>
-          <li><a href="blog.html"    class="footer__col-link">Blog</a></li>
-          <li><a href="contact.html" class="footer__col-link">Contact</a></li>
+          <li><a href="about.html"   class="footer__col-link" data-i18n="footer-co-1">About</a></li>
+          <li><a href="contact.html" class="nav__link" data-i18n="footer-co-2">Contact</a></li>
+          <li><a href="blog.html"    class="footer__col-link" data-i18n="footer-co-3">Blog</a></li>
+          <li><a href="contact.html" class="footer__col-link" data-i18n="footer-co-4">Contact</a></li>
         </ul>
       </div>
 
       <!-- Contact -->
       <div class="footer__col">
-        <div class="footer__col-title">Get in Touch</div>
+        <div class="footer__col-title" data-i18n="footer-col3-title">Get in Touch</div>
         <ul class="footer__col-links footer__col-links--contact" role="list">
           <li>
             <a href="mailto:arun.mandook@gmail.com" class="footer__col-link footer__contact-item">
@@ -4137,7 +4137,7 @@
 
     <!-- Bottom bar -->
     <div class="footer__bottom">
-      <p class="footer__copy">© 2025 Mandook.com · All rights reserved.</p>
+      <p class="footer__copy" data-i18n="footer-copy">© 2025 Mandook.com · All rights reserved.</p>
 
     </div>
   </div>

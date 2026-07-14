@@ -32,7 +32,7 @@ html[dir="rtl"] .section__label::before  { margin-right: 0; margin-left: 10px; }
 html[dir="rtl"] .page-hero__label        { flex-direction: row-reverse; }
 
 /* Hero */
-html[dir="rtl"] .hero__actions  { flex-direction: row-reverse; }
+html[dir="rtl"] .hero__actions  { justify-content: flex-start; }
 html[dir="rtl"] .hero__content  { text-align: right; }
 
 /* Problem section */
@@ -56,15 +56,22 @@ html[dir="rtl"] .why-card { text-align: right; }
 html[dir="rtl"] .testi-card__author { flex-direction: row-reverse; }
 html[dir="rtl"] .testi-card__inner  { text-align: right; }
 
-/* Process steps */
+/* Process steps — homepage uses __left / __connector / __right */
 html[dir="rtl"] .ps-step {
   grid-template-columns: 1fr 32px 64px !important;
-  direction: rtl;
+  direction: ltr; /* explicit placement via grid-column below */
 }
-html[dir="rtl"] .ps-step__line { order: 2; }
-html[dir="rtl"] .ps-step__num  { order: 3; }
-html[dir="rtl"] .ps-step__body { order: 1; text-align: right; }
-html[dir="rtl"] .ps-step__tags { justify-content: flex-start; }
+html[dir="rtl"] .ps-step__right     { grid-column: 1; text-align: right; }
+html[dir="rtl"] .ps-step__connector { grid-column: 2; }
+html[dir="rtl"] .ps-step__left      { grid-column: 3; text-align: center; }
+html[dir="rtl"] .ps-step__title     { text-align: right; }
+html[dir="rtl"] .ps-step__desc      { text-align: right; }
+html[dir="rtl"] .process-steps__header { text-align: right; }
+
+/* Why Choose Us cards */
+html[dir="rtl"] .wc-card            { flex-direction: row-reverse; }
+html[dir="rtl"] .wc-card__text      { text-align: right; }
+html[dir="rtl"] .why-choose__title  { text-align: right; }
 
 /* FAQ */
 html[dir="rtl"] .faq-item__q   { text-align: right !important; flex-direction: row-reverse; }

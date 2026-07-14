@@ -54,7 +54,7 @@
     /* WHY SECTION */
     .why-section{background:var(--clr-surface);padding:var(--section-gap) 0;}.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:64px;}.why-card{padding:40px 36px;background:var(--clr-surface-2);border:1px solid var(--clr-border);border-radius:var(--radius-lg);transition:border-color 0.4s,transform 0.4s var(--ease-out-quart);}.why-card:hover{border-color:var(--clr-border-glow);transform:translateY(-6px);}.why-card__icon{font-size:32px;margin-bottom:20px;}.why-card__title{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--clr-text-1);margin-bottom:12px;}.why-card__desc{font-size:15px;color:var(--clr-text-2);line-height:1.65;}
     /* FAQ */
-    .faq-section{background:var(--clr-bg);padding:var(--section-gap) 0;}.faq-list{margin-top:56px;max-width:800px;}.faq-item{border-bottom:1px solid var(--clr-border);}.faq-item__q{width:100%;display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-family:var(--font-head);font-size:17px;font-weight:600;color:var(--clr-text-1);cursor:pointer;background:none;border:none;text-align:left;gap:16px;transition:color 0.3s;}.faq-item__q:hover{color:var(--clr-blue);}.faq-item__icon{flex-shrink:0;width:24px;height:24px;border-radius:50%;border:1px solid var(--clr-border);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--clr-text-3);transition:transform 0.3s,border-color 0.3s,color 0.3s;}.faq-item.open .faq-item__icon{transform:rotate(45deg);border-color:var(--clr-blue);color:var(--clr-blue);}.faq-item__a{max-height:0;overflow:hidden;transition:max-padding 0.3s;}.faq-item.open .faq-item__a{max-height:300px;padding-bottom:24px;}.faq-item__a p{font-size:15px;color:var(--clr-text-2);line-height:1.7;}
+    .faq-section{background:var(--clr-bg);padding:var(--section-gap) 0;}.faq-list{margin-top:56px;max-width:800px;}.faq-item{border-bottom:1px solid var(--clr-border);}.faq-item__q{width:100%;display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-family:var(--font-head);font-size:17px;font-weight:600;color:var(--clr-text-1);cursor:pointer;background:none;border:none;text-align:start;gap:16px;transition:color 0.3s;}.faq-item__q:hover{color:var(--clr-blue);}.faq-item__icon{flex-shrink:0;width:24px;height:24px;border-radius:50%;border:1px solid var(--clr-border);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--clr-text-3);transition:transform 0.3s,border-color 0.3s,color 0.3s;}.faq-item.open .faq-item__icon{transform:rotate(45deg);border-color:var(--clr-blue);color:var(--clr-blue);}.faq-item__a{max-height:0;overflow:hidden;transition:max-padding 0.3s;}.faq-item.open .faq-item__a{max-height:300px;padding-bottom:24px;}.faq-item__a p{font-size:15px;color:var(--clr-text-2);line-height:1.7;}
     /* CTA */
     .cta-section{padding:var(--section-gap) 0;position:relative;overflow:hidden;}.cta-section__bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 50% 50%,rgba(0,114,255,0.15) 0%,transparent 70%);pointer-events:none;}.cta-section__inner{position:relative;text-align:center;max-width:720px;margin:0 auto;}.cta-section__heading{font-family:var(--font-head);font-size:clamp(36px,5vw,64px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:24px;}.cta-section__sub{font-size:18px;color:var(--clr-text-2);margin-bottom:48px;line-height:1.65;}.btn--magnetic{display:inline-flex;align-items:center;gap:10px;padding:20px 52px;border-radius:100px;background:linear-gradient(135deg,var(--clr-blue-dark),var(--clr-blue));color:#fff;font-family:var(--font-head);font-size:18px;font-weight:700;letter-spacing:-0.3px;position:relative;overflow:hidden;transition:box-shadow 0.4s;box-shadow:0 0 60px rgba(0,198,255,0.3);}.btn--magnetic::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);animation:btn-shimmer 3s ease-in-out infinite;}@keyframes btn-shimmer{0%{left:-100%;}50%,100%{left:150%;}}.btn--magnetic:hover{box-shadow:0 0 80px rgba(0,198,255,0.5),0 20px 40px rgba(0,0,0,0.3);}
     /* ============================================================
@@ -234,8 +234,8 @@
         <li><a href="services.html" class="nav__link" data-i18n="nav-services">Services</a></li>
         <li><a href="process.html"  class="nav__link active" data-i18n="nav-process">Process</a></li>
         <li><a href="about.html"    class="nav__link" data-i18n="nav-about">About</a></li>
-        <li><a href="contact.html" class="nav__link">Contact</a></li>
-        <li><a href="blog.html"     class="nav__link">Blog</a></li>
+        <li><a href="contact.html" class="nav__link" data-i18n="nav-contact">Contact</a></li>
+        <li><a href="blog.html"     class="nav__link" data-i18n="nav-blog">Blog</a></li>
       </ul>
 
       <div class="nav__cta">
@@ -259,7 +259,7 @@
   <a href="services.html" class="nav__mobile-link" data-i18n="nav-services">Services</a>
   <a href="process.html"  class="nav__mobile-link" data-i18n="nav-process">Process</a>
   <a href="about.html"    class="nav__mobile-link" data-i18n="nav-about">About</a>
-  <a href="contact.html" class="nav__mobile-link">Contact</a>
+  <a href="contact.html" class="nav__mobile-link" data-i18n="nav-contact">Contact</a>
   <a href="contact.html"  class="nav__mobile-link" data-i18n="nav-proposal" style="color:var(--clr-blue)">Get a Proposal →</a>
   <div class="lang-toggle" style="margin:16px 24px;" aria-label="Switch language">
     <button class="lang-toggle__btn active" data-lang="en">EN</button>
@@ -276,18 +276,18 @@
   <div class="page-hero__grid" aria-hidden="true"></div>
   <div class="container"><div class="page-hero__content">
     <div class="page-hero__breadcrumb"><a href="index.html">Home</a><span>›</span><span>Process</span></div>
-    <div class="page-hero__label"><span class="page-hero__label-dot"></span>How We Work</div>
-    <h1 class="page-hero__title">A Process Built on<br><span class="grad">Transparency & Trust</span></h1>
-    <p class="page-hero__sub">No black boxes. No surprises. From the first call to long-term support, every step of our process is designed to keep you informed, in control, and confident.</p>
+    <div class="page-hero__label"><span class="page-hero__label-dot"></span><span data-i18n="proc-hero-label">How We Work</span></div>
+    <h1 class="page-hero__title" data-i18n-html="proc-hero-title">A Process Built on<br><span class="grad">Transparency & Trust</span></h1>
+    <p class="page-hero__sub" data-i18n="proc-hero-sub">No black boxes. No surprises. From the first call to long-term support, every step of our process is designed to keep you informed, in control, and confident.</p>
   </div></div>
 </section>
 
 <section class="process-steps-page" id="process">
   <div class="container">
     <div class="process-steps__header reveal">
-      <div class="section__label">Our Process</div>
-      <h2 class="section__heading">Businesses like clarity.</h2>
-      <p class="section__sub">Here's exactly how we work — from the first call to long-term growth.</p>
+      <div class="section__label"><span data-i18n="proc-label">Our Process</span></div>
+      <h2 class="section__heading" data-i18n="proc-heading">Businesses like clarity.</h2>
+      <p class="section__sub" data-i18n="proc-sub">Here's exactly how we work — from the first call to long-term growth.</p>
     </div>
 
     <div class="process-steps__track">
@@ -296,9 +296,9 @@
         <div class="ps-step__left"><div class="ps-step__num">01</div></div>
         <div class="ps-step__connector"><div class="ps-step__node"></div><div class="ps-step__line"></div></div>
         <div class="ps-step__right">
-          <h3 class="ps-step__title">Discover</h3>
-          <p class="ps-step__desc">A focused session to understand your business goals, challenges, and the outcomes that matter most. We listen far more than we talk — then map a clear path forward.</p>
-          <div class="ps-step__tags"><span class="ps-step__tag">Free call</span><span class="ps-step__tag">No commitment</span></div>
+          <h3 class="ps-step__title" data-i18n="proc-1-title">Discover</h3>
+          <p class="ps-step__desc" data-i18n="proc-1-desc">A focused session to understand your business goals, challenges, and the outcomes that matter most. We listen far more than we talk — then map a clear path forward.</p>
+          <div class="ps-step__tags"><span class="ps-step__tag" data-i18n="proc-1-tag1">Free call</span><span class="ps-step__tag" data-i18n="proc-1-tag2">No commitment</span></div>
         </div>
       </div>
 
@@ -306,9 +306,9 @@
         <div class="ps-step__left"><div class="ps-step__num">02</div></div>
         <div class="ps-step__connector"><div class="ps-step__node"></div><div class="ps-step__line"></div></div>
         <div class="ps-step__right">
-          <h3 class="ps-step__title">Design</h3>
-          <p class="ps-step__desc">Create a modern user experience — intuitive, scalable, and built around your team. Fixed-scope proposal with milestones, timelines, and costs. No surprises.</p>
-          <div class="ps-step__tags"><span class="ps-step__tag">Fixed-scope</span><span class="ps-step__tag">Milestone-based</span></div>
+          <h3 class="ps-step__title" data-i18n="proc-2-title">Design</h3>
+          <p class="ps-step__desc" data-i18n="proc-2-desc">Create a modern user experience — intuitive, scalable, and built around your team. Fixed-scope proposal with milestones, timelines, and costs. No surprises.</p>
+          <div class="ps-step__tags"><span class="ps-step__tag" data-i18n="proc-2-tag1">Fixed-scope</span><span class="ps-step__tag" data-i18n="proc-2-tag2">Milestone-based</span></div>
         </div>
       </div>
 
@@ -316,9 +316,9 @@
         <div class="ps-step__left"><div class="ps-step__num">03</div></div>
         <div class="ps-step__connector"><div class="ps-step__node"></div><div class="ps-step__line"></div></div>
         <div class="ps-step__right">
-          <h3 class="ps-step__title">Build</h3>
-          <p class="ps-step__desc">Develop scalable solutions with clean architecture — on time, no surprises. Two-week sprints with weekly demos so you see working software early and often.</p>
-          <div class="ps-step__tags"><span class="ps-step__tag">2-week sprints</span><span class="ps-step__tag">Weekly demos</span></div>
+          <h3 class="ps-step__title" data-i18n="proc-3-title">Build</h3>
+          <p class="ps-step__desc" data-i18n="proc-3-desc">Develop scalable solutions with clean architecture — on time, no surprises. Two-week sprints with weekly demos so you see working software early and often.</p>
+          <div class="ps-step__tags"><span class="ps-step__tag" data-i18n="proc-3-tag1">2-week sprints</span><span class="ps-step__tag" data-i18n="proc-3-tag2">Weekly demos</span></div>
         </div>
       </div>
 
@@ -326,9 +326,9 @@
         <div class="ps-step__left"><div class="ps-step__num">04</div></div>
         <div class="ps-step__connector"><div class="ps-step__node"></div><div class="ps-step__line"></div></div>
         <div class="ps-step__right">
-          <h3 class="ps-step__title">Launch</h3>
-          <p class="ps-step__desc">Go live with confidence. We handle deployment, training, and every detail before day one — zero-downtime releases and full documentation included.</p>
-          <div class="ps-step__tags"><span class="ps-step__tag">Zero downtime</span><span class="ps-step__tag">Full docs</span></div>
+          <h3 class="ps-step__title" data-i18n="proc-4-title">Launch</h3>
+          <p class="ps-step__desc" data-i18n="proc-4-desc">Go live with confidence. We handle deployment, training, and every detail before day one — zero-downtime releases and full documentation included.</p>
+          <div class="ps-step__tags"><span class="ps-step__tag" data-i18n="proc-4-tag1">Zero downtime</span><span class="ps-step__tag" data-i18n="proc-4-tag2">Full docs</span></div>
         </div>
       </div>
 
@@ -336,9 +336,9 @@
         <div class="ps-step__left"><div class="ps-step__num">05</div></div>
         <div class="ps-step__connector"><div class="ps-step__node ps-step__node--last"></div></div>
         <div class="ps-step__right">
-          <h3 class="ps-step__title">Support &amp; Grow</h3>
-          <p class="ps-step__desc">We stay with you — monitoring, optimising, and evolving the platform as your business scales. 90-day post-launch support included in every engagement.</p>
-          <div class="ps-step__tags"><span class="ps-step__tag">90-day support</span><span class="ps-step__tag">Ongoing available</span></div>
+          <h3 class="ps-step__title" data-i18n="proc-5-title">Support &amp; Grow</h3>
+          <p class="ps-step__desc" data-i18n="proc-5-desc">We stay with you — monitoring, optimising, and evolving the platform as your business scales. 90-day post-launch support included in every engagement.</p>
+          <div class="ps-step__tags"><span class="ps-step__tag" data-i18n="proc-5-tag1">90-day support</span><span class="ps-step__tag" data-i18n="proc-5-tag2">Ongoing available</span></div>
         </div>
       </div>
 
@@ -349,17 +349,17 @@
 
 <section class="faq-section">
   <div class="container">
-    <div class="section__label reveal">FAQ</div>
-    <h2 class="section__heading reveal" data-delay="1">Common Questions</h2>
+    <div class="section__label reveal"><span data-i18n="proc-faq-label">FAQ</span></div>
+    <h2 class="section__heading reveal" data-delay="1" data-i18n="proc-faq-heading">Common Questions</h2>
     <div class="faq-list">
-      <div class="faq-item reveal"><button class="faq-item__q">How long does a typical engagement take?<span class="faq-item__icon">+</span></button><div class="faq-item__a"><p>It depends on scope. A focused audit takes 1–2 weeks. A full-stack product build typically runs 3–6 months. We always define timelines upfront in the proposal so you can plan accordingly.</p></div></div>
-      <div class="faq-item reveal" data-delay="1"><button class="faq-item__q">Do you work with early-stage startups?<span class="faq-item__icon">+</span></button><div class="faq-item__a"><p>We work best with companies that have a clear problem to solve and budget to solve it properly. We're not the cheapest option — but we are the most reliable. If you're pre-seed, reach out anyway and we'll point you in the right direction.</p></div></div>
-      <div class="faq-item reveal" data-delay="2"><button class="faq-item__q">Can we use our own tools and tech stack?<span class="faq-item__icon">+</span></button><div class="faq-item__a"><p>Absolutely. We adapt to your environment. If you have existing infrastructure, tooling, or standards, we work within them. We only recommend changes when there's a compelling technical or business reason.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-item__q"><span data-i18n="proc-faq-1-q">How long does a typical engagement take?</span><span class="faq-item__icon">+</span></button><div class="faq-item__a" data-i18n-html="proc-faq-1-a"><p>It depends on scope. A focused audit takes 1–2 weeks. A full-stack product build typically runs 3–6 months. We always define timelines upfront in the proposal so you can plan accordingly.</p></div></div>
+      <div class="faq-item reveal" data-delay="1"><button class="faq-item__q"><span data-i18n="proc-faq-2-q">Do you work with early-stage startups?</span><span class="faq-item__icon">+</span></button><div class="faq-item__a" data-i18n-html="proc-faq-2-a"><p>We work best with companies that have a clear problem to solve and budget to solve it properly. We're not the cheapest option — but we are the most reliable. If you're pre-seed, reach out anyway and we'll point you in the right direction.</p></div></div>
+      <div class="faq-item reveal" data-delay="2"><button class="faq-item__q"><span data-i18n="proc-faq-3-q">Can we use our own tools and tech stack?</span><span class="faq-item__icon">+</span></button><div class="faq-item__a" data-i18n-html="proc-faq-3-a"><p>Absolutely. We adapt to your environment. If you have existing infrastructure, tooling, or standards, we work within them. We only recommend changes when there's a compelling technical or business reason.</p></div></div>
     </div>
   </div>
 </section>
 
-<section class="cta-section" id="contact"><div class="cta-section__bg" aria-hidden="true"></div><div class="container"><div class="cta-section__inner"><div class="section__label reveal" style="justify-content:center">Let's build together</div><h2 class="cta-section__heading reveal" data-delay="1">Ready to start the <span style="background:linear-gradient(135deg,var(--clr-blue),var(--clr-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">conversation?</span></h2><p class="cta-section__sub reveal" data-delay="2">The first call is free, focused, and genuinely useful — whether we work together or not.</p><div class="footer__col"><div class="magnetic-wrap"><a href="contact.html" class="btn--magnetic">Book a Discovery Call →</a></div></div></div></div></section>
+<section class="cta-section" id="contact"><div class="cta-section__bg" aria-hidden="true"></div><div class="container"><div class="cta-section__inner"><div class="section__label reveal" style="justify-content:center"><span data-i18n="proc-cta-label">Let's build together</span></div><h2 class="cta-section__heading reveal" data-delay="1" data-i18n-html="proc-cta-heading">Ready to start the <span style="background:linear-gradient(135deg,var(--clr-blue),var(--clr-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">conversation?</span></h2><p class="cta-section__sub reveal" data-delay="2" data-i18n="proc-cta-sub">The first call is free, focused, and genuinely useful — whether we work together or not.</p><div class="footer__col"><div class="magnetic-wrap"><a href="contact.html" class="btn--magnetic" data-i18n="proc-cta-btn">Book a Discovery Call →</a></div></div></div></div></section>
 
 <footer class="footer" role="contentinfo">
   <div class="footer__glow-bar" aria-hidden="true"></div>
@@ -369,7 +369,7 @@
         <div class="nav__logo" style="margin-bottom:0">
           <img src="assets/mandook-logo.png" alt="MANDOOK" class="nav__logo-img" fetchpriority="high">
         </div>
-        <p class="footer__tagline">We design and build digital experiences that help businesses grow — from stunning websites to powerful CRM solutions.</p>
+        <p class="footer__tagline" data-i18n="footer-tagline">We design and build digital experiences that help businesses grow — from stunning websites to powerful CRM solutions.</p>
         <div class="footer__socials">
           <a href="https://www.linkedin.com/company/mandook" class="footer__social" aria-label="LinkedIn" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
           <a href="#" class="footer__social" aria-label="Instagram" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
@@ -377,25 +377,24 @@
         </div>
       </div>
       <div class="footer__col">
-        <div class="footer__col-title">Services</div>
+        <div class="footer__col-title" data-i18n="footer-col1-title">Services</div>
         <ul class="footer__col-links" role="list">
-          <li><a href="services.html" class="footer__col-link">Website Development</a></li>
-          <li><a href="services.html" class="footer__col-link">CMS Solutions</a></li>
-          <li><a href="services.html" class="footer__col-link">AMC Support</a></li>
-          <li><a href="services.html" class="footer__col-link">Lead Growth</a></li>
+          <li><a href="services.html" class="footer__col-link" data-i18n="footer-svc-1">Website Development</a></li>
+          <li><a href="services.html" class="footer__col-link" data-i18n="footer-svc-2">CMS Solutions</a></li>
+          <li><a href="services.html" class="footer__col-link" data-i18n="footer-svc-3">AMC Support</a></li>
+          <li><a href="services.html" class="footer__col-link" data-i18n="footer-svc-4">Lead Growth</a></li>
         </ul>
       </div>
       <div class="footer__col">
-        <div class="footer__col-title">Company</div>
+        <div class="footer__col-title" data-i18n="footer-col2-title">Company</div>
         <ul class="footer__col-links" role="list">
-          <li><a href="about.html"   class="footer__col-link">About</a></li>
-        <li><a href="contact.html" class="nav__link">Contact</a></li>
-          <li><a href="blog.html"    class="footer__col-link">Blog</a></li>
-          <li><a href="contact.html" class="footer__col-link">Contact</a></li>
+          <li><a href="about.html"   class="footer__col-link" data-i18n="footer-co-about">About</a></li>
+          <li><a href="blog.html"    class="footer__col-link" data-i18n="footer-co-blog">Blog</a></li>
+          <li><a href="contact.html" class="footer__col-link" data-i18n="footer-co-contact">Contact</a></li>
         </ul>
       </div>
       <div class="footer__col">
-        <div class="footer__col-title">Get in Touch</div>
+        <div class="footer__col-title" data-i18n="footer-col3-title">Get in Touch</div>
         <ul class="footer__col-links footer__col-links--contact" role="list">
           <li><a href="mailto:arun.mandook@gmail.com" class="footer__col-link footer__contact-item"><span class="footer__contact-icon">✉</span><span>arun.mandook@gmail.com</span></a></li>
           <li><a href="tel:+919619884321" class="footer__col-link footer__contact-item"><span class="footer__contact-icon">📞</span><span>+91 96198 84321</span></a></li>
@@ -404,7 +403,7 @@
       </div>
     </div>
     <div class="footer__bottom">
-      <p class="footer__copy">© 2025 Mandook.com · All rights reserved.</p>
+      <p class="footer__copy" data-i18n="footer-copy">© 2025 Mandook.com · All rights reserved.</p>
 
     </div>
   </div>
@@ -428,6 +427,7 @@
 </script>
 <script>requestAnimationFrame(function(){requestAnimationFrame(function(){var s=document.getElementById("no-trans");if(s)s.remove();});});</script>
 </div><!-- #page-root -->
+<script src="assets/i18n.js"></script>
 <script src="assets/animations.js" defer></script>
 <script src="assets/router.js"></script>
 </body>

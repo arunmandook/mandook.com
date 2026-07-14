@@ -111,6 +111,7 @@
         // Page enter animation + re-init counters / image fades
         if (typeof window.mAnimEnter === 'function') window.mAnimEnter();
         else root.style.opacity = '1';
+        if (typeof window.mandookI18n !== 'undefined') window.mandookI18n.reapply();
       })
       .catch(function () {
         location.href = href;

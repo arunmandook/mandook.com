@@ -3,6 +3,116 @@
    Only adds transitions/transforms. Zero layout changes.
    ============================================================ */
 
+/* ────────────────────────────────────────
+   RTL / Arabic overrides
+   Loaded once, persists across SPA navigation.
+──────────────────────────────────────── */
+html[dir="rtl"] body,
+html[dir="rtl"] h1,html[dir="rtl"] h2,html[dir="rtl"] h3,
+html[dir="rtl"] p,html[dir="rtl"] a,html[dir="rtl"] li,
+html[dir="rtl"] span,html[dir="rtl"] div,html[dir="rtl"] button,
+html[dir="rtl"] label,html[dir="rtl"] input,html[dir="rtl"] select,
+html[dir="rtl"] textarea {
+  font-family: 'Cairo', sans-serif !important;
+  letter-spacing: 0 !important;
+}
+
+/* Nav */
+html[dir="rtl"] .nav__inner    { flex-direction: row-reverse; }
+html[dir="rtl"] .nav__links    { flex-direction: row-reverse; }
+html[dir="rtl"] .nav__cta      { flex-direction: row-reverse; }
+html[dir="rtl"] .nav__link::after {
+  left: auto;
+  right: 0;
+}
+
+/* Section labels */
+html[dir="rtl"] .section__label          { flex-direction: row-reverse; }
+html[dir="rtl"] .section__label::before  { margin-right: 0; margin-left: 10px; }
+html[dir="rtl"] .page-hero__label        { flex-direction: row-reverse; }
+
+/* Hero */
+html[dir="rtl"] .hero__actions  { flex-direction: row-reverse; }
+html[dir="rtl"] .hero__content  { text-align: right; }
+
+/* Problem section */
+html[dir="rtl"] .problem-card                { text-align: right; }
+html[dir="rtl"] .problem-card__icon-wrap     { justify-content: flex-end; }
+html[dir="rtl"] .problem__transition         { text-align: right; }
+
+/* Services */
+html[dir="rtl"] .svc-tab              { flex-direction: row-reverse; }
+html[dir="rtl"] .svc-tab__arrow       { transform: scaleX(-1); margin-right: auto; margin-left: 0; }
+html[dir="rtl"] .svc-tab::before      { left: auto; right: 0; border-radius: 2px 0 0 2px; }
+html[dir="rtl"] .svc-panel__header    { text-align: right; }
+html[dir="rtl"] .svc-panel__features li { flex-direction: row-reverse; }
+html[dir="rtl"] .svc-panel__cta       { flex-direction: row-reverse; }
+html[dir="rtl"] .services__layout     { direction: rtl; }
+
+/* Why cards */
+html[dir="rtl"] .why-card { text-align: right; }
+
+/* Testimonials */
+html[dir="rtl"] .testi-card__author { flex-direction: row-reverse; }
+html[dir="rtl"] .testi-card__inner  { text-align: right; }
+
+/* Process steps */
+html[dir="rtl"] .ps-step {
+  grid-template-columns: 1fr 32px 64px !important;
+  direction: rtl;
+}
+html[dir="rtl"] .ps-step__line { order: 2; }
+html[dir="rtl"] .ps-step__num  { order: 3; }
+html[dir="rtl"] .ps-step__body { order: 1; text-align: right; }
+html[dir="rtl"] .ps-step__tags { justify-content: flex-start; }
+
+/* FAQ */
+html[dir="rtl"] .faq-item__q   { text-align: right !important; flex-direction: row-reverse; }
+html[dir="rtl"] .faq-item__a   { text-align: right; }
+
+/* About */
+html[dir="rtl"] .story-body    { text-align: right; }
+html[dir="rtl"] .mv-card       { text-align: right; }
+html[dir="rtl"] .value-card    { text-align: right; }
+
+/* Work / case cards */
+html[dir="rtl"] .case-card__metrics  { flex-direction: row-reverse; }
+html[dir="rtl"] .case-card__link     { flex-direction: row-reverse; }
+html[dir="rtl"] .case-card--featured { direction: rtl; }
+html[dir="rtl"] .ind-card            { text-align: right; }
+
+/* Contact */
+html[dir="rtl"] .contact-layout      { direction: rtl; }
+html[dir="rtl"] .contact-info-item   { flex-direction: row-reverse; text-align: right; }
+html[dir="rtl"] .sidebar-content     { text-align: right; }
+html[dir="rtl"] .expect-card         { text-align: right; }
+html[dir="rtl"] .form-group label    { text-align: right; display: block; }
+html[dir="rtl"] .form-select {
+  background-position: left 16px center !important;
+  padding-left: 44px !important;
+  padding-right: 16px !important;
+}
+html[dir="rtl"] .trust-pills { flex-direction: row-reverse; flex-wrap: wrap; }
+
+/* Blog */
+html[dir="rtl"] .blog-card         { text-align: right; }
+html[dir="rtl"] .blog-card__link   { flex-direction: row-reverse; }
+
+/* Footer */
+html[dir="rtl"] .footer__col-link:hover { transform: translateX(4px); }
+html[dir="rtl"] .footer__bottom         { flex-direction: row-reverse; }
+html[dir="rtl"] .footer__brand p        { text-align: right; }
+html[dir="rtl"] .footer__col            { text-align: right; }
+
+/* CTA */
+html[dir="rtl"] .cta-section__heading { text-align: right; }
+html[dir="rtl"] .cta-section__sub     { text-align: right; }
+
+/* Scroll-reveal: flip slide-left to slide-right for RTL */
+html[dir="rtl"] .m-reveal-left {
+  transform: translateX(28px);
+}
+
 /* ── Reduced motion: kill everything ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

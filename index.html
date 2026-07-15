@@ -2712,7 +2712,7 @@
       position: absolute;
       top: 0; left: 50%; transform: translateX(-50%);
       width: 600px; height: 200px;
-      background: radial-gradient(ellipse at top, rgba(26,107,90,0.08) 0%, transparent 70%);
+      background: radial-gradient(ellipse at top, rgba(26,107,90,0.45) 0%, rgba(26,107,90,0.12) 40%, transparent 70%);
       pointer-events: none;
     }
     .footer__grid {
@@ -2735,7 +2735,7 @@
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--clr-text-3);
+      color: rgba(255,255,255,0.75);
       margin-bottom: 24px;
       display: flex;
       align-items: center;
@@ -2757,7 +2757,8 @@
     }
     .footer__col-link {
       font-size: 14px;
-      color: var(--clr-text-2);
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
       transition: color 0.25s, padding-left 0.25s;
       display: inline-flex;
       align-items: flex-start;

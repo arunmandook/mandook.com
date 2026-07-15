@@ -30,8 +30,8 @@
       --clr-gold-light:   #E4C76B;
 
       --clr-text-1:       #F0F4FF;
-      --clr-text-2:       #FFFFFF;
-      --clr-text-3:       #555F78;
+      --clr-text-2:       rgba(210,225,255,0.80);
+      --clr-text-3:       #7B8DB5;
 
       --font-head:        'Space Grotesk', sans-serif;
       --font-body:        'Inter', sans-serif;
@@ -46,7 +46,7 @@
       --radius-xl:  40px;
 
       --nav-h:      110px;
-      --section-gap: 56px;
+      --section-gap: 88px;
       --h1-size: clamp(36px, 5vw, 58px);
       --h2-size: clamp(28px, 4vw, 48px);
       --h3-size: clamp(17px, 2vw, 22px);
@@ -566,10 +566,11 @@
       font-family: var(--font-head);
       font-size: clamp(32px, 4.5vw, 58px);
       font-weight: 800;
-      line-height: 1.04;
-      letter-spacing: -2px;
+      line-height: 1.06;
+      letter-spacing: -1.5px;
       margin-bottom: 28px;
       color: var(--clr-text-1);
+      text-wrap: balance;
     }
     .hero__headline .word {
       display: inline-block;
@@ -927,6 +928,7 @@
       line-height: 1.1;
       color: var(--clr-text-1);
       margin-bottom: 20px;
+      text-wrap: balance;
     }
 
     .section__sub {
@@ -1532,6 +1534,7 @@
       max-width: 560px;
       margin: 0 auto;
       line-height: 1.25;
+      text-wrap: balance;
     }
     .why-choose__title em {
       font-style: normal;
@@ -2768,6 +2771,46 @@
     }
 
     /* ============================================================
+       BLOG SECTION HEADER CLASSES
+    ============================================================ */
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--clr-blue);
+      margin-bottom: 12px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--clr-blue);
+      flex-shrink: 0;
+    }
+    .section-heading {
+      font-family: var(--font-head);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      color: var(--clr-text-1);
+      text-wrap: balance;
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, var(--clr-blue) 0%, var(--clr-purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* Footer brand — constrain logo to footer proportions */
+    .footer__brand .nav__logo-img { height: 64px; max-height: 64px; }
+    /* Footer phone/email icon override */
+    .footer__contact-icon svg { display: block; }
+
+    /* ============================================================
        KEYFRAMES SHARED
     ============================================================ */
     @keyframes fade-up {
@@ -3274,7 +3317,7 @@
     }
 
     @media (max-width: 768px) {
-      :root { --section-gap: 40px; }
+      :root { --section-gap: 56px; }
       .nav__links, .nav__cta { display: none; }
       .nav__hamburger { display: flex; }
       .nav__mobile { display: flex; }
@@ -3531,7 +3574,7 @@
 
       <div class="problem-card reveal" data-delay="1">
         <div class="problem-card__icon-wrap">
-          <span>🚫</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
           <span class="problem-card__num">01</span>
         </div>
         <h3 class="problem-card__title" data-i18n="prob-1-title">No Website</h3>
@@ -3540,7 +3583,7 @@
 
       <div class="problem-card reveal" data-delay="2">
         <div class="problem-card__icon-wrap">
-          <span>⏳</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <span class="problem-card__num">02</span>
         </div>
         <h3 class="problem-card__title" data-i18n="prob-2-title">Outdated Website</h3>
@@ -3549,7 +3592,7 @@
 
       <div class="problem-card reveal" data-delay="3">
         <div class="problem-card__icon-wrap">
-          <span>📉</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
           <span class="problem-card__num">03</span>
         </div>
         <h3 class="problem-card__title" data-i18n="prob-3-title">No Lead System</h3>
@@ -3558,7 +3601,7 @@
 
       <div class="problem-card reveal" data-delay="4">
         <div class="problem-card__icon-wrap">
-          <span>🔧</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           <span class="problem-card__num">04</span>
         </div>
         <h3 class="problem-card__title" data-i18n="prob-4-title">No Maintenance</h3>
@@ -3605,28 +3648,28 @@
 
         <div class="svc-tab active" role="tab" aria-selected="true" aria-controls="panel-1" data-tab="1">
           <span class="svc-tab__num">01</span>
-          <span class="svc-tab__icon">🌐</span>
+          <span class="svc-tab__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
           <span class="svc-tab__label" data-i18n="tab-1-label">Website Development</span>
           <span class="svc-tab__arrow">→</span>
         </div>
 
         <div class="svc-tab" role="tab" aria-selected="false" aria-controls="panel-2" data-tab="2">
           <span class="svc-tab__num">02</span>
-          <span class="svc-tab__icon">🖥️</span>
+          <span class="svc-tab__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
           <span class="svc-tab__label" data-i18n="tab-2-label">CMS Solutions</span>
           <span class="svc-tab__arrow">→</span>
         </div>
 
         <div class="svc-tab" role="tab" aria-selected="false" aria-controls="panel-3" data-tab="3">
           <span class="svc-tab__num">03</span>
-          <span class="svc-tab__icon">🔧</span>
+          <span class="svc-tab__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
           <span class="svc-tab__label" data-i18n="tab-3-label">AMC Support</span>
           <span class="svc-tab__arrow">→</span>
         </div>
 
         <div class="svc-tab" role="tab" aria-selected="false" aria-controls="panel-4" data-tab="4">
           <span class="svc-tab__num">04</span>
-          <span class="svc-tab__icon">📈</span>
+          <span class="svc-tab__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
           <span class="svc-tab__label" data-i18n="tab-4-label">Lead Growth</span>
           <span class="svc-tab__arrow">→</span>
         </div>
@@ -3640,7 +3683,7 @@
         <div class="svc-panel active" id="panel-1" role="tabpanel">
           <div class="svc-panel__inner">
             <div class="svc-panel__header">
-              <div class="svc-panel__icon-wrap">🌐</div>
+              <div class="svc-panel__icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
               <h3 class="svc-panel__title" data-i18n="p1-title">Website Development</h3>
               <p class="svc-panel__desc" data-i18n="p1-desc">Professional, high-converting websites built from scratch — designed to make your brand stand out and turn visitors into customers from day one.</p>
             </div>
@@ -3668,7 +3711,7 @@
         <div class="svc-panel" id="panel-2" role="tabpanel">
           <div class="svc-panel__inner">
             <div class="svc-panel__header">
-              <div class="svc-panel__icon-wrap">🖥️</div>
+              <div class="svc-panel__icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
               <h3 class="svc-panel__title" data-i18n="p2-title">CMS Solutions</h3>
               <p class="svc-panel__desc" data-i18n="p2-desc">Take full control of your website content without writing a line of code. We build intuitive admin panels tailored to your workflow.</p>
             </div>
@@ -3700,7 +3743,7 @@
         <div class="svc-panel" id="panel-3" role="tabpanel">
           <div class="svc-panel__inner">
             <div class="svc-panel__header">
-              <div class="svc-panel__icon-wrap">🔧</div>
+              <div class="svc-panel__icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
               <h3 class="svc-panel__title" data-i18n="p3-title">AMC Support</h3>
               <p class="svc-panel__desc" data-i18n="p3-desc">Your website is a living asset. We keep it fast, secure, and up-to-date so you can focus on running your business without worrying about downtime.</p>
             </div>
@@ -3732,7 +3775,7 @@
         <div class="svc-panel" id="panel-4" role="tabpanel">
           <div class="svc-panel__inner">
             <div class="svc-panel__header">
-              <div class="svc-panel__icon-wrap">📈</div>
+              <div class="svc-panel__icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
               <h3 class="svc-panel__title" data-i18n="p4-title">Lead Growth Solutions</h3>
               <p class="svc-panel__desc" data-i18n="p4-desc">Stop waiting for customers to find you. We build automated systems that capture, qualify, and route leads directly to your team — 24/7.</p>
             </div>
@@ -3871,7 +3914,8 @@
 
       <div class="wc-card reveal" data-delay="1">
         <div class="wc-card__check">
-          <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
+          <!-- Map pin: Local UAE -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <div class="wc-card__text">
           <h3 data-i18n="wc-1-title">Local UAE Understanding</h3>
@@ -3881,7 +3925,8 @@
 
       <div class="wc-card reveal" data-delay="2">
         <div class="wc-card__check">
-          <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
+          <!-- Code brackets: Customized Solutions -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         </div>
         <div class="wc-card__text">
           <h3 data-i18n="wc-2-title">Customized Solutions</h3>
@@ -3891,7 +3936,8 @@
 
       <div class="wc-card reveal" data-delay="3">
         <div class="wc-card__check">
-          <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
+          <!-- Shield with check: Long-Term AMC -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
         </div>
         <div class="wc-card__text">
           <h3 data-i18n="wc-3-title">Long-Term AMC Support</h3>
@@ -3901,7 +3947,8 @@
 
       <div class="wc-card reveal" data-delay="4">
         <div class="wc-card__check">
-          <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
+          <!-- Price tag: Transparent Pricing -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
         </div>
         <div class="wc-card__text">
           <h3 data-i18n="wc-4-title">Transparent Pricing</h3>
@@ -3911,7 +3958,8 @@
 
       <div class="wc-card reveal" data-delay="5">
         <div class="wc-card__check">
-          <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
+          <!-- Lightning bolt: Fast Communication -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
         <div class="wc-card__text">
           <h3 data-i18n="wc-5-title">Fast Communication</h3>
@@ -3921,7 +3969,8 @@
 
       <div class="wc-card reveal" data-delay="6">
         <div class="wc-card__check">
-          <svg viewBox="0 0 14 14"><polyline points="2,7 5.5,10.5 12,3"/></svg>
+          <!-- Target/bullseye: Growth-Focused -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
         </div>
         <div class="wc-card__text">
           <h3 data-i18n="wc-6-title">Growth-Focused Approach</h3>
@@ -4101,10 +4150,10 @@
       <div class="footer__col">
         <div class="footer__col-title" data-i18n="footer-col2-title">Company</div>
         <ul class="footer__col-links" role="list">
-          <li><a href="about.html"   class="footer__col-link" data-i18n="footer-co-1">About</a></li>
-          <li><a href="contact.html" class="nav__link" data-i18n="footer-co-2">Contact</a></li>
-          <li><a href="blog.html"    class="footer__col-link" data-i18n="footer-co-3">Blog</a></li>
-          <li><a href="contact.html" class="footer__col-link" data-i18n="footer-co-4">Contact</a></li>
+          <li><a href="about.html"    class="footer__col-link" data-i18n="footer-co-1">About</a></li>
+          <li><a href="services.html" class="footer__col-link" data-i18n="footer-co-2">Services</a></li>
+          <li><a href="blog.html"     class="footer__col-link" data-i18n="footer-co-3">Blog</a></li>
+          <li><a href="work.html"     class="footer__col-link" data-i18n="footer-co-4">Work</a></li>
         </ul>
       </div>
 
@@ -4114,19 +4163,19 @@
         <ul class="footer__col-links footer__col-links--contact" role="list">
           <li>
             <a href="mailto:arun.mandook@gmail.com" class="footer__col-link footer__contact-item">
-              <span class="footer__contact-icon">✉</span>
+              <span class="footer__contact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
               <span dir="ltr">arun.mandook@gmail.com</span>
             </a>
           </li>
           <li>
             <a href="tel:+919619884321" class="footer__col-link footer__contact-item">
-              <span class="footer__contact-icon">📞</span>
+              <span class="footer__contact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.58 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
               <span dir="ltr">+91 96198 84321</span>
             </a>
           </li>
           <li>
             <a href="tel:+971522770849" class="footer__col-link footer__contact-item">
-              <span class="footer__contact-icon">📞</span>
+              <span class="footer__contact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.58 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
               <span dir="ltr">+971 52 277 0849</span>
             </a>
           </li>
@@ -4137,7 +4186,7 @@
 
     <!-- Bottom bar -->
     <div class="footer__bottom">
-      <p class="footer__copy" data-i18n="footer-copy">© 2025 Mandook.com · All rights reserved.</p>
+      <p class="footer__copy" data-i18n="footer-copy">© 2026 Mandook.com · All rights reserved.</p>
 
     </div>
   </div>
@@ -4870,7 +4919,7 @@
       'cta-btn':'Get a Free Proposal',
       'footer-brand':'Salesforce CREST Partner specialising in consulting, implementation, and ongoing support — helping businesses automate operations and grow with confidence.',
       'footer-col1-title':'Services','footer-col2-title':'Company','footer-col3-title':'Contact',
-      'footer-copy':'© 2025 Mandook.com · All rights reserved.'
+      'footer-copy':'© 2026 Mandook.com · All rights reserved.'
     },
     ar: {
       'nav-home':'الرئيسية','nav-services':'الخدمات','nav-process':'المنهجية',
@@ -4943,7 +4992,7 @@
       'cta-btn':'احصل على عرض مجاني',
       'footer-brand':'شريك سيلزفورس CREST متخصص في الاستشارات والتطبيق والدعم المستمر — نساعد الشركات على أتمتة عملياتها والنمو بثقة.',
       'footer-col1-title':'الخدمات','footer-col2-title':'الشركة','footer-col3-title':'تواصل',
-      'footer-copy':'© ٢٠٢٥ Mandook.com · جميع الحقوق محفوظة.'
+      'footer-copy':'© ٢٠٢٦ Mandook.com · جميع الحقوق محفوظة.'
     }
   };
 

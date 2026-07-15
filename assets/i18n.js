@@ -26,7 +26,7 @@
       'footer-co-about':   'About',
       'footer-co-blog':    'Blog',
       'footer-co-contact': 'Contact',
-      'footer-copy':       '© 2025 Mandook.com · All rights reserved.',
+      'footer-copy':       '© 2026 Mandook.com · All rights reserved.',
 
       /* ── INDEX hero ── */
       'hero-headline':    'Your Implementation Partner for Digital Transformation',
@@ -176,9 +176,9 @@
 
       /* ── Footer company links ── */
       'footer-co-1': 'About',
-      'footer-co-2': 'Contact',
+      'footer-co-2': 'Services',
       'footer-co-3': 'Blog',
-      'footer-co-4': 'Contact',
+      'footer-co-4': 'Work',
 
       /* ── ABOUT ── */
       'about-hero-label':  'About Mandook',
@@ -364,7 +364,7 @@
       'footer-co-about':   'عنّا',
       'footer-co-blog':    'المدونة',
       'footer-co-contact': 'تواصل',
-      'footer-copy':       '© ٢٠٢٥ Mandook.com · جميع الحقوق محفوظة.',
+      'footer-copy':       '© ٢٠٢٦ Mandook.com · جميع الحقوق محفوظة.',
 
       /* ── INDEX hero ── */
       'hero-headline':    'شريكك في التحول الرقمي من الفكرة إلى التطبيق',
@@ -514,9 +514,9 @@
 
       /* ── Footer company links ── */
       'footer-co-1': 'من نحن',
-      'footer-co-2': 'تواصل',
+      'footer-co-2': 'الخدمات',
       'footer-co-3': 'المدونة',
-      'footer-co-4': 'تواصل',
+      'footer-co-4': 'أعمالنا',
 
       /* ── ABOUT ── */
       'about-hero-label':  'عن مندوق',

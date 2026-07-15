@@ -82,15 +82,7 @@
       height: 1px;
       background: linear-gradient(90deg, transparent 0%, var(--clr-blue) 30%, rgba(123,79,255,0.8) 60%, transparent 100%);
     }
-    .footer__pre-glow {
-      left: 0; right: 0; bottom: 0;
-      width: 100%; height: 160px;
-      background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(26,107,90,0.65) 0%, rgba(26,107,90,0.18) 55%, transparent 80%);
-      pointer-events: none;
-      position: relative;
-      margin-bottom: -80px;
-      z-index: 1;
-    }
+   
     .footer__grid {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr 1.3fr;
@@ -211,10 +203,12 @@
     .footer__heart { color: #ff4d6d; }
     /* Responsive */
     @media (max-width: 1024px) {
-      .footer__grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+
+    .footer__grid { grid-template-columns: 1fr 1fr; gap: 40px; }
     }
     @media (max-width: 600px) {
-      .footer__grid { grid-template-columns: 1fr; }
+
+    .footer__grid { grid-template-columns: 1fr; }
       .footer__bottom { flex-direction: column; align-items: flex-start; }
     }
     @media(max-width:1024px){.footer__grid{grid-template-columns:1fr 1fr;gap:40px;}}@media(max-width:768px){:root{--section-gap:80px;}.nav__links,.nav__cta{display:none;}.nav__hamburger{display:flex;}.nav__mobile{display:flex;}.footer__grid{grid-template-columns:1fr;}}
@@ -567,8 +561,8 @@
 
 <section class="cta-section" id="contact"><div class="cta-section__bg" aria-hidden="true"></div><div class="container"><div class="cta-section__inner"><div class="section__label reveal" style="justify-content:center"><span data-i18n="about-cta-label">Work with us</span></div><h2 class="cta-section__heading reveal" data-delay="1" data-i18n-html="about-cta-heading">Let's build something<br><span style="background:linear-gradient(135deg,var(--clr-blue),var(--clr-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">great together</span></h2><p class="cta-section__sub reveal" data-delay="2" data-i18n="about-cta-sub">Whether you need a discovery call or you're ready to start — we're ready to help.</p><div class="footer__col"><div class="magnetic-wrap"><a href="contact.html" class="btn--magnetic" data-i18n="about-cta-btn">Get in Touch →</a></div></div></div></div></section>
 
-<div class="footer__pre-glow" aria-hidden="true"></div>
 <footer class="footer" role="contentinfo">
+  <div class="footer__glow-bar" aria-hidden="true"></div>
 
   <div class="container">
     <div class="footer__grid">

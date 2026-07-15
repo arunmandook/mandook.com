@@ -99,8 +99,9 @@
 
         root.innerHTML = newRoot.innerHTML;
 
-        // Update URL
-        if (push !== false) history.pushState({ href: href }, '', href);
+        // Update URL — normalise /index.html → /
+        var pushUrl = href.replace(/\/index\.html$/, '/');
+        if (push !== false) history.pushState({ href: href }, '', pushUrl);
 
         // Update nav active state
         updateActiveLinks(href);

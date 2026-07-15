@@ -709,10 +709,21 @@
   };
 
   document.addEventListener('click', function (e) {
+    // Named lang-toggle buttons (data-lang attribute)
     var btn = e.target.closest('.lang-toggle__btn');
     if (btn) {
       var l = btn.getAttribute('data-lang');
       if (l && l !== lang) applyLang(l);
+      return;
+    }
+    // Toggle button (#langToggleBtn / #langToggleBtnMobile) — switches en ↔ ar
+    if (e.target.closest('#langToggleBtn') || e.target.closest('#langToggleBtnMobile')) {
+      var newLang = lang === 'en' ? 'ar' : 'en';
+      applyLang(newLang);
+      var lbl  = document.getElementById('langBtnLabel');
+      var lblM = document.getElementById('langBtnLabelMobile');
+      if (lbl)  lbl.textContent  = newLang === 'en' ? 'عربي' : 'English';
+      if (lblM) lblM.textContent = newLang === 'en' ? 'عربي' : 'English';
     }
   });
 

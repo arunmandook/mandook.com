@@ -4934,23 +4934,6 @@
 
 <!-- i18n handled by assets/i18n.js (loaded outside #page-root) -->
 <script>
-/* Language toggle bridge — delegates to assets/i18n.js (mandookI18n) */
-(function() {
-  document.addEventListener('click', function(e) {
-    if (e.target.closest('#langToggleBtn') || e.target.closest('#langToggleBtnMobile')) {
-      var i18n = window.mandookI18n;
-      if (!i18n) return;
-      var newLang = i18n.getLang() === 'en' ? 'ar' : 'en';
-      i18n.applyLang(newLang);
-      var lbl  = document.getElementById('langBtnLabel');
-      var lblM = document.getElementById('langBtnLabelMobile');
-      if (lbl)  lbl.textContent  = newLang === 'en' ? 'عربي' : 'English';
-      if (lblM) lblM.textContent = newLang === 'en' ? 'عربي' : 'English';
-    }
-  });
-})();
-</script>
-<script>
 // Draw HeroInfo.png onto canvas and paint over the baked-in text labels
 (function() {
   var cvs = document.getElementById('hero-map-canvas');

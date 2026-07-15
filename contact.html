@@ -352,7 +352,7 @@
 </head>
 <body>
 <svg id="logo-svg-defs" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs><radialGradient id="irisGrad" cx="38%" cy="33%" r="65%" fx="38%" fy="33%"><stop offset="0%" stop-color="#22E8FF"/><stop offset="45%" stop-color="#0090FF"/><stop offset="100%" stop-color="#3B1FA8"/></radialGradient><radialGradient id="scleraGrad" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="rgba(255,255,255,0.09)"/><stop offset="100%" stop-color="rgba(255,255,255,0.02)"/></radialGradient><linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00C6FF"/><stop offset="100%" stop-color="#7B4FFF"/></linearGradient><filter id="eyeGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="0.6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs></svg>
-<nav class="nav nav--solid" id="mainNav" role="navigation" aria-label="Main navigation">
+<nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
   <div class="container">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo" aria-label="Mandook home">
@@ -698,5 +698,20 @@
 <script src="assets/i18n.js"></script>
 <script src="assets/animations.js" defer></script>
 <script src="assets/router.js"></script>
+
+<script>
+(function() {
+  var nav = document.getElementById('mainNav');
+  if (!nav) return;
+  function updateNav() {
+    var hasHero = !!(document.querySelector('.page-hero'));
+    var solid = !hasHero || window.scrollY > 40;
+    nav.classList.toggle('scrolled', solid);
+    nav.classList.toggle('nav--solid', solid);
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+})();
+</script>
 </body>
 </html>

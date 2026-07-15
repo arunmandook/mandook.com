@@ -458,7 +458,7 @@
 <body>
 
 <!-- NAV -->
-<nav class="nav nav--solid" id="mainNav" role="navigation" aria-label="Main navigation">
+<nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
   <div class="container">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo" aria-label="Mandook home">
@@ -644,5 +644,20 @@
 <script src="assets/i18n.js"></script>
 <script src="assets/animations.js" defer></script>
 <script src="assets/router.js"></script>
+
+<script>
+(function() {
+  var nav = document.getElementById('mainNav');
+  if (!nav) return;
+  function updateNav() {
+    var hasHero = !!(document.querySelector('.page-hero'));
+    var solid = !hasHero || window.scrollY > 40;
+    nav.classList.toggle('scrolled', solid);
+    nav.classList.toggle('nav--solid', solid);
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+})();
+</script>
 </body>
 </html>

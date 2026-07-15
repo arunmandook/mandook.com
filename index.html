@@ -4286,7 +4286,7 @@
     const nav = document.getElementById('mainNav');
     if (!nav) return;
     const onScroll = () => {
-      const hasHero = !!document.getElementById('hero');
+      const hasHero = !!(document.getElementById('hero') || document.querySelector('.page-hero'));
       const solid = !hasHero || window.scrollY > 40;
       nav.classList.toggle('scrolled', solid);
       nav.classList.toggle('nav--solid', solid);

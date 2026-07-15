@@ -52,8 +52,8 @@
       --text-muted:       #8888aa;
       --error:            #e53935;
 
-      --font-head:        'Space Grotesk', sans-serif;
-      --font-body:        'Inter', sans-serif;
+      --font-head:        'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-body:        'Segoe UI', system-ui, -apple-system, sans-serif;
 
       --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);
       --ease-out-quart:   cubic-bezier(0.25, 1, 0.5, 1);
@@ -67,7 +67,7 @@
       --nav-h:      72px;
       --section-gap: 88px;
       --h1-size: clamp(36px, 5vw, 58px);
-      --h2-size: 39px;
+      --h2-size: clamp(1.8rem, 3vw, 2.6rem);
       --h3-size: clamp(17px, 2vw, 22px);
     }
 
@@ -201,8 +201,9 @@
       align-items: center;
       gap: 0;
       line-height: 1;
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
       letter-spacing: 1px;
       transition: letter-spacing 0.45s var(--ease-out-quart);
     }
@@ -232,8 +233,8 @@
       gap: 32px;
     }
     .nav__link {
-      font-size: 14px;
-      font-weight: 400;
+      font-size: 0.9rem;
+      font-weight: 500;
       letter-spacing: 0.3px;
       color: rgba(255,255,255,0.82);
       position: relative;
@@ -631,9 +632,9 @@
     /* Hero headline */
     .hero__headline {
       font-family: var(--font-head);
-      font-size: clamp(42px, 6.5vw, 88px);
+      font-size: clamp(2.2rem, 5vw, 4rem);
       font-weight: 800;
-      line-height: 1.06;
+      line-height: 1.15;
       letter-spacing: -2px;
       margin-bottom: 28px;
       color: var(--clr-text-1);
@@ -665,7 +666,7 @@
     }
 
     .hero__sub {
-      font-size: clamp(15px, 1.6vw, 18px);
+      font-size: clamp(1rem, 2vw, 1.2rem);
       color: rgba(255,255,255,0.80);
       max-width: 620px;
       margin-left: auto;
@@ -2242,7 +2243,7 @@
     }
     .cta-section__heading {
       font-family: var(--font-head);
-      font-size: clamp(36px, 5vw, 64px);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
       font-weight: 800;
       letter-spacing: -1.5px;
       line-height: 1.1;
@@ -3418,7 +3419,7 @@
       border: 1.5px solid rgba(255,255,255,0.40);
       border-radius: 100px;
       background: transparent;
-      color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 0.3px;
+      color: #fff; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.3px;
       cursor: pointer; transition: background 0.22s, border-color 0.22s;
       flex-shrink: 0; user-select: none;
     }
@@ -3430,7 +3431,7 @@
     html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3,
     html[dir="rtl"] p, html[dir="rtl"] a, html[dir="rtl"] li,
     html[dir="rtl"] span, html[dir="rtl"] div, html[dir="rtl"] button {
-      font-family: 'Cairo', sans-serif; letter-spacing: 0;
+      font-family: 'Segoe UI', 'Arial', 'Tahoma', sans-serif; letter-spacing: 0;
     }
     html[dir="rtl"] .nav__inner { flex-direction: row-reverse; }
     html[dir="rtl"] .nav__links { flex-direction: row-reverse; }

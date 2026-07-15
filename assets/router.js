@@ -108,8 +108,8 @@
         // Scroll to top
         window.scrollTo(0, 0);
 
-        // Re-run page scripts (excluding router)
-        runScripts(root);
+        // Re-run page scripts (excluding router); swallow individual script errors
+        try { runScripts(root); } catch (e) { console.warn('runScripts error:', e); }
 
         // Ensure body.loaded is set
         document.body.classList.add('loaded');

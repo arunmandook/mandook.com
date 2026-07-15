@@ -29,7 +29,7 @@
       'footer-copy':       '© 2026 Mandook.com · All rights reserved.',
 
       /* ── INDEX hero ── */
-      'hero-headline':    'Your Implementation Partner for Digital Transformation',
+      'hero-headline':    'Your Implementation Partner for <span class="grad">Digital Transformation</span>',
       'hero-sub':         'Helping businesses innovate, automate, and scale with modern technology solutions tailored to their goals.',
       'hero-eyebrow':     "UAE's Trusted Digital Partner",
       'hero-cta-primary': 'Start Your Project',
@@ -368,7 +368,7 @@
       'footer-copy':       '© ٢٠٢٦ Mandook.com · جميع الحقوق محفوظة.',
 
       /* ── INDEX hero ── */
-      'hero-headline':    'شريكك في التحول الرقمي من الفكرة إلى التطبيق',
+      'hero-headline':    'شريكك في <span class="grad">التحول الرقمي</span> من الفكرة إلى التطبيق',
       'hero-sub':         'نساعد الأعمال على الابتكار والأتمتة والتوسع بحلول تقنية حديثة مصممة لتحقيق أهدافها.',
       'hero-eyebrow':     'شريكك الرقمي الموثوق في الإمارات',
       'hero-cta-primary': 'ابدأ مشروعك',

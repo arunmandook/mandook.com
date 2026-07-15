@@ -137,7 +137,7 @@ html[dir="rtl"] .m-reveal-left {
   top: 0; left: 0;
   height: 2px;
   width: 0%;
-  background: linear-gradient(90deg, #0072FF 0%, #B8922A 60%, #1B6B45 100%);
+  background: linear-gradient(90deg, #0072FF 0%, #1a6b5a 60%, #f0a500 100%);
   z-index: 9999;
   pointer-events: none;
   will-change: width;
@@ -303,9 +303,9 @@ html[dir="rtl"] .m-reveal-left {
 .process-card:hover,
 .wc-card:hover {
   transform: translateY(-5px) !important;
-  border-color: rgba(184,146,42,0.3) !important;
+  border-color: rgba(26,107,90,0.3) !important;
   box-shadow: 0 16px 48px rgba(0,0,0,0.25),
-              0 0 0 1px rgba(184,146,42,0.12) !important;
+              0 0 0 1px rgba(26,107,90,0.12) !important;
 }
 
 /* Blog cards */
@@ -318,7 +318,7 @@ html[dir="rtl"] .m-reveal-left {
 }
 .blog-card:hover {
   transform: translateY(-6px) !important;
-  border-color: rgba(184,146,42,0.25) !important;
+  border-color: rgba(26,107,90,0.25) !important;
   box-shadow: 0 20px 60px rgba(0,0,0,0.35) !important;
 }
 
@@ -345,7 +345,7 @@ html[dir="rtl"] .m-reveal-left {
 .form-select:focus,
 .form-textarea:focus {
   border-color: var(--clr-blue) !important;
-  box-shadow: 0 0 0 3px rgba(184,146,42,0.12),
+  box-shadow: 0 0 0 3px rgba(26,107,90,0.12),
               0 2px 8px rgba(0,114,255,0.1) !important;
 }
 
@@ -357,7 +357,7 @@ html[dir="rtl"] .m-reveal-left {
 }
 .form-submit:hover {
   transform: translateY(-2px) !important;
-  box-shadow: 0 12px 40px rgba(184,146,42,0.35) !important;
+  box-shadow: 0 12px 40px rgba(26,107,90,0.35) !important;
 }
 .form-submit:active {
   transform: translateY(0) scale(0.98) !important;

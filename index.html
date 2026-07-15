@@ -228,28 +228,24 @@
     .nav__links {
       display: flex;
       align-items: center;
-      gap: 40px;
+      gap: 32px;
     }
     .nav__link {
-      font-size: 13.5px;
-      font-weight: 500;
-      letter-spacing: 0.2px;
-      color: var(--clr-text-2);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      color: rgba(255,255,255,0.82);
       position: relative;
-      transition: color 0.25s;
-      padding: 4px 0;
+      transition: color 0.22s;
+      padding: 5px 12px;
+      border-radius: 6px;
     }
-    .nav__link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 0; height: 1.5px;
-      background: #f0a500;
-      border-radius: 2px;
-      transition: width 0.3s var(--ease-out-quart);
-    }
+    .nav__link::after { display: none; }
     .nav__link:hover { color: #ffffff; }
-    .nav__link:hover::after { width: 100%; }
+    .nav__link.active {
+      color: #f0a500;
+      background: rgba(0,0,0,0.18);
+    }
 
     /* Nav CTA */
     .nav__cta {

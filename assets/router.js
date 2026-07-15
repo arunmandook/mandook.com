@@ -16,9 +16,10 @@
   }
 
   function updateActiveLinks(href) {
-    var path = new URL(href, location.href).pathname.split('/').pop() || 'index.html';
+    var raw = new URL(href, location.href).pathname.split('/').pop() || 'index';
+    var path = raw.replace('.html', '') || 'index';
     document.querySelectorAll('.nav__link, .nav__mobile-link').forEach(function (a) {
-      var lp = (a.getAttribute('href') || '').split('/').pop();
+      var lp = (a.getAttribute('href') || '').split('/').pop().replace('.html', '') || 'index';
       a.classList.toggle('active', lp === path);
     });
   }

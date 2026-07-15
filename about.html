@@ -355,6 +355,20 @@
     }
     .page-hero__breadcrumb a:hover { color: #f0a500 !important; }
 
+
+    /* ── Nav link style: white regular weight, gold active ── */
+    .nav__links { gap: 32px !important; }
+    .nav__link {
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      color: rgba(255,255,255,0.82) !important;
+      padding: 5px 12px !important;
+      border-radius: 6px !important;
+    }
+    .nav__link::after { display: none !important; }
+    .nav__link:hover { color: #ffffff !important; background: none !important; }
+    .nav__link.active { color: #f0a500 !important; background: rgba(0,0,0,0.18) !important; }
+
     /* ── Additional cyan → green overrides ── */
     .svc-tab.active .svc-tab__icon,
     .svc-tab:hover .svc-tab__icon {

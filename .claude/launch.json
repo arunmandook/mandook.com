@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mandook",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", "/Users/ishitajadvani/Documents/GitHub/mandook.com", "--listen", "4444"],
+      "port": 4444
+    }
+  ]
+}

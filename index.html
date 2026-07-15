@@ -64,7 +64,7 @@
       --radius-lg:  24px;
       --radius-xl:  40px;
 
-      --nav-h:      110px;
+      --nav-h:      72px;
       --section-gap: 88px;
       --h1-size: clamp(36px, 5vw, 58px);
       --h2-size: clamp(28px, 4vw, 48px);
@@ -147,28 +147,21 @@
       height: var(--nav-h);
       display: flex;
       align-items: center;
-      background: linear-gradient(135deg, #1a6b5a 0%, #155c4d 100%);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.08), 0 4px 24px rgba(0,0,0,0.22);
-      /* override tokens so all nav text stays white */
+      background: transparent;
+      box-shadow: none;
       --clr-text-1:  #ffffff;
-      --clr-text-2:  rgba(255,255,255,0.78);
+      --clr-text-2:  rgba(255,255,255,0.82);
       --clr-text-3:  rgba(255,255,255,0.45);
       --clr-border:  rgba(255,255,255,0.14);
-      transition: box-shadow 0.4s var(--ease-out-quart), background 0.4s;
+      transition: background 0.35s ease, box-shadow 0.35s ease;
     }
-    /* Gold accent line under nav */
-    .nav::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent 0%, rgba(240,165,0,0.6) 35%, rgba(240,165,0,0.9) 50%, rgba(240,165,0,0.6) 65%, transparent 100%);
-    }
-    .nav--solid { background: #134e42 !important; box-shadow: 0 2px 24px rgba(0,0,0,0.30) !important; transition: none !important; }
+    .nav--solid,
     .nav.scrolled {
-      background: #134e42;
-      box-shadow: 0 2px 24px rgba(0,0,0,0.30);
-      height: 110px;
+      background: rgba(10, 26, 20, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.35);
+      height: var(--nav-h);
     }
     .nav__inner {
       display: flex;
@@ -189,11 +182,13 @@
       width: auto;
       display: block;
       object-fit: contain;
-      filter: drop-shadow(0 0 14px rgba(26,107,90,0.45)) brightness(1.1);
+      height: 52px;
+      max-height: 52px;
+      filter: grayscale(1) brightness(1.4) contrast(1.1) drop-shadow(0 0 10px rgba(255,255,255,0.20));
       transition: filter 0.35s, transform 0.35s;
     }
     .nav__logo:hover .nav__logo-img {
-      filter: drop-shadow(0 0 28px rgba(26,107,90,0.8)) brightness(1.25);
+      filter: grayscale(1) brightness(1.6) contrast(1.1) drop-shadow(0 0 22px rgba(255,255,255,0.40));
       transform: scale(1.05);
     }
 
@@ -395,19 +390,25 @@
       align-items: center;
       overflow: hidden;
       padding-top: var(--nav-h);
-      background:
-        radial-gradient(ellipse 60% 70% at 70% 50%, rgba(26,107,90,0.18) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 50% at 10% 80%, rgba(240,165,0,0.07) 0%, transparent 60%),
-        linear-gradient(160deg, #0a1a14 0%, #0d1f1a 45%, #081510 100%);
+      background: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
     }
-    /* Hero split layout */
-    .hero .container { width: 100%; }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(5,18,12,0.72) 0%, rgba(5,15,10,0.60) 50%, rgba(5,18,12,0.78) 100%);
+      z-index: 0;
+    }
+    /* Hero centered layout */
+    .hero .container { width: 100%; position: relative; z-index: 1; }
     .hero__inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       align-items: center;
-      gap: 48px;
+      justify-items: center;
+      gap: 0;
       min-height: calc(100vh - var(--nav-h));
+      text-align: center;
     }
     /* Network visual */
     .hero__visual {
@@ -536,12 +537,9 @@
       .hero__stat { display: none; }
     }
 
-    /* Canvas particles */
-    #hero-canvas {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
+    /* Canvas particles — hidden (photo bg replaces them) */
+    #hero-canvas { display: none; }
+    .hero__orb, .hero__grid { display: none; }
 
     /* Gradient orbs */
     .hero__orb {
@@ -625,13 +623,21 @@
       50%       { box-shadow: 0 0 0 6px rgba(240,165,0,0); }
     }
 
+    /* Hero content centering */
+    .hero__content {
+      text-align: center;
+      max-width: 880px;
+      width: 100%;
+    }
+    .hero__visual { display: none !important; }
+
     /* Hero headline */
     .hero__headline {
       font-family: var(--font-head);
-      font-size: clamp(32px, 4.5vw, 58px);
+      font-size: clamp(36px, 5.5vw, 72px);
       font-weight: 800;
       line-height: 1.06;
-      letter-spacing: -1.5px;
+      letter-spacing: -2px;
       margin-bottom: 28px;
       color: var(--clr-text-1);
       text-wrap: balance;
@@ -657,18 +663,18 @@
     }
 
     .hero__headline .grad {
-      background: linear-gradient(135deg, var(--clr-blue) 0%, var(--clr-purple) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #f0a500;
+      -webkit-text-fill-color: #f0a500;
     }
 
     .hero__sub {
-      font-size: clamp(14px, 1.5vw, 17px);
-      color: var(--clr-text-2);
-      max-width: 500px;
+      font-size: clamp(15px, 1.6vw, 18px);
+      color: rgba(255,255,255,0.80);
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
       line-height: 1.65;
-      margin-bottom: 36px;
+      margin-bottom: 40px;
       opacity: 0;
       transform: translateY(20px);
       animation: fade-up 0.7s var(--ease-out-expo) 0.85s forwards;
@@ -677,7 +683,8 @@
     .hero__actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      justify-content: center;
+      gap: 14px;
       flex-wrap: wrap;
       opacity: 0;
       transform: translateY(20px);
@@ -3408,19 +3415,18 @@
     body.loaded > *:not(.nav):not(.nav__mobile){opacity:1;}
 
     /* ── Language Toggle ── */
-    .lang-toggle {
-      display: flex; align-items: center;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 100px; padding: 3px; gap: 2px; flex-shrink: 0;
+    .lang-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 16px 7px 12px;
+      border: 1.5px solid rgba(255,255,255,0.40);
+      border-radius: 100px;
+      background: transparent;
+      color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 0.3px;
+      cursor: pointer; transition: background 0.22s, border-color 0.22s;
+      flex-shrink: 0; user-select: none;
     }
-    .lang-toggle__btn {
-      padding: 5px 14px; border-radius: 100px;
-      font-size: 11.5px; font-weight: 700; letter-spacing: 0.8px;
-      color: rgba(255,255,255,0.55); transition: background 0.25s, color 0.25s;
-      cursor: pointer; border: none; background: none; user-select: none;
-    }
-    .lang-toggle__btn.active { background: rgba(255,255,255,0.18); color: #fff; }
+    .lang-btn:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.65); }
+    .lang-btn svg { opacity: 0.85; flex-shrink: 0; }
 
     /* ── RTL / Arabic ── */
     html[dir="rtl"] body,
@@ -3434,7 +3440,7 @@
     html[dir="rtl"] .nav__cta   { flex-direction: row-reverse; }
     html[dir="rtl"] .section__label { flex-direction: row-reverse; }
     html[dir="rtl"] .section__label::before { margin-right: 0; margin-left: 10px; }
-    html[dir="rtl"] .hero__actions { justify-content: flex-start; }
+    html[dir="rtl"] .hero__actions { justify-content: center; }
     html[dir="rtl"] .hero__content { text-align: right; }
     html[dir="rtl"] .problem-card { text-align: right; }
     html[dir="rtl"] .problem-card__icon-wrap { justify-content: flex-end; }
@@ -3496,7 +3502,7 @@
 <!-- ============================================================
      NAVIGATION
 ============================================================ -->
-<nav class="nav nav--solid" id="mainNav" role="navigation" aria-label="Main navigation">
+<nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
   <div class="container">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo" aria-label="Mandook home">
@@ -3513,10 +3519,10 @@
       </ul>
 
       <div class="nav__cta">
-        <div class="lang-toggle" aria-label="Switch language">
-          <button class="lang-toggle__btn active" data-lang="en">EN</button>
-          <button class="lang-toggle__btn" data-lang="ar">AR</button>
-        </div>
+        <button class="lang-btn" id="langToggleBtn" aria-label="Switch language">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="langBtnLabel">عربي</span>
+        </button>
         <a href="contact.html" class="btn btn--accent" data-i18n="nav-proposal">Get a Proposal →</a>
       </div>
 
@@ -3535,10 +3541,10 @@
   <a href="about.html"    class="nav__mobile-link" data-i18n="nav-about">About</a>
   <a href="contact.html" class="nav__mobile-link" data-i18n="nav-contact">Contact</a>
   <a href="contact.html"  class="nav__mobile-link" data-i18n="nav-proposal" style="color:var(--clr-blue)">Get a Proposal →</a>
-  <div class="lang-toggle" style="margin:16px 24px;" aria-label="Switch language">
-    <button class="lang-toggle__btn active" data-lang="en">EN</button>
-    <button class="lang-toggle__btn" data-lang="ar">AR</button>
-  </div>
+  <button class="lang-btn" id="langToggleBtnMobile" aria-label="Switch language" style="margin:16px 0;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <span id="langBtnLabelMobile">عربي</span>
+  </button>
 </div>
 
 <div id="page-root">
@@ -3561,11 +3567,7 @@
 
       <!-- LEFT — Text -->
       <div class="hero__content" id="heroContent">
-        <div class="hero__eyebrow" id="heroEyebrow" aria-hidden="true">
-          <span class="hero__eyebrow-dot"></span>
-          <span data-i18n="hero-eyebrow">UAE's Trusted Digital Partner</span>
-        </div>
-        <h1 class="hero__headline reveal" id="heroHeadline" data-i18n="hero-headline">
+<h1 class="hero__headline reveal" id="heroHeadline" data-i18n="hero-headline">
           Your Implementation Partner for Digital Transformation
         </h1>
         <p class="hero__sub reveal" data-delay="1" id="heroSub" data-i18n="hero-sub">
@@ -4284,7 +4286,8 @@
     const nav = document.getElementById('mainNav');
     if (!nav) return;
     const onScroll = () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
+      const hasHero = !!document.getElementById('hero');
+      nav.classList.toggle('scrolled', !hasHero || window.scrollY > 40);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -5097,25 +5100,21 @@
       }).join(' ');
     }
 
-    document.querySelectorAll('.lang-toggle__btn').forEach(function(btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-lang') === l);
-    });
+    // Update single toggle button labels
+    var labelEN = 'عربي', labelAR = 'English';
+    var lbl = document.getElementById('langBtnLabel');
+    var lblM = document.getElementById('langBtnLabelMobile');
+    if (lbl)  lbl.textContent  = (l === 'en') ? labelEN : labelAR;
+    if (lblM) lblM.textContent = (l === 'en') ? labelEN : labelAR;
   }
 
   document.addEventListener('click', function(e) {
-    var btn = e.target.closest('.lang-toggle__btn');
-    if (btn) {
-      var l = btn.getAttribute('data-lang');
-      if (l && l !== lang) applyLang(l);
+    if (e.target.closest('#langToggleBtn') || e.target.closest('#langToggleBtnMobile')) {
+      applyLang(lang === 'en' ? 'ar' : 'en');
     }
   });
 
   if (lang === 'ar') applyLang('ar');
-  else {
-    document.querySelectorAll('.lang-toggle__btn').forEach(function(btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-lang') === 'en');
-    });
-  }
 })();
 </script>
 <script>

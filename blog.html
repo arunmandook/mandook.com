@@ -291,6 +291,169 @@
     .svc-panel__title,.ps-step__title,.mv-card h3,.value-card h3,.bp-card__title,.process-step__title,.about-card h3{font-size:var(--h3-size)!important;}
   ::view-transition-group(site-nav){animation-duration:0s;}::view-transition-old(site-nav),::view-transition-new(site-nav){animation:none;mix-blend-mode:normal;}</style>
   <style id="no-trans">.nav{view-transition-name:site-nav;transition:none!important}::view-transition-group(site-nav){animation-duration:0s;}::view-transition-old(site-nav),::view-transition-new(site-nav){animation:none;mix-blend-mode:normal;}</style>
+<!-- theme-override -->
+  <style>
+    /* ── Theme override: dark photo hero + green nav ── */
+    /* ── Full token retheme ── */
+    body { background: #ffffff !important; color: #1a1a2e !important; }
+    :root {
+      --clr-bg: #ffffff;
+      --clr-surface: #f0f4f0;
+      --clr-surface-2: #f8f9fc;
+      --clr-border: #c0d8d0;
+      --clr-border-glow: rgba(26,107,90,0.20);
+      --clr-blue: #1a6b5a;
+      --clr-blue-dark: #134e42;
+      --clr-purple: #f0a500;
+      --clr-gold: #f0a500;
+      --clr-gold-light: #f4b733;
+      --clr-text-1: #1a1a2e;
+      --clr-text-2: #4a4a68;
+      --clr-text-3: #8888aa;
+    }
+    /* Hardcoded cyan glows → green */
+    .btn--primary { box-shadow: none !important; }
+    .btn--primary:hover { box-shadow: 0 8px 30px rgba(26,107,90,0.35) !important; }
+    .btn--magnetic {
+      background: linear-gradient(135deg,#134e42,#1a6b5a) !important;
+      box-shadow: 0 0 40px rgba(26,107,90,0.22) !important;
+    }
+    .btn--magnetic:hover { box-shadow: 0 8px 40px rgba(26,107,90,0.40) !important; }
+    /* Icon wraps & accent tints */
+    [class*="__icon-wrap"],[class*="__icon-box"],[class*="__icon-bg"] {
+      background: rgba(26,107,90,0.10) !important;
+      border-color: rgba(26,107,90,0.20) !important;
+    }
+    .feat-check,[class*="feat-check"] {
+      background: rgba(26,107,90,0.08) !important;
+      border-color: rgba(26,107,90,0.20) !important;
+    }
+    /* Panel / card headers */
+    [class*="__header"] {
+      background: linear-gradient(135deg,rgba(26,107,90,0.06) 0%,rgba(240,165,0,0.04) 100%) !important;
+      border-bottom-color: #c0d8d0 !important;
+    }
+    /* Active/hover tab tints */
+    [class$="-tab"].active,[class*="-tab"].active { background: rgba(26,107,90,0.04) !important; border-color: rgba(26,107,90,0.25) !important; }
+    /* Section label color */
+    .section__label { color: #1a6b5a !important; }
+    .section__label::before { background: #1a6b5a !important; }
+    /* Scroll bar */
+    ::-webkit-scrollbar-thumb { background: #1a6b5a !important; }
+    /* Nav link underline */
+    .nav__link::after { background: #f0a500 !important; }
+    /* Logo eye glow → green */
+    .logo-eye { filter: drop-shadow(0 0 4px rgba(26,107,90,0.35)) !important; }
+    .nav__logo:hover .logo-eye { filter: drop-shadow(0 0 7px rgba(26,107,90,0.7)) !important; }
+    /* CTA section if dark */
+    .grow-cta,.cta-section { background: #0d1f1a !important; --clr-text-1:#F8FAF8; --clr-text-2:rgba(232,242,234,0.80); }
+    /* Footer stays dark */
+    .footer {
+      background: #0d1f1a !important;
+      --clr-bg: #0d1f1a;
+      --clr-surface: rgba(255,255,255,0.04);
+      --clr-text-1: #F8FAF8;
+      --clr-text-2: rgba(255,255,255,0.60);
+      --clr-text-3: rgba(255,255,255,0.35);
+      --clr-border: rgba(255,255,255,0.10);
+    }
+    .lang-toggle { display: none !important; }
+    .lang-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 16px 7px 12px;
+      border: 1.5px solid rgba(255,255,255,0.40);
+      border-radius: 100px;
+      background: transparent;
+      color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 0.3px;
+      cursor: pointer; transition: background 0.22s, border-color 0.22s;
+      flex-shrink: 0; user-select: none;
+    }
+    .lang-btn:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.65); }
+    :root { --nav-h: 72px !important; }
+    .nav--solid, .nav.scrolled {
+      background: rgba(10,26,20,0.94) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.35) !important;
+    }
+    .nav__logo-img {
+      height: 52px !important; max-height: 52px !important;
+      filter: grayscale(1) brightness(1.4) contrast(1.1) drop-shadow(0 0 10px rgba(255,255,255,0.20)) !important;
+      transition: filter 0.35s, transform 0.35s;
+    }
+    .nav__logo:hover .nav__logo-img {
+      filter: grayscale(1) brightness(1.6) contrast(1.1) drop-shadow(0 0 22px rgba(255,255,255,0.40)) !important;
+    }
+    .nav__link::after { background: #f0a500 !important; }
+    .btn--primary, .btn--accent {
+      background: linear-gradient(135deg, #c98a00, #f0a500) !important;
+      color: #fff !important;
+    }
+    .btn--primary:hover, .btn--accent:hover { box-shadow: 0 8px 30px rgba(240,165,0,0.35) !important; }
+    .page-hero {
+      background: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat !important;
+      --clr-text-1: #ffffff;
+      --clr-text-2: rgba(255,255,255,0.78);
+      --clr-text-3: rgba(255,255,255,0.45);
+      --clr-border: rgba(255,255,255,0.14);
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(10,58,42,0.90) 0%, rgba(13,70,50,0.85) 50%, rgba(8,44,32,0.92) 100%);
+      z-index: 0;
+    }
+    .page-hero__content { position: relative; z-index: 2; text-align: center; }
+    .page-hero__sub { margin-left: auto; margin-right: auto; text-align: center; }
+    .page-hero__orb, .page-hero__grid { display: none !important; }
+    .page-hero__label {
+      color: #f0a500 !important;
+      border-color: rgba(240,165,0,0.40) !important;
+      background: rgba(240,165,0,0.08) !important;
+    }
+    .page-hero__label-dot { background: #f0a500 !important; }
+    .page-hero__title .grad {
+      background: none !important;
+      -webkit-background-clip: unset !important;
+      background-clip: unset !important;
+      color: #f0a500 !important;
+      -webkit-text-fill-color: #f0a500 !important;
+    }
+    .page-hero__breadcrumb a:hover { color: #f0a500 !important; }
+
+    /* ── Additional cyan → green overrides ── */
+    .svc-tab.active .svc-tab__icon,
+    .svc-tab:hover .svc-tab__icon {
+      background: rgba(26,107,90,0.10) !important;
+      border-color: rgba(26,107,90,0.20) !important;
+      box-shadow: none !important;
+    }
+    .svc-panel__icon-wrap {
+      background: rgba(26,107,90,0.10) !important;
+      border-color: rgba(26,107,90,0.20) !important;
+      box-shadow: none !important;
+    }
+    .blog-card__tag {
+      background: rgba(26,107,90,0.08) !important;
+      border-color: rgba(26,107,90,0.20) !important;
+      color: #1a6b5a !important;
+    }
+    .footer__social:hover {
+      border-color: #1a6b5a !important;
+      color: #1a6b5a !important;
+      box-shadow: 0 0 12px rgba(26,107,90,0.25) !important;
+    }
+    .cta-section__bg {
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(26,107,90,0.15) 0%, transparent 70%) !important;
+    }
+    .svc-panel__header::after {
+      background: radial-gradient(circle, rgba(26,107,90,0.08) 0%, transparent 65%) !important;
+    }
+    .blog-section__bg,
+    [class*="section__bg"] {
+      background: radial-gradient(ellipse at top, rgba(26,107,90,0.06) 0%, transparent 70%) !important;
+    }
+  </style>
 </head>
 <body>
 
@@ -312,10 +475,10 @@
       </ul>
 
       <div class="nav__cta">
-        <div class="lang-toggle" aria-label="Switch language">
-          <button class="lang-toggle__btn active" data-lang="en">EN</button>
-          <button class="lang-toggle__btn" data-lang="ar">AR</button>
-        </div>
+        <button class="lang-btn" id="langToggleBtn" aria-label="Switch language">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="langBtnLabel">&#x639;&#x631;&#x628;&#x64A;</span>
+        </button>
         <a href="contact.html" class="btn btn--primary" data-i18n="nav-proposal">Get a Proposal</a>
       </div>
 

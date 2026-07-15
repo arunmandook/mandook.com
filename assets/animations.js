@@ -350,8 +350,12 @@
   function pageEnter() {
     var root = document.getElementById('page-root');
     if (!root) return;
+    // Only animate entrance when arriving from an SPA transition (m-exit was
+    // set by mAnimExit). On initial page load there is no m-exit class, so we
+    // go straight to m-visible — prevents hero flashing invisible then back in.
+    var fromSpa = root.classList.contains('m-exit');
     root.classList.remove('m-exit', 'm-visible');
-    if (reducedMotion) {
+    if (!fromSpa || reducedMotion) {
       root.classList.add('m-visible');
       return;
     }

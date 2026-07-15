@@ -31,6 +31,7 @@
       /* ── INDEX hero ── */
       'hero-headline':    'Your Implementation Partner for Digital Transformation',
       'hero-sub':         'Helping businesses innovate, automate, and scale with modern technology solutions tailored to their goals.',
+      'hero-eyebrow':     "UAE's Trusted Digital Partner",
       'hero-cta-primary': 'Start Your Project',
       'hero-cta-secondary': 'Book a Free Consultation',
       'hero-scroll':      'Scroll',
@@ -369,6 +370,7 @@
       /* ── INDEX hero ── */
       'hero-headline':    'شريكك في التحول الرقمي من الفكرة إلى التطبيق',
       'hero-sub':         'نساعد الأعمال على الابتكار والأتمتة والتوسع بحلول تقنية حديثة مصممة لتحقيق أهدافها.',
+      'hero-eyebrow':     'شريكك الرقمي الموثوق في الإمارات',
       'hero-cta-primary': 'ابدأ مشروعك',
       'hero-cta-secondary': 'احجز استشارة مجانية',
       'hero-scroll':      'انتقل للأسفل',

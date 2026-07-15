@@ -69,6 +69,10 @@
     var root = document.getElementById(ROOT_ID);
     if (!root) return;
 
+    // Lock nav to solid during transition so white links don't vanish over body bg
+    var nav = document.getElementById('mainNav');
+    if (nav) nav.classList.add('nav--transitioning');
+
     // Signal animation layer to play exit
     if (typeof window.mAnimExit === 'function') window.mAnimExit();
     else { root.style.transition = 'opacity 0.12s ease'; root.style.opacity = '0'; }
@@ -113,6 +117,16 @@
         if (typeof window.mAnimEnter === 'function') window.mAnimEnter();
         else root.style.opacity = '1';
         if (typeof window.mandookI18n !== 'undefined') window.mandookI18n.reapply();
+
+        // Release nav from transitioning lock after content fades in
+        setTimeout(function () {
+          if (nav) nav.classList.remove('nav--transitioning');
+          // Re-evaluate correct transparent/solid state
+          var hasHero = !!(document.getElementById('hero') || document.querySelector('.page-hero'));
+          var solid = !hasHero || window.scrollY > 40;
+          nav.classList.toggle('scrolled', solid);
+          nav.classList.toggle('nav--solid', solid);
+        }, 350);
       })
       .catch(function () {
         location.href = href;

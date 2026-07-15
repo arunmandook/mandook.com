@@ -73,6 +73,10 @@
     var nav = document.getElementById('mainNav');
     if (nav) nav.classList.add('nav--transitioning');
 
+    // Prevent white flash: darken body bg to match hero while page-root fades
+    document.body.style.transition = 'background-color 0.15s ease';
+    document.body.style.backgroundColor = '#0d1f1a';
+
     // Signal animation layer to play exit
     if (typeof window.mAnimExit === 'function') window.mAnimExit();
     else { root.style.transition = 'opacity 0.12s ease'; root.style.opacity = '0'; }
@@ -118,9 +122,11 @@
         else root.style.opacity = '1';
         if (typeof window.mandookI18n !== 'undefined') window.mandookI18n.reapply();
 
-        // Release nav from transitioning lock after content fades in
+        // Release nav + restore body bg after content fades in
         setTimeout(function () {
           if (nav) nav.classList.remove('nav--transitioning');
+          // Restore body background so page content colours take over
+          document.body.style.backgroundColor = '';
           // Re-evaluate correct transparent/solid state
           var hasHero = !!(document.getElementById('hero') || document.querySelector('.page-hero'));
           var solid = !hasHero || window.scrollY > 40;

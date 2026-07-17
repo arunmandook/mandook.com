@@ -25,6 +25,44 @@
     .trust-pills{display:flex;flex-wrap:wrap;gap:10px;}.trust-pill{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;background:var(--clr-surface);border:1px solid var(--clr-border);border-radius:100px;font-size:12px;font-weight:600;color:var(--clr-text-2);}.trust-pill::before{content:'✓';color:var(--clr-blue);font-size:11px;}
     /* FORM */
     .contact-form-wrap{background:var(--clr-surface);border:1px solid var(--clr-border);border-radius:var(--radius-lg);padding:48px;position:relative;overflow:hidden;}.contact-form-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--clr-blue),transparent);}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}.form-group--full{grid-column:span 2;}.form-label{font-size:13px;font-weight:600;color:var(--clr-text-2);letter-spacing:0.3px;}.form-input,.form-select,.form-textarea{width:100%;background:var(--clr-bg);border:1px solid var(--clr-border);border-radius:var(--radius-sm);padding:14px 18px;font-family:var(--font-body);font-size:15px;color:var(--clr-text-1);transition:border-color 0.3s,box-shadow 0.3s;outline:none;-webkit-appearance:none;}.form-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238B96B0' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:44px;cursor:pointer;}.form-input::placeholder,.form-textarea::placeholder{color:var(--clr-text-3);}.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--clr-blue);box-shadow:0 0 0 3px rgba(0,198,255,0.10);}.form-textarea{min-height:130px;resize:vertical;}.form-budget{display:flex;flex-wrap:wrap;gap:10px;}.form-budget-opt{position:relative;}.form-budget-opt input[type=radio]{position:absolute;opacity:0;width:0;height:0;}.form-budget-opt label{display:inline-flex;align-items:center;padding:9px 16px;background:var(--clr-bg);border:1px solid var(--clr-border);border-radius:100px;font-size:13px;font-weight:500;color:var(--clr-text-2);cursor:pointer;transition:border-color 0.2s,color 0.2s,background 0.2s;}.form-budget-opt input[type=radio]:checked+label{border-color:var(--clr-blue);color:var(--clr-blue);background:rgba(0,198,255,0.07);}.form-budget-opt label:hover{border-color:rgba(255,255,255,0.2);color:var(--clr-text-1);}.form-submit{width:100%;padding:18px;border-radius:14px;background:linear-gradient(135deg,var(--clr-blue-dark),var(--clr-blue));color:#fff;font-family:var(--font-head);font-size:17px;font-weight:700;letter-spacing:-0.3px;cursor:pointer;border:none;position:relative;overflow:hidden;transition:box-shadow 0.3s,transform 0.2s;margin-top:8px;box-shadow:0 4px 30px rgba(26,107,90,0.25);}.form-submit::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);animation:btn-shimmer 3s ease-in-out infinite;}@keyframes btn-shimmer{0%{left:-100%;}50%,100%{left:150%;}}.form-submit:hover{box-shadow:0 8px 40px rgba(0,198,255,0.4);transform:translateY(-2px);}.form-submit:active{transform:translateY(0);}.form-note{text-align:center;font-size:12px;color:var(--clr-text-3);margin-top:14px;}.form-success{display:none;text-align:center;padding:40px 24px;}.form-success__icon{font-size:48px;margin-bottom:16px;}.form-success__title{font-family:var(--font-head);font-size:22px;font-weight:700;color:var(--clr-text-1);margin-bottom:10px;}.form-success__sub{font-size:15px;color:var(--clr-text-2);}
+    /* ── MULTI-SELECT SERVICE DROPDOWN ── */
+    .svc-select{position:relative;width:100%;}
+    .svc-select__trigger{width:100%;display:flex;align-items:center;gap:10px;background:var(--clr-bg);border:1px solid var(--clr-border);border-radius:var(--radius-sm);padding:13px 16px;font-family:var(--font-body);font-size:15px;color:var(--clr-text-3);cursor:pointer;text-align:left;transition:border-color 0.25s,box-shadow 0.25s;}
+    .svc-select__trigger:hover{border-color:rgba(255,255,255,0.18);}
+    .svc-select__trigger.open,.svc-select__trigger:focus-visible{border-color:#1a6b5a;box-shadow:0 0 0 3px rgba(26,107,90,0.15);outline:none;}
+    .svc-select__trigger.has-value{color:var(--clr-text-1);}
+    .svc-select__trigger.error{border-color:rgba(255,100,100,0.6)!important;}
+    .svc-select__trigger-icon{flex-shrink:0;opacity:0.4;}
+    .svc-select__placeholder{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .svc-select__chevron{flex-shrink:0;opacity:0.5;transition:transform 0.25s var(--ease-out-quart);}
+    .svc-select__trigger.open .svc-select__chevron{transform:rotate(180deg);}
+    .svc-select__dropdown{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:200;background:#0e1a2e;border:1px solid rgba(26,107,90,0.30);border-radius:var(--radius-md);box-shadow:0 16px 48px rgba(0,0,0,0.55),0 0 0 1px rgba(26,107,90,0.10);overflow:hidden;}
+    .svc-select__dropdown.open{display:block;}
+    .svc-select__search-wrap{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);}
+    .svc-select__search-wrap svg{flex-shrink:0;opacity:0.35;}
+    .svc-select__search{flex:1;background:transparent;border:none;outline:none;font-family:var(--font-body);font-size:13.5px;color:var(--clr-text-1);padding:2px 0;}
+    .svc-select__search::placeholder{color:var(--clr-text-3);}
+    .svc-select__list{max-height:248px;overflow-y:auto;padding:6px;}
+    .svc-select__list::-webkit-scrollbar{width:3px;}
+    .svc-select__list::-webkit-scrollbar-track{background:transparent;}
+    .svc-select__list::-webkit-scrollbar-thumb{background:rgba(26,107,90,0.4);border-radius:2px;}
+    .svc-select__loading{padding:14px 10px;font-size:13px;color:var(--clr-text-3);text-align:center;}
+    .svc-select__item{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:8px;cursor:pointer;transition:background 0.15s;user-select:none;list-style:none;}
+    .svc-select__item:hover{background:rgba(255,255,255,0.05);}
+    .svc-select__item.checked{background:rgba(26,107,90,0.10);}
+    .svc-select__item.hidden{display:none;}
+    .svc-select__check{width:18px;height:18px;border-radius:5px;border:1.5px solid rgba(255,255,255,0.18);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background 0.18s,border-color 0.18s;}
+    .svc-select__item.checked .svc-select__check{background:#1a6b5a;border-color:#1a6b5a;}
+    .svc-select__check-svg{opacity:0;transform:scale(0.5);transition:opacity 0.15s,transform 0.15s;}
+    .svc-select__item.checked .svc-select__check-svg{opacity:1;transform:scale(1);}
+    .svc-select__item-name{font-size:14px;color:var(--clr-text-2);flex:1;transition:color 0.15s;}
+    .svc-select__item.checked .svc-select__item-name{color:var(--clr-text-1);}
+    /* Selected pills */
+    .svc-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+    .svc-tag{display:inline-flex;align-items:center;gap:5px;padding:4px 10px 4px 12px;background:rgba(26,107,90,0.15);border:1px solid rgba(26,107,90,0.35);border-radius:100px;font-size:12.5px;font-weight:600;color:#4db896;transition:background 0.15s;}
+    .svc-tag:hover{background:rgba(26,107,90,0.22);}
+    .svc-tag__remove{display:flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:rgba(26,107,90,0.30);border:none;cursor:pointer;color:#4db896;font-size:11px;line-height:1;padding:0;transition:background 0.15s,color 0.15s;font-family:inherit;}
+    .svc-tag__remove:hover{background:#1a6b5a;color:#fff;}
     /* WHAT TO EXPECT */
     .expect-section{padding:var(--section-gap) 0;background:var(--clr-surface);}.expect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:64px;}.expect-card{padding:40px 32px;border-radius:var(--radius-lg);background:var(--clr-bg);border:1px solid var(--clr-border);position:relative;overflow:hidden;transition:border-color 0.4s,transform 0.4s var(--ease-out-quart);}.expect-card:hover{border-color:var(--clr-border-glow);transform:translateY(-6px);}.expect-card__step{font-family:var(--font-head);font-size:60px;font-weight:900;letter-spacing:-3px;line-height:1;margin-bottom:20px;background:linear-gradient(135deg,var(--clr-blue) 0%,var(--clr-purple) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0.3;}.expect-card__title{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--clr-text-1);margin-bottom:12px;}.expect-card__desc{font-size:14px;color:var(--clr-text-2);line-height:1.65;}.expect-card__time{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-size:12px;font-weight:600;color:var(--clr-blue);letter-spacing:0.5px;}.expect-card__time::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--clr-blue);}
     /* ============================================================
@@ -457,7 +495,27 @@
           <div class="form-group"><label class="form-label" for="email" data-i18n="form-email">Email ID *</label><input class="form-input" id="email" type="email" placeholder="alex@company.com" autocomplete="email" required/></div>
         </div>
         <div class="form-group form-group--full"><label class="form-label" for="org" data-i18n="form-org">Organization Name *</label><input class="form-input" id="org" type="text" placeholder="Acme Inc." autocomplete="organization" required/></div>
-        <div class="form-group form-group--full"><label class="form-label" for="services" data-i18n="form-service">Service Required *</label><select class="form-select" id="services" required><option value="" disabled selected>Loading services…</option></select></div>
+        <div class="form-group form-group--full">
+          <label class="form-label" data-i18n="form-service">Services Required *</label>
+          <div class="svc-select" id="svcSelect">
+            <button type="button" class="svc-select__trigger" id="svcTrigger" aria-haspopup="listbox" aria-expanded="false">
+              <svg class="svc-select__trigger-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <span class="svc-select__placeholder" id="svcPlaceholder">Select services…</span>
+              <svg class="svc-select__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="svc-select__dropdown" id="svcDropdown" role="listbox" aria-multiselectable="true" aria-label="Services">
+              <div class="svc-select__search-wrap">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input class="svc-select__search" id="svcSearch" type="text" placeholder="Search services…" autocomplete="off" aria-label="Search services"/>
+              </div>
+              <ul class="svc-select__list" id="svcList" role="group">
+                <li class="svc-select__loading">Loading services…</li>
+              </ul>
+            </div>
+          </div>
+          <div class="svc-tags" id="svcTags" aria-label="Selected services"></div>
+          <input type="hidden" id="services"/>
+        </div>
         <div id="formError" style="display:none;color:rgba(255,100,100,0.9);font-size:13px;margin-bottom:12px;padding:10px 14px;background:rgba(255,100,100,0.07);border:1px solid rgba(255,100,100,0.2);border-radius:8px;"></div>
         <button type="button" class="form-submit" id="submitBtn" data-i18n="form-submit">Submit Enquiry →</button>
         <p class="form-note" data-i18n="form-note">We read every enquiry personally. No automated replies.</p>
@@ -612,23 +670,139 @@
       'Other':['Other'],
     };
 
-    // Load services from Supabase
+    // ── Custom multi-select state ──
+    const selectedIds   = [];   // array of numeric service IDs
+    const selectedNames = [];   // parallel array of service names
+    const trigger   = document.getElementById('svcTrigger');
+    const dropdown  = document.getElementById('svcDropdown');
+    const list      = document.getElementById('svcList');
+    const search    = document.getElementById('svcSearch');
+    const placeholder = document.getElementById('svcPlaceholder');
+    const tagsWrap  = document.getElementById('svcTags');
+    const hiddenSvc = document.getElementById('services');
+
+    function syncHidden() {
+      hiddenSvc.value = selectedIds.join(',');
+    }
+
+    function renderTags() {
+      tagsWrap.innerHTML = '';
+      selectedNames.forEach((name, i) => {
+        const tag = document.createElement('span');
+        tag.className = 'svc-tag';
+        tag.innerHTML = `${name}<button type="button" class="svc-tag__remove" aria-label="Remove ${name}" data-idx="${i}">✕</button>`;
+        tagsWrap.appendChild(tag);
+      });
+      tagsWrap.querySelectorAll('.svc-tag__remove').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const idx = parseInt(btn.dataset.idx);
+          const id  = selectedIds[idx];
+          selectedIds.splice(idx, 1);
+          selectedNames.splice(idx, 1);
+          const li = list.querySelector(`[data-id="${id}"]`);
+          if (li) li.classList.remove('checked');
+          renderTags();
+          updatePlaceholder();
+          syncHidden();
+        });
+      });
+    }
+
+    function updatePlaceholder() {
+      if (selectedIds.length === 0) {
+        placeholder.textContent = 'Select services…';
+        trigger.classList.remove('has-value');
+      } else {
+        placeholder.textContent = selectedIds.length === 1
+          ? selectedNames[0]
+          : `${selectedIds.length} services selected`;
+        trigger.classList.add('has-value');
+      }
+    }
+
+    function openDropdown() {
+      dropdown.classList.add('open');
+      trigger.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+      search.value = '';
+      filterList('');
+      search.focus();
+    }
+
+    function closeDropdown() {
+      dropdown.classList.remove('open');
+      trigger.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    trigger.addEventListener('click', () => {
+      dropdown.classList.contains('open') ? closeDropdown() : openDropdown();
+    });
+
+    document.addEventListener('click', e => {
+      if (!document.getElementById('svcSelect').contains(e.target)) closeDropdown();
+    });
+
+    trigger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDropdown(); }
+      if (e.key === 'Escape') closeDropdown();
+    });
+
+    search.addEventListener('input', () => filterList(search.value));
+
+    function filterList(q) {
+      const term = q.toLowerCase().trim();
+      list.querySelectorAll('.svc-select__item').forEach(li => {
+        const name = li.querySelector('.svc-select__item-name').textContent.toLowerCase();
+        li.classList.toggle('hidden', term && !name.includes(term));
+      });
+    }
+
+    // Load services from Supabase into custom list
     (async () => {
-      const servicesEl = document.getElementById('services');
       try {
         const r = await fetch(`${SUPABASE_URL}/rest/v1/services?select=id,name&order=id`, {
           headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
         });
-        const list = await r.json();
-        servicesEl.innerHTML = '<option value="" disabled selected>Select a service</option>';
-        list.forEach(s => {
-          const o = document.createElement('option');
-          o.value = s.id;
-          o.textContent = s.name;
-          servicesEl.appendChild(o);
+        const services = await r.json();
+        list.innerHTML = '';
+        services.forEach(s => {
+          const li = document.createElement('li');
+          li.className = 'svc-select__item';
+          li.setAttribute('role', 'option');
+          li.setAttribute('aria-selected', 'false');
+          li.setAttribute('data-id', s.id);
+          li.setAttribute('data-name', s.name);
+          li.innerHTML = `
+            <span class="svc-select__check">
+              <svg class="svc-select__check-svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="svc-select__item-name">${s.name}</span>`;
+          li.addEventListener('click', () => {
+            const id  = s.id;
+            const idx = selectedIds.indexOf(id);
+            if (idx === -1) {
+              selectedIds.push(id);
+              selectedNames.push(s.name);
+              li.classList.add('checked');
+              li.setAttribute('aria-selected', 'true');
+            } else {
+              selectedIds.splice(idx, 1);
+              selectedNames.splice(idx, 1);
+              li.classList.remove('checked');
+              li.setAttribute('aria-selected', 'false');
+            }
+            renderTags();
+            updatePlaceholder();
+            syncHidden();
+          });
+          list.appendChild(li);
         });
       } catch {
-        servicesEl.innerHTML = '<option value="" disabled selected>Could not load services</option>';
+        list.innerHTML = '<li class="svc-select__loading">Could not load services</li>';
       }
     })();
 
@@ -671,7 +845,6 @@
         contact_number:    document.getElementById('phone'),
         email:             document.getElementById('email'),
         organization_name: document.getElementById('org'),
-        services:          document.getElementById('services'),
       };
 
       let valid = true;
@@ -679,6 +852,15 @@
         if (!el.value.trim()) { el.style.borderColor = 'rgba(255,100,100,0.6)'; valid = false; }
         else el.style.borderColor = '';
       });
+
+      // Validate multi-select
+      if (selectedIds.length === 0) {
+        trigger.classList.add('error');
+        valid = false;
+      } else {
+        trigger.classList.remove('error');
+      }
+
       if (!valid) { showErr('Please fill in all required fields.'); return; }
 
       const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -700,7 +882,8 @@
           country:           fields.country.value,
           city:              fields.city.value,
           organization_name: fields.organization_name.value.trim(),
-          service_id:        fields.services ? parseInt(fields.services.value) : null,
+          service_id:        selectedIds[0] || null,
+          service_names:     selectedNames.join(', '),
         };
 
         // Primary: Supabase

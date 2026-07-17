@@ -34,8 +34,6 @@
   var WORD_SPLIT_SEL = '.page-hero__title, .hero__headline';
 
   function buildWordHTML(el) {
-    // Walk child nodes: text → split into m-word spans,
-    // BR → keep, element (span.grad etc.) → rewrap each word preserving attrs
     var html = '';
     el.childNodes.forEach(function (node) {
       if (node.nodeType === 3) { // text node
@@ -49,7 +47,6 @@
       } else if (node.nodeName === 'BR') {
         html += '<br>';
       } else if (node.nodeType === 1) {
-        // Inline element (span.grad, span[style]) — preserve styling per word
         var cls   = node.className ? ' ' + node.className : '';
         var style = node.getAttribute('style') ? ' style="' + node.getAttribute('style') + '"' : '';
         node.textContent.trim().split(/\s+/).filter(Boolean).forEach(function (word) {
@@ -62,26 +59,18 @@
 
   function applyWordSplit(el) {
     if (reducedMotion || el.hasAttribute('data-m-split')) return;
-
     el.setAttribute('data-m-split', '1');
-    // Cancel the CSS animation that page styles define, make el a transparent
-    // container — words carry the animation instead
     el.classList.add('m-split-active');
-    // Strip any IO-based classes that might have been added by autoTag first
     el.classList.remove('reveal', 'm-anim', 'm-reveal', 'm-reveal-up', 'm-reveal-left', 'm-reveal-scale');
     el.removeAttribute('data-m-anim');
-
     el.innerHTML = buildWordHTML(el);
 
     var words = el.querySelectorAll('.m-word');
-    // Match the original CSS animation-delay so the first word appears at the
-    // same time the old animation would have started
     var baseDelay = el.classList.contains('page-hero__title') ? 0.32 : 0.05;
     words.forEach(function (span, i) {
       span.style.transitionDelay = (baseDelay + i * 0.055) + 's';
     });
 
-    // Two-frame delay so the browser has painted the initial hidden state
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         words.forEach(function (span) { span.classList.add('m-w-in'); });
@@ -95,57 +84,60 @@
   }
 
   /* ═══════════════════════════════════════════════
-     SCROLL REVEAL — auto-tags elements and
-     fires IntersectionObserver once per element
+     SCROLL REVEAL
   ═══════════════════════════════════════════════ */
   var revealIO = null;
 
-  // Elements tagged by JS — no HTML change required.
-  // Rules:
-  //   • Never include elements in hidden tab panels (.svc-panel etc.)
-  //   • Never include page-hero children — those use CSS animation: fade-up
-  //   • Group by parent → siblings stagger together
   var AUTO_SELECTORS = [
     /* ── Section chrome ── */
     '.section__label',
     '.section__heading',
     '.section__sub',
+    '.section-eyebrow',
+    '.section-heading',
 
     /* ── Homepage ── */
     '.problem-card',
     '.bp-card',
     '.hero__stat',
+    '.testi-card',
 
-    /* ── Services tab buttons (always visible, not in hidden panels) ── */
+    /* ── Services ── */
     '.svc-tab',
+    '.wc-card',
+    '.tech-tag',
 
-    /* ── Process steps ── */
+    /* ── Process ── */
     '.ps-step',
 
     /* ── Why Choose cards ── */
     '.why-card',
 
-    /* ── Blog cards ── */
+    /* ── Blog ── */
     '.blog-card',
 
     /* ── About ── */
     '.mv-card',
     '.value-card',
     '.story-body',
+    '.ind-card',
 
-    /* ── Contact / Expect ── */
+    /* ── Contact ── */
     '.expect-card',
     '.contact-form-wrap',
+    '.contact-info-item',
+    '.trust-pill',
 
-    /* ── Work ── */
+    /* ── Work / Case studies ── */
     '.case-card',
-    '.ind-card',
     '.stat-item',
 
-    /* ── CTA section ── */
+    /* ── CTA ── */
     '.cta-section__heading',
     '.cta-section__sub',
-    '.magnetic-wrap',        // CTA button wrapper
+    '.magnetic-wrap',
+    '.grow-cta__heading',
+    '.grow-cta__sub',
 
     /* ── FAQ ── */
     '.faq-item',
@@ -158,8 +150,9 @@
     '.article-body > blockquote',
     '.article-body > .article-cta',
 
-    /* ── Footer columns ── */
+    /* ── Footer ── */
     '.footer__col',
+    '.footer__brand',
   ];
 
   var DIRECTION = {
@@ -169,21 +162,28 @@
     '.problem-card':                'm-reveal-up',
     '.bp-card':                     'm-reveal-up',
     '.hero__stat':                  'm-reveal-scale',
+    '.testi-card':                  'm-reveal-up',
     '.svc-tab':                     'm-reveal-up',
+    '.wc-card':                     'm-reveal-up',
+    '.tech-tag':                    'm-reveal-scale',
     '.ps-step':                     'm-reveal-up',
     '.why-card':                    'm-reveal-up',
     '.blog-card':                   'm-reveal-up',
     '.mv-card':                     'm-reveal-up',
     '.value-card':                  'm-reveal-up',
     '.story-body':                  'm-reveal',
+    '.ind-card':                    'm-reveal-up',
     '.expect-card':                 'm-reveal-up',
     '.contact-form-wrap':           'm-reveal-up',
+    '.contact-info-item':           'm-reveal-left',
+    '.trust-pill':                  'm-reveal-scale',
     '.case-card':                   'm-reveal-up',
-    '.ind-card':                    'm-reveal-up',
     '.stat-item':                   'm-reveal-scale',
     '.cta-section__heading':        'm-reveal',
     '.cta-section__sub':            'm-reveal',
     '.magnetic-wrap':               'm-reveal-scale',
+    '.grow-cta__heading':           'm-reveal',
+    '.grow-cta__sub':               'm-reveal',
     '.faq-item':                    'm-reveal',
     '.article-body > p':            'm-reveal',
     '.article-body > h2':           'm-reveal',
@@ -192,10 +192,13 @@
     '.article-body > blockquote':   'm-reveal-left',
     '.article-body > .article-cta': 'm-reveal-up',
     '.footer__col':                 'm-reveal-up',
+    '.footer__brand':               'm-reveal',
   };
 
+  /* Selectors where odd/even siblings alternate left↔right slide */
+  var ALTERNATING = ['.case-card', '.wc-card'];
+
   function tagElement(el, cls) {
-    // Skip elements already tagged by IO system or by word-split
     if (el.hasAttribute('data-m-anim') || el.hasAttribute('data-m-split')) return;
     el.setAttribute('data-m-anim', cls);
     el.classList.add('m-anim', cls);
@@ -205,10 +208,10 @@
     var container = root || document;
 
     AUTO_SELECTORS.forEach(function (sel) {
-      var cls = DIRECTION[sel] || 'm-reveal';
+      var defaultCls = DIRECTION[sel] || 'm-reveal';
+      var doAlternate = ALTERNATING.indexOf(sel) !== -1;
       var elements = Array.from(container.querySelectorAll(sel));
 
-      // Group by parent — stagger runs within each visual grid
       var byParent = new Map();
       elements.forEach(function (el) {
         var p = el.parentElement || document.body;
@@ -218,17 +221,19 @@
 
       byParent.forEach(function (group) {
         group.forEach(function (el, idx) {
+          var cls = defaultCls;
+          if (doAlternate && group.length > 1) {
+            cls = idx % 2 === 0 ? 'm-reveal-left' : 'm-reveal-right';
+          }
           tagElement(el, cls);
-          // Apply stagger only when there are siblings, and only when the
-          // author hasn't already set a [data-delay] HTML attribute
           if (group.length > 1 && !el.hasAttribute('data-delay')) {
-            el.style.transitionDelay = (idx * 0.08) + 's';
+            el.style.transitionDelay = (idx * 0.09) + 's';
           }
         });
       });
     });
 
-    // Ensure legacy .reveal elements are observed even if not in AUTO_SELECTORS
+    /* Legacy .reveal elements */
     container.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function (el) {
       if (!el.hasAttribute('data-m-anim') && !el.hasAttribute('data-m-split')) {
         el.setAttribute('data-m-anim', 'legacy');
@@ -243,11 +248,10 @@
       ).forEach(function (el) {
         el.classList.add('m-visible', 'visible');
       });
-      // Also unblock any word spans that didn't fire (e.g. offscreen on load)
       (root || document).querySelectorAll('.m-word:not(.m-w-in)').forEach(function (span) {
         span.classList.add('m-w-in');
       });
-    }, 1500);
+    }, 1800);
   }
 
   function buildIO(root) {
@@ -267,12 +271,12 @@
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('m-visible', 'visible');
-          revealIO.unobserve(entry.target); // one-shot: never re-hide
+          revealIO.unobserve(entry.target);
         }
       });
     }, {
-      threshold: 0.08,
-      rootMargin: '0px 0px -24px 0px'
+      threshold: 0.07,
+      rootMargin: '0px 0px -20px 0px'
     });
 
     (root || document).querySelectorAll('[data-m-anim], .reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function (el) {
@@ -328,6 +332,31 @@
   }
 
   /* ═══════════════════════════════════════════════
+     CARD HOVER PARALLAX (subtle tilt)
+  ═══════════════════════════════════════════════ */
+  function initCardParallax(root) {
+    if (reducedMotion) return;
+    var sel = '.why-card, .mv-card, .value-card, .expect-card, .blog-card, .case-card';
+    (root || document).querySelectorAll(sel).forEach(function (card) {
+      if (card.hasAttribute('data-m-tilt')) return;
+      card.setAttribute('data-m-tilt', '1');
+
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width  - 0.5;
+        var y = (e.clientY - rect.top)  / rect.height - 0.5;
+        card.style.transform = 'translateY(-5px) rotateX(' + (-y * 4) + 'deg) rotateY(' + (x * 4) + 'deg)';
+      }, { passive: true });
+
+      card.addEventListener('mouseleave', function () {
+        card.style.transform = '';
+        card.style.transition = 'transform 0.55s cubic-bezier(0.16,1,0.3,1), box-shadow 0.55s ease, border-color 0.55s ease';
+        setTimeout(function () { card.style.transition = ''; }, 560);
+      }, { passive: true });
+    });
+  }
+
+  /* ═══════════════════════════════════════════════
      PAGE ENTER / EXIT (router hooks)
   ═══════════════════════════════════════════════ */
   window.mAnimExit = function () {
@@ -338,21 +367,18 @@
 
   window.mAnimEnter = function () {
     var pageRoot = document.getElementById('page-root');
-    // Word-split must run before autoTag so tagElement's guard sees data-m-split
     applyWordSplits(pageRoot);
     autoTag(pageRoot);
     buildIO(pageRoot);
     initImageFade(pageRoot);
     initCounters(pageRoot);
+    initCardParallax(pageRoot);
     pageEnter();
   };
 
   function pageEnter() {
     var root = document.getElementById('page-root');
     if (!root) return;
-    // Only animate entrance when arriving from an SPA transition (m-exit was
-    // set by mAnimExit). On initial page load there is no m-exit class, so we
-    // go straight to m-visible — prevents hero flashing invisible then back in.
     var fromSpa = root.classList.contains('m-exit');
     root.classList.remove('m-exit', 'm-visible');
     if (!fromSpa || reducedMotion) {
@@ -360,9 +386,6 @@
       return;
     }
     root.classList.add('m-enter');
-    // setTimeout fires even in background/hidden tabs — unlike rAF which
-    // is suspended when document.hidden is true, causing the page to stay
-    // invisible if it loads while the tab is not focused.
     setTimeout(function () {
       root.classList.remove('m-enter');
       root.classList.add('m-visible');
@@ -374,11 +397,12 @@
   ═══════════════════════════════════════════════ */
   function init() {
     initProgress();
-    applyWordSplits(document); // must run before autoTag
+    applyWordSplits(document);
     autoTag(document);
     buildIO(document);
     initImageFade(document);
     initCounters(document);
+    initCardParallax(document);
     pageEnter();
   }
 

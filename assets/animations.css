@@ -481,17 +481,16 @@
 /* ────────────────────────────────────────
    WHY CHOOSE — icon bounce-pop on enter
 ──────────────────────────────────────── */
-@keyframes m-icon-pop {
-  0%   { opacity: 0; transform: scale(0.5) rotate(-18deg); }
-  55%  { opacity: 1; transform: scale(1.18) rotate(6deg);  }
-  78%  { transform: scale(0.94) rotate(-2deg); }
-  100% { transform: scale(1) rotate(0deg); }
-}
 .wc-card__check {
-  opacity: 0;
+  opacity: 0 !important;
+  transform: scale(0.55) rotate(-18deg) !important;
+  transition: opacity 0.55s var(--ease-expo) 0.2s,
+              transform 0.6s var(--ease-expo) 0.2s,
+              background 0.35s, border-color 0.35s, box-shadow 0.35s !important;
 }
 .wc-card.m-visible .wc-card__check {
-  animation: m-icon-pop 0.65s var(--ease-expo) 0.2s both;
+  opacity: 1 !important;
+  transform: scale(1) rotate(0deg) !important;
 }
 
 /* ────────────────────────────────────────

@@ -912,17 +912,6 @@
           service_names:     selectedNames.join(', '),
         };
 
-        // Supabase payload excludes service fields (columns not yet in schema)
-        const supabasePayload = {
-          first_name:        payload.first_name,
-          last_name:         payload.last_name,
-          contact:           payload.contact,
-          email_id:          payload.email_id,
-          country:           payload.country,
-          city:              payload.city,
-          organization_name: payload.organization_name,
-        };
-
         // Primary: Supabase
         const res = await fetch(`${SUPABASE_URL}/rest/v1/customers`, {
           method: 'POST',
@@ -932,7 +921,7 @@
             'Authorization': `Bearer ${SUPABASE_KEY}`,
             'Prefer':        'return=minimal',
           },
-          body: JSON.stringify(supabasePayload),
+          body: JSON.stringify(payload),
         });
 
         if (!res.ok) {

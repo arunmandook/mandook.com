@@ -962,7 +962,7 @@
           city:              fields.city.value,
           country_code:      fields.country_code.value,
           organization_name: fields.organization_name.value.trim(),
-          service_id:        selectedIds[0] || null,
+          service_ids:       selectedIds.map(Number),
           service_names:     selectedNames.join(', '),
           remark:            document.getElementById('remark').value.trim(),
         };

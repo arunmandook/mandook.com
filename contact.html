@@ -856,6 +856,46 @@
 
     const btn     = document.getElementById('submitBtn');
     const errBox  = document.getElementById('formError');
+    const phoneEl = document.getElementById('phone');
+    const ccEl    = document.getElementById('country_code');
+
+    // Phone digit rules per country code: [min, max]
+    const PHONE_RULES = {
+      '+971': [9,  9,  '50 123 4567'],
+      '+91':  [10, 10, '98765 43210'],
+      '+966': [9,  9,  '50 123 4567'],
+      '+974': [8,  8,  '3312 3456'],
+      '+973': [8,  8,  '3600 1234'],
+      '+968': [8,  8,  '9212 3456'],
+      '+965': [8,  8,  '5012 3456'],
+      '+1':   [10, 10, '555 000 0000'],
+      '+44':  [10, 11, '7700 900000'],
+      '+49':  [10, 11, '151 12345678'],
+      '+33':  [9,  9,  '6 12 34 56 78'],
+      '+86':  [11, 11, '131 2345 6789'],
+      '+81':  [10, 11, '90 1234 5678'],
+      '+61':  [9,  9,  '412 345 678'],
+      '+7':   [10, 10, '912 345 6789'],
+      '+55':  [10, 11, '11 91234 5678'],
+      '+27':  [9,  9,  '71 234 5678'],
+      '+234': [10, 10, '802 345 6789'],
+      '+254': [9,  9,  '712 345 678'],
+      '+20':  [10, 10, '101 234 5678'],
+    };
+
+    // Update placeholder and maxlength when country code changes
+    ccEl.addEventListener('change', () => {
+      const rule = PHONE_RULES[ccEl.value];
+      if (rule) {
+        phoneEl.placeholder = rule[2];
+        phoneEl.maxLength   = rule[1] + 4; // allow spaces/dashes
+      } else {
+        phoneEl.placeholder = '555 000 0000';
+        phoneEl.removeAttribute('maxlength');
+      }
+      phoneEl.value = '';
+      phoneEl.style.borderColor = '';
+    });
 
     function showErr(msg) {
       errBox.textContent = msg;
@@ -869,8 +909,8 @@
         last_name:         document.getElementById('lname'),
         country:           countryEl,
         city:              cityEl,
-        country_code:      document.getElementById('country_code'),
-        contact_number:    document.getElementById('phone'),
+        country_code:      ccEl,
+        contact_number:    phoneEl,
         email:             document.getElementById('email'),
         organization_name: document.getElementById('org'),
       };
@@ -890,6 +930,16 @@
       }
 
       if (!valid) { showErr('Please fill in all required fields.'); return; }
+
+      // Validate phone digit count against selected country code
+      const digits = fields.contact_number.value.replace(/\D/g, '');
+      const rule   = PHONE_RULES[fields.country_code.value];
+      if (rule && (digits.length < rule[0] || digits.length > rule[1])) {
+        fields.contact_number.style.borderColor = 'rgba(255,100,100,0.6)';
+        const expected = rule[0] === rule[1] ? rule[0] : `${rule[0]}–${rule[1]}`;
+        showErr(`Contact number must be ${expected} digits for ${fields.country_code.value}.`);
+        return;
+      }
 
       const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRe.test(fields.email.value.trim())) {

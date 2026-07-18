@@ -38,6 +38,7 @@
     .svc-select__trigger.open .svc-select__chevron{transform:rotate(180deg);}
     .svc-select__dropdown{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:200;background:var(--clr-surface-2);border:1px solid var(--clr-border);border-radius:var(--radius-md);box-shadow:0 16px 48px rgba(0,0,0,0.15),0 0 0 1px rgba(26,107,90,0.10);overflow:hidden;}
     .svc-select__dropdown.open{display:block;}
+    .svc-select__dropdown.drop-up{top:auto;bottom:calc(100% + 6px);box-shadow:0 -8px 32px rgba(0,0,0,0.12),0 0 0 1px rgba(26,107,90,0.10);}
     .svc-select__search-wrap{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--clr-border);}
     .svc-select__search-wrap svg{flex-shrink:0;opacity:0.4;}
     .svc-select__search{flex:1;background:transparent;border:none;outline:none;font-family:var(--font-body);font-size:13.5px;color:var(--clr-text-1);padding:2px 0;}
@@ -727,6 +728,15 @@
       trigger.setAttribute('aria-expanded', 'true');
       search.value = '';
       filterList('');
+      // flip upward if not enough space below
+      var rect = trigger.getBoundingClientRect();
+      var spaceBelow = window.innerHeight - rect.bottom;
+      var dropH = Math.min(320, dropdown.scrollHeight);
+      if (spaceBelow < dropH + 16) {
+        dropdown.classList.add('drop-up');
+      } else {
+        dropdown.classList.remove('drop-up');
+      }
       search.focus();
     }
 
@@ -760,51 +770,67 @@
     }
 
     // Load services from Supabase into custom list
-    (async () => {
-      try {
-        const r = await fetch(`${SUPABASE_URL}/rest/v1/services?select=id,name&order=id`, {
-          headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-        });
-        const services = await r.json();
-        list.innerHTML = '';
-        services.forEach(s => {
-          const li = document.createElement('li');
-          li.className = 'svc-select__item';
-          li.setAttribute('role', 'option');
+    function buildServiceItem(s) {
+      const li = document.createElement('li');
+      li.className = 'svc-select__item';
+      li.setAttribute('role', 'option');
+      li.setAttribute('aria-selected', 'false');
+      li.setAttribute('data-id', s.id);
+      li.setAttribute('data-name', s.name);
+      li.innerHTML =
+        '<span class="svc-select__check">' +
+          '<svg class="svc-select__check-svg" width="10" height="10" viewBox="0 0 10 10" fill="none">' +
+            '<polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '</svg>' +
+        '</span>' +
+        '<span class="svc-select__item-name">' + s.name + '</span>';
+      li.addEventListener('click', function() {
+        var id  = s.id;
+        var idx = selectedIds.indexOf(id);
+        if (idx === -1) {
+          selectedIds.push(id);
+          selectedNames.push(s.name);
+          li.classList.add('checked');
+          li.setAttribute('aria-selected', 'true');
+        } else {
+          selectedIds.splice(idx, 1);
+          selectedNames.splice(idx, 1);
+          li.classList.remove('checked');
           li.setAttribute('aria-selected', 'false');
-          li.setAttribute('data-id', s.id);
-          li.setAttribute('data-name', s.name);
-          li.innerHTML = `
-            <span class="svc-select__check">
-              <svg class="svc-select__check-svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
-                <polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            <span class="svc-select__item-name">${s.name}</span>`;
-          li.addEventListener('click', () => {
-            const id  = s.id;
-            const idx = selectedIds.indexOf(id);
-            if (idx === -1) {
-              selectedIds.push(id);
-              selectedNames.push(s.name);
-              li.classList.add('checked');
-              li.setAttribute('aria-selected', 'true');
-            } else {
-              selectedIds.splice(idx, 1);
-              selectedNames.splice(idx, 1);
-              li.classList.remove('checked');
-              li.setAttribute('aria-selected', 'false');
-            }
-            renderTags();
-            updatePlaceholder();
-            syncHidden();
-          });
-          list.appendChild(li);
-        });
-      } catch {
-        list.innerHTML = '<li class="svc-select__loading">Could not load services</li>';
-      }
-    })();
+        }
+        renderTags();
+        updatePlaceholder();
+        syncHidden();
+      });
+      return li;
+    }
+
+    function loadServices(attempt) {
+      var svcList = document.getElementById('svcList');
+      if (!svcList) return;
+      fetch(SUPABASE_URL + '/rest/v1/services?select=id,name&order=id', {
+        headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(services) {
+        var svcList = document.getElementById('svcList');
+        if (!svcList) return;
+        if (!Array.isArray(services) || !services.length) throw new Error('empty');
+        svcList.innerHTML = '';
+        services.forEach(function(s) { svcList.appendChild(buildServiceItem(s)); });
+      })
+      .catch(function(err) {
+        console.warn('Services load attempt', attempt, err);
+        var svcList = document.getElementById('svcList');
+        if (attempt < 3) {
+          setTimeout(function() { loadServices(attempt + 1); }, 1500);
+        } else if (svcList) {
+          svcList.innerHTML = '<li class="svc-select__loading">Could not load services — please refresh</li>';
+        }
+      });
+    }
+
+    loadServices(1);
 
     const countryEl = document.getElementById('country');
     const cityEl    = document.getElementById('city');

@@ -416,6 +416,131 @@
 }
 
 /* ────────────────────────────────────────
+   HERO VISUAL — scroll parallax (driven by JS)
+──────────────────────────────────────── */
+.hero__visual {
+  will-change: transform;
+  transition: none !important;
+}
+
+/* ────────────────────────────────────────
+   PROBLEM CARD — icon scale-in on enter
+──────────────────────────────────────── */
+.problem-card__icon-wrap svg {
+  opacity: 0;
+  transform: scale(0.55) rotate(-12deg);
+  transition: opacity 0.5s var(--ease-expo), transform 0.55s var(--ease-expo);
+}
+.problem-card.m-visible .problem-card__icon-wrap svg {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  transition-delay: 0.25s;
+}
+
+/* PROBLEM CARD — number flash on enter */
+@keyframes m-num-pop {
+  0%   { opacity: 0; transform: translateY(10px) scale(0.75); }
+  65%  { transform: translateY(-3px) scale(1.12); opacity: 1; }
+  100% { transform: translateY(0)   scale(1);    opacity: 1; }
+}
+.problem-card.m-visible .problem-card__num {
+  animation: m-num-pop 0.55s var(--ease-expo) 0.38s both;
+}
+
+/* ────────────────────────────────────────
+   PROCESS STEPS — connector line draws down
+──────────────────────────────────────── */
+.ps-step__line {
+  transform-origin: top center;
+  transform: scaleY(0);
+  transition: transform 0.75s var(--ease-expo) 0.55s;
+}
+.ps-step.m-visible .ps-step__line {
+  transform: scaleY(1);
+}
+
+/* PROCESS STEPS — node pulse ring on enter */
+@keyframes m-node-pulse {
+  0%   { box-shadow: 0 0 0 0   rgba(26,107,90,0.55); }
+  70%  { box-shadow: 0 0 0 12px rgba(26,107,90,0);   }
+  100% { box-shadow: 0 0 0 0   rgba(26,107,90,0);   }
+}
+.ps-step.m-visible .ps-step__node {
+  animation: m-node-pulse 1s ease-out 0.45s 1 both;
+}
+
+/* PROCESS STEPS — number count-in */
+@keyframes m-step-num {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.ps-step.m-visible .ps-step__num {
+  animation: m-step-num 0.45s var(--ease-expo) 0.15s both;
+}
+
+/* ────────────────────────────────────────
+   WHY CHOOSE — icon bounce-pop on enter
+──────────────────────────────────────── */
+@keyframes m-icon-pop {
+  0%   { opacity: 0; transform: scale(0.5) rotate(-18deg); }
+  55%  { opacity: 1; transform: scale(1.18) rotate(6deg);  }
+  78%  { transform: scale(0.94) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.wc-card__check {
+  opacity: 0;
+}
+.wc-card.m-visible .wc-card__check {
+  animation: m-icon-pop 0.65s var(--ease-expo) 0.2s both;
+}
+
+/* ────────────────────────────────────────
+   BLOG PREVIEW CARDS — clip-path image wipe
+──────────────────────────────────────── */
+.bp-card__thumb {
+  overflow: hidden;
+}
+.bp-card__thumb-img {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.75s var(--ease-expo) 0.1s,
+              transform  0.55s var(--ease-expo) !important;
+}
+.bp-card.m-visible .bp-card__thumb-img {
+  clip-path: inset(0 0% 0 0);
+}
+.bp-card:hover .bp-card__thumb-img {
+  transform: scale(1.06) !important;
+}
+
+/* ────────────────────────────────────────
+   GROW CTA — button pulse ring while in view
+──────────────────────────────────────── */
+@keyframes m-cta-pulse {
+  0%   { box-shadow: 0 0 0 0    rgba(240,165,0,0.5), 0 8px 32px rgba(240,165,0,0.25); }
+  70%  { box-shadow: 0 0 0 18px rgba(240,165,0,0),   0 8px 32px rgba(240,165,0,0.25); }
+  100% { box-shadow: 0 0 0 0    rgba(240,165,0,0),   0 8px 32px rgba(240,165,0,0.25); }
+}
+.grow-cta.in-view .grow-cta__btn {
+  animation: m-cta-pulse 2.4s ease-out 1s infinite;
+}
+
+/* ────────────────────────────────────────
+   SECTION HEADING — .grad shimmer
+──────────────────────────────────────── */
+@keyframes m-grad-shimmer {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+.section__heading .grad,
+.hero__headline .grad,
+.grow-cta__heading .highlight,
+.blog-preview__header .text-gradient {
+  background-size: 250% 100% !important;
+  animation: m-grad-shimmer 5s ease infinite;
+}
+
+/* ────────────────────────────────────────
    SECTION BACKGROUNDS — subtle parallax float
 ──────────────────────────────────────── */
 @keyframes m-bg-float {

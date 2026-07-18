@@ -332,6 +332,25 @@
   }
 
   /* ═══════════════════════════════════════════════
+     HERO VISUAL — scroll parallax
+  ═══════════════════════════════════════════════ */
+  function initHeroParallax() {
+    if (reducedMotion) return;
+    var visual = document.querySelector('.hero__visual');
+    if (!visual) return;
+    var hero = document.querySelector('.hero');
+    function onScroll() {
+      var scrollY = window.scrollY || window.pageYOffset;
+      var heroH   = hero ? hero.offsetHeight : window.innerHeight;
+      if (scrollY > heroH) return;
+      visual.style.transform = 'translateY(' + (scrollY * 0.10) + 'px)';
+    }
+    window.removeEventListener('scroll', window._mHeroParallax);
+    window._mHeroParallax = onScroll;
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  /* ═══════════════════════════════════════════════
      CARD HOVER PARALLAX (subtle tilt)
   ═══════════════════════════════════════════════ */
   function initCardParallax(root) {
@@ -373,6 +392,7 @@
     initImageFade(pageRoot);
     initCounters(pageRoot);
     initCardParallax(pageRoot);
+    initHeroParallax();
     pageEnter();
   };
 
@@ -403,6 +423,7 @@
     initImageFade(document);
     initCounters(document);
     initCardParallax(document);
+    initHeroParallax();
     pageEnter();
   }
 

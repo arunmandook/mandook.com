@@ -986,10 +986,14 @@
 
         // Mirror: Google Sheets (fires silently when SHEET_URL is set)
         if (SHEET_URL) {
+          var sheetsPayload = Object.assign({}, payload, {
+            service_ids:  Array.isArray(payload.service_ids) ? payload.service_ids.join(',') : (payload.service_ids || ''),
+            submitted_at: new Date().toISOString(),
+          });
           fetch(SHEET_URL, {
             method: 'POST',
             mode:   'no-cors',
-            body:   new URLSearchParams({ ...payload, submitted_at: new Date().toISOString() }),
+            body:   new URLSearchParams(sheetsPayload),
           }).catch(() => {});
         }
 

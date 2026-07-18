@@ -317,11 +317,19 @@
     var suffix = el.getAttribute('data-suffix') || '';
     var isInt  = Number.isInteger(target);
     var dur = 1600, t0 = null;
+    function springEase(p) {
+      /* cubic-bezier(0.34, 1.56, 0.64, 1) — slight overshoot */
+      var c1 = 1.56, c2 = 0.64;
+      if (p < 0.5) return 4 * p * p * p;
+      var f = p - 1;
+      return 1 + c1 * f * f * f + c2 * f * f;
+    }
     function tick(ts) {
       if (!t0) t0 = ts;
       var p = Math.min((ts - t0) / dur, 1);
-      var ease = 1 - Math.pow(1 - p, 4);
-      el.textContent = (isInt ? Math.round(target * ease) : (target * ease).toFixed(1)) + suffix;
+      var ease = springEase(p);
+      var val = Math.max(0, target * ease);
+      el.textContent = (isInt ? Math.round(val) : val.toFixed(1)) + suffix;
       if (p < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
@@ -383,6 +391,25 @@
   }
 
   /* ═══════════════════════════════════════════════
+     BUTTON RIPPLE — click effect
+  ═══════════════════════════════════════════════ */
+  function initRipple(root) {
+    if (reducedMotion) return;
+    (root || document).querySelectorAll('.btn:not([data-m-ripple])').forEach(function (btn) {
+      btn.setAttribute('data-m-ripple', '1');
+      btn.addEventListener('click', function (e) {
+        var rect = btn.getBoundingClientRect();
+        var wave = document.createElement('span');
+        wave.className = 'm-ripple-wave';
+        wave.style.top  = (e.clientY - rect.top)  + 'px';
+        wave.style.left = (e.clientX - rect.left) + 'px';
+        btn.appendChild(wave);
+        wave.addEventListener('animationend', function () { wave.remove(); }, { once: true });
+      }, { passive: true });
+    });
+  }
+
+  /* ═══════════════════════════════════════════════
      PAGE ENTER / EXIT (router hooks)
   ═══════════════════════════════════════════════ */
   window.mAnimExit = function () {
@@ -399,6 +426,7 @@
     initImageFade(pageRoot);
     initCounters(pageRoot);
     initCardParallax(pageRoot);
+    initRipple(pageRoot);
     initHeroParallax();
     pageEnter();
   };
@@ -430,6 +458,7 @@
     initImageFade(document);
     initCounters(document);
     initCardParallax(document);
+    initRipple(document);
     initHeroParallax();
     pageEnter();
   }

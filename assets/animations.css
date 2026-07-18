@@ -207,6 +207,31 @@
   animation: m-canvas-in 1.6s ease 0.3s both;
 }
 
+/* ────────────────────────────────────────
+   KEN BURNS — hero background slow zoom-pan
+──────────────────────────────────────── */
+@keyframes m-ken-burns {
+  0%   { transform: scale(1)    translate(0%,   0%); }
+  33%  { transform: scale(1.07) translate(-0.8%, 0.4%); }
+  67%  { transform: scale(1.05) translate(0.6%, -0.5%); }
+  100% { transform: scale(1)    translate(0%,   0%); }
+}
+/* Strip static bg from hero; the animated ::after takes over */
+.hero { background-image: none !important; }
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: -6%;
+  z-index: 0;
+  background: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+  animation: m-ken-burns 22s ease-in-out infinite;
+  will-change: transform;
+}
+/* gradient overlay must sit above the Ken Burns layer */
+.hero::before { z-index: 1 !important; }
+/* content above both */
+.hero .container { z-index: 2 !important; }
+
 /* Hero orbs — gentle drift */
 @keyframes m-orb1 {
   0%,100% { transform: translate(0,0); }
@@ -232,6 +257,44 @@
   50%     { transform: scale(1.55); opacity: 0.5; }
 }
 .page-hero__label-dot { animation: m-dot 3s ease-in-out infinite; }
+
+/* ────────────────────────────────────────
+   SECTION HEADING — clip-path text wipe
+   Overrides the default fade-up on headings
+   with a left-to-right reveal
+──────────────────────────────────────── */
+.section__heading.m-reveal,
+.section__heading.m-reveal-up {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: inset(0 102% 0 0);
+  transition: clip-path 0.9s var(--ease-expo) 0.08s !important;
+}
+.section__heading.m-reveal.m-visible,
+.section__heading.m-reveal-up.m-visible {
+  clip-path: inset(0 0% 0 0) !important;
+}
+
+/* Section sub — gentle fade-up (unchanged) */
+
+/* ────────────────────────────────────────
+   BUTTON RIPPLE — click effect
+──────────────────────────────────────── */
+.btn { position: relative; overflow: hidden; }
+@keyframes m-ripple {
+  from { transform: scale(0);   opacity: 0.45; }
+  to   { transform: scale(3.5); opacity: 0; }
+}
+.m-ripple-wave {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.38);
+  width: 60px; height: 60px;
+  margin-top: -30px; margin-left: -30px;
+  pointer-events: none;
+  animation: m-ripple 0.65s var(--ease-expo) forwards;
+  will-change: transform, opacity;
+}
 
 /* ────────────────────────────────────────
    SECTION LABEL line animation

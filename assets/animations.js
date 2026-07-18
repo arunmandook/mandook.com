@@ -241,15 +241,22 @@
     });
   }
 
+  function isInViewport(el) {
+    var rect = el.getBoundingClientRect();
+    return rect.top < window.innerHeight && rect.bottom > 0;
+  }
+
   function safetyReveal(root) {
+    /* Only force-reveal elements currently visible in the viewport.
+       Off-screen elements stay hidden and animate when scrolled into view. */
     setTimeout(function () {
       (root || document).querySelectorAll(
         '.m-anim:not(.m-visible), .reveal:not(.visible), .reveal-left:not(.visible), .reveal-right:not(.visible)'
       ).forEach(function (el) {
-        el.classList.add('m-visible', 'visible');
+        if (isInViewport(el)) el.classList.add('m-visible', 'visible');
       });
       (root || document).querySelectorAll('.m-word:not(.m-w-in)').forEach(function (span) {
-        span.classList.add('m-w-in');
+        if (isInViewport(span)) span.classList.add('m-w-in');
       });
     }, 1800);
   }

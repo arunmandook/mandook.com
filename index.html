@@ -3509,7 +3509,24 @@
 <nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
   <div class="container">
     <div class="nav__inner">
-      <a href="index.html" class="nav__logo" aria-label="Igniz AI home">
+      <a href="index.html" class="nav__logo" aria-label="Igniz AI home" style="display:inline-flex;align-items:center;gap:9px">
+        <!-- Igniz AI mark — revealed after intro video -->
+        <svg id="nav-logo-mark" width="18" height="24" viewBox="0 0 100 128" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;opacity:0;transition:opacity 0.5s ease;will-change:opacity">
+          <defs>
+            <linearGradient id="ngl" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0a120e"/><stop offset="55%" stop-color="#5a6e64"/><stop offset="100%" stop-color="#a8b4a8"/></linearGradient>
+            <linearGradient id="ngr" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#a8b4a8"/><stop offset="45%" stop-color="#5a6e64"/><stop offset="100%" stop-color="#0a120e"/></linearGradient>
+            <radialGradient id="nsp" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffe8a0" stop-opacity=".95"/><stop offset="50%" stop-color="#f0a500" stop-opacity=".6"/><stop offset="100%" stop-color="#f0a500" stop-opacity="0"/></radialGradient>
+          </defs>
+          <polygon points="50,10 4,118 22,118" fill="url(#ngl)"/>
+          <polygon points="50,10 78,118 96,118" fill="url(#ngr)"/>
+          <!-- crossbar across left leg at 58% height -->
+          <polygon points="50,10 28,74 37,74" fill="#c8900a"/>
+          <!-- spark -->
+          <circle cx="50" cy="10" r="10" fill="url(#nsp)"/>
+          <polygon points="50,0 51.6,10 50,22 48.4,10" fill="#fffce0"/>
+          <polygon points="38,10 50,8.5 62,10 50,11.5" fill="#ffe080" opacity=".9"/>
+          <circle cx="50" cy="10" r="2.5" fill="#fff"/>
+        </svg>
         <span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:1.22rem;font-weight:200;letter-spacing:.18em;color:#fff;line-height:1;display:inline-block"><span style="color:#f0a500">I</span>GNIZ <span style="color:#f0a500">AI</span></span>
       </a>
 
@@ -3558,6 +3575,11 @@
      HERO
 ============================================================ -->
 <section class="hero" id="hero" aria-label="Hero banner carousel">
+
+  <!-- ░░ Intro video overlay ░░ -->
+  <video id="hero-video" class="hero__video" autoplay muted playsinline preload="auto" aria-hidden="true">
+    <source src="assets/herovideo.mp4" type="video/mp4">
+  </video>
 
   <!-- ░░ Background atmosphere ░░ -->
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
@@ -4973,5 +4995,232 @@
 <script src="assets/i18n.js"></script>
 <script src="assets/animations.js" defer></script>
 <script src="assets/router.js"></script>
+
+<!-- ═══════════════════════════════════════════════════════
+     INTRO VIDEO SPLASH MARK  (fixed overlay, above everything)
+════════════════════════════════════════════════════════════ -->
+<div id="hero-splash" aria-hidden="true">
+  <svg id="splash-mark" width="180" height="216" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sgl" x1="8" y1="0" x2="44" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0%"   stop-color="#0a120e"/>
+        <stop offset="42%"  stop-color="#4e5e54"/>
+        <stop offset="100%" stop-color="#a8b4a8"/>
+      </linearGradient>
+      <linearGradient id="sgr" x1="156" y1="0" x2="192" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0%"   stop-color="#a8b4a8"/>
+        <stop offset="58%"  stop-color="#4e5e54"/>
+        <stop offset="100%" stop-color="#0a120e"/>
+      </linearGradient>
+      <linearGradient id="sglh" x1="36" y1="0" x2="47" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0%"  stop-color="#c8d4c4"/>
+        <stop offset="100%" stop-color="#687870"/>
+      </linearGradient>
+      <linearGradient id="sgrh" x1="153" y1="0" x2="164" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0%"  stop-color="#687870"/>
+        <stop offset="100%" stop-color="#c8d4c4"/>
+      </linearGradient>
+      <radialGradient id="saura" cx="50%" cy="50%" r="50%">
+        <stop offset="0%"   stop-color="#fff8d0" stop-opacity=".95"/>
+        <stop offset="30%"  stop-color="#f0a500" stop-opacity=".6"/>
+        <stop offset="65%"  stop-color="#c87000" stop-opacity=".2"/>
+        <stop offset="100%" stop-color="#c87000" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="srayUp" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#fffef2"/>
+        <stop offset="50%"  stop-color="#ffd860" stop-opacity=".85"/>
+        <stop offset="100%" stop-color="#f0a500" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="srayH" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#f0a500" stop-opacity="0"/>
+        <stop offset="50%"  stop-color="#fffce4"/>
+        <stop offset="100%" stop-color="#f0a500" stop-opacity="0"/>
+      </linearGradient>
+      <filter id="sglow" x="-150%" y="-150%" width="400%" height="400%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="ssoftglow" x="-100%" y="-100%" width="300%" height="300%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <!-- A legs -->
+    <polygon points="100,18 8,193 40,193"    fill="url(#sgl)"/>
+    <polygon points="100,18 36,193 45,193"   fill="url(#sglh)" opacity=".9"/>
+    <polygon points="100,18 160,193 192,193" fill="url(#sgr)"/>
+    <polygon points="100,18 155,193 164,193" fill="url(#sgrh)" opacity=".9"/>
+    <!-- Spark aura -->
+    <circle cx="100" cy="18" r="28" fill="url(#saura)" filter="url(#ssoftglow)"/>
+    <!-- Rays -->
+    <g filter="url(#sglow)">
+      <polygon points="100,0 101.8,17 100,34 98.2,17"  fill="url(#srayUp)"/>
+      <polygon points="100,20 101.2,24 100,32 98.8,24" fill="#fffce0" opacity=".5"/>
+      <polygon points="78,18 100,16.6 122,18 100,19.4" fill="url(#srayH)"/>
+      <polygon points="88,6 100.8,17.5 112,6  99.2,17.5"  fill="#ffe080" opacity=".28"/>
+      <polygon points="88,30 100.8,18.5 112,30 99.2,18.5" fill="#ffe080" opacity=".18"/>
+      <circle cx="100" cy="18" r="3" fill="#ffffff"/>
+      <circle cx="100" cy="18" r="1.4" fill="#fffce8"/>
+    </g>
+  </svg>
+</div>
+
+<style>
+/* ─── Intro video ─────────────────────────────────────── */
+.hero__video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2000;
+  background: #06100b;
+  transition: opacity 1s ease;
+}
+.hero__video.fading { opacity: 0; pointer-events: none; }
+
+/* ─── Splash mark overlay ─────────────────────────────── */
+#hero-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 1999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  background: transparent;
+}
+#hero-splash.visible { opacity: 1; }
+#hero-splash.hidden  { opacity: 0; }
+
+#splash-mark {
+  will-change: transform, opacity;
+  transform-origin: center center;
+  filter: drop-shadow(0 0 32px rgba(240,165,0,.55));
+  transition: transform 0s, opacity 0s;
+}
+#splash-mark.flying {
+  transition: transform 1.15s cubic-bezier(0.34, 1.08, 0.64, 1),
+              opacity   0.3s ease 0.85s;
+}
+
+/* Skip button */
+#intro-skip {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2rem;
+  z-index: 2001;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: .14em;
+  color: rgba(255,255,255,.45);
+  background: none;
+  border: 1px solid rgba(255,255,255,.15);
+  padding: 7px 18px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: color .2s, border-color .2s;
+}
+#intro-skip:hover { color: #fff; border-color: rgba(255,255,255,.4); }
+</style>
+
+<script>
+(function () {
+  'use strict';
+  var video   = document.getElementById('hero-video');
+  var splash  = document.getElementById('hero-splash');
+  var mark    = document.getElementById('splash-mark');
+  var navMark = document.getElementById('nav-logo-mark');
+  var skip    = document.getElementById('intro-skip');
+
+  if (!video) return;
+
+  /* ── helpers ── */
+  function revealNavMark() {
+    if (navMark) navMark.style.opacity = '1';
+  }
+
+  function removeOverlays() {
+    if (video  && video.parentNode)  video.parentNode.removeChild(video);
+    if (splash && splash.parentNode) splash.parentNode.removeChild(splash);
+    if (skip   && skip.parentNode)   skip.parentNode.removeChild(skip);
+    document.body.style.overflow = '';
+  }
+
+  function skipIntro() {
+    revealNavMark();
+    removeOverlays();
+  }
+
+  /* ── lock scroll while video plays ── */
+  document.body.style.overflow = 'hidden';
+
+  /* ── skip button ── */
+  var skipBtn = document.createElement('button');
+  skipBtn.id = 'intro-skip';
+  skipBtn.textContent = 'Skip intro';
+  skipBtn.addEventListener('click', skipIntro);
+  document.body.appendChild(skipBtn);
+
+  /* ── main transition after video ends ── */
+  function startTransition() {
+    document.body.style.overflow = '';
+    if (skipBtn && skipBtn.parentNode) skipBtn.parentNode.removeChild(skipBtn);
+
+    /* 1 — fade out video */
+    video.classList.add('fading');
+
+    /* 2 — show splash mark after short delay */
+    setTimeout(function () {
+      splash.classList.add('visible');
+
+      /* 3 — fly mark to nav after mark has faded in */
+      setTimeout(function () {
+        var navRect   = navMark ? navMark.getBoundingClientRect() : null;
+        var markRect  = mark.getBoundingClientRect();
+
+        if (navRect && navRect.width > 0) {
+          var dx    = (navRect.left + navRect.width  / 2) - (markRect.left + markRect.width  / 2);
+          var dy    = (navRect.top  + navRect.height / 2) - (markRect.top  + markRect.height / 2);
+          var scale = navRect.height / markRect.height;
+
+          mark.classList.add('flying');
+          mark.style.transform = 'translate(' + dx + 'px, ' + dy + 'px) scale(' + scale + ')';
+          mark.style.opacity   = '0';
+        }
+
+        /* 4 — reveal nav mark when splash arrives */
+        setTimeout(function () {
+          revealNavMark();
+
+          /* 5 — fade out splash overlay */
+          splash.classList.remove('visible');
+          splash.classList.add('hidden');
+
+          setTimeout(removeOverlays, 700);
+        }, 1150);
+
+      }, 420); /* pause after mark appears before flying */
+
+    }, 350); /* pause after video starts fading */
+  }
+
+  video.addEventListener('ended', startTransition);
+
+  /* ── fallback: if autoplay blocked, skip intro ── */
+  var playPromise = video.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(function () { skipIntro(); });
+  }
+
+  /* ── safety fallback: if video hasn't ended in 60s, skip ── */
+  var safetyTimer = setTimeout(skipIntro, 60000);
+  video.addEventListener('ended', function () { clearTimeout(safetyTimer); });
+})();
+</script>
+
 </body>
 </html>

@@ -706,3 +706,38 @@ html[dir="rtl"] .cta-section__sub     { text-align: right; }
 /* RTL: flip slide-left direction */
 html[dir="rtl"] .m-reveal-left  { transform: translateX(24px); }
 html[dir="rtl"] .m-reveal-right { transform: translateX(-24px); }
+
+/* ── Nav link slide-up text swap ───────────────────────────── */
+.nav__link { position: relative; }
+
+.link-inner {
+  display: block;
+  overflow: hidden;          /* clips at one line height */
+  height: 1.2em;
+  line-height: 1.2;
+  position: relative;
+}
+
+.link-inner > span {
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Second span sits below the clip window, ready to slide in */
+.link-inner > span:nth-child(2) {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  text-align: inherit;
+}
+
+/* On hover: both spans slide up together — first exits top, second enters */
+.nav__link:hover .link-inner > span,
+.nav__link:focus-visible .link-inner > span {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-inner > span { transition: none; }
+}

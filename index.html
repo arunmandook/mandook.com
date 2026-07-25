@@ -165,11 +165,15 @@
       height: var(--nav-h);
     }
     .nav__inner {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
       width: 100%;
     }
+    .nav__logo     { grid-column: 1; }
+    .nav__links    { grid-column: 2; }
+    .nav__cta      { grid-column: 3; justify-self: end; }
+    .nav__hamburger{ grid-column: 3; justify-self: end; }
 
     /* Logo */
     .nav__logo {
@@ -3584,12 +3588,12 @@
       </a>
 
       <ul class="nav__links" role="list">
-        <li><a href="index.html" class="nav__link active" data-i18n="nav-home">Home</a></li>
-        <li><a href="services.html" class="nav__link" data-i18n="nav-services">Services</a></li>
-        <li><a href="process.html"  class="nav__link" data-i18n="nav-process">Process</a></li>
-        <li><a href="about.html"    class="nav__link" data-i18n="nav-about">About</a></li>
-        <li><a href="contact.html" class="nav__link" data-i18n="nav-contact">Contact</a></li>
-        <li><a href="blog.html"     class="nav__link" data-i18n="nav-blog">Blog</a></li>
+        <li><a href="index.html" class="nav__link active"><span class="link-inner"><span data-i18n="nav-home">Home</span><span aria-hidden="true" data-i18n="nav-home">Home</span></span></a></li>
+        <li><a href="services.html" class="nav__link"><span class="link-inner"><span data-i18n="nav-services">Services</span><span aria-hidden="true" data-i18n="nav-services">Services</span></span></a></li>
+        <li><a href="process.html" class="nav__link"><span class="link-inner"><span data-i18n="nav-process">Process</span><span aria-hidden="true" data-i18n="nav-process">Process</span></span></a></li>
+        <li><a href="about.html" class="nav__link"><span class="link-inner"><span data-i18n="nav-about">About</span><span aria-hidden="true" data-i18n="nav-about">About</span></span></a></li>
+        <li><a href="contact.html" class="nav__link"><span class="link-inner"><span data-i18n="nav-contact">Contact</span><span aria-hidden="true" data-i18n="nav-contact">Contact</span></span></a></li>
+        <li><a href="blog.html" class="nav__link"><span class="link-inner"><span data-i18n="nav-blog">Blog</span><span aria-hidden="true" data-i18n="nav-blog">Blog</span></span></a></li>
       </ul>
 
       <div class="nav__cta">
@@ -4355,22 +4359,33 @@
 
 
   /* ──────────────────────────────────────────────────────────
-     Nav — scroll behaviour
+     Nav — scroll theme swap via IntersectionObserver
   ────────────────────────────────────────────────────────── */
   (function initNav() {
     const nav = document.getElementById('mainNav');
     if (!nav) return;
-    const onScroll = () => {
-      const hasHero = !!(document.getElementById('hero') || document.querySelector('.page-hero'));
-      const solid = !hasHero || window.scrollY > 40;
+
+    const setSolid = (solid) => {
       nav.classList.toggle('scrolled', solid);
       nav.classList.toggle('nav--solid', solid);
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    // Re-run on every SPA navigation
-    window.addEventListener('popstate', onScroll);
-    document.addEventListener('mandook:navigate', onScroll);
-    onScroll();
+
+    const hero = document.getElementById('hero') || document.querySelector('.page-hero');
+    if (hero) {
+      // Watch hero: go solid when hero exits viewport (isIntersecting = false)
+      const observer = new IntersectionObserver(
+        ([entry]) => setSolid(!entry.isIntersecting),
+        { threshold: 0, rootMargin: '0px' }
+      );
+      observer.observe(hero);
+    } else {
+      // No hero — always solid
+      setSolid(true);
+    }
+
+    // Keep re-evaluating on SPA navigation
+    window.addEventListener('popstate', () => setSolid(window.scrollY > 40));
+    document.addEventListener('mandook:navigate', () => setSolid(window.scrollY > 40));
   })();
 
   /* ──────────────────────────────────────────────────────────

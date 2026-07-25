@@ -26,7 +26,7 @@
       'footer-co-about':   'About',
       'footer-co-blog':    'Blog',
       'footer-co-contact': 'Contact',
-      'footer-copy':       '© 2026 Mandook.com · All rights reserved.',
+      'footer-copy':       '© 2026 Igniz AI · All rights reserved.',
 
       /* ── INDEX hero ── */
       'hero-headline':    'Your Implementation Partner for <span class="grad">Digital Transformation</span>',
@@ -105,7 +105,7 @@
       'p4-s1-sub':   'Measured across clients in 12 months post-campaign launch.',
 
       /* ── Why Mandook ── */
-      'why-label':   'Why Mandook',
+      'why-label':   'Why Igniz AI',
       'why-heading': 'Built for businesses that want results.',
       'why-1-title': 'UAE-Based & Culturally Aligned',
       'why-1-desc':  'We understand the local market — Arabic UX, bilingual content, and the business culture that matters here.',
@@ -182,12 +182,12 @@
       'footer-co-4': 'Work',
 
       /* ── ABOUT ── */
-      'about-hero-label':  'About Mandook',
+      'about-hero-label':  'About Igniz AI',
       'about-hero-title':  'Building Digital<br><span class="grad">Foundations for Growth</span>',
       'about-hero-sub':    'We believe every business deserves a digital presence that inspires confidence, builds trust, and creates opportunities for growth.',
       'about-label-1':     'Who We Are',
-      'about-heading-1':   'About Mandook',
-      'about-story':       '<p>At <strong>Mandook</strong>, we believe every business deserves a digital presence that inspires confidence, builds trust, and creates opportunities for growth.</p><p>We are a digital consulting and development company dedicated to helping businesses establish, strengthen, and expand their presence online. From professionally designed websites and intuitive Content Management Systems (CMS) to reliable Annual Maintenance Contracts (AMC), we create digital solutions that are modern, scalable, and built to deliver measurable business value.</p><p>Our approach is simple: understand your business, identify your goals, and develop technology that helps you reach them. We don\'t just create websites — we build digital experiences that attract customers, generate quality leads, and support long-term success.</p><p>Whether you\'re a startup launching your first website or an established business looking to modernize your digital presence, Mandook is committed to being your trusted technology partner throughout your growth journey.</p>',
+      'about-heading-1':   'About Igniz AI',
+      'about-story':       '<p>At <strong>Igniz AI</strong>, we believe every business deserves a digital presence that inspires confidence, builds trust, and creates opportunities for growth.</p><p>We are a digital consulting and development company dedicated to helping businesses establish, strengthen, and expand their presence online. From professionally designed websites and intuitive Content Management Systems (CMS) to reliable Annual Maintenance Contracts (AMC), we create digital solutions that are modern, scalable, and built to deliver measurable business value.</p><p>Our approach is simple: understand your business, identify your goals, and develop technology that helps you reach them. We don\'t just create websites — we build digital experiences that attract customers, generate quality leads, and support long-term success.</p><p>Whether you\'re a startup launching your first website or an established business looking to modernize your digital presence, Igniz AI is committed to being your trusted technology partner throughout your growth journey.</p>',
       'about-label-2':     'Our Purpose',
       'about-heading-2':   'Mission & Vision',
       'mv-1-label':        'Our Mission',
@@ -365,7 +365,7 @@
       'footer-co-about':   'عنّا',
       'footer-co-blog':    'المدونة',
       'footer-co-contact': 'تواصل',
-      'footer-copy':       '© ٢٠٢٦ Mandook.com · جميع الحقوق محفوظة.',
+      'footer-copy':       '© ٢٠٢٦ Igniz AI · جميع الحقوق محفوظة.',
 
       /* ── INDEX hero ── */
       'hero-headline':    'شريكك في <span class="grad">التحول الرقمي</span> من الفكرة إلى التطبيق',

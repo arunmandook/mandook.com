@@ -609,9 +609,6 @@
       text-transform: uppercase;
       margin-bottom: 32px;
 
-      opacity: 0;
-      transform: translateY(16px);
-      animation: fade-up 0.7s var(--ease-out-expo) 0.2s forwards;
     }
     .hero__eyebrow-dot {
       width: 6px; height: 6px;
@@ -643,25 +640,7 @@
       color: var(--clr-text-1);
       text-wrap: balance;
     }
-    .hero__headline .word {
-      display: inline-block;
-      overflow: hidden;
-    }
-    .hero__headline .word-inner {
-      display: inline-block;
-      transform: translateY(105%);
-      animation: word-reveal 0.75s var(--ease-out-expo) forwards;
-    }
-    .hero__headline .word:nth-child(1) .word-inner { animation-delay: 0.3s; }
-    .hero__headline .word:nth-child(2) .word-inner { animation-delay: 0.4s; }
-    .hero__headline .word:nth-child(3) .word-inner { animation-delay: 0.5s; }
-    .hero__headline .word:nth-child(4) .word-inner { animation-delay: 0.6s; }
-    .hero__headline .word:nth-child(5) .word-inner { animation-delay: 0.7s; }
-    .hero__headline .word:nth-child(6) .word-inner { animation-delay: 0.8s; }
-    .hero__headline .word:nth-child(7) .word-inner { animation-delay: 0.9s; }
-    @keyframes word-reveal {
-      to { transform: translateY(0); }
-    }
+    .hero__headline { display: flex; flex-direction: column; align-items: center; }
 
     .hero__headline .grad {
       color: #f0a500;
@@ -676,9 +655,6 @@
       margin-right: auto;
       line-height: 1.65;
       margin-bottom: 40px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fade-up 0.7s var(--ease-out-expo) 0.85s forwards;
     }
 
     .hero__actions {
@@ -687,9 +663,6 @@
       justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fade-up 0.7s var(--ease-out-expo) 1.0s forwards;
     }
 
     /* Magnetic button wrapper */
@@ -705,8 +678,6 @@
       flex-direction: column;
       align-items: center;
       gap: 8px;
-      opacity: 0;
-      animation: fade-up 0.7s var(--ease-out-expo) 1.4s forwards;
     }
     .hero__scroll-label {
       font-size: 11px;
@@ -3470,7 +3441,122 @@
     .testi-heading,.cta-heading,.blog-section__heading { font-size: var(--h2-size) !important; }
     .svc-panel__title,.ps-step__title,.prob-card__title,.why-card__title,
     .bp-card__title,.wc-card__text h3 { font-size: var(--h3-size) !important; }
-    ::view-transition-group(site-nav){animation-duration:0s;}::view-transition-old(site-nav),::view-transition-new(site-nav){animation:none;mix-blend-mode:normal;}</style>
+    ::view-transition-group(site-nav){animation-duration:0s;}::view-transition-old(site-nav),::view-transition-new(site-nav){animation:none;mix-blend-mode:normal;}
+
+    /* ── Hero scroll stage (parallax container) ── */
+    .hero-scroll-stage {
+      position: relative;
+      height: 300vh;
+    }
+    .hero {
+      position: sticky !important;
+      top: 0;
+      height: 100vh !important;
+      min-height: unset !important;
+      overflow: hidden;
+    }
+
+    /* ── Parallax background ── */
+    .hero__parallax-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=80') 50% 80% / cover no-repeat;
+      will-change: background-position-y;
+      pointer-events: none;
+    }
+
+    /* ── Hero trust strip ── */
+    .hero__trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      color: rgba(255,255,255,0.55);
+    }
+    .hero__trust-sep { opacity: 0.35; }
+
+    /* ── Hero headline lines ── */
+    .hero-line { display: block; }
+
+    /* ── Initial hidden state for hero animated elements ── */
+    .hero__eyebrow,
+    .hero-line,
+    .hero__sub,
+    .hero__actions,
+    .hero__trust,
+    .hero__visual,
+    .hero__scroll {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    /* Scroll indicator has its own x-center transform; combine */
+    .hero__scroll { transform: translateX(-50%) translateY(24px); }
+
+    /* ── heroReveal keyframe ── */
+    @keyframes heroReveal {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes heroRevealScroll {
+      from { opacity: 0; transform: translateX(-50%) translateY(24px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* ── Stagger: fires when body gets .hero-animated ── */
+    body.hero-animated .hero__eyebrow {
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0s    forwards;
+    }
+    body.hero-animated .hero-line--1 {
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s  forwards;
+    }
+    body.hero-animated .hero-line--2 {
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.22s forwards;
+    }
+    body.hero-animated .hero-line--3 {
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.34s forwards;
+    }
+    body.hero-animated .hero__trust {
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.46s forwards;
+    }
+    body.hero-animated .hero__visual {
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.56s forwards;
+    }
+    body.hero-animated .hero__scroll {
+      animation: heroRevealScroll 0.8s cubic-bezier(0.22,1,0.36,1) 0.68s forwards;
+    }
+    /* sub and actions follow the line stagger (line-2 and line-3 effectively) */
+    body.hero-animated .hero__sub {
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.40s forwards;
+    }
+    body.hero-animated .hero__actions {
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.46s forwards;
+    }
+
+    /* ── Reduced motion: show all hero elements immediately ── */
+    @media (prefers-reduced-motion: reduce) {
+      .hero__eyebrow,
+      .hero-line,
+      .hero__sub,
+      .hero__actions,
+      .hero__trust,
+      .hero__visual {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
+      .hero__scroll {
+        opacity: 1 !important;
+        transform: translateX(-50%) !important;
+        animation: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -3630,10 +3716,13 @@
 <!-- ============================================================
      HERO
 ============================================================ -->
-<section class="hero" id="hero" aria-label="Hero banner carousel">
+<div class="hero-scroll-stage">
+<section class="hero" id="hero" aria-label="Hero banner">
 
-  <!-- ░░ Background atmosphere ░░ -->
-  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <!-- ░░ Parallax background ░░ -->
+  <div class="hero__parallax-bg" aria-hidden="true"></div>
+
+  <!-- ░░ Gradient overlay (z-index 1 in animations.css) ░░ -->
   <div class="hero__grid" aria-hidden="true"></div>
   <div class="hero__orb hero__orb--1" aria-hidden="true"></div>
   <div class="hero__orb hero__orb--2" aria-hidden="true"></div>
@@ -3642,15 +3731,25 @@
   <div class="container">
     <div class="hero__inner">
 
-      <!-- LEFT — Text -->
+      <!-- Text -->
       <div class="hero__content" id="heroContent">
-<h1 class="hero__headline reveal" id="heroHeadline" data-i18n-html="hero-headline">
-          Your Implementation Partner for <span class="grad">Digital Transformation</span>
+
+        <div class="hero__eyebrow">
+          <span class="hero__eyebrow-dot"></span>
+          <span>Elite IT &amp; AI Consulting</span>
+        </div>
+
+        <h1 class="hero__headline" id="heroHeadline">
+          <span class="hero-line hero-line--1">Your Implementation Partner</span>
+          <span class="hero-line hero-line--2">for</span>
+          <span class="hero-line hero-line--3"><span class="grad">Digital Transformation</span></span>
         </h1>
-        <p class="hero__sub reveal" data-delay="1" id="heroSub" data-i18n="hero-sub">
+
+        <p class="hero__sub" id="heroSub" data-i18n="hero-sub">
           Helping businesses innovate, automate, and scale with modern technology solutions tailored to their goals.
         </p>
-        <div class="hero__actions reveal" data-delay="2" id="heroActions">
+
+        <div class="hero__actions" id="heroActions">
           <div class="magnetic-wrap">
             <a href="contact.html" class="btn btn--accent btn--large" id="heroCtaPrimary">
               <span data-i18n="hero-cta-primary">Start Your Project</span>
@@ -3663,10 +3762,19 @@
             Book a Free Consultation
           </a>
         </div>
+
+        <div class="hero__trust" aria-label="Social proof">
+          <span class="hero__trust-item">✓ 50+ Projects Delivered</span>
+          <span class="hero__trust-sep">·</span>
+          <span class="hero__trust-item">UAE &amp; India</span>
+          <span class="hero__trust-sep">·</span>
+          <span class="hero__trust-item">AI-First Approach</span>
+        </div>
+
       </div>
 
-      <!-- RIGHT — UAE map image with glowing dot overlays -->
-      <div class="hero__visual reveal-right" data-delay="1" aria-hidden="true">
+      <!-- Visual (hidden in centered layout; animates when layout changes) -->
+      <div class="hero__visual" aria-hidden="true">
         <img src="assets/UAEInfo.png" alt="" class="hero__map-img">
         <div class="hero__dots">
           <div class="hero__pin hero__pin--hub" style="top:18%; left:80%; animation-delay:0s">
@@ -3707,6 +3815,7 @@
   </div>
 
 </section>
+</div><!-- /.hero-scroll-stage -->
 
 <!-- ============================================================
      PROBLEM SECTION
@@ -5057,5 +5166,42 @@
 <script src="assets/i18n.js"></script>
 <script src="assets/animations.js" defer></script>
 <script src="assets/router.js"></script>
+
+<script>
+/* ── Hero entrance: fires on pageReady or 2s fallback ── */
+(function() {
+  var fired = false;
+  function trigger() {
+    if (fired) return;
+    fired = true;
+    document.body.classList.add('hero-animated');
+  }
+  document.addEventListener('pageReady', trigger);
+  setTimeout(trigger, 4000); /* fallback: after preloader's 2.6s hold + 0.75s exit */
+})();
+
+/* ── Hero parallax: scroll the Dubai image from street to tower top ── */
+(function() {
+  var stage = document.querySelector('.hero-scroll-stage');
+  var bg    = document.querySelector('.hero__parallax-bg');
+  if (!stage || !bg) return;
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  function update() {
+    var stageTop   = stage.getBoundingClientRect().top;
+    var totalScroll = stage.offsetHeight - window.innerHeight;
+    if (totalScroll <= 0) return;
+    var progress = Math.max(0, Math.min(1, -stageTop / totalScroll));
+    /* 80% = base of skyline (street level), 5% = top of image (tower top) */
+    var posY = 80 - 75 * progress;
+    bg.style.backgroundPositionY = posY + '%';
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
 </body>
 </html>

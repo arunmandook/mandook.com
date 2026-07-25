@@ -3471,6 +3471,75 @@
 </head>
 <body>
 
+<!-- ═══════════════════════════════════════════════
+     PRELOADER
+═══════════════════════════════════════════════ -->
+<div id="preloader" aria-hidden="true">
+  <div id="preloader__logo">
+    <img src="assets/Ignizailogo.png" alt="" id="pre__flame">
+    <img src="assets/IgnizAi.png"     alt="Igniz AI" id="pre__wordmark">
+  </div>
+</div>
+
+<style>
+  #preloader {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0d1117;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: opacity, transform;
+  }
+  #preloader__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    opacity: 0;
+    animation: preLogoReveal 1.8s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+  }
+  #pre__flame {
+    height: 110px;
+    width: auto;
+    display: block;
+    filter: invert(1) saturate(0) brightness(1.3) contrast(1.15);
+  }
+  #pre__wordmark {
+    height: 48px;
+    width: auto;
+    display: block;
+    filter: invert(1) saturate(0) brightness(1.3) contrast(1.15);
+  }
+  @keyframes preLogoReveal {
+    0%    { opacity: 0; }
+    33%   { opacity: 0.55; }   /* 0.6s — fade in */
+    77%   { opacity: 0.55; }   /* hold through 1.4s */
+    100%  { opacity: 1; }      /* 1.8s — full opacity */
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var pre = document.getElementById('preloader');
+    document.body.style.overflow = 'hidden';
+
+    setTimeout(function () {
+      pre.style.transition = 'opacity 0.75s cubic-bezier(0.76,0,0.24,1), transform 0.75s cubic-bezier(0.76,0,0.24,1)';
+      pre.style.opacity    = '0';
+      pre.style.transform  = 'translateY(-6%)';
+
+      setTimeout(function () {
+        pre.remove();
+        document.body.style.overflow = '';
+        document.dispatchEvent(new CustomEvent('pageReady'));
+      }, 750);
+    }, 2000);
+  });
+</script>
 
 <!-- ╔══ Shared SVG gradient defs for Binary logo ══╗
      Defined once; referenced by url(#id) in nav + footer. -->

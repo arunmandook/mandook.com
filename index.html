@@ -632,15 +632,21 @@
     /* Hero headline */
     .hero__headline {
       font-family: var(--font-head);
-      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-size: clamp(1.6rem, 2.8vw, 2.6rem);
       font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -2px;
-      margin-bottom: 28px;
+      line-height: 1.35;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
       color: var(--clr-text-1);
-      text-wrap: balance;
+      text-align: center;
+      display: block;
     }
-    .hero__headline { display: flex; flex-direction: column; align-items: center; }
+    .hero__headline .m-word { display: inline !important; }
+    /* Force line break before the first hero-line--2 word */
+    .hero__headline .hero-line--1 + .hero-line--2::before {
+      content: '';
+      display: block;
+    }
 
     .hero__headline .grad {
       color: #f0a500;
@@ -3446,7 +3452,7 @@
     /* ── Hero scroll stage (parallax container) ── */
     .hero-scroll-stage {
       position: relative;
-      height: 300vh;
+      height: 200vh;
     }
     .hero {
       position: sticky !important;
@@ -3484,19 +3490,19 @@
     /* ── Hero headline lines ── */
     .hero-line { display: block; }
 
-    /* ── Initial hidden state for hero animated elements ── */
-    .hero__eyebrow,
-    .hero-line,
-    .hero__sub,
-    .hero__actions,
-    .hero__trust,
-    .hero__visual,
-    .hero__scroll {
+    /* ── Initial hidden state: only while body lacks .hero-animated ── */
+    body:not(.hero-animated) .hero-line,
+    body:not(.hero-animated) .hero__sub,
+    body:not(.hero-animated) .hero__actions,
+    body:not(.hero-animated) .hero__trust,
+    body:not(.hero-animated) .hero__visual {
       opacity: 0;
       transform: translateY(24px);
     }
-    /* Scroll indicator has its own x-center transform; combine */
-    .hero__scroll { transform: translateX(-50%) translateY(24px); }
+    body:not(.hero-animated) .hero__scroll {
+      opacity: 0;
+      transform: translateX(-50%) translateY(24px);
+    }
 
     /* ── heroReveal keyframe ── */
     @keyframes heroReveal {
@@ -3508,52 +3514,52 @@
       to   { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
 
-    /* ── Stagger: fires when body gets .hero-animated ── */
-    body.hero-animated .hero__eyebrow {
-      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0s    forwards;
-    }
+    /* ── Stagger: fires when body gets .hero-animated.
+          fill-mode: both → holds `from` state during delay, no flash. ── */
     body.hero-animated .hero-line--1 {
-      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s  forwards;
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s  both;
     }
     body.hero-animated .hero-line--2 {
-      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.22s forwards;
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.22s both;
     }
-    body.hero-animated .hero-line--3 {
-      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.34s forwards;
-    }
-    body.hero-animated .hero__trust {
-      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.46s forwards;
-    }
-    body.hero-animated .hero__visual {
-      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.56s forwards;
-    }
-    body.hero-animated .hero__scroll {
-      animation: heroRevealScroll 0.8s cubic-bezier(0.22,1,0.36,1) 0.68s forwards;
-    }
-    /* sub and actions follow the line stagger (line-2 and line-3 effectively) */
     body.hero-animated .hero__sub {
-      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.40s forwards;
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.34s both;
     }
     body.hero-animated .hero__actions {
-      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.46s forwards;
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.46s both;
+    }
+    body.hero-animated .hero__trust {
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.56s both;
+    }
+    body.hero-animated .hero__visual {
+      animation: heroReveal 0.8s cubic-bezier(0.22,1,0.36,1) 0.56s both;
+    }
+    body.hero-animated .hero__scroll {
+      animation: heroRevealScroll 0.8s cubic-bezier(0.22,1,0.36,1) 0.66s both;
     }
 
     /* ── Reduced motion: show all hero elements immediately ── */
     @media (prefers-reduced-motion: reduce) {
-      .hero__eyebrow,
-      .hero-line,
-      .hero__sub,
-      .hero__actions,
-      .hero__trust,
-      .hero__visual {
+      body:not(.hero-animated) .hero-line,
+      body:not(.hero-animated) .hero__sub,
+      body:not(.hero-animated) .hero__actions,
+      body:not(.hero-animated) .hero__trust,
+      body:not(.hero-animated) .hero__visual {
         opacity: 1 !important;
         transform: none !important;
-        animation: none !important;
       }
-      .hero__scroll {
+      body:not(.hero-animated) .hero__scroll {
         opacity: 1 !important;
         transform: translateX(-50%) !important;
+      }
+      body.hero-animated .hero-line,
+      body.hero-animated .hero__sub,
+      body.hero-animated .hero__actions,
+      body.hero-animated .hero__trust,
+      body.hero-animated .hero__visual,
+      body.hero-animated .hero__scroll {
         animation: none !important;
+        opacity: 1 !important;
       }
     }
   </style>
@@ -3734,15 +3740,9 @@
       <!-- Text -->
       <div class="hero__content" id="heroContent">
 
-        <div class="hero__eyebrow">
-          <span class="hero__eyebrow-dot"></span>
-          <span>Elite IT &amp; AI Consulting</span>
-        </div>
-
         <h1 class="hero__headline" id="heroHeadline">
-          <span class="hero-line hero-line--1">Your Implementation Partner</span>
-          <span class="hero-line hero-line--2">for</span>
-          <span class="hero-line hero-line--3"><span class="grad">Digital Transformation</span></span>
+          <span class="hero-line hero-line--1">Your Implementation Partner for</span>
+          <span class="hero-line hero-line--2"><span class="grad">Digital Transformation</span></span>
         </h1>
 
         <p class="hero__sub" id="heroSub" data-i18n="hero-sub">
@@ -4478,16 +4478,22 @@
       nav.classList.toggle('nav--solid', solid);
     };
 
-    const hero = document.getElementById('hero') || document.querySelector('.page-hero');
-    if (hero) {
-      // Watch hero: go solid when hero exits viewport (isIntersecting = false)
+    const stage = document.querySelector('.hero-scroll-stage');
+    const hero  = document.getElementById('hero') || document.querySelector('.page-hero');
+
+    if (stage) {
+      // Parallax hero: go solid as soon as user scrolls at all
+      function onScroll() { setSolid(window.scrollY > 40); }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    } else if (hero) {
+      // Regular hero: go solid when hero exits viewport
       const observer = new IntersectionObserver(
         ([entry]) => setSolid(!entry.isIntersecting),
         { threshold: 0, rootMargin: '0px' }
       );
       observer.observe(hero);
     } else {
-      // No hero — always solid
       setSolid(true);
     }
 

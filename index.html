@@ -3036,9 +3036,13 @@
       cursor: default;
       overflow: hidden;
       box-shadow: 0 2px 12px rgba(26,107,90,0.06);
+      /* scroll-in initial state */
+      opacity: 0;
+      transform: translateY(28px);
       transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
         border-color 0.45s var(--ease-out-quart),
-        transform 0.45s var(--ease-out-quart),
         box-shadow 0.45s;
       z-index: 1;
     }
@@ -3190,11 +3194,11 @@
       letter-spacing: 0.3px;
     }
 
-    /* Stagger delays for problem cards */
-    .problem-card:nth-child(1) { transition-delay: 0s; }
-    .problem-card:nth-child(2) { transition-delay: 0.05s; }
-    .problem-card:nth-child(3) { transition-delay: 0.10s; }
-    .problem-card:nth-child(4) { transition-delay: 0.15s; }
+    /* Revealed state */
+    .problem-card.prob-card-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* ─────────────────────────────────────────────────────────
        PROBLEM SECTION — Premium child cascade animations
@@ -3280,6 +3284,7 @@
 
     /* Reduced motion: skip all problem animations */
     @media (prefers-reduced-motion: reduce) {
+      .problem-card { opacity: 1 !important; transform: none !important; transition: border-color 0.45s, box-shadow 0.45s !important; }
       .problem-card.visible .problem-card__icon-wrap,
       .problem-card.visible .problem-card__num,
       .problem-card.visible .problem-card__title,
@@ -3864,15 +3869,41 @@
     </div>
 
     <script>
-    /* Grid connector line: observe .problem__grid, add prob-grid-in on enter */
     (function(){
-      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var g = document.querySelector('#problem .problem__grid');
-      if(!g) return;
-      var io = new IntersectionObserver(function(e){
-        if(e[0].isIntersecting){ g.classList.add('prob-grid-in'); io.disconnect(); }
-      },{threshold:0.15});
-      io.observe(g);
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var grid = document.querySelector('#problem .problem__grid');
+      if(!grid) return;
+
+      var cards = grid.querySelectorAll('.problem-card');
+      var delays = [0, 0.1, 0.2, 0.3];
+
+      if(reduced) {
+        cards.forEach(function(c){ c.classList.add('prob-card-in'); });
+        return;
+      }
+
+      var io = new IntersectionObserver(function(entries){
+        if(!entries[0].isIntersecting) return;
+        io.disconnect();
+
+        /* Grid connector line */
+        grid.classList.add('prob-grid-in');
+
+        /* Stagger each card in */
+        cards.forEach(function(card, i){
+          var delay = delays[i] || 0;
+          card.style.transitionDelay = delay + 's';
+          card.classList.add('prob-card-in');
+          /* Clear inline delay after animation so hover feels instant */
+          card.addEventListener('transitionend', function onEnd(e){
+            if(e.propertyName !== 'opacity') return;
+            card.style.transitionDelay = '';
+            card.removeEventListener('transitionend', onEnd);
+          });
+        });
+      }, { threshold: 0.2 });
+
+      io.observe(grid);
     })();
     </script>
 
